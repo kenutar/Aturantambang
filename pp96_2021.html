@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP No. 96 Tahun 2021 — Pelaksanaan Usaha Pertambangan Minerba</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --paper: #fdfbf7;
+    --ink: #1c1608;
+    --ink-light: #3d3520;
+    --ink-muted: #7a7060;
+    --accent: #8b2200;
+    --accent-pale: #fff4f2;
+    --accent-light: #e8b8a8;
+    --gold: #8a6800;
+    --gold-light: #fdf5d0;
+    --blue: #0a3d7a;
+    --blue-pale: #edf3ff;
+    --green: #1a5a2a;
+    --green-pale: #edf7ee;
+    --border: #d8d0b8;
+    --sidebar-w: 310px;
+    --nav-h: 64px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+  .topbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--ink); display: flex; align-items: center; gap: 16px; padding: 0 20px; z-index: 200; border-bottom: 3px solid var(--accent); }
+  .topbar-logo { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #f5f0e8; white-space: nowrap; flex-shrink: 0; }
+  .topbar-logo span { color: #e09070; }
+  .search-wrapper { flex: 1; max-width: 520px; position: relative; }
+  .search-input { width: 100%; padding: 9px 42px 9px 14px; border: 1.5px solid #302808; border-radius: 6px; background: #251c08; color: #f5f0e8; font-family: 'Source Sans 3', sans-serif; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+  .search-input::placeholder { color: #605030; }
+  .search-input:focus { border-color: var(--accent); }
+  .search-icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #605030; pointer-events: none; }
+  .search-count { position: absolute; right: 38px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: #e09070; display: none; white-space: nowrap; }
+  .search-nav-btns { display: flex; gap: 4px; flex-shrink: 0; }
+  .snb { background: #302808; border: none; color: #f5f0e8; width: 30px; height: 30px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .snb:hover { background: var(--accent); }
+  .sidebar-toggle { background: none; border: none; color: #f5f0e8; font-size: 1.3rem; cursor: pointer; display: none; }
+
+  .layout { display: flex; padding-top: var(--nav-h); min-height: 100vh; }
+
+  .sidebar { width: var(--sidebar-w); flex-shrink: 0; background: var(--ink); position: fixed; top: var(--nav-h); left: 0; bottom: 0; overflow-y: auto; padding: 16px 0; transition: transform 0.3s; z-index: 100; }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #302808; border-radius: 2px; }
+  .sidebar-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #504020; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 18px 10px; border-bottom: 1px solid #251c08; margin-bottom: 6px; }
+  .nav-group-label { padding: 12px 18px 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: #403010; letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-item { display: block; padding: 8px 18px; color: #9a8a60; text-decoration: none; font-size: 0.86rem; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; line-height: 1.4; }
+  .nav-item:hover { color: #f5f0e8; background: #251c08; border-left-color: var(--accent); }
+  .nav-item.active { color: #f5f0e8; background: #251c08; border-left-color: var(--accent); font-weight: 600; }
+  .nav-item.sub { padding-left: 30px; font-size: 0.8rem; color: #5a4a28; }
+  .nav-item.sub:hover, .nav-item.sub.active { color: #9a8a60; }
+
+  .main { margin-left: var(--sidebar-w); flex: 1; padding: 40px 52px; max-width: 920px; }
+  .section { display: none; animation: fadeIn 0.28s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .doc-header { border-bottom: 2px solid var(--border); padding-bottom: 26px; margin-bottom: 32px; }
+  .doc-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #f5f0e8; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 5px 12px; border-radius: 3px; margin-bottom: 14px; letter-spacing: 0.05em; }
+  .doc-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .doc-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 10px; }
+  .doc-subtitle { font-size: 0.98rem; color: var(--ink-light); line-height: 1.65; }
+
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin: 34px 0 14px; padding-bottom: 9px; border-bottom: 2px solid var(--border); }
+  h2:first-child { margin-top: 0; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--accent); margin: 24px 0 9px; }
+  h4 { font-size: 0.96rem; font-weight: 600; color: var(--ink-light); margin: 16px 0 7px; }
+  p { font-size: 0.94rem; line-height: 1.75; color: var(--ink-light); margin-bottom: 11px; }
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { font-size: 0.92rem; line-height: 1.72; color: var(--ink-light); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  strong { color: var(--ink); }
+
+  .table-wrapper { overflow-x: auto; margin: 14px 0 22px; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  thead { background: var(--ink); color: #f5f0e8; }
+  thead th { padding: 10px 13px; text-align: left; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em; }
+  tbody tr:nth-child(even) { background: var(--accent-pale); }
+  tbody tr:hover { background: #fce8e0; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--border); color: var(--ink-light); vertical-align: top; line-height: 1.55; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+
+  .info-box { background: var(--gold-light); border-left: 4px solid var(--gold); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+  .note-box { background: var(--accent-pale); border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+  .blue-box { background: var(--blue-pale); border-left: 4px solid var(--blue); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+  .green-box { background: var(--green-pale); border-left: 4px solid var(--green); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+
+  mark { background: #ffe066; color: var(--ink); border-radius: 2px; padding: 0 2px; }
+  mark.current { background: var(--accent); color: white; }
+
+  .section-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #f5f0e8; font-family: 'Playfair Display', serif; font-size: 0.86rem; padding: 6px 16px 6px 12px; border-radius: 4px; margin-bottom: 20px; }
+  .section-badge .roman { font-size: 1.1rem; font-weight: 700; color: #e09070; }
+
+  .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .card { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 18px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transition: transform 0.2s; }
+  .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-bab { font-family: 'Playfair Display', serif; font-size: 0.75rem; font-weight: 600; color: var(--accent); margin-bottom: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .card-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 5px; }
+  .card-sub { font-size: 0.77rem; color: var(--ink-muted); line-height: 1.4; }
+  .card-pasal { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--ink-muted); margin-top: 8px; }
+
+  .pasal-num { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; background: var(--ink); color: #f5f0e8; padding: 2px 8px; border-radius: 3px; margin-right: 8px; }
+  .pasal-block { background: var(--paper); border: 1px solid var(--border); border-radius: 6px; padding: 16px 18px; margin: 14px 0; }
+  .pasal-block h5 { font-size: 0.82rem; font-weight: 600; color: var(--accent); margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0; }
+  .col-card { background: var(--paper); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .col-card h5 { font-size: 0.88rem; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+  .col-card ul { padding-left: 18px; }
+  .col-card li { font-size: 0.83rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .divider-bab { border: none; border-top: 2px solid var(--border); margin: 32px 0; }
+
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+  .overlay.open { display: block; }
+
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-toggle { display: flex; }
+    .main { margin-left: 0; padding: 22px 18px; }
+    .home-grid { grid-template-columns: 1fr; }
+    .doc-title { font-size: 1.4rem; }
+    .topbar-logo { display: none; }
+  }
+  [id] { scroll-margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="topbar-logo">PP No. <span>96 Tahun 2021</span></div>
+  <div class="search-wrapper">
+    <input class="search-input" id="searchInput" type="text" placeholder="Cari kata kunci... (contoh: IUP, divestasi, reklamasi, RKAB)" oninput="doSearch()" onkeydown="searchNav(event)">
+    <span class="search-count" id="searchCount"></span>
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="search-nav-btns">
+    <button class="snb" onclick="prevMatch()" title="Sebelumnya">↑</button>
+    <button class="snb" onclick="nextMatch()" title="Berikutnya">↓</button>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Navigasi PP 96/2021</div>
+  <a class="nav-item active" onclick="showSection('home')">🏠 Beranda</a>
+  <a class="nav-item" onclick="showSection('b1')">BAB I — Ketentuan Umum</a>
+  <a class="nav-item sub" onclick="showSection('b1'); scrollTo('b1-def')">Pasal 1: 42 Definisi</a>
+  <a class="nav-item sub" onclick="showSection('b1'); scrollTo('b1-gol')">Pasal 2: Penggolongan Komoditas</a>
+  <a class="nav-item" onclick="showSection('b2')">BAB II — Rencana Pengelolaan Minerba Nasional</a>
+  <a class="nav-item" onclick="showSection('b3')">BAB III — Perizinan Berusaha</a>
+
+  <div class="nav-group-label">Perizinan</div>
+  <a class="nav-item" onclick="showSection('b4')">BAB IV — IUP (Izin Usaha Pertambangan)</a>
+  <a class="nav-item sub" onclick="showSection('b4'); scrollTo('b4-umum')">Umum & Pemindahtanganan</a>
+  <a class="nav-item sub" onclick="showSection('b4'); scrollTo('b4-eksplorasi')">Tahap Eksplorasi</a>
+  <a class="nav-item sub" onclick="showSection('b4'); scrollTo('b4-op')">Tahap Operasi Produksi</a>
+  <a class="nav-item" onclick="showSection('b5')">BAB V — IPR (Izin Pertambangan Rakyat)</a>
+  <a class="nav-item" onclick="showSection('b6')">BAB VI — IUPK (IUP Khusus)</a>
+  <a class="nav-item sub" onclick="showSection('b6'); scrollTo('b6-prioritas')">Prioritas BUMN/BUMD & Lelang</a>
+  <a class="nav-item sub" onclick="showSection('b6'); scrollTo('b6-eksplorasi')">Tahap Eksplorasi</a>
+  <a class="nav-item sub" onclick="showSection('b6'); scrollTo('b6-op')">Tahap Operasi Produksi</a>
+  <a class="nav-item sub" onclick="showSection('b6'); scrollTo('b6-konservasi')">Dana Ketahanan Cadangan</a>
+  <a class="nav-item" onclick="showSection('b7')">BAB VII — IUPK Kelanjutan Operasi KK/PKP2B</a>
+  <a class="nav-item" onclick="showSection('b8')">BAB VIII — SIPB (Surat Izin Penambangan Batuan)</a>
+
+  <div class="nav-group-label">Operasional</div>
+  <a class="nav-item" onclick="showSection('b10')">BAB X — Usaha Jasa Pertambangan (IUJP)</a>
+  <a class="nav-item" onclick="showSection('b12')">BAB XII — Divestasi Saham</a>
+  <a class="nav-item" onclick="showSection('b13')">BAB XIII — Suspensi Kegiatan Usaha</a>
+  <a class="nav-item" onclick="showSection('b14')">BAB XIV — Pengutamaan Dalam Negeri & Pengendalian Produksi</a>
+  <a class="nav-item" onclick="showSection('b16')">BAB XVI — Penggunaan Jalan Pertambangan</a>
+  <a class="nav-item" onclick="showSection('b17')">BAB XVII — Penggunaan Tanah</a>
+  <a class="nav-item" onclick="showSection('b18')">BAB XVIII — RKAB Tahunan & Laporan</a>
+  <a class="nav-item" onclick="showSection('b19')">BAB XIX — Pengembangan & Pemberdayaan Masyarakat</a>
+  <a class="nav-item" onclick="showSection('b20')">BAB XX — Penjualan Mineral/Batubara Keadaan Tertentu</a>
+  <a class="nav-item" onclick="showSection('b21')">BAB XXI — Sanksi Administratif</a>
+  <a class="nav-item" onclick="showSection('b22')">BAB XXII & XXIII — Ketentuan Peralihan & Penutup</a>
+</aside>
+
+<div class="layout">
+<main class="main" id="mainContent">
+
+<!-- HOME -->
+<section class="section active" id="home">
+  <div class="doc-header">
+    <div class="doc-badge"><span class="dot"></span>Presiden Republik Indonesia — ditetapkan 9 September 2021</div>
+    <div class="doc-title">Peraturan Pemerintah Republik Indonesia<br>Nomor 96 Tahun 2021</div>
+    <div class="doc-subtitle">Tentang <strong>Pelaksanaan Kegiatan Usaha Pertambangan Mineral dan Batubara</strong><br>Mencabut dan menggantikan PP Nomor 23 Tahun 2010 beserta perubahannya</div>
+  </div>
+  <p>PP ini ditetapkan sebagai pelaksana dari Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara sebagaimana telah diubah dengan Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja.</p>
+  <div class="home-grid">
+    <div class="card" onclick="showSection('b1')"><div class="card-bab">BAB I — Pasal 1–2</div><div class="card-title">Ketentuan Umum</div><div class="card-sub">42 definisi istilah; 5 golongan komoditas tambang (mineral radioaktif, logam, bukan logam, batuan, dan batubara)</div></div>
+    <div class="card" onclick="showSection('b2')"><div class="card-bab">BAB II — Pasal 3–5</div><div class="card-title">Rencana Pengelolaan Mineral dan Batubara Nasional</div><div class="card-sub">Penyusunan, penetapan 5 tahun, dan peninjauan rencana pengelolaan Minerba nasional</div></div>
+    <div class="card" onclick="showSection('b3')"><div class="card-bab">BAB III — Pasal 6–8</div><div class="card-title">Perizinan Berusaha di Bidang Pertambangan</div><div class="card-sub">NIB, sertifikat standar, dan izin; jenis-jenis izin (IUP, IUPK, IPR, SIPB, IUJP, dll.); prinsip pendelegasian kepada Pemda Provinsi</div></div>
+    <div class="card" onclick="showSection('b4')"><div class="card-bab">BAB IV — Pasal 9–61</div><div class="card-title">Izin Usaha Pertambangan (IUP)</div><div class="card-sub">Pemberian IUP, pemindahtanganan, tahap Eksplorasi dan Operasi Produksi, kewajiban pemegang IUP</div></div>
+    <div class="card" onclick="showSection('b5')"><div class="card-bab">BAB V — Pasal 62–67</div><div class="card-title">Izin Pertambangan Rakyat (IPR)</div><div class="card-sub">Pemberian IPR kepada orang perseorangan/Koperasi penduduk setempat, persyaratan, jangka waktu 10 tahun</div></div>
+    <div class="card" onclick="showSection('b6')"><div class="card-bab">BAB VI — Pasal 68–114</div><div class="card-title">Izin Usaha Pertambangan Khusus (IUPK)</div><div class="card-sub">Pemberian IUPK, prioritas BUMN/BUMD, lelang WIUPK, tahap Eksplorasi dan Operasi Produksi, dana ketahanan cadangan</div></div>
+    <div class="card" onclick="showSection('b7')"><div class="card-bab">BAB VII — Pasal 115–128</div><div class="card-title">IUPK sebagai Kelanjutan Operasi KK/PKP2B</div><div class="card-sub">Syarat dan tata cara perpanjangan KK/PKP2B menjadi IUPK; rencana pengembangan wilayah; jangka waktu dan perpanjangan</div></div>
+    <div class="card" onclick="showSection('b8')"><div class="card-bab">BAB VIII — Pasal 129–136</div><div class="card-title">Surat Izin Penambangan Batuan (SIPB)</div><div class="card-sub">Pemberian SIPB kepada BUMD/Badan Usaha untuk batuan jenis tertentu; jenis batuan yang tercakup</div></div>
+    <div class="card" onclick="showSection('b10')"><div class="card-bab">BAB X — Pasal 137–146</div><div class="card-title">Usaha Jasa Pertambangan (IUJP)</div><div class="card-sub">Kewajiban penggunaan jasa lokal/nasional; jenis usaha jasa; konsultasi, perencanaan, dan pelaksanaan</div></div>
+    <div class="card" onclick="showSection('b12')"><div class="card-bab">BAB XII — Pasal 147–149</div><div class="card-title">Divestasi Saham</div><div class="card-sub">Kewajiban divestasi 51% saham secara berjenjang kepada Pemerintah/BUMN/BUMD/Swasta Nasional</div></div>
+    <div class="card" onclick="showSection('b13')"><div class="card-bab">BAB XIII — Pasal 150–156</div><div class="card-title">Suspensi Kegiatan Usaha Pertambangan</div><div class="card-sub">Keadaan kahar, keadaan menghalangi, kondisi daya dukung lingkungan; tata cara permohonan dan pemberian suspensi</div></div>
+    <div class="card" onclick="showSection('b14')"><div class="card-bab">BAB XIV — Pasal 157–172</div><div class="card-title">Pengutamaan Dalam Negeri, Pengendalian Produksi & Penjualan</div><div class="card-sub">Kewajiban DMO, harga patokan, pengendalian produksi dan penjualan Mineral dan Batubara</div></div>
+    <div class="card" onclick="showSection('b18')"><div class="card-bab">BAB XVIII — Pasal 177–178</div><div class="card-title">RKAB Tahunan & Laporan</div><div class="card-sub">Kewajiban penyusunan dan persetujuan RKAB; laporan berkala, akhir, dan khusus</div></div>
+    <div class="card" onclick="showSection('b21')"><div class="card-bab">BAB XXI — Pasal 185–188</div><div class="card-title">Sanksi Administratif</div><div class="card-sub">Peringatan tertulis (3 kali × 30 hari), penghentian sementara (maks. 60 hari), dan pencabutan izin</div></div>
+  </div>
+</section>
+
+<!-- BAB I -->
+<section class="section" id="b1">
+  <div class="section-badge"><span class="roman">BAB I</span> Pasal 1–2</div>
+  <h2>BAB I — Ketentuan Umum</h2>
+
+  <div id="b1-def">
+    <h3>Pasal 1 — Definisi (42 Istilah)</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No.</th><th>Istilah</th><th>Definisi</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><strong>Pertambangan</strong></td><td>Sebagian atau seluruh tahapan kegiatan dalam rangka pengelolaan dan pengusahaan mineral atau batubara yang meliputi penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan/atau pemurnian atau pengembangan dan/atau pemanfaatan, pengangkutan dan penjualan, serta kegiatan pascatambang</td></tr>
+          <tr><td>2</td><td><strong>Mineral</strong></td><td>Senyawa anorganik yang terbentuk di alam, yang memiliki sifat fisik dan kimia tertentu serta susunan kristal teratur atau gabungannya yang membentuk batuan, baik dalam bentuk lepas atau padu</td></tr>
+          <tr><td>3</td><td><strong>Batubara</strong></td><td>Endapan senyawa organik karbonan yang terbentuk secara alamiah dari sisa tumbuh-tumbuhan</td></tr>
+          <tr><td>4</td><td><strong>Pertambangan Mineral</strong></td><td>Pertambangan kumpulan Mineral yang berupa bijih atau batuan, di luar panas bumi, minyak dan gas bumi, serta air tanah</td></tr>
+          <tr><td>5</td><td><strong>Pertambangan Batubara</strong></td><td>Pertambangan endapan karbon yang terdapat di dalam bumi, termasuk bitumen padat, gambut, dan batuan aspal</td></tr>
+          <tr><td>6</td><td><strong>Usaha Pertambangan</strong></td><td>Kegiatan dalam rangka pengusahaan Mineral atau Batubara yang meliputi tahapan kegiatan penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan/atau pemurnian atau pengembangan dan/atau pemanfaatan, pengangkutan dan penjualan, serta pascatambang</td></tr>
+          <tr><td>7</td><td><strong>KK (Kontrak Karya)</strong></td><td>Perjanjian antara pemerintah dengan perusahaan berbadan hukum Indonesia untuk melakukan kegiatan Usaha Pertambangan Mineral</td></tr>
+          <tr><td>8</td><td><strong>PKP2B</strong></td><td>Perjanjian Karya Pengusahaan Pertambangan Batubara — perjanjian antara pemerintah dengan perusahaan berbadan hukum Indonesia untuk melakukan kegiatan Usaha Pertambangan Batubara</td></tr>
+          <tr><td>9</td><td><strong>Perizinan Berusaha</strong></td><td>Legalitas yang diberikan kepada pelaku usaha untuk memulai dan menjalankan usaha dan/atau kegiatannya</td></tr>
+          <tr><td>10</td><td><strong>IUP</strong></td><td>Izin Usaha Pertambangan — izin untuk melaksanakan Usaha Pertambangan</td></tr>
+          <tr><td>11</td><td><strong>IPR</strong></td><td>Izin Pertambangan Rakyat — izin untuk melaksanakan Usaha Pertambangan dalam wilayah pertambangan rakyat dengan luas wilayah dan investasi terbatas</td></tr>
+          <tr><td>12</td><td><strong>IUPK</strong></td><td>Izin Usaha Pertambangan Khusus — izin untuk melaksanakan Usaha Pertambangan di wilayah izin usaha pertambangan khusus</td></tr>
+          <tr><td>13</td><td><strong>SIPB</strong></td><td>Surat Izin Penambangan Batuan — izin yang diberikan untuk melaksanakan kegiatan Usaha Pertambangan batuan jenis tertentu atau untuk keperluan tertentu</td></tr>
+          <tr><td>14</td><td><strong>IUPK sebagai Kelanjutan Operasi KK/Perjanjian</strong></td><td>Izin usaha yang diberikan sebagai perpanjangan setelah selesainya pelaksanaan Kontrak Karya atau PKP2B</td></tr>
+          <tr><td>15</td><td><strong>Izin Pengangkutan dan Penjualan</strong></td><td>Izin usaha yang diberikan kepada perusahaan untuk membeli, mengangkut, dan menjual komoditas tambang Mineral atau Batubara</td></tr>
+          <tr><td>16</td><td><strong>IUJP</strong></td><td>Izin Usaha Jasa Pertambangan — izin yang diberikan untuk melakukan kegiatan usaha jasa pertambangan inti yang berkaitan dengan tahapan dan/atau bagian kegiatan Usaha Pertambangan</td></tr>
+          <tr><td>17</td><td><strong>Penyelidikan Umum</strong></td><td>Tahapan kegiatan Pertambangan untuk mengetahui kondisi geologi regional dan indikasi adanya mineralisasi</td></tr>
+          <tr><td>18</td><td><strong>Eksplorasi</strong></td><td>Tahapan kegiatan Usaha Pertambangan untuk memperoleh informasi secara terperinci dan teliti tentang lokasi, bentuk, dimensi, sebaran, kualitas dan sumber daya terukur dari bahan galian, serta informasi mengenai lingkungan sosial dan lingkungan hidup</td></tr>
+          <tr><td>19</td><td><strong>Studi Kelayakan</strong></td><td>Tahapan kegiatan Usaha Pertambangan untuk memperoleh informasi secara rinci seluruh aspek yang berkaitan untuk menentukan kelayakan ekonomis dan teknis Usaha Pertambangan, termasuk analisis mengenai dampak lingkungan serta perencanaan pascatambang</td></tr>
+          <tr><td>20</td><td><strong>Operasi Produksi</strong></td><td>Tahapan kegiatan Usaha Pertambangan yang meliputi konstruksi, penambangan, pengolahan dan/atau pemurnian atau pengembangan dan/atau pemanfaatan, termasuk pengangkutan dan penjualan, serta sarana pengendalian dampak lingkungan sesuai dengan hasil studi kelayakan</td></tr>
+          <tr><td>21</td><td><strong>Konstruksi</strong></td><td>Kegiatan Usaha Pertambangan untuk melakukan pembangunan seluruh fasilitas operasi produksi, termasuk pengendalian dampak lingkungan</td></tr>
+          <tr><td>22</td><td><strong>Penambangan</strong></td><td>Kegiatan untuk memproduksi Mineral dan/atau Batubara dan Mineral ikutannya</td></tr>
+          <tr><td>23</td><td><strong>Pengolahan</strong></td><td>Upaya meningkatkan mutu komoditas tambang Mineral untuk menghasilkan produk dengan sifat fisik dan kimia yang tidak berubah dari sifat komoditas tambang asal untuk dilakukan pemurnian atau menjadi bahan baku industri</td></tr>
+          <tr><td>24</td><td><strong>Pemurnian</strong></td><td>Upaya untuk meningkatkan mutu komoditas tambang Mineral melalui proses fisika maupun kimia serta proses peningkatan kemurnian lebih lanjut untuk menghasilkan produk dengan sifat fisik dan kimia yang berbeda dari komoditas tambang asal sampai dengan produk logam sebagai bahan baku industri</td></tr>
+          <tr><td>25</td><td><strong>Pengembangan dan/atau Pemanfaatan</strong></td><td>Upaya untuk meningkatkan mutu Batubara dengan atau tanpa mengubah sifat fisik atau kimia Batubara asal</td></tr>
+          <tr><td>26</td><td><strong>Pengangkutan</strong></td><td>Kegiatan Usaha Pertambangan untuk memindahkan Mineral dan/atau Batubara dari daerah tambang dan/atau tempat Pengolahan dan/atau Pemurnian sampai tempat penyerahan</td></tr>
+          <tr><td>27</td><td><strong>Penjualan</strong></td><td>Kegiatan Usaha Pertambangan untuk menjual hasil Pertambangan Mineral atau Batubara</td></tr>
+          <tr><td>28</td><td><strong>Badan Usaha</strong></td><td>Setiap badan hukum yang bergerak di bidang Pertambangan yang didirikan berdasarkan hukum Indonesia dan berkedudukan dalam wilayah NKRI</td></tr>
+          <tr><td>29</td><td><strong>BUMN</strong></td><td>BUMN yang bergerak di bidang Pertambangan sesuai dengan ketentuan peraturan perundang-undangan</td></tr>
+          <tr><td>30</td><td><strong>Badan Usaha Swasta Nasional</strong></td><td>Badan usaha yang berbadan hukum Indonesia yang kepemilikan sahamnya 100% (seratus persen) dalam negeri</td></tr>
+          <tr><td>31</td><td><strong>BUMD</strong></td><td>BUMD yang bergerak di bidang Pertambangan sesuai dengan ketentuan peraturan perundang-undangan</td></tr>
+          <tr><td>32</td><td><strong>Jasa Pertambangan</strong></td><td>Jasa penunjang yang berkaitan dengan kegiatan Usaha Pertambangan</td></tr>
+          <tr><td>33</td><td><strong>WIUP</strong></td><td>Wilayah Izin Usaha Pertambangan — wilayah yang diberikan kepada pemegang IUP atau pemegang SIPB</td></tr>
+          <tr><td>34</td><td><strong>WP (Wilayah Pertambangan)</strong></td><td>Wilayah yang memiliki potensi Mineral dan/atau Batubara dan tidak terikat dengan batasan administrasi pemerintahan yang merupakan bagian dari tata ruang nasional</td></tr>
+          <tr><td>35</td><td><strong>WPR</strong></td><td>Wilayah Pertambangan Rakyat — bagian dari WP tempat dilakukan kegiatan Usaha Pertambangan rakyat</td></tr>
+          <tr><td>36</td><td><strong>WUPK</strong></td><td>Wilayah Usaha Pertambangan Khusus — wilayah yang telah memiliki ketersediaan data, potensi, dan/atau informasi geologi yang dapat diusahakan untuk kepentingan strategis nasional</td></tr>
+          <tr><td>37</td><td><strong>Koperasi</strong></td><td>Badan hukum yang didirikan oleh orang perseorangan atau badan hukum Koperasi, dengan pemisahan kekayaan para anggotanya sebagai modal untuk menjalankan usaha, yang memenuhi aspirasi dan kebutuhan bersama di bidang ekonomi, sosial, dan budaya sesuai dengan nilai dan prinsip Koperasi</td></tr>
+          <tr><td>38</td><td><strong>Masyarakat</strong></td><td>Masyarakat yang terkena dampak langsung dari kegiatan Usaha Pertambangan</td></tr>
+          <tr><td>39</td><td><strong>RKAB Tahunan</strong></td><td>Rencana Kerja dan Anggaran Biaya Tahunan — rencana kerja dan anggaran biaya tahun berjalan pada kegiatan Usaha Pertambangan Mineral dan Batubara yang meliputi aspek pengusahaan, aspek teknik, dan aspek lingkungan</td></tr>
+          <tr><td>40</td><td><strong>Pemerintah Pusat</strong></td><td>Presiden Republik Indonesia yang memegang kekuasaan pemerintahan negara Republik Indonesia yang dibantu oleh Wakil Presiden dan Menteri sebagaimana dimaksud dalam UUD Negara Republik Indonesia Tahun 1945</td></tr>
+          <tr><td>41</td><td><strong>Pemerintah Daerah</strong></td><td>Kepala daerah sebagai unsur penyelenggara pemerintahan daerah yang memimpin pelaksanaan urusan pemerintahan yang menjadi kewenangan daerah otonom</td></tr>
+          <tr><td>42</td><td><strong>Menteri</strong></td><td>Menteri yang menyelenggarakan urusan pemerintahan di bidang Pertambangan Mineral dan Batubara</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="b1-gol">
+    <h3>Pasal 2 — Penggolongan Komoditas Tambang</h3>
+    <p>Pertambangan Mineral dan Batubara dikelompokkan ke dalam <strong>5 (lima) golongan</strong>:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>a. Mineral Radioaktif</h5>
+        <ul><li>Uranium</li><li>Torium</li><li>Bahan galian radioaktif lainnya</li></ul>
+      </div>
+      <div class="col-card">
+        <h5>b. Mineral Logam</h5>
+        <p style="font-size:0.82rem;color:var(--ink-light)">Meliputi aluminium, antimon, arsenik, bauksit, berilium, bijih besi, bismut, cadmium, cesium, emas, galena, hafnium, indium, iridium, khrom, kobalt, kromit, litium, logam tanah jarang, magnesium, mangan, molibdenum, monasit, nikel, niobium, osmium, pasir besi, palladium, perak, platina, rhodium, ruthenium, selenium, seng, senodim, sinabar, stronsium, tantalum, telurium, tembaga, timah, titanium, vanadium, wolfram, dan zirkonium</p>
+      </div>
+      <div class="col-card">
+        <h5>c. Mineral Bukan Logam</h5>
+        <p style="font-size:0.82rem;color:var(--ink-light)">Meliputi asbes, barit, belerang, bentonit, bromium, dolomit, feldspar, fluorit, fluorspar, fosfat, garam batu, gipsum, grafit, halit, ilmenit, kalsit, kaolin, kriolit, kapur padam, kuarsit, magnesit, mika, oker, perlit, pirofilit, rijang, rutil, talk, tawas, wollastonit, yarosit, yodium, zeolit, dan zirkon</p>
+      </div>
+      <div class="col-card">
+        <h5>d. Batuan</h5>
+        <p style="font-size:0.82rem;color:var(--ink-light)">Meliputi agar, andesit, basalt, batu apung, batu gamping, batu gunung kuari besar, batu kali, chert, diorit, gabro, garnet, giok, granit, granodiorit, jasper, kalsedon, kayu terkersikan, kerikil berpasir alami (sirtu), kerikil galian dari bukit, kerikil sungai, marmer, obsidian, onik, opal, pasir laut, pasir urug, pasir pasang, perlit, peridotit, pumice, tanah, tanah diatome, tanah liat, tanah merah, tanah serap, tanah urug, toseki, trakhit, tras, dan slate</p>
+      </div>
+    </div>
+    <div class="col-card" style="margin-top:14px">
+      <h5>e. Batubara</h5>
+      <ul><li>Batuan aspal</li><li>Batubara</li><li>Bitumen padat</li><li>Gambut</li></ul>
+    </div>
+    <div class="info-box" style="margin-top:16px"><strong>Mineral Bukan Logam Jenis Tertentu (Pasal 2 ayat 2):</strong> Ametis, akuamarin, intan, korundum, rubi, safir, topas, turmalin, serta batu gamping, clay, dan pasir kuarsa untuk industri semen dan/atau bukan semen. Perubahan atas penggolongan dan/atau penambahan komoditas tambang ditetapkan oleh Menteri.</div>
+  </div>
+</section>
+
+<!-- BAB II -->
+<section class="section" id="b2">
+  <div class="section-badge"><span class="roman">BAB II</span> Pasal 3–5</div>
+  <h2>BAB II — Rencana Pengelolaan Mineral dan Batubara Nasional</h2>
+  <h3>Pasal 3 — Penyusunan Rencana Pengelolaan</h3>
+  <h4>Pertimbangan Penyusunan (Pasal 3 ayat 1)</h4>
+  <ul>
+    <li>Daya dukung sumber daya alam dan lingkungan menurut data dan informasi geospasial dasar dan tematik</li>
+    <li>Pelestarian lingkungan hidup</li>
+    <li>Rencana tata ruang wilayah dan/atau rencana zonasi</li>
+    <li>Perkembangan ilmu pengetahuan dan teknologi</li>
+    <li>Tingkat pertumbuhan ekonomi</li>
+    <li>Prioritas pemberian komoditas tambang</li>
+    <li>Jumlah dan luas WP</li>
+    <li>Ketersediaan lahan Pertambangan</li>
+    <li>Jumlah sumber daya dan/atau cadangan Mineral atau Batubara</li>
+    <li>Ketersediaan sarana dan prasarana</li>
+  </ul>
+  <h4>Muatan Rencana Pengelolaan (Pasal 3 ayat 2)</h4>
+  <ul>
+    <li>Kebijakan di bidang Pertambangan Mineral dan Batubara</li>
+    <li>Strategi pengelolaan Mineral dan Batubara nasional</li>
+    <li>Data potensi sumber daya dan cadangan Mineral dan Batubara</li>
+    <li>Tujuan dan target rencana pengelolaan Mineral dan Batubara nasional</li>
+    <li>Kelembagaan</li>
+    <li>Monitoring dan evaluasi pelaksanaan pengelolaan Mineral dan Batubara nasional</li>
+  </ul>
+  <h3>Pasal 4 — Penetapan Rencana Pengelolaan</h3>
+  <p>Rencana pengelolaan Mineral dan Batubara nasional ditetapkan oleh Menteri untuk <strong>jangka waktu 5 (lima) tahun</strong> dan dapat ditinjau kembali <strong>1 (satu) kali dalam 5 (lima) tahun</strong>.</p>
+  <p>Digunakan sebagai pedoman dalam:</p>
+  <ul>
+    <li>Penerbitan perizinan</li>
+    <li>Pembinaan dan pengawasan</li>
+    <li>Peningkatan nilai tambah Mineral dan Batubara</li>
+    <li>Pengendalian produksi dan penjualan serta pengutamaan Mineral dan Batubara untuk kepentingan dalam negeri</li>
+    <li>Penetapan target penerimaan negara</li>
+    <li>Pengelolaan lingkungan hidup termasuk Reklamasi dan Pascatambang</li>
+  </ul>
+  <h3>Pasal 5 — Peninjauan Rencana Pengelolaan</h3>
+  <p>Peninjauan dapat dilakukan apabila terdapat perubahan:</p>
+  <ul>
+    <li>Kebijakan nasional di bidang Pertambangan Mineral dan Batubara; dan/atau</li>
+    <li>Rencana pembangunan jangka panjang dan rencana pembangunan jangka menengah nasional</li>
+  </ul>
+</section>
+
+<!-- BAB III -->
+<section class="section" id="b3">
+  <div class="section-badge"><span class="roman">BAB III</span> Pasal 6–8</div>
+  <h2>BAB III — Perizinan Berusaha di Bidang Pertambangan</h2>
+  <h3>Pasal 6 — Jenis-jenis Perizinan Berusaha</h3>
+  <p>Usaha Pertambangan dilaksanakan berdasarkan <strong>Perizinan Berusaha dari Pemerintah Pusat</strong>, yang dilaksanakan melalui pemberian:</p>
+  <ul>
+    <li><strong>a.</strong> Nomor Induk Berusaha (NIB)</li>
+    <li><strong>b.</strong> Sertifikat Standar</li>
+    <li><strong>c.</strong> Izin</li>
+  </ul>
+  <p>Jenis <strong>Izin</strong> yang diberikan terdiri atas:</p>
+  <div class="two-col">
+    <div class="col-card">
+      <h5>Izin Usaha Utama</h5>
+      <ul>
+        <li><strong>IUP</strong> — Izin Usaha Pertambangan</li>
+        <li><strong>IUPK</strong> — IUP Khusus</li>
+        <li><strong>IUPK sebagai Kelanjutan Operasi KK/Perjanjian</strong></li>
+        <li><strong>IPR</strong> — Izin Pertambangan Rakyat</li>
+        <li><strong>SIPB</strong> — Surat Izin Penambangan Batuan</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h5>Izin Lainnya</h5>
+      <ul>
+        <li><strong>Izin Penugasan</strong></li>
+        <li><strong>Izin Pengangkutan dan Penjualan</strong></li>
+        <li><strong>IUJP</strong> — Izin Usaha Jasa Pertambangan</li>
+        <li><strong>IUP untuk Penjualan</strong></li>
+      </ul>
+    </div>
+  </div>
+  <h3>Pasal 6–8 — Pendelegasian kepada Pemerintah Daerah Provinsi</h3>
+  <p>Perizinan Berusaha dalam bentuk pemberian sertifikat standar dan izin dapat didelegasikan kepada Pemerintah Daerah Provinsi berdasarkan prinsip:</p>
+  <ul>
+    <li>Efektivitas</li>
+    <li>Efisiensi</li>
+    <li>Akuntabilitas</li>
+    <li>Eksternalitas</li>
+  </ul>
+  <p>Selain prinsip di atas, pendelegasian harus mempertimbangkan sifat strategis komoditas Pertambangan untuk: penyediaan bahan baku industri dalam negeri; dan/atau penyediaan energi dalam negeri.</p>
+  <div class="note-box"><strong>Pasal 8:</strong> Pendelegasian Perizinan Berusaha dalam bentuk pemberian sertifikat standar dan izin diatur lebih lanjut dengan <strong>Peraturan Presiden</strong>.</div>
+</section>
+
+<!-- BAB IV -->
+<section class="section" id="b4">
+  <div class="section-badge"><span class="roman">BAB IV</span> Pasal 9–61</div>
+  <h2>BAB IV — Izin Usaha Pertambangan (IUP)</h2>
+
+  <div id="b4-umum">
+    <h3>Bagian Kesatu — Umum (Pasal 9–14)</h3>
+    <h4>Pasal 9 — Pemberian IUP</h4>
+    <p>IUP diberikan oleh Menteri berdasarkan permohonan yang diajukan oleh:</p>
+    <ul>
+      <li><strong>Badan Usaha</strong> (BUMN, BUMD, atau Badan Usaha swasta)</li>
+      <li><strong>Koperasi</strong></li>
+      <li><strong>Perusahaan perseorangan</strong> (perusahaan firma dan perusahaan komanditer)</li>
+    </ul>
+    <div class="note-box"><strong>IUP diberikan setelah mendapatkan WIUP.</strong> Ketentuan mengenai penetapan WIUP diatur dalam Peraturan Pemerintah tersendiri.</div>
+
+    <h4>Pasal 10 — Pemindahtanganan IUP</h4>
+    <p>Pemegang IUP <strong>dilarang memindahtangankan IUP kepada pihak lain tanpa persetujuan dari Menteri</strong>.</p>
+    <p>Persetujuan dapat diberikan setelah pemegang IUP memenuhi persyaratan:</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Jenis Persyaratan</th><th>Isi</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Administratif</strong></td><td>Surat permohonan; NIB (dalam hal terjadi pemutakhiran data); susunan pengurus, daftar pemegang saham atau modal, dan daftar pemilik manfaat</td></tr>
+          <tr><td><strong>Teknis</strong></td><td>Laporan akhir Eksplorasi; data sumber daya dan cadangan (dilengkapi dengan surat pernyataan sumber daya dan cadangan)</td></tr>
+          <tr><td><strong>Lingkungan</strong></td><td>Laporan pelaksanaan kegiatan Reklamasi; bukti penempatan jaminan Reklamasi</td></tr>
+          <tr><td><strong>Finansial</strong></td><td>Laporan keuangan 3 (tiga) tahun terakhir yang telah diaudit oleh akuntan publik; surat keterangan fiskal; bukti pembayaran iuran tetap 3 (tiga) tahun terakhir</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Selain itu, pemegang IUP juga harus menyampaikan dokumen terkait pihak lain yang akan menerima pemindahtanganan IUP (Pasal 10–11), meliputi dokumen administratif, teknis, lingkungan, dan finansial pihak penerima.</p>
+  </div>
+
+  <div id="b4-eksplorasi">
+    <h3>Bagian Kedua — IUP Tahap Kegiatan Eksplorasi (Pasal 15–30)</h3>
+    <p>IUP terdiri atas 2 (dua) tahap kegiatan:</p>
+    <ul>
+      <li><strong>Eksplorasi</strong>: Penyelidikan Umum, Eksplorasi, dan Studi Kelayakan</li>
+      <li><strong>Operasi Produksi</strong>: Konstruksi, Penambangan, Pengolahan dan/atau Pemurnian atau Pengembangan dan/atau Pemanfaatan, serta Pengangkutan dan Penjualan</li>
+    </ul>
+    <div class="info-box">Ketentuan lebih lanjut mengenai tata cara dan persyaratan pemberian IUP diatur dalam Peraturan Menteri.</div>
+  </div>
+
+  <div id="b4-op">
+    <h3>Bagian Ketiga — IUP Tahap Kegiatan Operasi Produksi (Pasal 31–61)</h3>
+    <h4>Kewajiban Pemegang IUP Operasi Produksi</h4>
+    <ul>
+      <li>Melaksanakan kegiatan Penambangan sesuai ketentuan kaidah teknik Pertambangan yang baik</li>
+      <li>Pemasangan tanda batas WIUP tahap kegiatan Operasi Produksi (Pasal 48–49)</li>
+      <li>Melaksanakan Reklamasi dan Pascatambang</li>
+      <li>Menggunakan perusahaan Jasa Pertambangan lokal dan/atau nasional</li>
+      <li>Mengutamakan kebutuhan Mineral dan Batubara untuk kepentingan dalam negeri</li>
+      <li>Mengacu pada harga patokan dalam penjualan Mineral dan Batubara</li>
+    </ul>
+    <div class="note-box"><strong>Komoditas Tambang Lain (Pasal 57):</strong> Pemegang IUP yang menemukan komoditas tambang lain yang keterdapatannya berbeda di dalam WIUP yang dikelola diberikan prioritas untuk mengusahakannya. Jika tidak berminat, pengusahaannya dapat diberikan kepada pihak lain melalui lelang atau permohonan wilayah.</div>
+  </div>
+</section>
+
+<!-- BAB V -->
+<section class="section" id="b5">
+  <div class="section-badge"><span class="roman">BAB V</span> Pasal 62–67</div>
+  <h2>BAB V — Izin Pertambangan Rakyat (IPR)</h2>
+
+  <h3>Pasal 62 — Pemberian IPR</h3>
+  <p>IPR diberikan oleh Menteri berdasarkan permohonan yang diajukan oleh:</p>
+  <ul>
+    <li><strong>Orang perseorangan</strong> yang merupakan penduduk setempat; atau</li>
+    <li><strong>Koperasi</strong> yang anggotanya merupakan penduduk setempat</li>
+  </ul>
+  <div class="note-box"><strong>Permohonan IPR hanya dapat diajukan pada wilayah yang telah ditetapkan sebagai WPR.</strong> Dalam 1 (satu) WPR dapat diberikan 1 (satu) atau beberapa IPR. Setiap pemohon hanya dapat diberikan 1 (satu) IPR.</div>
+
+  <h3>Pasal 63 — Persyaratan IPR</h3>
+  <div class="two-col">
+    <div class="col-card">
+      <h5>Orang Perseorangan</h5>
+      <ol>
+        <li>Surat permohonan</li>
+        <li>Nomor Induk Berusaha</li>
+        <li>Salinan kartu tanda penduduk</li>
+        <li>Surat keterangan dari kelurahan/desa setempat yang menyatakan pemohon merupakan penduduk setempat</li>
+        <li>Surat pernyataan kesanggupan mematuhi ketentuan peraturan di bidang perlindungan dan pengelolaan lingkungan hidup serta keselamatan Pertambangan</li>
+        <li>Surat keterangan fiskal</li>
+      </ol>
+    </div>
+    <div class="col-card">
+      <h5>Koperasi</h5>
+      <ol>
+        <li>Surat permohonan</li>
+        <li>Nomor Induk Berusaha</li>
+        <li>Salinan kartu tanda penduduk pengurus Koperasi</li>
+        <li>Surat keterangan dari kelurahan/desa setempat yang menyatakan seluruh pengurus Koperasi merupakan penduduk setempat</li>
+        <li>Surat pernyataan kesanggupan mematuhi ketentuan perlindungan lingkungan hidup serta keselamatan Pertambangan</li>
+        <li>Surat keterangan fiskal</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3>Pasal 64 — Jangka Waktu IPR</h3>
+  <p>IPR diberikan untuk jangka waktu paling lama <strong>10 (sepuluh) tahun</strong> dan dapat diperpanjang <strong>2 (dua) kali</strong> masing-masing <strong>5 (lima) tahun</strong>.</p>
+
+  <h3>Pasal 65 — Kewajiban Memulai Kegiatan</h3>
+  <p>Pemegang IPR <strong>wajib melakukan kegiatan Penambangan dalam jangka waktu paling lambat 3 (tiga) bulan</strong> setelah IPR diterbitkan.</p>
+  <p>Rencana Penambangan paling sedikit memuat: metode Penambangan; peralatan dan perlengkapan; jadwal kerja; kebutuhan personil; dan biaya atau permodalan.</p>
+
+  <h3>Pasal 66 — Persyaratan Teknis IPR</h3>
+  <p>Pemegang IPR wajib menaati persyaratan teknis Pertambangan, paling sedikit meliputi:</p>
+  <ul>
+    <li><strong>Tidak menggunakan bahan peledak</strong></li>
+    <li><strong>Tidak menggunakan bahan berbahaya beracun</strong> yang dilarang sesuai ketentuan peraturan perundang-undangan</li>
+    <li><strong>Tidak melakukan kegiatan Penambangan dengan menggunakan metode Penambangan bawah tanah</strong> bagi orang perseorangan</li>
+    <li>Menerapkan kaidah teknik Pertambangan yang baik khususnya pengelolaan lingkungan dan keselamatan Pertambangan</li>
+  </ul>
+  <div class="note-box"><strong>Pasal 67:</strong> Ketentuan lebih lanjut mengenai tata cara dan syarat pemberian IPR diatur dalam Peraturan Menteri.</div>
+</section>
+
+<!-- BAB VI -->
+<section class="section" id="b6">
+  <div class="section-badge"><span class="roman">BAB VI</span> Pasal 68–114</div>
+  <h2>BAB VI — Izin Usaha Pertambangan Khusus (IUPK)</h2>
+
+  <h3>Pasal 68 — Pemberian IUPK</h3>
+  <p>IUPK diberikan oleh Menteri berdasarkan permohonan yang diajukan oleh: BUMN; BUMD; atau Badan Usaha swasta. IUPK diberikan setelah mendapatkan WIUPK.</p>
+
+  <div id="b6-prioritas">
+    <h3>Prioritas BUMN/BUMD dan Lelang WIUPK (Pasal 74–83)</h3>
+    <p>Penawaran WIUPK Mineral logam atau WIUPK Batubara dilaksanakan melalui:</p>
+    <ul>
+      <li><strong>Prioritas</strong> diberikan kepada BUMN atau BUMD</li>
+      <li><strong>Lelang</strong> kepada Badan Usaha swasta (apabila BUMN/BUMD mengundurkan diri atau tidak berminat)</li>
+    </ul>
+    <div class="info-box">
+      <strong>Jangka waktu pengajuan permohonan IUPK setelah ditetapkan sebagai pemenang lelang/penerima prioritas:</strong><br>
+      Dalam jangka waktu <strong>10 (sepuluh) hari kerja</strong>. Jika melewati batas waktu, dianggap mengundurkan diri dan kompensasi data informasi yang telah dibayarkan menjadi milik negara sebagai penerimaan negara bukan pajak.
+    </div>
+    <p>Pemenang lelang harus membayar seluruh nilai kompensasi data informasi dalam jangka waktu paling lambat <strong>7 (tujuh) hari kerja</strong> sejak pengumuman pemenang lelang.</p>
+  </div>
+
+  <div id="b6-eksplorasi">
+    <h3>Pasal 84 — Tahap Kegiatan IUPK</h3>
+    <p>IUPK terdiri atas 2 (dua) tahap kegiatan:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>a. Tahap Eksplorasi</h5>
+        <ul>
+          <li>Penyelidikan Umum</li>
+          <li>Eksplorasi</li>
+          <li>Studi Kelayakan</li>
+        </ul>
+      </div>
+      <div class="col-card">
+        <h5>b. Tahap Operasi Produksi</h5>
+        <ul>
+          <li>Konstruksi</li>
+          <li>Penambangan</li>
+          <li>Pengolahan dan/atau Pemurnian atau Pengembangan dan/atau Pemanfaatan</li>
+          <li>Pengangkutan dan Penjualan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="b6-op">
+    <h3>Bagian Ketiga Paragraf 3 — Tahap Operasi Produksi IUPK (Pasal 95–113)</h3>
+    <p>Pemegang IUPK tahap Operasi Produksi yang tidak melakukan sendiri kegiatan Pengolahan dan Pemurnian dapat dilakukan oleh:</p>
+    <ul>
+      <li>Pemegang IUP tahap kegiatan Operasi Produksi yang memiliki fasilitas Pengolahan dan Pemurnian secara terintegrasi</li>
+      <li>Pemegang IUPK lain tahap kegiatan Operasi Produksi yang memiliki fasilitas Pengolahan dan Pemurnian secara terintegrasi</li>
+      <li>Pihak lain yang melakukan kegiatan usaha Pengolahan dan/atau Pemurnian yang tidak terintegrasi dengan kegiatan Penambangan</li>
+    </ul>
+  </div>
+
+  <div id="b6-konservasi">
+    <h3>Pasal 104 — Dana Ketahanan Cadangan Mineral dan Batubara</h3>
+    <p>Dalam rangka konservasi Mineral dan Batubara, pemegang IUPK tahap kegiatan Operasi Produksi <strong>wajib melakukan Eksplorasi lanjutan setiap tahun</strong> untuk kegiatan penemuan cadangan baru pada WIUPK tahap kegiatan Operasi Produksi.</p>
+    <p>Pemegang IUPK wajib mengalokasikan anggaran setiap tahun sebagai <strong>dana ketahanan cadangan Mineral dan Batubara</strong>, besarannya diusulkan dalam RKAB Tahunan.</p>
+    <div class="note-box"><strong>Pengecualian:</strong> Kewajiban Eksplorasi lanjutan dapat dikecualikan bagi pemegang IUPK tahap kegiatan Operasi Produksi yang telah memiliki data cadangan di seluruh WIUPK berdasarkan hasil evaluasi Menteri.</div>
+    <h4>Pasal 106 — Komoditas Tambang Lain dalam WIUPK</h4>
+    <ul>
+      <li>Pemegang IUPK yang menemukan komoditas tambang lain yang keterdapatannya berbeda di dalam WIUPK diberikan prioritas untuk mengusahakannya</li>
+      <li>Jika berminat, harus mengajukan permohonan IUP atau IUPK baru</li>
+      <li>Jika tidak berminat, pengusahaannya dapat diberikan kepada pihak lain melalui lelang atau permohonan wilayah</li>
+    </ul>
+    <h4>Pasal 107 — Penggunaan Batuan dalam WIUPK</h4>
+    <p>Pemegang IUPK tahap kegiatan Operasi Produksi dapat mengambil dan menggunakan batuan yang terdapat di dalam WIUPK untuk <strong>menunjang kegiatan Usaha Pertambangan</strong>.</p>
+  </div>
+</section>
+
+<!-- BAB VII -->
+<section class="section" id="b7">
+  <div class="section-badge"><span class="roman">BAB VII</span> Pasal 115–128</div>
+  <h2>BAB VII — IUPK sebagai Kelanjutan Operasi KK/PKP2B</h2>
+
+  <h3>Pasal 115 — Permohonan IUPK Kelanjutan Operasi</h3>
+  <p>IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian diberikan oleh Menteri berdasarkan permohonan yang diajukan oleh pemegang KK atau PKP2B.</p>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Ketentuan</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Waktu Pengajuan</strong></td><td>Paling cepat <strong>5 (lima) tahun</strong> atau paling lambat <strong>1 (satu) tahun</strong> sebelum KK atau PKP2B berakhir</td></tr>
+        <tr><td><strong>Jangka Waktu IUPK</strong></td><td>Sesuai sisa jangka waktu KK atau PKP2B dan perpanjangan pertama selama <strong>10 (sepuluh) tahun</strong></td></tr>
+        <tr><td><strong>Pertimbangan Pemberian</strong></td><td>Keberlanjutan operasi; optimalisasi potensi cadangan Mineral atau Batubara; kepentingan nasional</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pasal 116–117 — Rencana Pengembangan Seluruh Wilayah</h3>
+  <p>Pemegang KK dan PKP2B sebelum mengajukan permohonan IUPK sebagai Kelanjutan Operasi harus menyampaikan <strong>rencana pengembangan seluruh wilayah</strong> untuk mendapatkan persetujuan Menteri.</p>
+  <p>Rencana pengembangan seluruh wilayah paling sedikit memuat:</p>
+  <ul>
+    <li>Jumlah dan lokasi sumber daya dan/atau cadangan yang diperuntukkan untuk kegiatan Penambangan sampai dengan masa perpanjangan</li>
+    <li>Rencana kegiatan Operasi Produksi selama masa perpanjangan</li>
+    <li>Rencana pengelolaan lingkungan termasuk Reklamasi dan Pascatambang</li>
+    <li>Rencana investasi dan pembiayaan</li>
+    <li>Rencana pemanfaatan wilayah di dalam WIUPK yang digunakan untuk menunjang kegiatan Usaha Pertambangan dan/atau diperlukan untuk menjamin terpenuhinya aspek lingkungan dan keselamatan Pertambangan</li>
+  </ul>
+  <div class="blue-box"><strong>Khusus PKP2B (Pasal 116 ayat 2):</strong> Pemegang PKP2B juga harus menyampaikan <strong>rencana Pengembangan dan/atau Pemanfaatan Batubara di dalam negeri</strong> untuk mendapatkan persetujuan Menteri sebelum mengajukan permohonan IUPK sebagai Kelanjutan Operasi.</div>
+</section>
+
+<!-- BAB VIII -->
+<section class="section" id="b8">
+  <div class="section-badge"><span class="roman">BAB VIII</span> Pasal 129–136</div>
+  <h2>BAB VIII — Surat Izin Penambangan Batuan (SIPB)</h2>
+
+  <h3>Pasal 129 — Pemberian SIPB</h3>
+  <p>SIPB diberikan oleh Menteri berdasarkan permohonan yang diajukan oleh:</p>
+  <ul>
+    <li>BUMD/Badan Usaha milik desa</li>
+    <li>Badan Usaha swasta dalam rangka penanaman modal dalam negeri</li>
+    <li>Koperasi</li>
+    <li>Perusahaan perseorangan</li>
+  </ul>
+  <div class="note-box"><strong>Permohonan SIPB hanya dapat diajukan pada wilayah yang telah ditetapkan sebagai WUP.</strong></div>
+
+  <h3>Batuan Jenis Tertentu atau untuk Keperluan Tertentu (Pasal 129 ayat 4)</h3>
+  <p>Batuan yang dimaksud meliputi batuan yang memiliki <strong>sifat material lepas</strong> berupa:</p>
+  <div class="two-col">
+    <div class="col-card">
+      <ul>
+        <li>Tanah urug</li>
+        <li>Kerikil galian dari bukit</li>
+        <li>Kerikil sungai</li>
+        <li>Batu kali</li>
+        <li>Kerikil sungai ayak tanpa pasir</li>
+        <li>Pasir urug</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <ul>
+        <li>Pasir pasang</li>
+        <li>Kerikil berpasir alami (sirtu)</li>
+        <li>Tanah</li>
+        <li>Pasir laut</li>
+        <li>Tanah merah (laterit)</li>
+        <li>Tanah liat</li>
+        <li>Batu gamping</li>
+      </ul>
+    </div>
+  </div>
+  <p>SIPB terdiri atas tahap kegiatan <strong>perencanaan, penambangan, pengolahan, serta Pengangkutan dan Penjualan</strong>.</p>
+  <div class="note-box"><strong>Pasal 130:</strong> Menteri menetapkan skala usaha Badan Usaha swasta dalam rangka penanaman modal dalam negeri yang dapat diberikan SIPB.</div>
+</section>
+
+<!-- BAB X -->
+<section class="section" id="b10">
+  <div class="section-badge"><span class="roman">BAB X</span> Pasal 137–146</div>
+  <h2>BAB X — Usaha Jasa Pertambangan (IUJP)</h2>
+
+  <h3>Pasal 137 — Kewajiban Penggunaan Jasa Pertambangan Lokal/Nasional</h3>
+  <p>Pemegang IUP atau IUPK <strong>wajib menggunakan perusahaan Jasa Pertambangan lokal dan/atau nasional</strong>.</p>
+  <p>Perusahaan Jasa Pertambangan melaksanakan kegiatan usaha di bidang:</p>
+  <div class="two-col">
+    <div class="col-card">
+      <h5>Bidang Usaha Jasa</h5>
+      <ul>
+        <li>Penyelidikan Umum</li>
+        <li>Eksplorasi</li>
+        <li>Studi Kelayakan</li>
+        <li>Konstruksi Pertambangan</li>
+        <li>Pengangkutan</li>
+        <li>Lingkungan Pertambangan</li>
+        <li>Reklamasi dan Pascatambang</li>
+        <li>Keselamatan Pertambangan</li>
+        <li>Penambangan</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h5>Jenis Kegiatan Usaha Jasa</h5>
+      <ul>
+        <li><strong>Konsultasi</strong> — sertifikat standar</li>
+        <li><strong>Perencanaan</strong> — sertifikat standar</li>
+        <li><strong>Pelaksanaan</strong> — IUJP</li>
+      </ul>
+      <p style="font-size:0.82rem;color:var(--ink-light);margin-top:8px">Kegiatan konsultasi dan perencanaan dilaksanakan setelah memenuhi ketentuan Perizinan Berusaha dalam bentuk sertifikat standar. Kegiatan pelaksanaan dilaksanakan setelah mendapatkan IUJP.</p>
+    </div>
+  </div>
+
+  <h3>Hierarki Penggunaan Jasa Pertambangan (Pasal 137 ayat 6–8)</h3>
+  <p>Penggunaan perusahaan Jasa Pertambangan lokal dan/atau nasional dilakukan berdasarkan:</p>
+  <ul>
+    <li>Kedekatan lokasi kegiatan Usaha Pertambangan dengan keberadaan perusahaan Jasa Pertambangan pada wilayah kabupaten/kota, provinsi, dan provinsi lainnya</li>
+    <li>Status perusahaan Jasa Pertambangan sebagai perusahaan penanaman modal dalam negeri</li>
+  </ul>
+  <div class="info-box">Dalam hal tidak terdapat perusahaan Jasa Pertambangan lokal dan/atau nasional, pemegang IUP atau IUPK dapat menggunakan perusahaan Jasa Pertambangan yang berbadan hukum Indonesia dalam rangka penanaman modal asing, setelah melakukan <strong>pengumuman ke media massa lokal dan/atau nasional</strong> tetapi tidak ada perusahaan Jasa Pertambangan lokal dan/atau nasional yang mampu secara teknis dan/atau finansial.</div>
+
+  <h3>Pasal 138 — Subkontrak</h3>
+  <p>Perusahaan Jasa Pertambangan lokal dan/atau nasional dapat memberikan sebagian pekerjaan usaha Jasa Pertambangan yang didapatkan kepada pihak lain, dengan <strong>wajib mengutamakan penggunaan kontraktor lokal dan tenaga kerja lokal</strong>.</p>
+</section>
+
+<!-- BAB XII -->
+<section class="section" id="b12">
+  <div class="section-badge"><span class="roman">BAB XII</span> Pasal 147–149</div>
+  <h2>BAB XII — Divestasi Saham</h2>
+
+  <h3>Pasal 147 — Kewajiban Divestasi Saham</h3>
+  <p>Badan Usaha pemegang IUP dan IUPK pada tahap kegiatan Operasi Produksi dalam rangka penanaman modal asing wajib melakukan <strong>divestasi saham paling sedikit sebesar 51% (lima puluh satu persen) secara berjenjang</strong> kepada Pemerintah Pusat, Pemerintah Daerah, BUMN, BUMD, dan/atau Badan Usaha Swasta Nasional.</p>
+
+  <h4>Jadwal Divestasi (Tambang Terbuka — Tidak Terintegrasi)</h4>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Tahun (sejak berproduksi)</th><th>Kepemilikan Saham Min.</th></tr></thead>
+      <tbody>
+        <tr><td>Tahun ke-10</td><td>5%</td></tr>
+        <tr><td>Tahun ke-11</td><td>10%</td></tr>
+        <tr><td>Tahun ke-12</td><td>15%</td></tr>
+        <tr><td>Tahun ke-13</td><td>20%</td></tr>
+        <tr><td>Tahun ke-14</td><td>30%</td></tr>
+        <tr><td>Tahun ke-15</td><td><strong>51%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Jadwal Divestasi (Tambang Terbuka — Terintegrasi dengan Fasilitas Pengolahan/Pemurnian)</h4>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Tahun (sejak berproduksi)</th><th>Kepemilikan Saham Min.</th></tr></thead>
+      <tbody>
+        <tr><td>Tahun ke-15</td><td>5%</td></tr>
+        <tr><td>Tahun ke-16</td><td>10%</td></tr>
+        <tr><td>Tahun ke-17</td><td>15%</td></tr>
+        <tr><td>Tahun ke-18</td><td>20%</td></tr>
+        <tr><td>Tahun ke-19</td><td>30%</td></tr>
+        <tr><td>Tahun ke-20</td><td><strong>51%</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box">Ketentuan lebih lanjut mengenai divestasi saham bagi metode tambang bawah tanah dan pengaturan skema pembelian saham diatur dalam Pasal 147–149 PP ini dan Peraturan Menteri.</div>
+</section>
+
+<!-- BAB XIII -->
+<section class="section" id="b13">
+  <div class="section-badge"><span class="roman">BAB XIII</span> Pasal 150–156</div>
+  <h2>BAB XIII — Suspensi Kegiatan Usaha Pertambangan</h2>
+
+  <h3>Pasal 150 — Alasan Suspensi</h3>
+  <p>Suspensi kegiatan Usaha Pertambangan dapat diberikan kepada pemegang IUP, IUPK, IPR, atau SIPB jika terjadi:</p>
+  <ul>
+    <li><strong>a. Keadaan kahar</strong></li>
+    <li><strong>b. Keadaan yang menghalangi</strong></li>
+    <li><strong>c. Kondisi daya dukung lingkungan wilayah tersebut tidak dapat menanggung beban kegiatan Operasi Produksi</strong></li>
+  </ul>
+  <div class="info-box"><strong>Penting:</strong> Suspensi kegiatan Usaha Pertambangan <strong>tidak mengurangi masa berlaku</strong> IUP, IUPK, IPR, atau SIPB.</div>
+
+  <h3>Pasal 151 — Dasar Pemberian Suspensi</h3>
+  <ul>
+    <li>Keadaan kahar dan keadaan yang menghalangi menjadi dasar pemberian suspensi apabila mengakibatkan <strong>terhentinya sebagian atau seluruh kegiatan Usaha Pertambangan</strong></li>
+    <li>Kondisi daya dukung lingkungan menjadi dasar apabila mengakibatkan: terjadinya degradasi kualitas lingkungan hidup; dan/atau terganggunya keseimbangan ekosistem</li>
+  </ul>
+
+  <h3>Pasal 152 — Permohonan Suspensi</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Jenis Suspensi</th><th>Batas Waktu Permohonan</th><th>Dasar Permohonan</th></tr></thead>
+      <tbody>
+        <tr><td>Keadaan kahar atau keadaan yang menghalangi</td><td>Paling lambat <strong>7 (tujuh) hari kalender</strong> sejak terjadinya keadaan kahar atau keadaan yang menghalangi</td><td>Permohonan pemegang IUP, IUPK, IPR, atau SIPB</td></tr>
+        <tr><td>Kondisi daya dukung lingkungan (dari Masyarakat)</td><td>—</td><td>Permohonan Masyarakat disertai dengan kajian dan data dukungnya</td></tr>
+        <tr><td>Kondisi daya dukung lingkungan</td><td>—</td><td>Hasil pengawasan yang dilakukan oleh Menteri; dan/atau permohonan dari Masyarakat</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- BAB XIV -->
+<section class="section" id="b14">
+  <div class="section-badge"><span class="roman">BAB XIV</span> Pasal 157–172</div>
+  <h2>BAB XIV — Pengutamaan Kepentingan Dalam Negeri, Pengendalian Produksi, dan Pengendalian Penjualan</h2>
+
+  <h3>Pasal 157 — Kewajiban DMO</h3>
+  <p>Pemegang IUP atau IUPK tahap kegiatan Operasi Produksi <strong>wajib mengutamakan kebutuhan Mineral dan/atau Batubara untuk kepentingan dalam negeri</strong>. Menteri dapat menetapkan kebutuhan Mineral dan Batubara di dalam negeri.</p>
+
+  <h3>Pasal 158 — Penjualan Mineral dan Batubara</h3>
+  <p>Pemegang IUP atau IUPK tahap Operasi Produksi dapat melakukan Penjualan Mineral dan Batubara ke luar negeri dengan ketentuan:</p>
+  <ul>
+    <li><strong>Mineral</strong>: Setelah memenuhi batasan minimum Pengolahan dan/atau Pemurnian; <strong>dan</strong> terpenuhinya kebutuhan Mineral dalam negeri</li>
+    <li><strong>Batubara</strong>: Setelah terpenuhinya kebutuhan Batubara dalam negeri</li>
+  </ul>
+
+  <h3>Pasal 159–160 — Harga Patokan</h3>
+  <p>Pemegang IUP dan IUPK yang menjual Mineral atau Batubara <strong>wajib mengacu pada harga patokan</strong> yang ditetapkan oleh Menteri berdasarkan: mekanisme pasar; atau harga yang berlaku umum di pasar internasional.</p>
+  <p>Menteri dapat menetapkan harga jual Mineral dan Batubara dalam rangka pemenuhan kebutuhan dalam negeri. Ketentuan lebih lanjut mengenai tata cara penetapan harga patokan Mineral logam dan Batubara diatur dalam Peraturan Menteri.</p>
+</section>
+
+<!-- BAB XVI -->
+<section class="section" id="b16">
+  <div class="section-badge"><span class="roman">BAB XVI</span> Pasal 173–174</div>
+  <h2>BAB XVI — Penggunaan Jalan Pertambangan</h2>
+
+  <h3>Pasal 173 — Jenis Jalan Pertambangan</h3>
+  <p>Pemegang IUP dan IUPK wajib menggunakan jalan Pertambangan dalam pelaksanaan kegiatan Usaha Pertambangan. Jalan Pertambangan terdiri atas:</p>
+  <ul>
+    <li><strong>Jalan tambang</strong> — terdapat pada area Pertambangan atau area proyek yang digunakan dan dilalui oleh alat utama dan alat penunjang produksi</li>
+    <li><strong>Jalan penunjang</strong> — disediakan untuk jalan transportasi barang atau orang dalam suatu area Pertambangan dan/atau area proyek pendukung operasi Pertambangan atau penyediaan fasilitas Pertambangan</li>
+  </ul>
+
+  <h4>Pembangunan Jalan Pertambangan</h4>
+  <p>Dapat dibangun sendiri oleh pemegang IUP dan IUPK atau bekerja sama dengan:</p>
+  <ul>
+    <li>Pemegang IUP atau IUPK lain yang membangun jalan Pertambangan</li>
+    <li>Pihak lain yang memiliki jalan yang dapat diperuntukkan sebagai jalan Pertambangan, setelah memenuhi aspek keselamatan Pertambangan</li>
+  </ul>
+  <div class="info-box">Dalam hal jalan penunjang tidak tersedia, pemegang IUP dan IUPK dapat memanfaatkan sarana dan prasarana umum termasuk jalan umum untuk keperluan Pertambangan setelah memenuhi ketentuan peraturan perundang-undangan.</div>
+
+  <h3>Pasal 174 — Keselamatan Penggunaan Jalan</h3>
+  <ul>
+    <li>Pemegang IUP dan IUPK dalam penggunaan dan pembangunan jalan Pertambangan <strong>wajib memenuhi aspek keselamatan Pertambangan</strong></li>
+    <li>Pemegang IUP dan IUPK dapat memberikan akses kepada Masyarakat untuk menggunakan jalan Pertambangan setelah mendapat persetujuan dari penanggung jawab aspek keselamatan Pertambangan</li>
+  </ul>
+</section>
+
+<!-- BAB XVII -->
+<section class="section" id="b17">
+  <div class="section-badge"><span class="roman">BAB XVII</span> Pasal 175–176</div>
+  <h2>BAB XVII — Penggunaan Tanah untuk Kegiatan Usaha Pertambangan</h2>
+
+  <h3>Pasal 175 — Penyelesaian Hak atas Tanah</h3>
+  <p>Pemegang IUP, IUPK, atau SIPB sebelum melakukan kegiatan Usaha Pertambangan <strong>wajib menyelesaikan hak atas tanah</strong> dalam WIUP atau WIUPK dengan pemegang hak atas tanah sesuai dengan ketentuan peraturan perundang-undangan.</p>
+  <ul>
+    <li>Penyelesaian hak atas tanah dapat dilakukan <strong>secara bertahap</strong> sesuai dengan kebutuhan</li>
+    <li>Pemegang IUP, IUPK, atau SIPB wajib memberikan <strong>kompensasi berdasarkan kesepakatan bersama</strong> dengan pemegang hak atas tanah</li>
+    <li>Kompensasi dihitung berdasarkan luasan tanah dan/atau benda yang berada di atas tanah — <strong>tidak memperhitungkan nilai potensi komoditas Mineral atau Batubara</strong></li>
+  </ul>
+
+  <h3>Pasal 176 — Musyawarah dan Mediasi</h3>
+  <p>Penyelesaian hak atas tanah dilakukan secara <strong>musyawarah untuk mufakat</strong>. Dalam hal musyawarah tidak tercapai, Pemerintah Pusat melakukan penyelesaian melalui <strong>mediasi</strong> yang dikoordinasikan oleh Menteri bersama menteri yang menyelenggarakan urusan pemerintahan di bidang agraria/pertanahan dengan melibatkan Pemerintah Daerah.</p>
+</section>
+
+<!-- BAB XVIII -->
+<section class="section" id="b18">
+  <div class="section-badge"><span class="roman">BAB XVIII</span> Pasal 177–178</div>
+  <h2>BAB XVIII — RKAB Tahunan dan Laporan</h2>
+
+  <h3>Pasal 177 — Rencana Kerja dan Anggaran Biaya Tahunan (RKAB)</h3>
+  <p>Pemegang IUP dan IUPK wajib menyusun dan menyampaikan <strong>RKAB Tahunan</strong> sebagai pedoman dalam pelaksanaan kegiatan Usaha Pertambangan kepada Menteri.</p>
+  <p>RKAB Tahunan <strong>wajib mendapatkan persetujuan Menteri</strong>. Ketentuan lebih lanjut mengenai tata cara penyusunan, penyampaian, dan persetujuan RKAB Tahunan diatur dalam Peraturan Menteri.</p>
+  <div class="info-box">RKAB Tahunan mencakup <strong>aspek pengusahaan, aspek teknik, dan aspek lingkungan</strong> (sesuai definisi dalam Pasal 1 angka 39).</div>
+
+  <h3>Pasal 178 — Laporan Pelaksanaan Kegiatan</h3>
+  <p>Pemegang IUP, IUPK, IPR, SIPB, Izin Pengangkutan dan Penjualan, IUJP, dan IUP untuk Penjualan <strong>wajib menyusun dan menyampaikan laporan</strong> pelaksanaan kegiatan Usaha Pertambangan kepada Menteri.</p>
+  <p>Laporan paling sedikit terdiri atas:</p>
+  <ul>
+    <li><strong>a. Laporan berkala</strong></li>
+    <li><strong>b. Laporan akhir</strong></li>
+    <li><strong>c. Laporan khusus</strong></li>
+  </ul>
+  <p>Laporan disampaikan secara tertulis dan/atau secara elektronik. Ketentuan lebih lanjut diatur dalam Peraturan Menteri.</p>
+</section>
+
+<!-- BAB XIX -->
+<section class="section" id="b19">
+  <div class="section-badge"><span class="roman">BAB XIX</span> Pasal 179–182</div>
+  <h2>BAB XIX — Pengembangan dan Pemberdayaan Masyarakat (PPM)</h2>
+
+  <h3>Pasal 179 — Kewajiban PPM</h3>
+  <p>Pemegang IUP dan IUPK <strong>wajib menyusun rencana induk program pengembangan dan pemberdayaan Masyarakat</strong> di sekitar WIUP dan WIUPK dengan berpedoman pada cetak biru (<em>blue print</em>) yang ditetapkan sesuai dengan ketentuan peraturan perundang-undangan.</p>
+  <p>Program pengembangan dan pemberdayaan Masyarakat dilaksanakan berdasarkan hasil kesepakatan bersama antara pemegang IUP atau IUPK dengan Masyarakat setempat. Program ini juga wajib dikonsultasikan dengan Pemerintah Daerah setempat.</p>
+  <p>Pemegang IUP dan IUPK wajib melaporkan pelaksanaan program pengembangan dan pemberdayaan Masyarakat kepada Menteri setiap tahun.</p>
+</section>
+
+<!-- BAB XX -->
+<section class="section" id="b20">
+  <div class="section-badge"><span class="roman">BAB XX</span> Pasal 183–184</div>
+  <h2>BAB XX — Penjualan Mineral dan Batubara Keadaan Tertentu</h2>
+
+  <h3>Pasal 183 — Penjualan setelah IUP Berakhir atau Dicabut</h3>
+  <p>Mineral atau Batubara yang berada pada fasilitas penimbunan pemegang IUP, IUPK, IPR, atau SIPB yang telah <strong>berakhir jangka waktunya atau dicabut</strong> dapat dilakukan Penjualan setelah mengajukan permohonan dan mendapatkan <strong>persetujuan Menteri</strong>.</p>
+  <div class="note-box"><strong>Pengecualian:</strong> Permohonan tidak dapat diajukan oleh eks pemegang IUP, IUPK, IPR, atau SIPB yang dicabut karena melanggar <strong>ketentuan pidana</strong> di bidang Pertambangan Mineral dan Batubara.</div>
+
+  <h4>Persyaratan Persetujuan Menteri</h4>
+  <ul>
+    <li>Surat permohonan</li>
+    <li>Salinan kontrak penjualan</li>
+  </ul>
+  <p>Menteri harus mendasarkan persetujuannya atas hasil evaluasi pemeriksaan lapangan terhadap: pemenuhan persyaratan; persetujuan RKAB Tahunan; rencana Reklamasi dan Pascatambang yang telah disetujui beserta jaminan yang telah ditempatkan; dan laporan hasil produksi dan penjualan.</p>
+
+  <h4>Batas Waktu Permohonan</h4>
+  <p>Permohonan hanya dapat diajukan dalam jangka waktu paling lambat <strong>6 (enam) bulan</strong> sejak IUP, IUPK, IPR, atau SIPB berakhir jangka waktunya atau dicabut.</p>
+
+  <h3>Pasal 184 — Mineral/Batubara sebagai Barang Milik Negara</h3>
+  <p>Apabila pemegang IUP, IUPK, IPR, atau SIPB yang telah berakhir jangka waktunya tidak mengajukan permohonan penjualan atau permohonan tidak disetujui oleh Menteri, <strong>Mineral atau Batubara ditetapkan sebagai barang milik negara</strong>.</p>
+</section>
+
+<!-- BAB XXI -->
+<section class="section" id="b21">
+  <div class="section-badge"><span class="roman">BAB XXI</span> Pasal 185–188</div>
+  <h2>BAB XXI — Sanksi Administratif</h2>
+
+  <h3>Pasal 185 — Jenis Sanksi Administratif</h3>
+  <p>Sanksi administratif berupa:</p>
+  <ul>
+    <li><strong>a. Peringatan tertulis</strong></li>
+    <li><strong>b. Penghentian sementara sebagian atau seluruh kegiatan Eksplorasi atau Operasi Produksi</strong></li>
+    <li><strong>c. Pencabutan IUP, IUPK, IPR, SIPB, atau IUP untuk Penjualan</strong></li>
+  </ul>
+  <p>Selain sanksi administratif di atas, pemegang IUP, IUPK, IPR, atau SIPB yang melakukan pelanggaran tertentu juga dikenai <strong>denda</strong> (yang dilaksanakan sesuai ketentuan di bidang pajak daerah dan retribusi daerah).</p>
+
+  <h3>Pasal 186–187 — Tahapan Pengenaan Sanksi</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Tahap</th><th>Jenis Sanksi</th><th>Waktu</th><th>Ketentuan</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Peringatan Tertulis</strong></td><td>Diberikan paling banyak <strong>3 (tiga) kali</strong> dengan jangka waktu peringatan masing-masing <strong>30 (tiga puluh) hari kalender</strong></td><td>Jika masih belum melaksanakan kewajibannya → lanjut ke tahap 2</td></tr>
+        <tr><td>2</td><td><strong>Penghentian Sementara Kegiatan</strong></td><td>Jangka waktu paling lama <strong>60 (enam puluh) hari kalender</strong> sejak jangka waktu peringatan tertulis berakhir</td><td>Jika masih belum melaksanakan kewajibannya → lanjut ke tahap 3</td></tr>
+        <tr><td>3</td><td><strong>Pencabutan Izin</strong></td><td>—</td><td>Dikenai apabila melewati batas waktu penghentian sementara tanpa memenuhi kewajiban</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pasal 188 — Pencabutan Langsung (Tanpa Tahapan)</h3>
+  <p>Menteri dapat memberikan sanksi administratif berupa pencabutan izin <strong>tanpa melalui tahapan</strong> peringatan tertulis dan penghentian sementara, dalam kondisi tertentu berkaitan dengan:</p>
+  <ul>
+    <li>Pelanggaran pidana yang dilakukan oleh pemegang IUP, IUPK, IPR, atau SIPB berdasarkan <strong>putusan pengadilan yang berkekuatan hukum tetap</strong></li>
+    <li>Hasil evaluasi Menteri atas pemegang IUP, IUPK, IPR, atau SIPB yang telah menimbulkan <strong>kerusakan lingkungan</strong> serta tidak menerapkan kaidah teknik Pertambangan yang baik</li>
+    <li>Pemegang IUP, IUPK, IPR, atau SIPB <strong>dinyatakan pailit</strong> sesuai dengan ketentuan peraturan perundang-undangan</li>
+  </ul>
+</section>
+
+<!-- BAB XXII & XXIII -->
+<section class="section" id="b22">
+  <div class="section-badge"><span class="roman">BAB XXII & XXIII</span> Pasal 189–201</div>
+  <h2>BAB XXII — Ketentuan Peralihan (Pasal 189–199)</h2>
+
+  <h3>Pasal 189 — Peralihan PKP2B menjadi IUPK</h3>
+  <p>Pemegang PKP2B yang telah mengajukan permohonan perpanjangan PKP2B menjadi IUPK Operasi Produksi perpanjangan kepada Menteri sebelum PP ini diundangkan harus menyesuaikan permohonan perpanjangan menjadi <strong>IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian</strong> berdasarkan ketentuan dalam PP ini.</p>
+
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Ketentuan Peralihan</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Rencana Pengembangan dan/atau Pemanfaatan Batubara</td><td>Harus disampaikan bersamaan dengan permohonan perpanjangan PKP2B menjadi IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian</td></tr>
+        <tr><td>Persetujuan Menteri</td><td>Menteri memberikan persetujuan permohonan IUPK sebelum berakhirnya PKP2B, dengan mempertimbangkan: keberlanjutan operasi; optimalisasi potensi cadangan Batubara; dan kepentingan nasional</td></tr>
+        <tr><td>Penolakan</td><td>Menteri dapat menolak permohonan berdasarkan hasil evaluasi terhadap persyaratan perpanjangan dan kinerja pengusahaan Pertambangan. Penolakan harus disampaikan paling lambat sebelum berakhirnya PKP2B disertai dengan alasan penolakan</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 style="margin-top:32px">BAB XXIII — Ketentuan Penutup (Pasal 200–201)</h2>
+
+  <h3>Pasal 200 — Pencabutan PP Sebelumnya</h3>
+  <p>Pada saat PP ini mulai berlaku, <strong>Peraturan Pemerintah Nomor 23 Tahun 2010</strong> tentang Pelaksanaan Kegiatan Usaha Pertambangan Mineral dan Batubara sebagaimana telah beberapa kali diubah, terakhir dengan <strong>PP Nomor 8 Tahun 2018</strong>, dicabut dan dinyatakan tidak berlaku.</p>
+
+  <h3>Pasal 201 — Mulai Berlaku</h3>
+  <div class="green-box"><strong>Peraturan Pemerintah ini mulai berlaku pada tanggal diundangkan</strong>, yaitu tanggal <strong>9 September 2021</strong>. Ditetapkan di Jakarta oleh <strong>Presiden Joko Widodo</strong>. Diundangkan oleh Menteri Hukum dan HAM Yasonna H. Laoly. Dimuat dalam Lembaran Negara Republik Indonesia Tahun 2021 Nomor 208.</div>
+</section>
+
+</main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    const oc = n.getAttribute('onclick') || '';
+    if (oc === `showSection('${id}')`) n.classList.add('active');
+  });
+  window.scrollTo(0, 0);
+  closeSidebar();
+  clearSearch();
+}
+function scrollTo(id) {
+  setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+let matches = [], matchIdx = -1;
+const originalHTML = {};
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchCount').style.display = 'none';
+  restoreAll(); matches = []; matchIdx = -1;
+}
+function saveOriginals() {
+  document.querySelectorAll('.section').forEach(s => { if (!originalHTML[s.id]) originalHTML[s.id] = s.innerHTML; });
+}
+function restoreAll() {
+  document.querySelectorAll('.section').forEach(s => { if (originalHTML[s.id]) s.innerHTML = originalHTML[s.id]; });
+}
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  const countEl = document.getElementById('searchCount');
+  if (!q) { restoreAll(); countEl.style.display = 'none'; matches = []; matchIdx = -1; return; }
+  saveOriginals(); restoreAll();
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(escaped, 'gi');
+  let count = 0;
+  document.querySelectorAll('.section').forEach(sec => {
+    const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null, false);
+    const textNodes = [];
+    let node;
+    while (node = walker.nextNode()) { if (!['SCRIPT','STYLE'].includes(node.parentElement.tagName)) textNodes.push(node); }
+    textNodes.forEach(tn => {
+      const text = tn.textContent;
+      if (regex.test(text)) {
+        regex.lastIndex = 0;
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(regex, m => `<mark>${m}</mark>`);
+        tn.parentNode.replaceChild(span, tn);
+        count += (text.match(regex) || []).length;
+        regex.lastIndex = 0;
+      }
+      regex.lastIndex = 0;
+    });
+  });
+  matches = [...document.querySelectorAll('mark')];
+  matchIdx = -1;
+  if (count > 0) {
+    countEl.textContent = `${count} hasil`;
+    countEl.style.display = 'block';
+    nextMatch();
+  } else {
+    countEl.textContent = 'Tidak ditemukan';
+    countEl.style.display = 'block';
+  }
+}
+function nextMatch() {
+  if (!matches.length) return;
+  if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+  matchIdx = (matchIdx + 1) % matches.length;
+  const m = matches[matchIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('section')) el = el.parentElement;
+  if (el) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); el.classList.add('active'); }
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function prevMatch() {
+  if (!matches.length) return;
+  if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+  matchIdx = (matchIdx - 1 + matches.length) % matches.length;
+  const m = matches[matchIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('section')) el = el.parentElement;
+  if (el) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); el.classList.add('active'); }
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function searchNav(e) {
+  if (e.key === 'Enter') { e.shiftKey ? prevMatch() : nextMatch(); }
+  if (e.key === 'Escape') clearSearch();
+}
+window.addEventListener('load', saveOriginals);
+</script>
+</body>
+</html>

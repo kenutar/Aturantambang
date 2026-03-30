@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP No. 55 Tahun 2010 — Pembinaan & Pengawasan Pertambangan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap');
+
+  :root {
+    --gold: #b8924a;
+    --gold-light: #d4b06a;
+    --gold-pale: #f5eddc;
+    --ink: #1a1410;
+    --ink-mid: #3d2f1e;
+    --ink-light: #6b5a44;
+    --cream: #faf6ef;
+    --cream-dark: #f0e8d8;
+    --rule: #c9a96e;
+    --sidebar-w: 280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── LAYOUT ── */
+  .shell { display: flex; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  aside {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: var(--ink);
+    color: #d4c9b4;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 0 2rem;
+  }
+
+  .sidebar-header {
+    padding: 1.5rem 1.2rem 1rem;
+    border-bottom: 1px solid #3d2f1e;
+    background: #120e09;
+  }
+  .sidebar-header .label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+  .sidebar-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: #e8dcc8;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  .nav-section { padding: 1rem 0 0; }
+  .nav-section-title {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 0 1.2rem 0.4rem;
+    margin-bottom: 0.2rem;
+  }
+  .nav-item {
+    display: block;
+    padding: 0.42rem 1.2rem;
+    color: #b0a490;
+    text-decoration: none;
+    font-size: 12.5px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--gold-light);
+    border-left-color: var(--gold);
+    background: rgba(184,146,74,0.08);
+  }
+  .nav-item span { font-size: 10px; opacity: 0.6; margin-right: 0.3rem; }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 3rem 6rem;
+  }
+
+  /* ── DOCUMENT HEADER ── */
+  .doc-header {
+    text-align: center;
+    padding: 2.5rem 0 2rem;
+    border-bottom: 2px solid var(--rule);
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .doc-header::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0 auto 1.5rem;
+  }
+  .doc-header .negara {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.8rem;
+  }
+  .doc-header .jenis-peraturan {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .doc-header .nomor {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .doc-header .tentang-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.6rem;
+  }
+  .doc-header .judul {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 560px;
+    margin: 0 auto 1rem;
+  }
+  .doc-header .ditetapkan {
+    font-size: 12px;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+
+  /* ── SECTION / BAB ── */
+  .bab {
+    margin-bottom: 2.8rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .bab-header {
+    text-align: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .bab-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .bab-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .bagian {
+    margin: 1.6rem 0 1rem;
+  }
+  .bagian-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  .bagian-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink-mid);
+    text-align: center;
+  }
+
+  /* ── PASAL ── */
+  .pasal {
+    margin: 1.4rem 0;
+    scroll-margin-top: 2rem;
+  }
+  .pasal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.5px;
+  }
+  .pasal-body { color: var(--ink-mid); }
+
+  p.ayat {
+    margin-bottom: 0.6rem;
+    padding-left: 0;
+  }
+  p.ayat-num {
+    margin-bottom: 0.5rem;
+    padding-left: 1.8rem;
+    text-indent: -1.8rem;
+  }
+
+  .list-alpha, .list-num {
+    margin: 0.4rem 0 0.4rem 1.6rem;
+  }
+  .list-alpha li, .list-num li {
+    margin-bottom: 0.35rem;
+    line-height: 1.7;
+  }
+  .list-sub {
+    margin: 0.3rem 0 0.3rem 1.6rem;
+    list-style-type: decimal;
+  }
+  .list-sub li { margin-bottom: 0.25rem; }
+
+  /* ── MENIMBANG / MENGINGAT ── */
+  .konsideran {
+    background: #f5eedf;
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.2rem;
+    margin: 0.6rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .konsideran-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    display: block;
+    font-weight: 600;
+  }
+
+  /* ── MEMUTUSKAN BOX ── */
+  .memutuskan-box {
+    text-align: center;
+    background: var(--ink);
+    color: var(--gold-light);
+    padding: 1.2rem 2rem;
+    margin: 1.5rem 0;
+    letter-spacing: 1px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+  }
+  .memutuskan-box .kata { font-size: 11px; letter-spacing: 3px; display: block; margin-bottom: 0.4rem; }
+  .memutuskan-box .isi { font-size: 13px; color: #e8dcc8; line-height: 1.5; }
+
+  /* ── PENUTUP / TTD ── */
+  .penutup {
+    text-align: right;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  .penutup .ttd-line { font-style: italic; color: var(--ink-light); font-size: 13px; }
+  .penutup .nama { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 15px; margin-top: 0.3rem; }
+
+  .lembaran-negara {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin: 2rem 0;
+    padding: 0.8rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── PENJELASAN SECTION ── */
+  .penjelasan-header {
+    text-align: center;
+    background: var(--ink-mid);
+    color: var(--gold-light);
+    padding: 1.2rem;
+    margin: 2rem 0 1.5rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .penjelasan-pasal {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0.3rem 1rem;
+    margin: 0.3rem 0;
+    font-size: 14px;
+  }
+  .penjelasan-pasal .pasal-ref {
+    color: var(--gold);
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  /* ── HIGHLIGHT / TAG ── */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: var(--gold-pale);
+    color: var(--gold);
+    padding: 1px 7px;
+    border-radius: 2px;
+    margin-right: 0.4rem;
+    vertical-align: middle;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--cream-dark);
+    margin: 1.5rem 0;
+  }
+
+  /* ── SCROLL TOC INDICATOR ── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    background: var(--gold);
+    width: 0%;
+    transition: width 0.1s;
+    z-index: 999;
+  }
+
+  @media (max-width: 768px) {
+    aside { display: none; }
+    main { padding: 1.5rem 1.2rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sidebar-header">
+    <div class="label">Referensi Regulasi</div>
+    <h2>PP No. 55 Tahun 2010<br>Pembinaan & Pengawasan Pertambangan</h2>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Pembukaan</div>
+    <a class="nav-item" href="#header"><span>▸</span>Identitas Peraturan</a>
+    <a class="nav-item" href="#konsideran"><span>▸</span>Menimbang & Mengingat</a>
+    <a class="nav-item" href="#memutuskan"><span>▸</span>Memutuskan</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">BAB I — Ketentuan Umum</div>
+    <a class="nav-item" href="#pasal1"><span>▸</span>Pasal 1 — Definisi</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">BAB II — Pembinaan</div>
+    <a class="nav-item" href="#pasal2"><span>▸</span>Pasal 2 — Umum</a>
+    <a class="nav-item" href="#pasal3"><span>▸</span>Pasal 3 — Jenis Pembinaan</a>
+    <a class="nav-item" href="#pasal4"><span>▸</span>Pasal 4 — Pelimpahan</a>
+    <a class="nav-item" href="#pasal5"><span>▸</span>Pasal 5 — Pedoman</a>
+    <a class="nav-item" href="#pasal6"><span>▸</span>Pasal 6 — Bimbingan & Supervisi</a>
+    <a class="nav-item" href="#pasal7"><span>▸</span>Pasal 7–10 — Diklat</a>
+    <a class="nav-item" href="#pasal11"><span>▸</span>Pasal 11 — Perencanaan</a>
+    <a class="nav-item" href="#pasal12"><span>▸</span>Pasal 12 — Pelaksanaan</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">BAB III — Pengawasan</div>
+    <a class="nav-item" href="#pasal13"><span>▸</span>Pasal 13 — Umum</a>
+    <a class="nav-item" href="#pasal14"><span>▸</span>Pasal 14–15 — Penyelenggaraan</a>
+    <a class="nav-item" href="#pasal16"><span>▸</span>Pasal 16 — Ruang Lingkup</a>
+    <a class="nav-item" href="#pasal17"><span>▸</span>Pasal 17–20 — Mekanisme</a>
+    <a class="nav-item" href="#pasal21"><span>▸</span>Pasal 21 — Teknis Tambang</a>
+    <a class="nav-item" href="#pasal22"><span>▸</span>Pasal 22 — Pemasaran</a>
+    <a class="nav-item" href="#pasal23"><span>▸</span>Pasal 23 — Keuangan</a>
+    <a class="nav-item" href="#pasal24"><span>▸</span>Pasal 24 — Data Minerba</a>
+    <a class="nav-item" href="#pasal25"><span>▸</span>Pasal 25 — Konservasi</a>
+    <a class="nav-item" href="#pasal26"><span>▸</span>Pasal 26 — K3 Pertambangan</a>
+    <a class="nav-item" href="#pasal27"><span>▸</span>Pasal 27 — Keselamatan Operasi</a>
+    <a class="nav-item" href="#pasal28"><span>▸</span>Pasal 28 — Lingkungan & Reklamasi</a>
+    <a class="nav-item" href="#pasal29"><span>▸</span>Pasal 29–34 — Aspek Lainnya</a>
+    <a class="nav-item" href="#pasal36"><span>▸</span>Pasal 36–38 — Pelaksanaan</a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-title">Penutup & Penjelasan</div>
+    <a class="nav-item" href="#penutup"><span>▸</span>BAB IV — Ketentuan Penutup</a>
+    <a class="nav-item" href="#penjelasan"><span>▸</span>Penjelasan Umum</a>
+    <a class="nav-item" href="#penjelasan-pasal"><span>▸</span>Penjelasan Pasal Demi Pasal</a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- HEADER -->
+  <div class="doc-header" id="header">
+    <div class="negara">Presiden Republik Indonesia</div>
+    <div class="jenis-peraturan">Peraturan Pemerintah Republik Indonesia</div>
+    <div class="nomor">Nomor 55 Tahun 2010</div>
+    <div class="tentang-label">Tentang</div>
+    <div class="judul">Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara</div>
+    <div class="ditetapkan">Ditetapkan di Jakarta, 5 Juli 2010 &nbsp;|&nbsp; Lembaran Negara RI Tahun 2010 Nomor 85</div>
+  </div>
+
+  <!-- KONSIDERAN -->
+  <div id="konsideran">
+    <div class="konsideran">
+      <span class="konsideran-label">Menimbang</span>
+      Bahwa untuk melaksanakan ketentuan Pasal 144 Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara, perlu menetapkan Peraturan Pemerintah tentang Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara.
+    </div>
+    <div class="konsideran">
+      <span class="konsideran-label">Mengingat</span>
+      <ol class="list-num">
+        <li>Pasal 5 ayat (2) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945;</li>
+        <li>Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara (Lembaran Negara RI Tahun 2009 Nomor 4, Tambahan Lembaran Negara RI Nomor 4959).</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- MEMUTUSKAN -->
+  <div class="memutuskan-box" id="memutuskan">
+    <span class="kata">Memutuskan — Menetapkan</span>
+    <div class="isi">Peraturan Pemerintah tentang Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       BAB I — KETENTUAN UMUM
+  ═══════════════════════════════════════ -->
+  <div class="bab" id="bab1">
+    <div class="bab-header">
+      <span class="bab-label">Bab I</span>
+      <div class="bab-title">Ketentuan Umum</div>
+    </div>
+
+    <div class="pasal" id="pasal1">
+      <div class="pasal-title">Pasal 1</div>
+      <div class="pasal-body">
+        <p class="ayat">Dalam Peraturan Pemerintah ini yang dimaksud dengan:</p>
+        <ol class="list-num">
+          <li>Pertambangan, Mineral, Batubara, Usaha Pertambangan, Wilayah Izin Usaha Pertambangan (WIUP), Wilayah Pertambangan Rakyat (WPR), Wilayah Izin Usaha Pertambangan Khusus (WIUPK), Izin Usaha Pertambangan (IUP), IUP Eksplorasi, IUP Operasi Produksi, Izin Pertambangan Rakyat (IPR), Izin Usaha Pertambangan Khusus (IUPK), IUPK Eksplorasi, IUPK Operasi Produksi, Penyelidikan Umum, Eksplorasi, Studi Kelayakan, Operasi Produksi, Konstruksi, Penambangan, Pengolahan dan Pemurnian, Pengangkutan dan Penjualan, Reklamasi, Kegiatan Pascatambang, dan Pemberdayaan Masyarakat adalah sebagaimana dimaksud dalam Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara.</li>
+          <li>Pemerintah Pusat yang selanjutnya disebut Pemerintah adalah Presiden Republik Indonesia yang memegang kekuasaan Pemerintahan Negara Republik Indonesia sebagaimana dimaksud dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945.</li>
+          <li>Menteri adalah menteri yang menyelenggarakan urusan pemerintahan di bidang pertambangan mineral dan batubara.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       BAB II — PEMBINAAN
+  ═══════════════════════════════════════ -->
+  <div class="bab" id="bab2">
+    <div class="bab-header">
+      <span class="bab-label">Bab II</span>
+      <div class="bab-title">Pembinaan</div>
+    </div>
+
+    <!-- Bagian Kesatu -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Kesatu</span>
+      <div class="bagian-title">Umum</div>
+    </div>
+
+    <div class="pasal" id="pasal2">
+      <div class="pasal-title">Pasal 2</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Menteri melakukan pembinaan terhadap penyelenggaraan pengelolaan usaha pertambangan yang dilaksanakan oleh pemerintah provinsi dan pemerintah kabupaten/kota sesuai dengan kewenangannya.</p>
+        <p class="ayat-num">(2) Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya melakukan pembinaan atas pelaksanaan kegiatan usaha pertambangan yang dilaksanakan oleh pemegang IUP, IPR, atau IUPK.</p>
+      </div>
+    </div>
+
+    <!-- Bagian Kedua -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Kedua</span>
+      <div class="bagian-title">Pembinaan Terhadap Penyelenggaraan Pengelolaan Usaha Pertambangan</div>
+    </div>
+
+    <div class="pasal" id="pasal3">
+      <div class="pasal-title">Pasal 3</div>
+      <div class="pasal-body">
+        <p class="ayat">Pembinaan terhadap penyelenggaraan pengelolaan usaha pertambangan sebagaimana dimaksud dalam Pasal 2 ayat (1) terdiri atas:</p>
+        <ol class="list-alpha" type="a">
+          <li>pemberian pedoman dan standar pelaksanaan pengelolaan usaha pertambangan;</li>
+          <li>pemberian bimbingan, supervisi, dan konsultasi;</li>
+          <li>pendidikan dan pelatihan; dan</li>
+          <li>perencanaan, penelitian, pengembangan, pemantauan, dan evaluasi pelaksanaan penyelenggaraan usaha pertambangan di bidang mineral dan batubara.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal4">
+      <div class="pasal-title">Pasal 4</div>
+      <div class="pasal-body">
+        <p class="ayat">Menteri dapat melimpahkan kepada gubernur untuk melakukan pembinaan terhadap penyelenggaraan pengelolaan usaha pertambangan yang dilaksanakan oleh pemerintah kabupaten/kota.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal5">
+      <div class="pasal-title">Pasal 5</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pemberian pedoman dan standar pelaksanaan pengelolaan usaha pertambangan sebagaimana dimaksud dalam Pasal 3 huruf a meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>pedoman tata laksana; dan</li>
+          <li>pedoman pelaksanaan.</li>
+        </ol>
+        <p class="ayat-num">(2) Pedoman tata laksana sebagaimana dimaksud pada ayat (1) huruf a paling sedikit meliputi pedoman struktur dan tata kerja penyelenggaraan pengelolaan kegiatan usaha pertambangan yang dilaksanakan oleh pemerintah provinsi dan pemerintah kabupaten/kota.</p>
+        <p class="ayat-num">(3) Pedoman pelaksanaan sebagaimana dimaksud pada ayat (1) huruf b paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>pedoman teknis pertambangan;</li>
+          <li>pedoman penyusunan laporan penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan pemurnian, serta pengangkutan dan penjualan;</li>
+          <li>pedoman penyusunan rencana kerja dan anggaran biaya;</li>
+          <li>pedoman impor barang modal, peralatan, bahan baku, dan/atau bahan pendukung pertambangan;</li>
+          <li>pedoman penyusunan rencana kerja tahunan teknis dan lingkungan;</li>
+          <li>pedoman pengembangan dan pemberdayaan masyarakat sekitar tambang;</li>
+          <li>pedoman pengelolaan dan pemantauan lingkungan pertambangan;</li>
+          <li>pedoman penyusunan laporan pengelolaan dan pemantauan lingkungan, reklamasi, dan pascatambang;</li>
+          <li>pedoman evaluasi terhadap laporan penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan pemurnian, serta pengangkutan dan penjualan;</li>
+          <li>pedoman penyusunan laporan penyelenggaraan pengelolaan kegiatan usaha pertambangan yang dilakukan oleh pemerintah provinsi dan pemerintah kabupaten/kota; dan</li>
+          <li>pedoman evaluasi laporan penyelenggaraan pengelolaan kegiatan usaha pertambangan yang dilakukan oleh pemerintah provinsi dan pemerintah kabupaten/kota.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal6">
+      <div class="pasal-title">Pasal 6</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pemberian bimbingan, supervisi, dan konsultasi sebagaimana dimaksud dalam Pasal 3 huruf b dilakukan terhadap penyelenggara pengelolaan usaha pertambangan.</p>
+        <p class="ayat-num">(2) Pemberian bimbingan, supervisi, dan konsultasi sebagaimana dimaksud pada ayat (1) dalam pelaksanaannya dilakukan sesuai dengan kebutuhan.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal7">
+      <div class="pasal-title">Pasal 7</div>
+      <div class="pasal-body">
+        <p class="ayat">Pendidikan dan pelatihan sebagaimana dimaksud dalam Pasal 3 huruf c paling sedikit meliputi kegiatan pendidikan dan pelatihan teknis manajerial, teknis pertambangan, dan pengawasan di bidang mineral dan batubara.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 8</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pendidikan dan pelatihan sebagaimana dimaksud dalam Pasal 7 pelaksanaannya dilakukan oleh lembaga pendidikan dan pelatihan pada Kementerian yang menyelenggarakan urusan pemerintahan di bidang pertambangan mineral dan batubara.</p>
+        <p class="ayat-num">(2) Pelaksanaan pendidikan dan pelatihan sebagaimana dimaksud pada ayat (1) dapat dilakukan bekerja sama dengan pemerintah provinsi dan/atau perguruan tinggi serta lembaga lainnya sesuai dengan ketentuan peraturan perundang-undangan.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 9</div>
+      <div class="pasal-body">
+        <p class="ayat">Pendidikan dan pelatihan sebagaimana dimaksud dalam Pasal 7 dapat dilaksanakan sendiri oleh pemerintah provinsi, perguruan tinggi, serta lembaga lainnya setelah mendapat akreditasi dari komite akreditasi yang dibentuk oleh Menteri.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 10</div>
+      <div class="pasal-body">
+        <p class="ayat">Ketentuan lebih lanjut mengenai tata cara penyelenggaraan pendidikan dan pelatihan serta pemberian akreditasi diatur dengan Peraturan Menteri.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal11">
+      <div class="pasal-title">Pasal 11</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pembinaan terhadap perencanaan, penelitian, pengembangan, pemantauan, dan evaluasi pelaksanaan penyelenggaraan usaha pertambangan di bidang mineral dan batubara sebagaimana dimaksud dalam Pasal 3 huruf d dilakukan oleh Menteri melalui pemberian bimbingan teknis penyelenggaraan pengelolaan usaha pertambangan.</p>
+        <p class="ayat-num">(2) Ketentuan lebih lanjut mengenai tata cara pemberian bimbingan teknis penyelenggaraan pengelolaan usaha pertambangan diatur dengan Peraturan Menteri.</p>
+      </div>
+    </div>
+
+    <!-- Bagian Ketiga -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Ketiga</span>
+      <div class="bagian-title">Pembinaan Atas Pelaksanaan Kegiatan Usaha Pertambangan</div>
+    </div>
+
+    <div class="pasal" id="pasal12">
+      <div class="pasal-title">Pasal 12</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pembinaan atas pelaksanaan kegiatan usaha pertambangan sebagaimana dimaksud dalam Pasal 2 ayat (2) dilakukan paling sedikit terhadap:</p>
+        <ol class="list-alpha" type="a">
+          <li>pengadministrasian pertambangan;</li>
+          <li>teknis operasional pertambangan; dan</li>
+          <li>penerapan standar kompetensi tenaga kerja pertambangan.</li>
+        </ol>
+        <p class="ayat-num">(2) Ketentuan lebih lanjut mengenai pembinaan atas pelaksanaan kegiatan usaha pertambangan sebagaimana dimaksud pada ayat (1) diatur dengan Peraturan Menteri.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       BAB III — PENGAWASAN
+  ═══════════════════════════════════════ -->
+  <div class="bab" id="bab3">
+    <div class="bab-header">
+      <span class="bab-label">Bab III</span>
+      <div class="bab-title">Pengawasan</div>
+    </div>
+
+    <!-- Bagian Kesatu -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Kesatu</span>
+      <div class="bagian-title">Umum</div>
+    </div>
+
+    <div class="pasal" id="pasal13">
+      <div class="pasal-title">Pasal 13</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Menteri melakukan pengawasan terhadap penyelenggaraan pengelolaan usaha pertambangan yang dilaksanakan oleh pemerintah provinsi dan pemerintah kabupaten/kota sesuai dengan kewenangannya.</p>
+        <p class="ayat-num">(2) Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya melakukan pengawasan atas pelaksanaan kegiatan usaha pertambangan yang dilakukan oleh pemegang IUP, IPR, atau IUPK.</p>
+      </div>
+    </div>
+
+    <!-- Bagian Kedua -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Kedua</span>
+      <div class="bagian-title">Pengawasan Terhadap Penyelenggaraan Pengelolaan Usaha Pertambangan</div>
+    </div>
+
+    <div class="pasal" id="pasal14">
+      <div class="pasal-title">Pasal 14</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan sebagaimana dimaksud dalam Pasal 13 ayat (1) meliputi pengawasan terhadap:</p>
+        <ol class="list-alpha" type="a">
+          <li>penetapan WPR;</li>
+          <li>penetapan dan pemberian WIUP mineral bukan logam dan batuan;</li>
+          <li>pemberian WIUP mineral logam dan batubara;</li>
+          <li>penerbitan IPR;</li>
+          <li>penerbitan IUP; dan</li>
+          <li>penyelenggaraan pembinaan dan pengawasan kegiatan yang dilakukan oleh pemegang IPR dan IUP.</li>
+        </ol>
+        <p class="ayat-num">(2) Dalam melakukan pengawasan sebagaimana dimaksud pada ayat (1), Menteri dapat berkoordinasi dengan menteri yang menyelenggarakan urusan pemerintahan di bidang pemerintahan dalam negeri.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 15</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Hasil pengawasan yang dilakukan oleh Menteri sebagaimana dimaksud dalam Pasal 14 disampaikan kepada gubernur atau bupati/walikota sesuai dengan kewenangannya dan tembusannya disampaikan kepada menteri yang menyelenggarakan urusan pemerintahan di bidang pemerintahan dalam negeri.</p>
+        <p class="ayat-num">(2) Gubernur atau bupati/walikota sesuai dengan kewenangannya wajib menindaklanjuti hasil pengawasan sebagaimana dimaksud pada ayat (1).</p>
+        <p class="ayat-num">(3) Menteri bersama menteri yang menyelenggarakan urusan pemerintahan di bidang pemerintahan dalam negeri melakukan pemantauan atas pelaksanaan tindak lanjut hasil pengawasan sebagaimana dimaksud pada ayat (2) sesuai dengan ketentuan peraturan perundang-undangan.</p>
+      </div>
+    </div>
+
+    <!-- Bagian Ketiga -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Ketiga</span>
+      <div class="bagian-title">Pengawasan Atas Pelaksanaan Kegiatan Usaha Pertambangan</div>
+    </div>
+
+    <div class="pasal" id="pasal16">
+      <div class="pasal-title">Pasal 16</div>
+      <div class="pasal-body">
+        <p class="ayat">Pengawasan sebagaimana dimaksud dalam Pasal 13 ayat (2) dilakukan terhadap:</p>
+        <ol class="list-alpha" type="a">
+          <li>teknis pertambangan;</li>
+          <li>pemasaran;</li>
+          <li>keuangan;</li>
+          <li>pengelolaan data mineral dan batubara;</li>
+          <li>konservasi sumber daya mineral dan batubara;</li>
+          <li>keselamatan dan kesehatan kerja pertambangan;</li>
+          <li>keselamatan operasi pertambangan;</li>
+          <li>pengelolaan lingkungan hidup, reklamasi, dan pascatambang;</li>
+          <li>pemanfaatan barang, jasa, teknologi, dan kemampuan rekayasa serta rancang bangun dalam negeri;</li>
+          <li>pengembangan tenaga kerja teknis pertambangan;</li>
+          <li>pengembangan dan pemberdayaan masyarakat setempat;</li>
+          <li>penguasaan, pengembangan, dan penerapan teknologi pertambangan;</li>
+          <li>kegiatan lain di bidang kegiatan usaha pertambangan yang menyangkut kepentingan umum;</li>
+          <li>pelaksanaan kegiatan sesuai dengan IUP, IPR, atau IUPK; dan</li>
+          <li>jumlah, jenis, dan mutu hasil usaha pertambangan.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal17">
+      <div class="pasal-title">Pasal 17</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan sebagaimana dimaksud dalam Pasal 16 dilakukan melalui:</p>
+        <ol class="list-alpha" type="a">
+          <li>evaluasi terhadap laporan rencana dan pelaksanaan kegiatan usaha pertambangan dari pemegang IUP, IPR, dan IUPK; dan/atau</li>
+          <li>inspeksi ke lokasi IUP, IPR, dan IUPK.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan paling sedikit <strong>1 (satu) kali dalam setahun</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 18</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Hasil pengawasan sebagaimana dimaksud dalam Pasal 16 yang dilakukan oleh bupati/walikota disampaikan kepada gubernur dan Menteri.</p>
+        <p class="ayat-num">(2) Gubernur melakukan evaluasi atas hasil pengawasan sebagaimana dimaksud pada ayat (1) dan menyampaikan hasil evaluasinya kepada Menteri.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 19</div>
+      <div class="pasal-body">
+        <p class="ayat">Hasil pengawasan sebagaimana dimaksud dalam Pasal 16 yang dilakukan oleh gubernur disampaikan kepada Menteri.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 20</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Menteri melakukan evaluasi atas hasil pengawasan sebagaimana dimaksud dalam Pasal 18 ayat (1) dan Pasal 19.</p>
+        <p class="ayat-num">(2) Hasil evaluasi sebagaimana dimaksud pada ayat (1) diberitahukan kepada gubernur atau bupati/walikota dengan tembusan kepada menteri yang menyelenggarakan urusan pemerintahan di bidang pemerintahan dalam negeri.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal21">
+      <div class="pasal-title">Pasal 21 — Pengawasan Teknis Pertambangan</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan teknis pertambangan sebagaimana dimaksud dalam Pasal 16 huruf a untuk:</p>
+        <ol class="list-alpha" type="a">
+          <li>IUP atau IUPK Eksplorasi dilakukan paling sedikit terhadap:
+            <ol class="list-sub">
+              <li>pelaksanaan teknik eksplorasi; dan</li>
+              <li>tata cara penghitungan sumber daya dan cadangan.</li>
+            </ol>
+          </li>
+          <li>IUP atau IUPK Operasi Produksi paling sedikit terhadap:
+            <ol class="list-sub">
+              <li>perencanaan dan pelaksanaan konstruksi termasuk pengujian alat pertambangan (<em>commisioning</em>);</li>
+              <li>perencanaan dan pelaksanaan penambangan;</li>
+              <li>perencanaan dan pelaksanaan pengolahan dan pemurnian; dan</li>
+              <li>perencanaan dan pelaksanaan pengangkutan dan penjualan.</li>
+            </ol>
+          </li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan teknis pertambangan sebagaimana dimaksud pada ayat (1) dilakukan oleh <strong>Inspektur Tambang</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal22">
+      <div class="pasal-title">Pasal 22 — Pengawasan Pemasaran</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pemasaran sebagaimana dimaksud dalam Pasal 16 huruf b paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>realisasi produksi dan realisasi penjualan termasuk kualitas dan kuantitas serta harga mineral dan batubara;</li>
+          <li>kewajiban pemenuhan kebutuhan mineral atau batubara untuk kepentingan dalam negeri;</li>
+          <li>rencana dan realisasi kontrak penjualan mineral atau batubara;</li>
+          <li>biaya penjualan yang dikeluarkan;</li>
+          <li>perencanaan dan realisasi penerimaan negara bukan pajak; dan</li>
+          <li>biaya pengolahan dan pemurnian mineral dan/atau batubara.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal23">
+      <div class="pasal-title">Pasal 23 — Pengawasan Keuangan</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan keuangan sebagaimana dimaksud dalam Pasal 16 huruf c paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>perencanaan anggaran;</li>
+          <li>realisasi anggaran;</li>
+          <li>realisasi investasi; dan</li>
+          <li>pemenuhan kewajiban pembayaran.</li>
+        </ol>
+        <p class="ayat-num">(2) Pemenuhan kewajiban pembayaran sebagaimana dimaksud pada ayat (1) huruf d paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>iuran tetap untuk WIUP mineral logam, WIUP batubara WPR, atau WIUPK;</li>
+          <li>iuran produksi mineral logam, batubara, dan mineral bukan logam sesuai dengan ketentuan peraturan perundang-undangan; dan</li>
+          <li>pembayaran sebesar 10% (sepuluh persen) dari keuntungan bersih bagi pemegang IUPK Operasi Produksi mineral logam atau batubara.</li>
+        </ol>
+        <p class="ayat-num">(3) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal24">
+      <div class="pasal-title">Pasal 24 — Pengawasan Pengelolaan Data</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pengelolaan data mineral dan batubara sebagaimana dimaksud dalam Pasal 16 huruf d, paling sedikit meliputi pengawasan terhadap kegiatan perolehan, pengadministrasian, pengolahan, penataan, penyimpanan, pemeliharaan, dan pemusnahan data dan/atau informasi.</p>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal25">
+      <div class="pasal-title">Pasal 25 — Pengawasan Konservasi</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan konservasi sumber daya mineral dan batubara sebagaimana dimaksud dalam Pasal 16 huruf e paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li><em>recovery</em> penambangan dan pengolahan;</li>
+          <li>pengelolaan dan/atau pemanfaatan cadangan marginal;</li>
+          <li>pengelolaan dan/atau pemanfaatan batubara kualitas rendah dan mineral kadar rendah;</li>
+          <li>pengelolaan dan/atau pemanfaatan mineral ikutan;</li>
+          <li>pendataan sumber daya serta cadangan mineral dan batubara yang tidak tertambang; dan</li>
+          <li>pendataan dan pengelolaan sisa hasil pengolahan dan pemurnian.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh <strong>Inspektur Tambang</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal26">
+      <div class="pasal-title">Pasal 26 — Pengawasan K3 Pertambangan</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan keselamatan dan kesehatan kerja pertambangan sebagaimana dimaksud dalam Pasal 16 huruf f terdiri atas:</p>
+        <ol class="list-alpha" type="a">
+          <li>keselamatan kerja;</li>
+          <li>kesehatan kerja;</li>
+          <li>lingkungan kerja; dan</li>
+          <li>sistem manajemen keselamatan dan kesehatan kerja.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) pelaksanaannya dilakukan oleh <strong>Inspektur Tambang</strong> berkoordinasi dengan pengawas ketenagakerjaan sesuai dengan ketentuan peraturan perundang-undangan.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal27">
+      <div class="pasal-title">Pasal 27 — Pengawasan Keselamatan Operasi</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan keselamatan operasi pertambangan sebagaimana dimaksud dalam Pasal 16 huruf g paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>sistem dan pelaksanaan pemeliharaan/perawatan sarana, prasarana, instalasi, dan peralatan pertambangan;</li>
+          <li>pengamanan instalasi;</li>
+          <li>kelayakan sarana, prasarana instalasi, dan peralatan pertambangan;</li>
+          <li>kompetensi tenaga teknik; dan</li>
+          <li>evaluasi laporan hasil kajian teknis pertambangan.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh <strong>Inspektur Tambang</strong> dan dapat berkoordinasi dengan pengawas ketenagakerjaan sesuai dengan ketentuan peraturan perundang-undangan.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal28">
+      <div class="pasal-title">Pasal 28 — Pengawasan Lingkungan, Reklamasi, Pascatambang</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pengelolaan lingkungan hidup, reklamasi, dan pascatambang sebagaimana dimaksud dalam Pasal 16 huruf h paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>pengelolaan dan pemantauan lingkungan sesuai dengan dokumen pengelolaan lingkungan atau izin lingkungan yang dimiliki dan telah disetujui;</li>
+          <li>penataan, pemulihan, dan perbaikan lahan sesuai dengan peruntukannya;</li>
+          <li>penetapan dan pencairan jaminan reklamasi;</li>
+          <li>pengelolaan pascatambang;</li>
+          <li>penetapan dan pencairan jaminan pascatambang; dan</li>
+          <li>pemenuhan baku mutu lingkungan sesuai dengan ketentuan peraturan perundang-undangan.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh <strong>Inspektur Tambang</strong> dan berkoordinasi dengan pejabat pengawas di bidang lingkungan hidup dan di bidang reklamasi sesuai dengan ketentuan peraturan perundang-undangan.</p>
+      </div>
+    </div>
+
+    <div class="pasal" id="pasal29">
+      <div class="pasal-title">Pasal 29 — Pengawasan Barang, Jasa & Teknologi Dalam Negeri</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pemanfaatan barang, jasa, teknologi, serta kemampuan rekayasa dan rancang bangun sebagaimana dimaksud dalam Pasal 16 huruf i dilakukan terhadap pelaksanaan pemanfaatan barang, jasa, teknologi, serta kemampuan rekayasa dan rancang bangun.</p>
+        <p class="ayat-num">(2) Penggunaan barang, jasa, teknologi, serta kemampuan rekayasa dan rancang bangun dilaksanakan sesuai dengan klasifikasi dan kualifikasi pelaksana usaha jasa pertambangan mineral dan batubara serta sesuai dengan ketentuan peraturan perundang-undangan.</p>
+        <p class="ayat-num">(3) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh <strong>Inspektur Tambang</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 30 — Pengawasan Pengembangan Tenaga Kerja Teknis</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pengembangan tenaga kerja teknis pertambangan sebagaimana dimaksud dalam Pasal 16 huruf j paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>pelaksanaan program pengembangan;</li>
+          <li>pelaksanaan uji kompetensi; dan</li>
+          <li>rencana biaya pengembangan.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 31 — Pengawasan Pengembangan & Pemberdayaan Masyarakat</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pengembangan dan pemberdayaan masyarakat setempat sebagaimana dimaksud dalam Pasal 16 huruf k paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>program pengembangan dan pemberdayaan masyarakat;</li>
+          <li>pelaksanaan pengembangan dan pemberdayaan masyarakat; dan</li>
+          <li>biaya pengembangan dan pemberdayaan masyarakat.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 32 — Pengawasan Kepentingan Umum</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan kegiatan lain di bidang kegiatan usaha pertambangan yang menyangkut kepentingan umum sebagaimana dimaksud dalam Pasal 16 huruf m paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>fasilitas umum yang dibangun oleh pemegang IUP atau pemegang IUPK untuk masyarakat sekitar tambang; dan</li>
+          <li>pembiayaan untuk pembangunan atau penyediaan fasilitas umum sebagaimana dimaksud pada huruf a.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 33 — Pengawasan Pelaksanaan Sesuai IUP/IPR/IUPK</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan pelaksanaan kegiatan sesuai dengan IUP, IPR, atau IUPK sebagaimana dimaksud dalam Pasal 16 huruf n paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>luas wilayah;</li>
+          <li>lokasi penambangan;</li>
+          <li>lokasi pengolahan dan pemurnian;</li>
+          <li>jangka waktu tahap kegiatan;</li>
+          <li>penyelesaian masalah pertanahan;</li>
+          <li>penyelesaian perselisihan; dan</li>
+          <li>penguasaan, pengembangan, dan penerapan teknologi pertambangan mineral atau batubara.</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 34 — Pengawasan Jumlah, Jenis & Mutu Hasil Tambang</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan jumlah, jenis, dan mutu hasil usaha pertambangan sebagaimana dimaksud dalam Pasal 16 huruf o paling sedikit meliputi:</p>
+        <ol class="list-alpha" type="a">
+          <li>jenis komoditas tambang;</li>
+          <li>kuantitas dan kualitas produksi untuk setiap lokasi penambangan;</li>
+          <li>kuantitas dan kualitas pencucian dan/atau pengolahan dan pemurnian; dan</li>
+          <li>tempat penimbunan sementara (<em>run of mine</em>), tempat penimbunan (<em>stock pile</em>), dan titik serah penjualan (<em>at sale point</em>).</li>
+        </ol>
+        <p class="ayat-num">(2) Pengawasan sebagaimana dimaksud pada ayat (1) dilakukan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 35</div>
+      <div class="pasal-body">
+        <p class="ayat">Ketentuan lebih lanjut mengenai tata cara pengawasan terhadap penyelenggaraan pengelolaan usaha pertambangan mineral dan batubara serta pelaksanaan kegiatan usaha pertambangan mineral dan batubara diatur dengan Peraturan Menteri.</p>
+      </div>
+    </div>
+
+    <!-- Bagian Keempat -->
+    <div class="bagian">
+      <span class="bagian-label">Bagian Keempat</span>
+      <div class="bagian-title">Pelaksanaan Pengawasan</div>
+    </div>
+
+    <div class="pasal" id="pasal36">
+      <div class="pasal-title">Pasal 36</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan oleh Inspektur Tambang dilakukan melalui:</p>
+        <ol class="list-alpha" type="a">
+          <li>evaluasi terhadap laporan berkala dan/atau sewaktu-waktu;</li>
+          <li>pemeriksaan berkala atau sewaktu-waktu; dan</li>
+          <li>penilaian atas keberhasilan pelaksanaan program dan kegiatan.</li>
+        </ol>
+        <p class="ayat-num">(2) Dalam pengawasan sebagaimana dimaksud pada ayat (1), Inspektur Tambang melakukan kegiatan inspeksi, penyelidikan, dan pengujian.</p>
+        <p class="ayat-num">(3) Dalam melakukan inspeksi, penyelidikan, dan pengujian sebagaimana dimaksud pada ayat (2), Inspektur Tambang berwenang:</p>
+        <ol class="list-alpha" type="a">
+          <li>memasuki tempat kegiatan usaha pertambangan setiap saat;</li>
+          <li>menghentikan sementara waktu sebagian atau seluruh kegiatan pertambangan mineral dan batubara apabila kegiatan pertambangan dinilai dapat membahayakan keselamatan pekerja/buruh tambang, keselamatan umum, atau menimbulkan pencemaran dan/atau kerusakan lingkungan; dan</li>
+          <li>mengusulkan penghentian sementara sebagaimana dimaksud pada huruf b menjadi penghentian secara tetap kegiatan pertambangan mineral dan batubara kepada Kepala Inspektur Tambang.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 37</div>
+      <div class="pasal-body">
+        <p class="ayat-num">(1) Pengawasan oleh pejabat yang ditunjuk oleh Menteri, gubernur, atau bupati/walikota sesuai dengan kewenangannya dilakukan melalui:</p>
+        <ol class="list-alpha" type="a">
+          <li>pemeriksaan berkala atau sewaktu-waktu maupun pemeriksaan terpadu; dan/atau</li>
+          <li>verifikasi dan evaluasi terhadap laporan dari pemegang IUP, IPR, atau IUPK.</li>
+        </ol>
+        <p class="ayat-num">(2) Dalam melakukan pengawasan sebagaimana dimaksud pada ayat (1) pejabat yang ditunjuk berwenang memasuki tempat kegiatan usaha pertambangan setiap saat.</p>
+      </div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 38</div>
+      <div class="pasal-body">
+        <p class="ayat">Ketentuan lebih lanjut mengenai tata cara penunjukan pejabat dan pengangkatan Inspektur Tambang diatur dengan Peraturan Menteri.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       BAB IV — KETENTUAN PENUTUP
+  ═══════════════════════════════════════ -->
+  <div class="bab" id="penutup">
+    <div class="bab-header">
+      <span class="bab-label">Bab IV</span>
+      <div class="bab-title">Ketentuan Penutup</div>
+    </div>
+
+    <div class="pasal">
+      <div class="pasal-title">Pasal 39</div>
+      <div class="pasal-body">
+        <p class="ayat">Peraturan Pemerintah ini mulai berlaku pada tanggal diundangkan.</p>
+        <p class="ayat">Agar setiap orang mengetahuinya, memerintahkan pengundangan Peraturan Pemerintah ini dengan penempatannya dalam Lembaran Negara Republik Indonesia.</p>
+      </div>
+    </div>
+
+    <div class="penutup">
+      <p>Ditetapkan di Jakarta<br>pada tanggal 5 Juli 2010</p>
+      <p class="nama" style="margin-top:0.5rem;">DR. H. SUSILO BAMBANG YUDHOYONO</p>
+      <p class="ttd-line">Presiden Republik Indonesia</p>
+      <br>
+      <p style="font-size:12px; color:var(--ink-light);">Diundangkan di Jakarta pada tanggal 5 Juli 2010</p>
+      <p style="font-size:12px;">Menteri Hukum dan Hak Asasi Manusia RI</p>
+      <p class="nama">PATRIALIS AKBAR</p>
+    </div>
+
+    <div class="lembaran-negara">
+      Lembaran Negara Republik Indonesia Tahun 2010 Nomor 85 &nbsp;|&nbsp; Tambahan Lembaran Negara RI Nomor 5142
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       PENJELASAN
+  ═══════════════════════════════════════ -->
+  <div class="bab" id="penjelasan">
+    <div class="penjelasan-header">PENJELASAN ATAS PP NOMOR 55 TAHUN 2010</div>
+
+    <div class="bagian">
+      <span class="bagian-label">I</span>
+      <div class="bagian-title">Umum</div>
+    </div>
+
+    <div class="pasal-body" style="margin-bottom:1.5rem;">
+      <p class="ayat">Pemanfaatan kekayaan alam berupa mineral dan batubara harus dikelola secara profesional dan transparan agar memiliki nilai tambah bagi peningkatan pendapatan nasional guna mewujudkan kesejahteraan masyarakat Indonesia.</p>
+      <p class="ayat">Dalam rangka mewujudkan pengelolaan mineral dan batubara yang memenuhi prinsip eksternalitas, akuntabilitas, dan efisiensi, perlu dilakukan pembinaan dan pengawasan terhadap penyelenggaraan pengelolaan usaha pertambangan dan pelaksanaan kegiatan usaha pertambangan.</p>
+      <p class="ayat">Penyelenggaraan pengelolaan usaha pertambangan tidak hanya dilakukan oleh Pemerintah tetapi juga dilakukan oleh pemerintah provinsi dan pemerintah kabupaten/kota sesuai dengan kewenangannya. Oleh karena itu, penyelenggaraan pembinaan dan pengawasan harus dilakukan berdasarkan pedoman dan standar yang baku agar diperoleh kejelasan dan kepastian bagi pelaku usaha yang melakukan kegiatan usaha di bidang mineral dan batubara.</p>
+      <p class="ayat">Pembinaan dan pengawasan dilakukan selain terhadap kegiatan usaha pertambangan mineral dan batubara, pertambangan rakyat juga dilakukan terhadap pelaksanaan program pengembangan dan pemberdayaan masyarakat sekitar kegiatan usaha pertambangan.</p>
+    </div>
+
+    <div class="bagian" id="penjelasan-pasal">
+      <span class="bagian-label">II</span>
+      <div class="bagian-title">Pasal Demi Pasal</div>
+    </div>
+
+    <div class="pasal-body">
+      <p class="ayat"><strong>Pasal 1–5, 7–8, 10–15, 17–25, 27–35, 37–39:</strong> Cukup jelas.</p>
+
+      <p class="ayat" style="margin-top:1rem;"><strong>Pasal 6 Ayat (1):</strong><br>
+      Bimbingan, supervisi, dan konsultasi dalam ketentuan ini dapat berupa sosialisasi, penyuluhan, lokakarya, inspeksi bersama, seminar, dan pertemuan teknis di tingkat nasional, provinsi, dan kabupaten/kota.</p>
+
+      <p class="ayat"><strong>Pasal 6 Ayat (2):</strong><br>
+      Sesuai dengan kebutuhan dalam ketentuan ini dilakukan berdasarkan penilaian Menteri atau atas permintaan pemerintah provinsi atau pemerintah kabupaten/kota.</p>
+
+      <p class="ayat"><strong>Pasal 9:</strong><br>
+      Lembaga pendidikan dan pelatihan lainnya dalam ketentuan ini termasuk lembaga pendidikan dan pelatihan yang diselenggarakan oleh swasta atau masyarakat.</p>
+
+      <p class="ayat"><strong>Pasal 26 Ayat (1) Huruf a — Keselamatan Kerja</strong>, antara lain meliputi: manajemen risiko; program keselamatan kerja (pencegahan kecelakaan, peledakan, kebakaran, dan kejadian berbahaya); pelatihan dan pendidikan K3; administrasi K3; manajemen keadaan darurat; inspeksi keselamatan kerja; serta pencegahan dan penyelidikan kecelakaan.</p>
+
+      <p class="ayat"><strong>Pasal 26 Ayat (1) Huruf b — Kesehatan Kerja</strong>, antara lain meliputi: program kesehatan pekerja/buruh (pemeriksaan kesehatan, pelayanan kesehatan, pencegahan penyakit akibat kerja, P3K, pelatihan); higienis dan sanitasi; ergonomis; pengelolaan makanan, minuman, dan gizi; serta diagnosis dan pemeriksaan penyakit akibat kerja.</p>
+
+      <p class="ayat"><strong>Pasal 26 Ayat (1) Huruf c — Lingkungan Kerja</strong>, antara lain meliputi: pengendalian debu; pengendalian kebisingan; pengendalian getaran; pencahayaan; kualitas udara kerja; pengendalian radiasi; pengendalian faktor kimia; pengendalian faktor biologi; dan kebersihan lingkungan kerja.</p>
+
+      <p class="ayat"><strong>Pasal 26 Ayat (2):</strong><br>
+      Yang dimaksud dengan "ketentuan peraturan perundang-undangan" adalah peraturan perundang-undangan di bidang ketenagakerjaan.</p>
+
+      <p class="ayat"><strong>Pasal 32 Ayat (1) Huruf a:</strong><br>
+      Fasilitas umum dalam ketentuan ini misalnya jalan umum, sekolah, dan klinik.</p>
+
+      <p class="ayat"><strong>Pasal 36 Ayat (3) Huruf c:</strong><br>
+      Yang dimaksud dengan "Kepala Inspektur Tambang" adalah pejabat yang secara <em>ex officio</em> menduduki jabatan: (1) direktur yang mempunyai tugas pokok dan fungsi di bidang keteknikan pertambangan mineral dan batubara di Pemerintah; (2) kepala dinas teknis provinsi yang mempunyai tugas pokok dan fungsi di bidang pertambangan mineral dan batubara di pemerintah provinsi; (3) kepala dinas teknis kabupaten/kota yang mempunyai tugas pokok dan fungsi di bidang pertambangan mineral dan batubara di pemerintah kabupaten/kota.</p>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('progress');
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    el.style.width = pct + '%';
+  });
+
+  // Active nav highlight
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('[id]');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navItems.forEach(n => n.classList.remove('active'));
+        const active = document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
