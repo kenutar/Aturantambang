@@ -24,6 +24,10 @@
     --purple-dim: #281e45;
     --teal: #2eb8a0;
     --teal-dim: #0e4038;
+    --orange: #c97c30;
+    --orange-dim: #4a2c0e;
+    --red: #c14a4a;
+    --red-dim: #3d1414;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -142,6 +146,8 @@
   .card.green  { --c: var(--green);  --c-dim: var(--green-dim);  --c-pale: rgba(58,158,106,0.06); }
   .card.purple { --c: var(--purple); --c-dim: var(--purple-dim); --c-pale: rgba(122,90,193,0.06); }
   .card.teal   { --c: var(--teal);   --c-dim: var(--teal-dim);   --c-pale: rgba(46,184,160,0.06); }
+  .card.orange { --c: var(--orange); --c-dim: var(--orange-dim); --c-pale: rgba(201,124,48,0.06); }
+  .card.red    { --c: var(--red);    --c-dim: var(--red-dim);    --c-pale: rgba(193,74,74,0.06); }
 
   .card:hover { border-color: var(--c); }
   .card::before { background: var(--c); }
@@ -235,7 +241,9 @@
   .card:nth-child(3) { animation: fadeUp 0.5s 0.32s ease both; }
   .card:nth-child(4) { animation: fadeUp 0.5s 0.39s ease both; }
   .card:nth-child(5) { animation: fadeUp 0.5s 0.46s ease both; }
-  .info-strip     { animation: fadeUp 0.5s 0.53s ease both; }
+  .card:nth-child(6) { animation: fadeUp 0.5s 0.53s ease both; }
+  .card:nth-child(7) { animation: fadeUp 0.5s 0.60s ease both; }
+  .info-strip     { animation: fadeUp 0.5s 0.67s ease both; }
 
   @media (max-width: 640px) {
     header, main, footer { padding-left: 20px; padding-right: 20px; }
@@ -253,8 +261,8 @@
   <h1>Referensi <em>Regulasi</em><br>Pertambangan Minerba</h1>
   <p class="subtitle">Kumpulan dokumen peraturan perundang-undangan di bidang mineral dan batubara. Klik kartu untuk membuka explorer interaktif masing-masing regulasi.</p>
   <div class="meta-row">
-    <span class="meta-badge">5 Dokumen</span>
-    <span class="meta-badge">UU · Perpres · Kepmen · Kepdirjen</span>
+    <span class="meta-badge">7 Dokumen</span>
+    <span class="meta-badge">UU · PP · Perpres · Kepmen · Kepdirjen</span>
     <span class="meta-badge">Ditjen Minerba</span>
   </div>
 </header>
@@ -350,6 +358,48 @@
       </div>
     </a>
 
+    <!-- PP 96 / 2021 -->
+    <a class="card orange" href="pp96_2021.html" target="_blank">
+      <div class="card-icon">⚙️</div>
+      <div>
+        <div class="card-kode">PP No. 96 Tahun 2021</div>
+        <div class="card-title">Pelaksanaan Kegiatan Usaha Pertambangan Minerba</div>
+      </div>
+      <p class="card-desc">
+        Peraturan Pemerintah tentang pelaksanaan kegiatan usaha pertambangan mineral dan batubara, mengatur teknis perizinan, kewajiban, dan tahapan kegiatan tambang.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Usaha Tambang</span>
+        <span class="tag">Perizinan</span>
+        <span class="tag">Kewajiban</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2021</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+    <!-- PP 55 / 2010 -->
+    <a class="card red" href="pp55-2010.html" target="_blank">
+      <div class="card-icon">🛡️</div>
+      <div>
+        <div class="card-kode">PP No. 55 Tahun 2010</div>
+        <div class="card-title">Pembinaan dan Pengawasan Penyelenggaraan Pertambangan</div>
+      </div>
+      <p class="card-desc">
+        Peraturan Pemerintah tentang pembinaan dan pengawasan penyelenggaraan pengelolaan usaha pertambangan mineral dan batubara oleh pemerintah.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Pembinaan</span>
+        <span class="tag">Pengawasan</span>
+        <span class="tag">Inspektur Tambang</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2010</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
     <!-- Perpres 55 -->
     <a class="card purple" href="perpres_55_2022.html" target="_blank">
       <div class="card-icon">🏛</div>
@@ -383,7 +433,9 @@
         kepmen_esdm_1827.html<br>
         kepdirjen_185_2019.html<br>
         kepdirjen_216_2022.html<br>
-        perpres_55_2022.html
+        perpres_55_2022.html<br>
+        pp96_2021.html<br>
+        pp55-2010.html
       </div>
     </div>
   </div>
@@ -391,7 +443,7 @@
 
 <footer>
   <span>Portal Regulasi Pertambangan Minerba · Referensi Internal Inspektur Tambang</span>
-  <span>5 dokumen · offline-ready</span>
+  <span>7 dokumen · offline-ready</span>
 </footer>
 
 </body>
