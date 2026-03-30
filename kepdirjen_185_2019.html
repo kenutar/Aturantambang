@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepdirjen Minerba No. 185.K/37.04/DJB/2019</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4f8;
+    --paper: #fdfcfa;
+    --ink: #1a1e2e;
+    --ink-light: #3a4060;
+    --ink-muted: #7a8099;
+    --accent: #1a5fa8;
+    --accent-hover: #0e4a8a;
+    --accent-pale: #edf4ff;
+    --accent-light: #b8d4f0;
+    --gold: #b07d10;
+    --gold-light: #fdf3d8;
+    --green: #1a7a4a;
+    --green-pale: #edf7f2;
+    --border: #d0d8e8;
+    --sidebar-w: 310px;
+    --nav-h: 64px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+    background: var(--ink); display: flex; align-items: center; gap: 16px;
+    padding: 0 20px; z-index: 200; border-bottom: 3px solid var(--accent);
+  }
+  .topbar-logo { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #fff; white-space: nowrap; flex-shrink: 0; }
+  .topbar-logo span { color: #6ea8f0; }
+  .search-wrapper { flex: 1; max-width: 520px; position: relative; }
+  .search-input {
+    width: 100%; padding: 9px 42px 9px 14px; border: 1.5px solid #2a3050;
+    border-radius: 6px; background: #222840; color: #e8ecf8;
+    font-family: 'Source Sans 3', sans-serif; font-size: 0.92rem; outline: none; transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: #6070a0; }
+  .search-input:focus { border-color: var(--accent); }
+  .search-icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #6070a0; pointer-events: none; }
+  .search-count { position: absolute; right: 38px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: #6ea8f0; display: none; white-space: nowrap; }
+  .search-nav-btns { display: flex; gap: 4px; flex-shrink: 0; }
+  .snb { background: #2a3050; border: none; color: #e8ecf8; width: 30px; height: 30px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .snb:hover { background: var(--accent); }
+  .sidebar-toggle { background: none; border: none; color: #fff; font-size: 1.3rem; cursor: pointer; display: none; }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; padding-top: var(--nav-h); min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0; background: var(--ink);
+    position: fixed; top: var(--nav-h); left: 0; bottom: 0;
+    overflow-y: auto; padding: 16px 0; transition: transform 0.3s; z-index: 100;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #2a3050; border-radius: 2px; }
+  .sidebar-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #4a5580; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 18px 10px; border-bottom: 1px solid #1e2440; margin-bottom: 6px; }
+  .nav-group-label { padding: 12px 18px 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: #3a4570; letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-item { display: block; padding: 8px 18px; color: #8a9ac0; text-decoration: none; font-size: 0.86rem; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; line-height: 1.4; }
+  .nav-item:hover { color: #e8ecf8; background: #1e2440; border-left-color: var(--accent); }
+  .nav-item.active { color: #e8ecf8; background: #1e2440; border-left-color: var(--accent); font-weight: 600; }
+  .nav-item.sub { padding-left: 30px; font-size: 0.8rem; color: #5a6590; }
+  .nav-item.sub:hover, .nav-item.sub.active { color: #8a9ac0; }
+
+  /* ── MAIN ── */
+  .main { margin-left: var(--sidebar-w); flex: 1; padding: 40px 52px; max-width: 920px; }
+
+  /* ── SECTIONS ── */
+  .section { display: none; animation: fadeIn 0.28s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── TYPOGRAPHY ── */
+  .doc-header { border-bottom: 2px solid var(--border); padding-bottom: 26px; margin-bottom: 32px; }
+  .doc-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #e8ecf8; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 5px 12px; border-radius: 3px; margin-bottom: 14px; letter-spacing: 0.05em; }
+  .doc-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .doc-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 10px; }
+  .doc-subtitle { font-size: 1rem; color: var(--ink-light); line-height: 1.6; }
+
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; font-weight: 700; color: var(--ink); margin: 34px 0 14px; padding-bottom: 9px; border-bottom: 2px solid var(--border); }
+  h2:first-child { margin-top: 0; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--accent); margin: 26px 0 10px; }
+  h4 { font-size: 0.97rem; font-weight: 600; color: var(--ink-light); margin: 18px 0 7px; font-family: 'Source Sans 3', sans-serif; }
+  p { font-size: 0.95rem; line-height: 1.75; color: var(--ink-light); margin-bottom: 11px; }
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { font-size: 0.93rem; line-height: 1.7; color: var(--ink-light); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  strong { color: var(--ink); }
+
+  /* ── TABLES ── */
+  .table-wrapper { overflow-x: auto; margin: 14px 0 22px; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  thead { background: var(--ink); color: #e8ecf8; }
+  thead th { padding: 10px 13px; text-align: left; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em; white-space: nowrap; }
+  tbody tr:nth-child(even) { background: var(--accent-pale); }
+  tbody tr:hover { background: #ddeeff; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--border); color: var(--ink-light); vertical-align: top; line-height: 1.5; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+
+  /* ── INFO / NOTE / WARNING BOXES ── */
+  .info-box { background: var(--gold-light); border-left: 4px solid var(--gold); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.91rem; color: var(--ink-light); line-height: 1.65; }
+  .note-box { background: var(--accent-pale); border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.91rem; color: var(--ink-light); line-height: 1.65; }
+  .green-box { background: var(--green-pale); border-left: 4px solid var(--green); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.91rem; color: var(--ink-light); line-height: 1.65; }
+
+  /* ── SEARCH HIGHLIGHTS ── */
+  mark { background: #ffe066; color: var(--ink); border-radius: 2px; padding: 0 2px; }
+  mark.current { background: var(--accent); color: white; }
+
+  /* ── SECTION BADGE ── */
+  .section-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #e8ecf8; font-family: 'Playfair Display', serif; font-size: 0.86rem; padding: 6px 16px 6px 12px; border-radius: 4px; margin-bottom: 20px; }
+  .section-badge .roman { font-size: 1.1rem; font-weight: 700; color: #6ea8f0; }
+
+  /* ── HOME CARDS ── */
+  .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .card { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 18px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transition: transform 0.2s; }
+  .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-letter { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 7px; }
+  .card-title { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 5px; }
+  .card-sub { font-size: 0.77rem; color: var(--ink-muted); line-height: 1.4; }
+
+  /* ── TIMELINE (prosedur) ── */
+  .steps { margin: 14px 0; }
+  .step { display: flex; gap: 14px; margin-bottom: 12px; }
+  .step-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: white; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-content { flex: 1; }
+  .step-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); }
+  .step-desc { font-size: 0.87rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── OVERLAY ── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+  .overlay.open { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-toggle { display: flex; }
+    .main { margin-left: 0; padding: 22px 18px; }
+    .home-grid { grid-template-columns: 1fr; }
+    .doc-title { font-size: 1.5rem; }
+    .topbar-logo { display: none; }
+  }
+  [id] { scroll-margin-top: 20px; }
+
+  .tag { display: inline-block; background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; padding: 2px 7px; border-radius: 3px; margin: 0 3px 3px 0; }
+  .tag.green { background: var(--green); }
+  .tag.gold { background: var(--gold); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+  .col-card { background: var(--paper); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .col-card h5 { font-size: 0.88rem; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+  .col-card ul { padding-left: 18px; }
+  .col-card li { font-size: 0.83rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  .freq-badge { display: inline-block; background: var(--ink); color: #6ea8f0; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding: 2px 8px; border-radius: 3px; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="topbar-logo">Kepdirjen Minerba <span>No. 185/2019</span></div>
+  <div class="search-wrapper">
+    <input class="search-input" id="searchInput" type="text" placeholder="Cari kata kunci... (contoh: fatigue, peledakan, bejana tekan)" oninput="doSearch()" onkeydown="searchNav(event)">
+    <span class="search-count" id="searchCount"></span>
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="search-nav-btns">
+    <button class="snb" onclick="prevMatch()" title="Sebelumnya">↑</button>
+    <button class="snb" onclick="nextMatch()" title="Berikutnya">↓</button>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Navigasi Dokumen</div>
+  <a class="nav-item active" onclick="showSection('home')">🏠 Beranda</a>
+
+  <div class="nav-group-label">Lampiran I — Petunjuk Teknis</div>
+  <a class="nav-item" onclick="showSection('sa')">A. Pendahuluan</a>
+  <a class="nav-item" onclick="showSection('sb')">B. Pengertian (29 Istilah)</a>
+  <a class="nav-item" onclick="showSection('sc')">C. Ketentuan Umum</a>
+
+  <div class="nav-group-label">D. Keselamatan & Kesehatan Kerja</div>
+  <a class="nav-item" onclick="showSection('sd1')">D.1 Keselamatan Kerja</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-manrisiko')">Manajemen Risiko</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-program')">Program K3</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-diklat')">Pendidikan & Pelatihan</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-kampanye')">Kampanye</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-admin')">Administrasi K3</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-darurat')">Manajemen Keadaan Darurat</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-inspeksi')">Inspeksi K3</a>
+  <a class="nav-item sub" onclick="showSection('sd1'); scrollTo('d1-penyelidikan')">Penyelidikan Kecelakaan</a>
+  <a class="nav-item" onclick="showSection('sd2')">D.2 Kesehatan Kerja</a>
+  <a class="nav-item sub" onclick="showSection('sd2'); scrollTo('d2-program')">Program Kesehatan</a>
+  <a class="nav-item sub" onclick="showSection('sd2'); scrollTo('d2-periksa')">Pemeriksaan Kesehatan</a>
+  <a class="nav-item sub" onclick="showSection('sd2'); scrollTo('d2-pelayanan')">Pelayanan Kesehatan</a>
+  <a class="nav-item sub" onclick="showSection('sd2'); scrollTo('d2-fatigue')">Pengelolaan Kelelahan (Fatigue)</a>
+  <a class="nav-item" onclick="showSection('sd3')">D.3 Lingkungan Kerja</a>
+
+  <div class="nav-group-label">E. Keselamatan Operasi</div>
+  <a class="nav-item" onclick="showSection('se1')">E.1 Pemeliharaan Sarana & Prasarana</a>
+  <a class="nav-item" onclick="showSection('se2')">E.2 Pengamanan Instalasi</a>
+  <a class="nav-item" onclick="showSection('se3')">E.3 Tenaga Teknis Berkompeten</a>
+  <a class="nav-item" onclick="showSection('se4')">E.4 Kelayakan Peralatan & Instalasi</a>
+  <a class="nav-item sub" onclick="showSection('se4'); scrollTo('e4-bejana')">Kelayakan Bejana Tekan</a>
+  <a class="nav-item sub" onclick="showSection('se4'); scrollTo('e4-listrik')">Kelayakan Kelistrikan</a>
+  <a class="nav-item" onclick="showSection('se5')">E.5 Evaluasi Kajian Teknis</a>
+  <a class="nav-item" onclick="showSection('se6')">E.6 Keselamatan Bahan Peledak</a>
+  <a class="nav-item" onclick="showSection('se7')">E.7 Keselamatan Fasilitas</a>
+  <a class="nav-item" onclick="showSection('se8')">E.8 Keselamatan Eksplorasi</a>
+  <a class="nav-item" onclick="showSection('se9')">E.9 Keselamatan Tambang Permukaan</a>
+  <a class="nav-item" onclick="showSection('se10')">E.10 Keselamatan Tambang Bawah Tanah</a>
+  <a class="nav-item sub" onclick="showSection('se10'); scrollTo('e10-admin')">Administrasi</a>
+  <a class="nav-item sub" onclick="showSection('se10'); scrollTo('e10-ventilasi')">Ventilasi</a>
+  <a class="nav-item" onclick="showSection('se11')">E.11 Keselamatan Kapal Keruk/Isap</a>
+  <a class="nav-item" onclick="showSection('se12')">E.12 Keselamatan Pengolahan & Pemurnian</a>
+
+  <div class="nav-group-label">Penutup</div>
+  <a class="nav-item" onclick="showSection('sfg')">F. Ketentuan Lain & G. Penutup</a>
+</aside>
+
+<div class="layout">
+<main class="main" id="mainContent">
+
+<!-- HOME -->
+<section class="section active" id="home">
+  <div class="doc-header">
+    <div class="doc-badge"><span class="dot"></span>Direktorat Jenderal Mineral dan Batubara — Kementerian ESDM</div>
+    <div class="doc-title">Keputusan Direktur Jenderal Mineral dan Batubara<br>Nomor 185.K/37.04/DJB/2019</div>
+    <div class="doc-subtitle">Petunjuk Teknis Pelaksanaan Keselamatan Pertambangan dan Pelaksanaan, Penilaian, dan Pelaporan Sistem Manajemen Keselamatan Pertambangan Mineral dan Batubara</div>
+  </div>
+  <p>Ditetapkan pada <strong>11 Juli 2019</strong> sebagai tindak lanjut dari Keputusan Menteri ESDM Nomor 1827 K/30/MEM/2018. Dokumen ini adalah <strong>Lampiran I</strong> yang memuat petunjuk teknis pelaksanaan Keselamatan Pertambangan (K3 dan Keselamatan Operasi).</p>
+  <div class="home-grid">
+    <div class="card" onclick="showSection('sa')"><div class="card-letter">A</div><div class="card-title">Pendahuluan</div><div class="card-sub">Umum, dasar hukum, maksud dan tujuan, ruang lingkup, sistematika</div></div>
+    <div class="card" onclick="showSection('sb')"><div class="card-letter">B</div><div class="card-title">Pengertian</div><div class="card-sub">29 definisi istilah teknis keselamatan pertambangan</div></div>
+    <div class="card" onclick="showSection('sc')"><div class="card-letter">C</div><div class="card-title">Ketentuan Umum</div><div class="card-sub">9 ketentuan umum pelaksanaan keselamatan pertambangan</div></div>
+    <div class="card" onclick="showSection('sd1')"><div class="card-letter">D</div><div class="card-title">Keselamatan & Kesehatan Kerja (K3)</div><div class="card-sub">Manajemen risiko, program K3, diklat, kampanye, administrasi, keadaan darurat, inspeksi, penyelidikan kecelakaan, kesehatan kerja, lingkungan kerja</div></div>
+    <div class="card" onclick="showSection('se1')"><div class="card-letter">E</div><div class="card-title">Keselamatan Operasi Pertambangan</div><div class="card-sub">Pemeliharaan sarana, pengamanan instalasi, kelayakan peralatan, bahan peledak, fasilitas, eksplorasi, tambang permukaan, bawah tanah, kapal keruk, pengolahan</div></div>
+    <div class="card" onclick="showSection('sfg')"><div class="card-letter">F/G</div><div class="card-title">Ketentuan Lain & Penutup</div><div class="card-sub">Cakupan tambahan dan ketentuan penutup dokumen</div></div>
+  </div>
+</section>
+
+<!-- A. PENDAHULUAN -->
+<section class="section" id="sa">
+  <div class="section-badge"><span class="roman">A</span> Pendahuluan</div>
+  <h2>A. Pendahuluan</h2>
+  <h3>1. Umum</h3>
+  <p>Petunjuk teknis ini merupakan tindak lanjut dari Keputusan Menteri ESDM Nomor 1827.K/30/MEM/2018 tentang Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik — khususnya Lampiran III tentang Pedoman Pelaksanaan Keselamatan Pertambangan dan Keselamatan Pengolahan dan/atau Pemurnian Mineral dan Batubara.</p>
+  <h3>2. Dasar Hukum</h3>
+  <ul>
+    <li>Peraturan Menteri ESDM Nomor 26 Tahun 2018 tentang Pelaksanaan Kaidah Teknik Pertambangan yang Baik dan Pengawasan Pertambangan Mineral dan Batubara</li>
+    <li>Keputusan Menteri ESDM Nomor 1827.K/30/MEM/2018 tentang Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik</li>
+  </ul>
+  <h3>3. Maksud dan Tujuan</h3>
+  <p><strong>Maksud</strong>: Sebagai pedoman bagi pemegang IUP, IUPK, IUP Operasi Produksi khusus Pengolahan dan/atau Pemurnian, dan IPR dalam pelaksanaan Keselamatan Pertambangan, serta sebagai pedoman pembinaan dan pengawasan.</p>
+  <p><strong>Tujuan</strong>:</p>
+  <ul>
+    <li>Terdapat standardisasi dalam pemenuhan persyaratan teknis Keselamatan Pertambangan</li>
+    <li>Menciptakan keseragaman serta persamaan persepsi pemegang izin dalam menyusun dan menerapkan pengelolaan Keselamatan Pertambangan</li>
+    <li>Meningkatkan profesionalisme dan kompetensi Perusahaan Pertambangan serta Pemerintah/Pemerintah Daerah dalam pelaksanaan Keselamatan Operasi Pertambangan</li>
+  </ul>
+  <h3>4. Ruang Lingkup</h3>
+  <div class="two-col">
+    <div class="col-card">
+      <h5>A. Keselamatan dan Kesehatan Kerja (K3)</h5>
+      <ul>
+        <li>Keselamatan Kerja Pertambangan dan Pengolahan dan/atau Pemurnian</li>
+        <li>Kesehatan Kerja Pertambangan dan Pengolahan dan/atau Pemurnian</li>
+        <li>Lingkungan Kerja</li>
+      </ul>
+    </div>
+    <div class="col-card">
+      <h5>B. Keselamatan Operasi Pertambangan</h5>
+      <ul>
+        <li>Sistem dan Pelaksanaan Pemeliharaan/Perawatan Sarana, Prasarana, Instalasi, dan Peralatan</li>
+        <li>Pengamanan Instalasi</li>
+        <li>Tenaga Teknis yang Berkompeten di Bidang Keselamatan Operasi</li>
+        <li>Kelayakan Sarana, Prasarana, Instalasi, dan Peralatan</li>
+        <li>Evaluasi Laporan Hasil Kajian Teknis</li>
+        <li>Keselamatan Bahan Peledak dan Peledakan</li>
+        <li>Keselamatan Fasilitas Pertambangan</li>
+        <li>Keselamatan Eksplorasi</li>
+        <li>Keselamatan Tambang Permukaan</li>
+        <li>Keselamatan Tambang Bawah Tanah</li>
+        <li>Keselamatan Kapal Keruk/Isap</li>
+        <li>Keselamatan Pengolahan dan/atau Pemurnian</li>
+      </ul>
+    </div>
+  </div>
+  <h3>5. Sistematika</h3>
+  <p>A. Pendahuluan &nbsp;|&nbsp; B. Pengertian &nbsp;|&nbsp; C. Ketentuan Umum &nbsp;|&nbsp; D. Pelaksanaan K3 Pertambangan &nbsp;|&nbsp; E. Pelaksanaan Keselamatan Operasi &nbsp;|&nbsp; F. Ketentuan Lain &nbsp;|&nbsp; G. Penutup</p>
+</section>
+
+<!-- B. PENGERTIAN -->
+<section class="section" id="sb">
+  <div class="section-badge"><span class="roman">B</span> Pengertian</div>
+  <h2>B. Pengertian (29 Istilah)</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Istilah</th><th>Definisi</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Keselamatan Pertambangan</strong></td><td>Segala kegiatan yang meliputi pengelolaan keselamatan dan kesehatan kerja Pertambangan dan keselamatan operasional Pertambangan</td></tr>
+        <tr><td>2</td><td><strong>K3 Pertambangan</strong></td><td>Segala kegiatan untuk menjamin dan melindungi Pekerja agar selamat dan sehat melalui upaya pengelolaan keselamatan kerja, kesehatan kerja, lingkungan kerja, dan sistem manajemen K3</td></tr>
+        <tr><td>3</td><td><strong>Keselamatan Operasi Pertambangan</strong></td><td>Segala kegiatan untuk menjamin dan melindungi operasional tambang yang aman, efisien, dan produktif melalui upaya pengelolaan sistem dan pelaksanaan pemeliharaan/perawatan sarana, prasarana, instalasi, dan peralatan; pengamanan instalasi; kelayakan; kompetensi tenaga teknik; dan evaluasi laporan kajian teknis</td></tr>
+        <tr><td>4</td><td><strong>Pertambangan</strong></td><td>Sebagian atau seluruh tahapan kegiatan dalam rangka penelitian, pengelolaan dan pengusahaan mineral atau batubara yang meliputi penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan pemurnian, pengangkutan dan penjualan, serta kegiatan pascatambang</td></tr>
+        <tr><td>5</td><td><strong>WIUP</strong></td><td>Wilayah Izin Usaha Pertambangan — wilayah yang diberikan kepada pemegang IUP</td></tr>
+        <tr><td>6</td><td><strong>WIUPK</strong></td><td>Wilayah Izin Usaha Pertambangan Khusus — wilayah yang diberikan kepada pemegang IUPK</td></tr>
+        <tr><td>7</td><td><strong>WPR</strong></td><td>Wilayah Pertambangan Rakyat — bagian dari wilayah Pertambangan tempat dilakukan kegiatan usaha Pertambangan rakyat</td></tr>
+        <tr><td>8</td><td><strong>KaIT</strong></td><td>Kepala Inspektur Tambang — pejabat yang secara ex officio menduduki jabatan Direktur yang mempunyai tugas pokok dan fungsi di bidang keteknikan Pertambangan</td></tr>
+        <tr><td>9</td><td><strong>IT (Inspektur Tambang)</strong></td><td>Aparatur Sipil Negara yang diberi tugas, tanggung jawab, dan wewenang untuk melakukan pengawasan terhadap pelaksanaan kaidah teknik Pertambangan yang baik</td></tr>
+        <tr><td>10</td><td><strong>KTT</strong></td><td>Kepala Teknik Tambang — seseorang yang memiliki posisi tertinggi dalam struktur organisasi lapangan Pertambangan yang memimpin dan bertanggung jawab atas terlaksananya operasional Pertambangan sesuai kaidah teknik yang baik</td></tr>
+        <tr><td>11</td><td><strong>PTL</strong></td><td>Penanggung Jawab Teknik dan Lingkungan — seseorang yang memiliki posisi tertinggi dalam struktur organisasi lapangan yang bertugas memimpin dan bertanggung jawab atas terlaksananya kegiatan operasional pengolahan dan/atau pemurnian</td></tr>
+        <tr><td>12</td><td><strong>Pekerja</strong></td><td>Seseorang yang bekerja di pemegang IUP, IUPK, IUP Operasi Produksi khusus untuk Pengolahan dan/atau Pemurnian, IPR, atau perusahaan jasa Pertambangan</td></tr>
+        <tr><td>13</td><td><strong>Kecelakaan</strong></td><td>Suatu kejadian yang tidak dikehendaki dan tidak diduga semula yang menimbulkan korban manusia dan/atau harta benda</td></tr>
+        <tr><td>14</td><td><strong>Kecelakaan Tambang</strong></td><td>Kecelakaan yang memenuhi 5 (lima) kriteria sebagaimana diatur dalam peraturan perundangan</td></tr>
+        <tr><td>15</td><td><strong>Kejadian Berbahaya</strong></td><td>Kejadian yang dapat membahayakan jiwa atau terhalangnya produksi</td></tr>
+        <tr><td>16</td><td><strong>Penyakit Akibat Kerja</strong></td><td>Penyakit yang disebabkan oleh pekerjaan dan/atau lingkungan kerja sesuai dengan peraturan perundangan</td></tr>
+        <tr><td>17</td><td><strong>Kejadian Akibat Penyakit Tenaga Kerja</strong></td><td>Kejadian meninggalnya Pekerja yang disebabkan oleh penyakit ketika Pekerja melakukan kegiatan Pertambangan atau pengolahan dan/atau pemurnian, terjadi pada jam kerja, atau terjadi dalam wilayah kegiatan usaha Pertambangan</td></tr>
+        <tr><td>18</td><td><strong>Pesawat Angkat dan/atau Angkut</strong></td><td>Suatu pesawat atau alat yang digunakan untuk memindahkan, mengangkat muatan baik bahan atau barang atau orang secara vertikal dan/atau horizontal dalam jarak yang ditentukan</td></tr>
+        <tr><td>19</td><td><strong>Stockpile</strong></td><td>Tempat penumpukan atau bahan yang ditumpuk untuk diambil, diolah, dipasarkan atau dimanfaatkan kemudian</td></tr>
+        <tr><td>20</td><td><strong>Sumuran (Shaft)</strong></td><td>Suatu lubang bukaan vertikal dan miring yang menghubungkan tambang bawah tanah dengan permukaan bumi dan berfungsi sebagai jalan pengangkutan karyawan, alat-alat kebutuhan tambang, ventilasi, penirisan, dan lain-lain</td></tr>
+        <tr><td>21</td><td><strong>Lubang Naik (Raise)</strong></td><td>Suatu lubang bukaan vertikal atau agak miring yang dibuat dari level bawah ke level yang di atasnya</td></tr>
+        <tr><td>22</td><td><strong>Lubang Turun (Winze)</strong></td><td>Lubang bukaan vertikal atau agak miring yang dibuat dari level atas ke level yang di bawahnya</td></tr>
+        <tr><td>23</td><td><strong>Penirisan</strong></td><td>Suatu cara pengalihan dan upaya untuk mengeluarkan air dari lokasi penambangan</td></tr>
+        <tr><td>24</td><td><strong>Tenaga Teknis Pertambangan yang Berkompeten</strong></td><td>Tenaga Pertambangan yang memiliki pengetahuan, kemampuan, pengalaman, atau sertifikasi kompetensi bagi area kerja yang telah memiliki standar kompetensi kerja berlaku wajib, diakui Pemerintah</td></tr>
+        <tr><td>25</td><td><strong>Kepala Kapal Keruk</strong></td><td>Seseorang yang memiliki posisi tertinggi dalam struktur organisasi di kapal keruk yang memimpin, mengatur, mengawasi pekerjaan termasuk pekerjaan lain yang berkaitan dengan pengoperasian kapal keruk</td></tr>
+        <tr><td>26</td><td><strong>Kelayakan Operasi</strong></td><td>Serangkaian pengujian secara berkala terhadap peralatan Pertambangan yang menerangkan bahwa peralatan tersebut telah memenuhi persyaratan administrasi dan kelayakan teknis untuk melakukan kegiatan Pertambangan</td></tr>
+        <tr><td>27</td><td><strong>Commissioning</strong></td><td>Kegiatan menilai kesiapan, kelengkapan, kesesuaian, dan kelayakan alat Pertambangan baik berdiri sendiri atau dalam sebuah rangkaian proses untuk mengetahui kehandalannya</td></tr>
+        <tr><td>28</td><td><strong>Izin Kerja Khusus (Work Permit)</strong></td><td>Sebuah dokumen atau izin tertulis dengan persyaratan-persyaratan keselamatan Pertambangan yang digunakan untuk mengontrol jenis pekerjaan yang berpotensi membahayakan Pekerja dan memiliki nilai risiko yang sangat tinggi</td></tr>
+        <tr><td>29</td><td><strong>Bencana Lumpur Basah (Wet Muck)</strong></td><td>Campuran ukuran butir halus dan air yang mana dapat mengalirkan material secara tiba-tiba keluar akibat dari penggalian tambang bawah</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- C. KETENTUAN UMUM -->
+<section class="section" id="sc">
+  <div class="section-badge"><span class="roman">C</span> Ketentuan Umum</div>
+  <h2>C. Ketentuan Umum</h2>
+  <ol>
+    <li>Keselamatan Pertambangan dan Keselamatan Pengolahan dan/atau Pemurnian Mineral dan Batubara dalam petunjuk teknis ini selanjutnya disebut dengan <strong>Keselamatan Pertambangan</strong>.</li>
+    <li>Wilayah di luar WIUP (<em>project area</em>) yang telah mendapat persetujuan Menteri atau Gubernur sesuai kewenangannya atau wilayah kerja IUP Operasi Produksi khusus untuk pengolahan dan/atau pemurnian menjadi tanggung jawab <strong>KTT atau PTL</strong>.</li>
+    <li>Hanya Pekerja atau orang yang diberi izin oleh KTT atau PTL yang dapat memasuki atau berada di WIUP, WIUPK, wilayah di luar WIUP atau WIUPK, WPR, dan/atau wilayah kerja IUP Operasi Produksi khusus.</li>
+    <li>Jika mendapatkan izin, orang tersebut perlu didampingi KTT, PTL, atau petugas yang ditunjuk yang memahami situasi dan kondisi daerah yang akan dikunjungi.</li>
+    <li>Dalam hal jalan Pertambangan digunakan di luar kegiatan Pertambangan yang diizinkan oleh KTT, maka keselamatan penggunaan jalan tersebut menjadi tanggung jawab KTT.</li>
+    <li>Pemegang IUP, IUPK, IUP Operasi Produksi khusus, dan IPR hanya dapat memulai usaha Pertambangan atau pengolahan dan/atau pemurnian setelah mendapat <strong>pengesahan KTT atau PTL</strong> oleh KaIT atau Kepala Dinas atas nama KaIT sesuai kewenangannya.</li>
+    <li>Pemegang IUP, IUPK, IUP Operasi Produksi khusus, dan IPR perlu menyediakan segala peralatan, perlengkapan, fasilitas, dan <strong>alat pelindung diri yang diberikan secara cuma-cuma</strong> kepada Pekerja sesuai dengan jenis, sifat, dan bahaya pekerjaan.</li>
+    <li>Jika dalam pekerjaan usaha Pertambangan tidak ada KTT, PTL, atau petugas yang ditunjuk maka <strong>pekerjaan tersebut dihentikan oleh IT</strong>.</li>
+    <li>Pemegang IUP, IUPK, IUP Operasi Produksi khusus, dan IPR memberikan bantuan sepenuhnya kepada IT pada saat melaksanakan tugasnya.</li>
+  </ol>
+</section>
+
+<!-- D.1 KESELAMATAN KERJA -->
+<section class="section" id="sd1">
+  <div class="section-badge"><span class="roman">D.1</span> Keselamatan Kerja Pertambangan</div>
+  <h2>D.1 Keselamatan Kerja Pertambangan dan Pengolahan dan/atau Pemurnian</h2>
+
+  <div id="d1-manrisiko">
+    <h3>a. Manajemen Risiko</h3>
+    <p>Manajemen risiko dilaksanakan melalui 5 (lima) tahapan:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Komunikasi dan Konsultasi</div><div class="step-desc">Dilakukan dengan melibatkan para pemangku kepentingan, baik internal maupun eksternal yang terkait. Dilakukan pada setiap tahap proses Manajemen Risiko.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Penetapan Konteks</div><div class="step-desc">Menentukan batasan-batasan risiko yang akan dikelola, mencakup faktor internal (kegiatan rutin dan tidak rutin, perubahan organisasi, fasilitas baru, kondisi normal/abnormal, faktor personal Pekerja, desain area kerja) dan faktor eksternal (budaya, politik, hukum, teknologi, persepsi pemangku kepentingan, infrastruktur pihak lain).</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Identifikasi Bahaya</div><div class="step-desc">Mengidentifikasi sumber-sumber bahaya, area yang terpapar, dan konsekuensi yang potensial, mempertimbangkan paling sedikit: kegiatan rutin dan tidak rutin, perubahan organisasi, fasilitas baru, kondisi proses, ketidakpatuhan terhadap rekomendasi, faktor personal Pekerja, desain area kerja, sistem pemeliharaan, pengamanan instalasi, kelayakan peralatan, dan kompetensi tenaga teknik.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Penilaian dan Pengendalian Risiko</div><div class="step-desc">Penilaian risiko untuk menentukan apakah risiko dapat diterima atau tidak. Pengendalian mengikuti <strong>hierarki pengendalian risiko</strong>: (a) Rekayasa: eliminasi, substitusi, isolasi; (b) Administrasi: rambu peringatan, rotasi Pekerja, pembatasan jam kerja; (c) Praktik kerja: JSA, SOP, instruksi kerja, pelatihan; (d) Alat pelindung diri.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Pemantauan dan Peninjauan</div><div class="step-desc">Dilakukan secara berkala atau apabila terjadi kecelakaan, Kejadian Berbahaya, Kejadian Akibat Penyakit Tenaga Kerja, Penyakit Akibat Kerja, terjadi perubahan peralatan/instalasi/proses, atau ada proses/kegiatan baru.</div></div></div>
+    </div>
+  </div>
+
+  <div id="d1-program">
+    <h3>b. Program Keselamatan Kerja Pertambangan</h3>
+    <p>Program Keselamatan Pertambangan disusun berdasarkan:</p>
+    <ul>
+      <li>Peraturan perundang-undangan dan standar terkait</li>
+      <li>Persyaratan lainnya yang terkait</li>
+      <li>Kebijakan perusahaan</li>
+      <li>Hasil Manajemen Risiko terhadap seluruh proses, kegiatan, dan area kerja</li>
+      <li>Evaluasi kinerja program keselamatan kerja</li>
+      <li>Hasil pemeriksaan terhadap kecelakaan dan Kejadian Berbahaya</li>
+      <li>Ketersediaan sumber daya (manusia, finansial, peralatan)</li>
+    </ul>
+    <div class="note-box"><strong>Program Keselamatan Pertambangan ditetapkan dan disahkan oleh Komite Keselamatan Pertambangan.</strong></div>
+  </div>
+
+  <div id="d1-diklat">
+    <h3>c. Pendidikan dan Pelatihan Keselamatan Kerja Pertambangan</h3>
+    <p>Tahapan penyusunan program diklat:</p>
+    <ol>
+      <li><strong>Pengumpulan data dan informasi</strong> — melalui identifikasi pekerjaan (struktur organisasi, tugas dan tanggung jawab, risiko keselamatan dan kesehatan) dan identifikasi Pekerja (kompetensi yang diperlukan, jumlah aktual Pekerja)</li>
+      <li><strong>Penyusunan Analisis Kebutuhan Diklat (<em>Training Need Analysis</em>)</strong> — mempertimbangkan tingkat kebutuhan Pekerja berkompeten, kesenjangan dengan standar, sumber daya manusia yang tersedia, ketersediaan penyelenggara, dan alokasi dana</li>
+      <li><strong>Pelaksanaan Diklat</strong> — <em>on the job</em> (di area kerja sendiri, trainer pengawas yang kompeten) atau <em>off the job</em> (di luar area kerja, oleh lembaga pemerintah atau swasta terakreditasi)</li>
+      <li><strong>Pemantauan dan Evaluasi</strong> — meliputi 4 (empat) tahap evaluasi: <em>reaction</em> (minat dan reaksi peserta), <em>learning</em> (tingkat pemahaman peserta), <em>behaviour</em> (perubahan perilaku setelah pelatihan), dan <em>result</em> (peningkatan kinerja perusahaan jangka panjang)</li>
+      <li><strong>Tindak Lanjut Perbaikan dan Peningkatan</strong> — menindaklanjuti hasil monitoring dan evaluasi untuk menjamin perbaikan berkelanjutan</li>
+    </ol>
+    <div class="info-box">Hasil pendidikan dan pelatihan menjadi dasar pertimbangan dalam penerimaan, seleksi, promosi, penilaian kinerja, serta pengembangan standar kompetensi kerja Keselamatan Pertambangan.</div>
+  </div>
+
+  <div id="d1-kampanye">
+    <h3>d. Kampanye Keselamatan Pertambangan</h3>
+    <p>Program kampanye disusun mempertimbangkan: peraturan perundang-undangan, hasil evaluasi kinerja, hasil inspeksi dan investigasi, hasil Manajemen Risiko, dan level kompetensi Pekerja.</p>
+    <p>Bentuk-bentuk kampanye:</p>
+    <ul>
+      <li>Upacara Keselamatan Pertambangan</li>
+      <li>Seminar dan <em>workshop</em> Keselamatan Pertambangan</li>
+      <li>Perlombaan tentang Keselamatan Pertambangan</li>
+      <li>Penghargaan terhadap implementasi Keselamatan Pertambangan</li>
+      <li>Sosialisasi Keselamatan Pertambangan</li>
+      <li>Poster dan spanduk</li>
+      <li>Kegiatan lainnya dalam rangka menggugah kesadaran keselamatan kerja</li>
+    </ul>
+    <div class="note-box">Kampanye dilakukan sesuai dengan rencana yang telah ditetapkan dan <strong>tidak terbatas pada Bulan K3 Nasional</strong>. Pelaksanaan kampanye dievaluasi secara berkala.</div>
+  </div>
+
+  <div id="d1-admin">
+    <h3>e. Administrasi Keselamatan Kerja Pertambangan</h3>
+    <h4>1) Buku Tambang</h4>
+    <p>Buku tambang memuat: larangan, perintah, dan petunjuk IT yang ditindaklanjuti oleh KTT atau PTL; serta informasi, tindak lanjut, dan pemberitahuan dari KTT atau PTL terhadap kegiatan usaha Pertambangan. Bentuk dan tata cara pengisian mengacu pada Standar Nasional Indonesia.</p>
+    <h4>2) Buku Daftar Kecelakaan Tambang</h4>
+    <p>Memuat catatan terhadap Kecelakaan Tambang yang berakibat cidera ringan, berat, atau mati, diisi oleh KTT atau PTL dan diverifikasi oleh IT.</p>
+    <h4>3) Dokumentasi Kejadian Berbahaya, Kejadian Akibat Penyakit Tenaga Kerja, dan Penyakit Akibat Kerja</h4>
+    <p>Didokumentasikan secara khusus oleh KTT atau PTL sesuai format yang ditentukan oleh KaIT (format rekapitulasi untuk Kejadian Berbahaya, Kejadian Akibat Penyakit Tenaga Kerja, dan Penyakit Akibat Kerja).</p>
+    <h4>4) Pelaporan Keselamatan Kerja Pertambangan</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Jenis Laporan</th><th>Isi</th><th>Batas Waktu</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bulanan</strong></td><td>Pemberitahuan kecelakaan kepada KaIT; pemberitahuan Kejadian Berbahaya kepada KaIT</td><td>Paling lambat <strong>5 hari kalender</strong> setelah berakhirnya tiap bulan takwim</td></tr>
+          <tr><td><strong>Triwulanan</strong></td><td>Daftar Kecelakaan Tambang; daftar jumlah tenaga kerja; daftar jam kerja; daftar kekerapan dan keparahan kecelakaan (<em>frequency rate</em> & <em>severity rate</em>); perhitungan biaya kecelakaan; rekapitulasi Kejadian Berbahaya; daftar persediaan dan pemakaian bahan peledak; laporan bahan bakar cair; laporan bahan berbahaya dan beracun; rencana dan realisasi program dan biaya K3</td><td>Paling lambat <strong>30 hari kalender</strong> setelah berakhirnya tiap triwulan</td></tr>
+          <tr><td><strong>Tahunan (Triwulan IV)</strong></td><td>Data kompetensi tenaga kerja</td><td>Paling lambat <strong>30 hari kalender</strong> tiap berakhirnya tahun</td></tr>
+          <tr><td><strong>Laporan Khusus</strong></td><td>Laporan pemberitahuan awal kecelakaan; laporan pemberitahuan awal Kejadian Berbahaya</td><td><strong>Sesaat setelah</strong> terjadinya kecelakaan atau Kejadian Berbahaya</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>5) Rencana Kerja dan Anggaran Biaya K3</h4>
+    <p>Disusun dengan mempertimbangkan skala prioritas sasaran dan program K3, kebutuhan untuk perbaikan dan peningkatan K3 yang berkelanjutan, dan pemenuhan terhadap peraturan perundang-undangan.</p>
+    <h4>6) Prosedur dan/atau Instruksi Kerja</h4>
+    <p>Langkah penyusunan: (a) bentuk tim penyusun; (b) pahami bisnis proses terkait; (c) susun alur kerja atau <em>flow chart</em>; (d) simulasikan prosedur; (e) evaluasi dan tindak lanjut perbaikan; (f) penetapan prosedur.</p>
+    <h4>7) Dokumen dan Laporan Pemenuhan Kompetensi</h4>
+    <p>Paling sedikit mencakup: dokumen kelayakan sarana, prasarana, dan instalasi; sertifikat dan laporan kompetensi tenaga kerja; lisensi (Kartu Izin Meledakkan, Kartu Pekerja Peledakan, Kartu Pengawas Operasional, surat izin mengoperasikan unit); pengesahan KTT, PTL, wakil KTT, wakil PTL, dan/atau Kepala Tambang Bawah Tanah; izin kerja khusus (ruang terbatas, ketinggian, panas, terpapar radioaktif).</p>
+  </div>
+
+  <div id="d1-darurat">
+    <h3>f. Manajemen Keadaan Darurat</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Identifikasi dan Penilaian Potensi Keadaan Darurat</div><div class="step-desc">Mengidentifikasi potensi keadaan darurat dari faktor internal dan eksternal (faktor alam dan sosial). Penilaian mempertimbangkan tingkat keparahan, tingkat kerugian, pengaruh terhadap operasi, keterlibatan sumber daya, dan pengaruh terhadap citra perusahaan.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Pencegahan Keadaan Darurat</div><div class="step-desc">Membuat kebijakan pencegahan keadaan darurat, inspeksi, dan perawatan.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Kesiapsiagaan Keadaan Darurat</div><div class="step-desc">Menyediakan sistem deteksi dini; sistem komunikasi darurat; sumber daya, sarana, prasarana, prosedur, dan tenaga teknis berkompeten; menyusun <em>emergency plan</em>; melaksanakan pelatihan penanggulangan; dan melaksanakan simulasi keadaan darurat (<em>emergency drill</em>) <strong>paling sedikit 2 (dua) kali dalam setahun</strong>.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Respon Keadaan Darurat</div><div class="step-desc">Memberikan respon dalam penanggulangan keadaan darurat secara cepat dan tepat untuk mencegah kondisi yang semakin parah dan meminimalkan kerusakan pada manusia dan peralatan.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Pemulihan Keadaan Darurat</div><div class="step-desc">Mencakup: pembentukan tim pemulihan, pembersihan lokasi dan operasi pemulihan (mengelola risiko, mengendalikan potensi darurat susulan, mengoptimalkan sumber daya), investigasi keadaan darurat, perkiraan kerugian (langsung dan tidak langsung), dan laporan pemulihan pasca keadaan darurat.</div></div></div>
+    </div>
+    <div class="info-box"><strong>Ketentuan Tim Tanggap Darurat:</strong> Sehat jasmani dan rohani; ketua tim ditunjuk oleh KTT atau PTL dan memiliki kompetensi supervisi penanggulangan kondisi darurat; anggota memiliki kompetensi sesuai; jumlah minimum personel per gilir jaga disesuaikan dengan penilaian potensi keadaan darurat; mendapat pemeriksaan kesehatan khusus berdasarkan hasil penilaian risiko.</div>
+  </div>
+
+  <div id="d1-inspeksi">
+    <h3>g. Inspeksi Keselamatan Kerja Pertambangan</h3>
+    <p>Prosedur inspeksi paling sedikit terdiri dari: tujuan inspeksi, jenis inspeksi, pelaksana inspeksi, objek inspeksi, jadwal dan frekuensi, lembar periksa, peralatan, metode, pelaksanaan, klasifikasi bahaya, laporan, tindak lanjut, evaluasi hasil tindak lanjut, dan dokumentasi.</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Tahap</th><th>Uraian</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Perencanaan</strong></td><td>Disusun berdasarkan penilaian risiko. Ditentukan: objek inspeksi, jadwal (berkala atau sewaktu-waktu), petugas, metode (inspeksi silang, inspeksi bersama), dan biaya pelaksanaan</td></tr>
+          <tr><td><strong>2. Persiapan</strong></td><td>Menyiapkan: prosedur, standar, dan <em>check list</em>; alat ukur dan alat uji; buku catatan; kamera atau alat dokumentasi</td></tr>
+          <tr><td><strong>3. Pelaksanaan</strong></td><td>KTT, PTL, atau petugas yang ditunjuk memeriksa setiap area kerja dan jalan perlintasan, sarana/prasarana/instalasi/peralatan, dan tempat yang dinilai berbahaya. Didampingi penanggung jawab area. Jika ditemukan kondisi tidak aman, segera ambil tindakan atau hentikan kegiatan apabila berpotensi mengakibatkan kecelakaan</td></tr>
+          <tr><td><strong>4. Rekomendasi dan Tindak Lanjut</strong></td><td>Rekomendasi diberikan berdasarkan temuan valid yang telah diverifikasi, mengacu pada hierarki pengendalian risiko. Ditindaklanjuti sesuai jangka waktu yang disepakati</td></tr>
+          <tr><td><strong>5. Evaluasi</strong></td><td>Dilakukan secara menyeluruh terhadap setiap tahapan kegiatan inspeksi dan hasil dari pelaksanaan tindak lanjut</td></tr>
+          <tr><td><strong>6. Laporan dan Penyebarluasan</strong></td><td>Hasil inspeksi dan pemenuhan tindak lanjut didokumentasikan dalam sistem pelaporan, kemudian disosialisasikan kepada seluruh Pekerja sebagai bentuk edukasi</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="d1-penyelidikan">
+    <h3>h. Penyelidikan Kecelakaan dan Kejadian Berbahaya</h3>
+    <h4>Kriteria Kejadian Berbahaya (4 Unsur)</h4>
+    <ol>
+      <li>Benar-benar terjadi (tidak diinginkan, tidak direncanakan, tidak ada unsur kesengajaan)</li>
+      <li>Berpotensi mengakibatkan kematian atau terhentinya kegiatan lebih dari <strong>24 jam</strong></li>
+      <li>Akibat kegiatan usaha Pertambangan, pengolahan dan/atau pemurnian, kegagalan teknis sarana/prasarana/instalasi/peralatan, atau kegagalan mengantisipasi faktor alam yang berada di wilayah kegiatan</li>
+      <li>Terjadi di wilayah kegiatan usaha Pertambangan atau pengolahan dan/atau Pertambangan, atau wilayah proyek</li>
+    </ol>
+    <h4>Ketentuan Hari Kerja Hilang Akibat Kecelakaan Tambang</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th colspan="2">Jenis Cidera / Kematian</th><th>Hari Kerja Hilang</th></tr></thead>
+        <tbody>
+          <tr><td colspan="2"><strong>Mati</strong></td><td><strong>6.000</strong></td></tr>
+          <tr><td colspan="2"><strong>Lumpuh total</strong></td><td><strong>6.000</strong></td></tr>
+          <tr><td colspan="2">Kedua mata</td><td>6.000</td></tr>
+          <tr><td colspan="2">Kaki bagian atas (pangkal paha ke bawah)</td><td>4.500</td></tr>
+          <tr><td colspan="2">Tangan Bagian Atas (pergelangan bahu ke bawah)</td><td>4.500</td></tr>
+          <tr><td colspan="2">Kaki bagian bawah (lutut ke bawah)</td><td>3.000</td></tr>
+          <tr><td colspan="2">Ujung jari tangan sampai pergelangan</td><td>3.000</td></tr>
+          <tr><td colspan="2">Kedua telinga</td><td>3.000</td></tr>
+          <tr><td colspan="2">Tangan Bagian Bawah (siku ke bawah)</td><td>3.600</td></tr>
+          <tr><td colspan="2">Ibu jari (ruas pangkal)</td><td>600</td></tr>
+          <tr><td colspan="2">Satu mata</td><td>1.800</td></tr>
+          <tr><td colspan="2">Satu telinga</td><td>600</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Tahapan Penyelidikan Kecelakaan</h4>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Tahap Persiapan</div><div class="step-desc">Pembentukan dan penetapan tim investigasi (oleh KTT, PTL, KaIT, atau Kepala Dinas); persiapan peralatan ukur atau uji; pengumpulan data dan dokumen (sketsa, foto, surat keterangan dokter, buku tambang, buku daftar kecelakaan).</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Tahap Pelaksanaan</div><div class="step-desc">Tim investigasi menuju lokasi; penyelidikan lokasi, sarana, peralatan, dan instalasi; wawancara saksi langsung dan tidak langsung; rekonstruksi (jika diperlukan, dilakukan dengan aman); tindakan pengamanan dan pencegahan jika ada potensi kecelakaan susulan; analisis penyebab, kesimpulan, dan rencana tindakan koreksi.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Tahap Pelaporan</div><div class="step-desc">Pembuatan berita acara hasil penyelidikan; penyampaian laporan kepada KTT atau PTL, diteruskan kepada KaIT atau Kepala Dinas; hasil penyelidikan dimasukkan ke dalam sistem pelaporan dan disosialisasikan kepada seluruh Pekerja.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Pemantauan Tindakan Koreksi</div><div class="step-desc">Pelaksanaan dari setiap tindakan koreksi dipantau untuk memastikan telah ditindaklanjuti dengan baik dan tepat waktu.</div></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Evaluasi Penyelidikan</div><div class="step-desc">Evaluasi dilakukan secara menyeluruh terhadap setiap tahap penyelidikan dan hasil dari pelaksanaan tindakan koreksi.</div></div></div>
+    </div>
+    <div class="note-box"><strong>Ketentuan penting:</strong> KTT atau PTL tidak boleh mengubah keadaan tempat atau kondisi perbaikan sarana/prasarana/instalasi/peralatan akibat kecelakaan atau Kejadian Berbahaya, kecuali untuk memberikan pertolongan pertama korban. Perubahan keadaan di tempat kecelakaan hanya dapat dilakukan dengan persetujuan KaIT atau Kepala Dinas atas nama KaIT.</div>
+  </div>
+</section>
+
+<!-- D.2 KESEHATAN KERJA -->
+<section class="section" id="sd2">
+  <div class="section-badge"><span class="roman">D.2</span> Kesehatan Kerja Pertambangan</div>
+  <h2>D.2 Kesehatan Kerja Pertambangan dan Pengolahan dan/atau Pemurnian</h2>
+  <p>KTT atau PTL menjamin kesehatan setiap Pekerja terhadap risiko kesehatan yang ditimbulkan paling sedikit oleh bahaya fisik, kimia, biologi, ergonomi, dan psikososial.</p>
+
+  <div id="d2-program">
+    <h3>a. Program Kesehatan Kerja</h3>
+    <p>Program kesehatan kerja dibuat dengan pendekatan 4 (empat) pilar:</p>
+    <div class="two-col">
+      <div class="col-card"><h5>1. Promotif dan Preventif</h5><ul><li>Kegiatan penyuluhan pola hidup sehat, fasilitas olahraga, diklat kesehatan berkala</li><li>Pencegahan penyalahgunaan narkotika, psikotropika, dan zat adiktif lainnya (penyuluhan dan tes laboratorium)</li><li>Pekerjaan hanya dapat dilaksanakan oleh Pekerja yang <strong>bebas dari pengaruh alkohol, narkotika, psikotropika, dan zat adiktif</strong></li><li>KTT atau PTL menetapkan kawasan tanpa asap rokok di wilayah kegiatan usaha</li></ul></div>
+      <div class="col-card"><h5>2. Kuratif</h5><ul><li>Menyediakan akses untuk pelayanan kesehatan: penanganan medis penyakit tenaga kerja, Penyakit Akibat Kerja, cidera kecelakaan</li><li>Penanganan medis meliputi penanganan gawat darurat dan proses evakuasi ke tempat pelayanan medis rujukan sesuai tingkat keparahan</li></ul></div>
+      <div class="col-card"><h5>3. Rehabilitatif</h5><ul><li>Pemulihan dan perawatan bagi Pekerja yang mengalami sakit akibat kecelakaan, penyakit tenaga kerja, atau Penyakit Akibat Kerja</li><li>Dilakukan oleh tim rehabilitasi yang dipimpin dokter perusahaan bersama perwakilan SDM dan atasan Pekerja yang bersangkutan</li></ul></div>
+      <div class="col-card"><h5>4. Rekaman Data Kesehatan Kerja</h5><ul><li>Data hasil pemeriksaan kesehatan awal, berkala, khusus, dan akhir</li><li>Riwayat pekerjaan Pekerja; data medis/rekam medis</li><li>Indikator kinerja kesehatan kerja Pertambangan</li><li>Hasil pemeriksaan lingkungan kerja</li></ul></div>
+    </div>
+    <h4>Indikator Kinerja Kesehatan Kerja</h4>
+    <div class="two-col">
+      <div class="col-card"><h5>Leading Indicator (Proses)</h5><ul><li>Pengukuran terhadap segala upaya yang sudah dilakukan dalam pengelolaan kesehatan kerja berupa realisasi pelaksanaan program</li></ul></div>
+      <div class="col-card"><h5>Lagging Indicator (Hasil Akhir)</h5><ul><li><strong>Rasio Kelayakan Kerja</strong> = (Pekerja yang layak kerja / Jumlah pekerja kumulatif) × 100%</li><li><strong>Angka Kesakitan Kasar (CMR)</strong> = (Pekerja yang sakit / Jumlah pekerja kumulatif) × 100%</li></ul></div>
+    </div>
+  </div>
+
+  <div id="d2-periksa">
+    <h3>Pemeriksaan Kesehatan Kerja</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Jenis</th><th>Waktu Pelaksanaan</th><th>Komponen Minimal</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Awal</strong></td><td>Sebelum Pekerja diterima atau dipindahkan ke pekerjaan baru</td><td>Anamnesis, pemeriksaan fisik lengkap, kesegaran jasmani, rontgen paru-paru, pemeriksaan laboratorium (darah lengkap, fungsi hati, fungsi ginjal, kimia darah, gula darah, urin lengkap, hepatitis HbsAg), EKG untuk usia &lt;40 tahun, <em>treadmill test</em> untuk usia &gt;40 tahun</td></tr>
+          <tr><td><strong>Berkala</strong></td><td>Paling sedikit <strong>setahun sekali</strong> bagi Pekerja tambang dan pengolahan/pemurnian; <strong>dua kali setahun</strong> khusus untuk Pekerja tambang bawah tanah</td><td>Anamnesis, pemeriksaan fisik lengkap, kesegaran jasmani, rontgen paru-paru, laboratorium lengkap, EKG/treadmill sesuai usia</td></tr>
+          <tr><td><strong>Khusus</strong></td><td>Sewaktu-waktu, untuk Pekerja yang diduga mengalami gangguan kesehatan akibat kondisi lingkungan kerja atau yang mengalami kecelakaan berakibat cidera berat/Penyakit Akibat Kerja</td><td>Disesuaikan dengan pajanan risiko pekerjaan</td></tr>
+          <tr><td><strong>Akhir</strong></td><td>KTT atau PTL melaksanakan paling lambat <strong>3 bulan sebelum</strong> memasuki masa pensiun (sisa masa kerja 1 tahun menjelang pensiun)</td><td>Anamnesis, pemeriksaan fisik lengkap, kesegaran jasmani, rontgen paru-paru, laboratorium lengkap, treadmill test, pemeriksaan khusus sesuai risiko pekerjaan</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Tindak Lanjut Setelah Pemeriksaan Kesehatan</h4>
+    <ul>
+      <li>Menginformasikan kepada Pekerja terkait kondisi yang bersangkutan</li>
+      <li>Melakukan pemantauan, pengobatan, atau rehabilitasi sesuai hasil pemeriksaan</li>
+      <li>Mengevaluasi penempatan Pekerja disesuaikan dengan kondisi Pekerja</li>
+      <li>Melakukan upaya promotif dan preventif terhadap Pekerja lain yang terkait</li>
+      <li>Melakukan kontrol pengendalian kondisi lingkungan kerja</li>
+    </ul>
+  </div>
+
+  <div id="d2-pelayanan">
+    <h3>Pelayanan Kesehatan Kerja</h3>
+    <h4>Kualifikasi Sarana Pelayanan Kesehatan</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Kualifikasi</th><th>Cakupan Pelayanan</th><th>Tingkat Keterisoliran</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pelayanan Kegawatdaruratan</strong></td><td>Pertolongan pertama untuk kecelakaan, Kejadian Akibat Penyakit Tenaga Kerja, dan kondisi gawat darurat medis</td><td><strong>Rendah</strong> — jarak ke RS tipe A/B/C kurang dari 60 menit</td></tr>
+          <tr><td><strong>Pelayanan Pratama</strong></td><td>Pelayanan kegawatdaruratan + pelayanan medis dasar (umum dan khusus)</td><td><strong>Menengah</strong> — jarak ke RS tipe A/B/C antara 60–120 menit</td></tr>
+          <tr><td><strong>Pelayanan Utama</strong></td><td>Pelayanan kegawatdaruratan + medis dasar + pelayanan medik spesialistik</td><td><strong>Tinggi</strong> — jarak ke RS tipe A/B/C lebih dari 120 menit</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Isi Kotak P3K (Minimal)</h4>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No.</th><th>Isi (Satuan)</th><th>Tipe A (≤25 Pekerja)</th><th>Tipe B (26–50 Pekerja)</th><th>Tipe C (51–100 Pekerja)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Kasa Steril terbungkus (bungkus)</td><td>20</td><td>40</td><td>40</td></tr>
+          <tr><td>2</td><td>Perban lebar 5 cm (gulung)</td><td>2</td><td>4</td><td>6</td></tr>
+          <tr><td>3</td><td>Perban lebar 10 cm (gulung)</td><td>2</td><td>4</td><td>6</td></tr>
+          <tr><td>4</td><td>Plester (lebar)</td><td>2</td><td>4</td><td>6</td></tr>
+          <tr><td>5</td><td>Pembalut Cepat</td><td>10</td><td>15</td><td>20</td></tr>
+          <tr><td>6</td><td>Kapas 25 gram</td><td>1</td><td>2</td><td>3</td></tr>
+          <tr><td>7</td><td>Kain Segitiga/Mittela (lembar)</td><td>2</td><td>4</td><td>6</td></tr>
+          <tr><td>8</td><td>Gunting (buah)</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>9</td><td>Peniti (buah)</td><td>12</td><td>12</td><td>12</td></tr>
+          <tr><td>10</td><td>Sarung Tangan Sekali Pakai (pasangan)</td><td>2</td><td>3</td><td>4</td></tr>
+          <tr><td>11</td><td>Masker (buah)</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>12</td><td>Masker Resusitasi Jantung-Paru (buah)</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>13</td><td>Kantong Plastik Bersih (buah)</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>14</td><td>Aquades 100 ml / lar. Saline</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>15</td><td>Buku Panduan P3K di tempat kerja</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>16</td><td>Buku Catatan Daftar Isi</td><td>1</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="d2-fatigue">
+    <h3>Pengelolaan Kelelahan Kerja (Fatigue)</h3>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Identifikasi, Evaluasi, dan Pengendalian</div><div class="step-desc">Mengidentifikasi dan mengevaluasi faktor yang dapat menimbulkan kelelahan Pekerja menggunakan metode yang valid dan reliabel, disesuaikan dengan faktor risiko dan terintegrasi dengan Manajemen Risiko. Pengendalian mengacu pada prinsip hierarki pengendalian.</div></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Pelatihan dan Sosialisasi</div><div class="step-desc">Memberikan pelatihan dan sosialisasi kepada semua Pekerja tentang pengelolaan dan pencegahan kelelahan, khususnya bagi Pekerja dengan waktu kerja bergilir atau <em>shift</em>. Jika diperlukan, diberikan juga kepada keluarga Pekerja.</div></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Pengaturan Pola Gilir Kerja (Shift)</div><div class="step-desc">Pola gilir kerja (<em>shift</em>) disusun dengan mempertimbangkan kebijakan, peraturan perundang-undangan, kapasitas kerja, beban kerja, dan kondisi lingkungan kerja. Diupayakan Pekerja tidak mengalami kelelahan fisik, mental, dan psikososial.</div></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Penilaian dan Pengelolaan Tingkat Kelelahan</div><div class="step-desc">Dilakukan <strong>setiap sebelum awal gilir kerja (<em>shift</em>) dan saat pekerjaan berlangsung</strong>, menggunakan metode yang valid dan reliabel. Hasil penilaian ditindaklanjuti untuk menentukan keberlangsungan pekerjaan.</div></div></div>
+    </div>
+    <h4>Pengelolaan Pekerja pada Tempat Risiko Tinggi</h4>
+    <ul>
+      <li>Memastikan risiko yang ada sudah dikendalikan secara memadai melalui penilaian risiko dan pemantauan</li>
+      <li>Memberikan pemahaman cara kerja aman, konsekuensi, dan pemantauan pekerjaan di area tersebut</li>
+      <li>Bertanggung jawab terhadap efek yang ditimbulkan akibat pekerjaan tersebut; memastikan Pekerja diberikan pemeriksaan kesehatan khusus sesuai risiko</li>
+    </ul>
+  </div>
+</section>
+
+<!-- D.3 LINGKUNGAN KERJA -->
+<section class="section" id="sd3">
+  <div class="section-badge"><span class="roman">D.3</span> Lingkungan Kerja</div>
+  <h2>D.3 Lingkungan Kerja</h2>
+  <p>Pengelolaan lingkungan kerja dilaksanakan melalui tahapan: antisipasi → pengenalan → evaluasi → pengendalian.</p>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Komponen</th><th>Ketentuan Utama</th></tr></thead>
+      <tbody>
+        <tr><td><strong>A. Debu</strong></td><td>Pengendalian debu di seluruh area kerja; pemantauan konsentrasi debu secara berkala; penggunaan APD (masker) yang sesuai; pengendalian debu batu bara (potensi ledakan dan penyakit paru)</td></tr>
+        <tr><td><strong>B. Kebisingan</strong></td><td>Pemantauan tingkat kebisingan; pengendalian sumber kebisingan; penggunaan APD (pelindung telinga); pemeriksaan audiometri berkala bagi Pekerja yang terpapar kebisingan</td></tr>
+        <tr><td><strong>C. Getaran</strong></td><td>Pengendalian getaran dari alat berat dan permesinan; pemantauan tingkat getaran; pemeriksaan kesehatan khusus bagi Pekerja yang terpapar getaran</td></tr>
+        <tr><td><strong>D. Pencahayaan</strong></td><td>Pemenuhan standar pencahayaan sesuai jenis pekerjaan; pengukuran tingkat pencahayaan secara berkala; penyediaan pencahayaan darurat</td></tr>
+        <tr><td><strong>E. Kuantitas dan Kualitas Udara Kerja</strong></td><td>Pemantauan kualitas udara di area kerja; pengendalian gas-gas berbahaya; sistem ventilasi yang memadai terutama di tambang bawah tanah</td></tr>
+        <tr><td><strong>F. Iklim Kerja</strong></td><td>Pemantauan suhu dan kelembaban; pengendalian tekanan panas; penyediaan air minum yang cukup; pengaturan waktu kerja di kondisi ekstrem</td></tr>
+        <tr><td><strong>G. Radiasi</strong></td><td>Identifikasi sumber radiasi (ionisasi dan non-ionisasi); pengendalian paparan radiasi; pemantauan dosis radiasi bagi Pekerja; penggunaan APD khusus radiasi</td></tr>
+        <tr><td><strong>H. Faktor Kimia</strong></td><td>Identifikasi semua bahan kimia berbahaya; penyediaan Lembar Data Keselamatan Bahan (LDKB); pengendalian paparan bahan kimia; pemantauan kadar bahan kimia di udara</td></tr>
+        <tr><td><strong>I. Faktor Biologi</strong></td><td>Identifikasi bahaya biologis (mikroorganisme, vektor penyakit); pengendalian paparan faktor biologis; imunisasi dan pemeriksaan kesehatan berkala</td></tr>
+        <tr><td><strong>J. Kebersihan Lingkungan Kerja</strong></td><td>Pengendalian mencakup: pemilihan proses/peralatan yang menghasilkan paling sedikit limbah; pemilahan barang dan material; penempatan barang berdasarkan sifat, ukuran, dan kegunaan; upaya daur ulang; program 5R (Ringkas, Rapi, Resik, Rawat, Rajin) dengan perekaman kegiatan; rambu himbauan; dan peraturan/tata kerja baku pengelolaan kebersihan</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box"><strong>Pengukuran dan Penilaian</strong> lingkungan kerja dilakukan oleh Tenaga Teknis Pertambangan yang Berkompeten menggunakan peralatan standar, termasuk <em>sound level meter</em>, <em>lux meter</em>, <em>wet bulb globe temperature meter</em>, dan <em>gas detector</em>.</div>
+</section>
+
+<!-- E.1 -->
+<section class="section" id="se1">
+  <div class="section-badge"><span class="roman">E.1</span> Pemeliharaan/Perawatan Sarana &amp; Prasarana</div>
+  <h2>E.1 Sistem dan Pelaksanaan Pemeliharaan/Perawatan Sarana, Prasarana, Instalasi, dan Peralatan Pertambangan</h2>
+  <p>Perencanaan dibuat dan dilakukan oleh <strong>Tenaga Teknis Pertambangan yang Berkompeten di bidang Keselamatan Operasi</strong>, dan ditetapkan oleh KTT atau PTL.</p>
+  <h3>Daftar Sarana, Prasarana, Instalasi, dan Peralatan</h3>
+  <div class="two-col">
+    <div class="col-card"><h5>Peralatan</h5><ul><li>Alat berat untuk pemindah tanah mekanis</li><li>Alat penunjang Pertambangan</li><li>Alat pemetaan dan pemantauan kestabilan lereng</li><li>Kendaraan untuk mobilisasi karyawan dan barang</li><li>Pesawat angkat dan/atau angkut</li><li>Peralatan perkakas tangan</li><li>Peralatan listrik</li></ul></div>
+    <div class="col-card"><h5>Instalasi</h5><ul><li>Instalasi ban berjalan</li><li>Instalasi listrik</li><li>Instalasi pneumatic dan/atau hydraulic</li><li>Instalasi bahan bakar cair</li><li>Instalasi air</li><li>Instalasi komunikasi</li><li>Instalasi proteksi kebakaran</li><li>Instalasi gas</li></ul></div>
+    <div class="col-card"><h5>Bangunan</h5><ul><li>Bangunan kantor, bengkel (workshop), genset, gudang, tempat sampah, tangki timbun, tempat ibadah, klinik, jembatan, menara telekomunikasi, menara penyalur petir, kolam pengendap, mess/camp, ruang kendali, washing plant, fuel station, jalan tambang, stockpile, kolam pengelolaan air limbah</li></ul></div>
+    <div class="col-card"><h5>Tahapan Pelaksanaan</h5><ul><li>Membuat daftar sarana, prasarana, instalasi, dan peralatan</li><li>Mengidentifikasi jenis, karakteristik, dan tingkat risiko</li><li>Menyusun dan menetapkan prosedur pemeliharaan</li><li>Merencanakan program dan jadwal pemeliharaan berdasarkan hasil identifikasi</li><li>Melaksanakan program pemeliharaan/perawatan yang sudah ditetapkan</li><li>Melakukan evaluasi hasil pelaksanaan</li><li>Melaksanakan tindak lanjut hasil evaluasi dan peningkatan kinerja</li></ul></div>
+  </div>
+</section>
+
+<!-- E.2 -->
+<section class="section" id="se2">
+  <div class="section-badge"><span class="roman">E.2</span> Pengamanan Instalasi</div>
+  <h2>E.2 Pengamanan Instalasi</h2>
+  <p>Pemegang IUP, IUPK, dan IUP Operasi Produksi khusus untuk Pengolahan dan/atau Pemurnian melaksanakan pengamanan instalasi dengan paling sedikit melakukan:</p>
+  <ol>
+    <li>Membuat daftar instalasi</li>
+    <li>Mengidentifikasi kebutuhan pengaman atas instalasi</li>
+    <li>Menyusun dan menetapkan prosedur pengamanan instalasi</li>
+    <li>Menyusun dan menetapkan desain pengamanan instalasi</li>
+    <li>Menyusun dan menetapkan prosedur proses pemasangan instalasi</li>
+    <li>Menyusun dan menetapkan prosedur pemeliharaan pengamanan instalasi</li>
+    <li>Menerapkan, memantau, dan mengevaluasi sistem pengamanan instalasi oleh Tenaga Teknis Pertambangan yang Berkompeten di bidang Keselamatan Operasi</li>
+  </ol>
+</section>
+
+<!-- E.3 -->
+<section class="section" id="se3">
+  <div class="section-badge"><span class="roman">E.3</span> Tenaga Teknis Berkompeten</div>
+  <h2>E.3 Tenaga Teknis Pertambangan yang Berkompeten di Bidang Keselamatan Operasi</h2>
+  <p>Dalam menyusun dan menetapkan prosedur, membuat program dan jadwal, serta melaksanakan pengujian kelayakan, pengamanan dan pemeliharaan terhadap sarana, prasarana, instalasi dan peralatan Pertambangan, dilakukan oleh <strong>Tenaga Teknis Pertambangan yang Berkompeten di bidang Keselamatan Operasi</strong> sesuai dengan ketentuan peraturan perundang-undangan.</p>
+</section>
+
+<!-- E.4 -->
+<section class="section" id="se4">
+  <div class="section-badge"><span class="roman">E.4</span> Kelayakan Sarana, Prasarana, Instalasi, dan Peralatan</div>
+  <h2>E.4 Kelayakan Sarana, Prasarana, Instalasi, dan Peralatan Pertambangan</h2>
+
+  <h3>Ketentuan Pengoperasian Peralatan dan Instalasi</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Jenis</th><th>Frekuensi Pemeriksaan/Pengujian</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Instalasi</strong></td><td><span class="freq-badge">1x/5 tahun</span> untuk sertifikasi</td><td>Pemeriksaan dilakukan secara berkala untuk mendapatkan sertifikasi</td></tr>
+        <tr><td><strong>Peralatan</strong></td><td><span class="freq-badge">Maks. 3 tahun</span> untuk sertifikasi, dan <span class="freq-badge">1x/tahun</span> oleh KTT atau PTL</td><td>Pemeriksaan berkala oleh KTT atau PTL paling sedikit 1 kali setiap 1 tahun</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box"><strong>Pemeriksaan keselamatan operasi terhadap peralatan dan instalasi</strong> dilakukan paling sedikit pada tahap: akan dipasang atau didirikan; sedang dipasang atau didirikan; dan/atau telah dipasang atau didirikan.</div>
+
+  <div id="e4-bejana">
+    <h3>a. Kelayakan Peralatan dan Instalasi</h3>
+    <p>Meliputi pemeriksaan keselamatan operasi terhadap: bejana tekan dan sejenisnya, pesawat angkat dan/atau angkut, peralatan listrik, peralatan putar, pipa penyalur, tangki timbun, katup pengaman, dan tanur (<em>smelter</em>).</p>
+    <h4>Ketentuan Bejana Tekan</h4>
+    <ul>
+      <li>Volume lebih dari <strong>60 liter</strong> atau tekanan melebihi <strong>150 Psi</strong></li>
+      <li>Penukar panas atau <em>fin fan cooler</em> termasuk dalam kategori bejana tekan</li>
+      <li>Setiap bejana tekan dilengkapi dengan katup pengaman yang sesuai</li>
+      <li>Bejana tekan diberi kode warna tertentu sesuai peraturan yang mengindikasikan mayoritas isi</li>
+      <li>Bejana udara bertekanan sangat tinggi dipastikan mempunyai faktor keamanan minimum <strong>5 (lima) kali</strong> tekanan maksimum yang diizinkan</li>
+      <li>Uji hidrostatik dilakukan pada pemeriksaan pertama; pada pemeriksaan berkala hanya dilakukan pengecekan fisik berupa pengukuran ketebalan dan kebocoran</li>
+    </ul>
+    <h4>Ketentuan Kompresor</h4>
+    <ul>
+      <li>Suhu udara tekan tidak boleh melebihi <strong>40°C</strong> di bawah titik nyala minyak pelumas yang dipakai</li>
+      <li>Minyak pelumas dengan kualitas bermutu tinggi, titik nyala lebih tinggi dari <strong>200°C</strong></li>
+      <li>Pemeriksaan, pengujian, dan perbaikan setiap tahun atau paling lama setiap <strong>8.000 jam kerja</strong></li>
+    </ul>
+    <h4>Ketentuan Katup Pengaman</h4>
+    <ul>
+      <li>Dilakukan pemeriksaan teknis sebelum digunakan (penelaahan dokumen, pemeriksaan fisik, pengujian, penyegelan, dan pelaporan)</li>
+      <li>Katup pengaman yang tidak lulus uji tidak boleh digunakan</li>
+      <li>Katup yang telah diuji dan dinyatakan layak operasi diberi <strong>segel pengaman</strong> oleh pihak independen</li>
+    </ul>
+    <h4>Perhitungan Sisa Umur Pakai Peralatan</h4>
+    <ul>
+      <li>KTT atau PTL melakukan perhitungan sisa umur pakai terhadap peralatan yang akan digunakan, termasuk peralatan yang tidak memiliki data manufaktur</li>
+      <li>Penilaian meliputi: pengumpulan data teknis dan riwayat, pengujian kondisi terkini, perhitungan rekayasa sisa umur pakai (SNI atau standar internasional), dan penetapan metode serta frekuensi pemeriksaan selanjutnya</li>
+    </ul>
+  </div>
+
+  <div id="e4-listrik">
+    <h3>b. Kelayakan Instalasi Kelistrikan</h3>
+    <p>Pemeriksaan, pengujian, pemeliharaan, dan perawatan terhadap instalasi kelistrikan dilakukan secara berkala oleh Tenaga Teknis Pertambangan yang Berkompeten. Sistem kelistrikan harus memenuhi ketentuan standar nasional Indonesia atau standar internasional yang diakui.</p>
+  </div>
+</section>
+
+<!-- E.5 -->
+<section class="section" id="se5">
+  <div class="section-badge"><span class="roman">E.5</span> Evaluasi Kajian Teknis</div>
+  <h2>E.5 Evaluasi Laporan Hasil Kajian Teknis Pertambangan</h2>
+  <p>KaIT atau Kepala Dinas atas nama KaIT sesuai kewenangannya dapat meminta KTT atau PTL untuk melakukan presentasi dan/atau menugaskan IT untuk melakukan verifikasi lapangan dalam rangka mengevaluasi kelayakan sarana, prasarana, instalasi, dan peralatan Pertambangan.</p>
+</section>
+
+<!-- E.6 -->
+<section class="section" id="se6">
+  <div class="section-badge"><span class="roman">E.6</span> Keselamatan Bahan Peledak dan Peledakan</div>
+  <h2>E.6 Keselamatan Bahan Peledak dan Peledakan</h2>
+  <div class="green-box"><strong>Keselamatan bahan peledak dan peledakan ketentuannya mengikuti peraturan perundang-undangan yang berlaku.</strong></div>
+  <p>Ketentuan lengkap mengenai keselamatan bahan peledak dan peledakan (termasuk penyimpanan, pengangkutan, juru ledak, radius aman, peledakan mangkir, dan lain-lain) diatur dalam Lampiran III Keputusan Menteri ESDM Nomor 1827 K/30/MEM/2018 dan peraturan perundang-undangan terkait lainnya. Petunjuk teknis ini merujuk sepenuhnya kepada ketentuan tersebut.</p>
+</section>
+
+<!-- E.7 -->
+<section class="section" id="se7">
+  <div class="section-badge"><span class="roman">E.7</span> Keselamatan Fasilitas Pertambangan</div>
+  <h2>E.7 Keselamatan Fasilitas Pertambangan</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>Fasilitas</th><th>Ketentuan Utama</th></tr></thead>
+      <tbody>
+        <tr><td><strong>a. Gedung dan Bangunan</strong></td><td>Dibangun dengan konstruksi yang kuat dan kokoh, memperhatikan kondisi alam (gempa, banjir); dilakukan perawatan berkala; memenuhi persyaratan administrasi dan teknis gedung untuk keselamatan; dilengkapi proteksi, jalan penyelamatan diri, penyalur petir, dan pencegahan terjatuh</td></tr>
+        <tr><td><strong>b. Perbengkelan</strong></td><td>Pengaturan peralatan; pencegahan kebakaran; pengamanan uap/gas berbahaya; peralatan pengaman; pengelasan dan pandai besi; penyimpanan zat cair mudah terbakar; permesinan dengan alat keselamatan</td></tr>
+        <tr><td><strong>c. Tangki Timbun</strong></td><td>Jarak aman; konstruksi tangki; tangki pendam; persediaan dan penyimpanan bahan bakar dan pelumas sesuai standar</td></tr>
+        <tr><td><strong>d. Tangki Portable</strong></td><td>Desain sesuai standar; tanggul pengaman; lantai kedap</td></tr>
+        <tr><td><strong>e. Stasiun Pengisian BBM</strong></td><td>Area pengisian yang memadai; jalan keluar masuk; lebar jalur; petugas berkemampuan; sarana pemadam kebakaran yang memadai</td></tr>
+        <tr><td><strong>f. Stockpile</strong></td><td>Drainase yang baik; tanggul pengaman; rambu keselamatan; <em>eye wash</em>; lampu penerangan yang cukup</td></tr>
+        <tr><td><strong>g. IPA dan IPAL</strong></td><td>Identifikasi bahaya; pengendalian bahan kimia; APD yang sesuai; alat pemadam kebakaran; P3K; <em>safety shower/eye wash</em>; prosedur tanggap darurat</td></tr>
+        <tr><td><strong>h. Laboratorium</strong></td><td><em>Safety shower/eye wash</em>; bak cuci; ventilasi yang memadai; sistem peringatan dan pemadam kebakaran; petunjuk arah keluar; lampu darurat; P3K; lembar data keselamatan bahan; lemari asam; tempat penyimpanan bahan kimia; untuk radioaktif: <em>survey meter</em> dan <em>personal dosimeter</em></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- E.8 -->
+<section class="section" id="se8">
+  <div class="section-badge"><span class="roman">E.8</span> Keselamatan Eksplorasi</div>
+  <h2>E.8 Keselamatan Eksplorasi</h2>
+  <p>Pelaksanaan keselamatan eksplorasi dilaksanakan oleh KTT dengan memperhatikan hal-hal paling sedikit sebagai berikut:</p>
+
+  <h3>a. Pelaksanaan Umum Eksplorasi</h3>
+  <ul>
+    <li>Mengidentifikasi bahaya dan menilai risiko pada kegiatan eksplorasi (potensi penyakit endemik, bahaya binatang buas, bahaya lainnya)</li>
+    <li>Melakukan pengendalian terhadap risiko yang muncul secara memadai sesuai prinsip pengendalian risiko</li>
+    <li>Menyediakan sarana, prasarana, instalasi, peralatan, dan Tenaga Teknis Pertambangan yang Berkompeten</li>
+    <li>Menyediakan sarana dan Tenaga Teknis yang Berkompeten untuk pengelolaan keadaan darurat pada kegiatan eksplorasi</li>
+    <li>Menyediakan peta topografi yang selalu diperbaharui (memuat seluruh bangunan, pabrik, jalur pipa, lokasi semua lubang bor, jalan, sungai, mata air, dan batas IUP)</li>
+    <li>Membuat tata cara keselamatan kegiatan eksplorasi dan memastikan para Pekerja melaksanakannya</li>
+    <li>Kegiatan eksplorasi di lokasi terpencil: bahan bakar/kimia/radioaktif ditempatkan khusus; alat pemadam kebakaran tersedia; sistem kelistrikan sesuai standar; tanda peringatan atau larangan dipasang pada tempat yang mudah dilihat</li>
+  </ul>
+
+  <h3>b. Pemetaan Geologi Eksplorasi</h3>
+  <ul>
+    <li>Memastikan seluruh Pekerja memiliki perbekalan yang cukup untuk <em>shift</em> yang dijadwalkan</li>
+    <li>Memastikan dalam satu <em>shift</em> terdapat lebih dari satu orang yang telah dilatih untuk pertolongan pertama</li>
+    <li>Memastikan alat komunikasi beroperasi dengan baik</li>
+  </ul>
+
+  <h3>c. Pembuatan Parit Uji</h3>
+  <ul>
+    <li>Kondisi kestabilan dinding batuan parit uji tidak dapat menimbulkan ambruknya parit uji</li>
+    <li>Kedalaman parit uji <strong>tidak boleh lebih dari 3 (tiga) meter</strong></li>
+    <li>Jika dibuat lebih dari satu paritan, jarak antar paritan paling sedikit sama dengan lebar puritan</li>
+  </ul>
+
+  <h3>d. Pembuatan Sumur Uji</h3>
+  <ul>
+    <li>Mempertimbangkan kestabilan dinding batuan sumur uji dan potensi gas-gas berbahaya</li>
+    <li>Apabila kedalaman sumur uji di atas <strong>10 (sepuluh) meter</strong>, sebelum pengambilan conto dilakukan pengecekan kecukupan udara dan potensi gas-gas berbahaya</li>
+  </ul>
+
+  <h3>e. Pengeboran Eksplorasi</h3>
+  <p>Ketentuan pencegahan umum:</p>
+  <ul>
+    <li>Sebelum memulai pengeboran, lokasi diperiksa untuk menjamin keamanan</li>
+    <li>Alat pemadam api portabel dari jenis dan ukuran sesuai tersedia dalam jumlah cukup</li>
+    <li>Helm, sepatu pengaman, dan APD lainnya dipakai oleh para Pekerja pada atau di sekitar instalasi pengeboran</li>
+    <li>Tidak menjalankan atau memindahkan instalasi bor kecuali semua Pekerja telah berada di tempat yang aman</li>
+    <li>Operator tidak boleh meninggalkan alat bor yang sedang beroperasi</li>
+    <li>Lubang bor yang sedang tidak dipergunakan ditutup atau dipagari</li>
+    <li>Lokasi pengeboran ditempatkan pada jarak aman dari hantaran kabel listrik udara, kabel tanah, atau saluran pipa</li>
+  </ul>
+</section>
+
+<!-- E.9 -->
+<section class="section" id="se9">
+  <div class="section-badge"><span class="roman">E.9</span> Keselamatan Tambang Permukaan</div>
+  <h2>E.9 Keselamatan Tambang Permukaan</h2>
+
+  <h3>a. Perencanaan dan Operasional Tambang Permukaan</h3>
+  <h4>1) Rencana Tambang</h4>
+  <ul>
+    <li>KTT menjamin kestabilan lereng penambangan, penimbunan, dan lokasi fasilitas lainnya telah diperhitungkan dalam perencanaan tambang</li>
+    <li>Jika ditemukan kondisi tidak aman yang tidak teridentifikasi sebelumnya, dilakukan perencanaan ulang agar tetap memenuhi standar aman dan disetujui oleh KTT</li>
+    <li>Tinggi, lebar, dan kemiringan teras dibuat dengan baik dan aman berdasarkan kajian kestabilan lereng</li>
+    <li>Kajian kestabilan lereng menentukan: jarak aman antara permuka kerja aktif dengan kaki timbunan; jarak aman antara ujung teras tambang dengan kaki timbunan; jarak aman antara kolam pengendap dengan kaki timbunan</li>
+  </ul>
+  <h4>2) Operasional Tambang</h4>
+  <ul>
+    <li><strong>Pembersihan lahan dan pemotongan pohon</strong>: alat dilengkapi kabin operator yang tertutup; pemotongan pohon dilakukan oleh paling sedikit 2 (dua) personil; minimum <strong>30 (tiga puluh) meter</strong> dari ujung teras atas penambangan bersih dari pepohonan</li>
+    <li><strong>Pemindahan tanah pucuk dan tanah penutup</strong>: jenis, ukuran, dan kapasitas alat disesuaikan dengan kondisi material; alat muat dan alat angkut dioperasikan sesuai kapasitas beban maksimum; Manajemen Risiko pada setiap kegiatan</li>
+    <li><strong>Jadwal perawatan kendaraan</strong>: jadwal perawatan semua kendaraan dibuat yang mengatur pemeriksaan, perawatan, dan perbaikan kendaraan</li>
+  </ul>
+</section>
+
+<!-- E.10 -->
+<section class="section" id="se10">
+  <div class="section-badge"><span class="roman">E.10</span> Keselamatan Tambang Bawah Tanah</div>
+  <h2>E.10 Keselamatan Tambang Bawah Tanah</h2>
+
+  <div id="e10-admin">
+    <h3>a. Administrasi Tambang Bawah Tanah</h3>
+    <h4>1) Personel</h4>
+    <ul>
+      <li>Kepala Tambang Bawah Tanah dan pengawas ditunjuk oleh KTT dan namanya dicatat dalam buku tambang</li>
+      <li>KTT dapat bertindak sebagai Kepala Tambang Bawah Tanah kecuali IT keberatan untuk kepentingan Keselamatan Pertambangan</li>
+      <li>Kepala Tambang Bawah Tanah beserta Pengawas mempunyai kemampuan teknis, kualifikasi, serta pengalaman sebagaimana ditetapkan oleh KaIT</li>
+    </ul>
+    <h4>2) Tugas Kepala Tambang Bawah Tanah</h4>
+    <ul>
+      <li>Mengatur semua kegiatan dalam operasi penambangan sesuai dengan peraturan yang berlaku dan petunjuk dari KTT</li>
+      <li>Memastikan bahwa dilakukan pencatatan yang teliti terhadap jumlah orang yang masuk setiap gilir kerja</li>
+      <li>Menjamin persediaan dan penyaluran barang kebutuhan pendukung kegiatan tambang bawah tanah</li>
+      <li>Melakukan pemeriksaan terhadap semua administrasi dan bagian-bagian tambang bawah tanah <strong>paling sedikit sekali dalam 3 bulan</strong></li>
+    </ul>
+    <h4>3) Pemeriksaan Tambang</h4>
+    <ul>
+      <li>Pengawas operasional setiap gilir kerja memeriksa setiap tempat kerja yang ada pekerjaan, jalan yang dilalui Pekerja, dan tempat kerja setelah peledakan</li>
+      <li>Dalam selang waktu tidak lebih dari <strong>7 (tujuh) hari</strong>, pengawas operasional atau pengawas teknis melakukan pemeriksaan menyeluruh</li>
+      <li>Apabila gilir kerja tidak kontinu, kondisi tidak aman diberitahukan secara tertulis kepada gilir kerja berikutnya dan ditandatangani</li>
+    </ul>
+    <h4>4) Peta Tambang Bawah Tanah</h4>
+    <ul>
+      <li>Jika terdapat lebih dari satu tambang bawah tanah, dapat diangkat penanggung jawab area</li>
+      <li>Batas wilayah ditunjukkan pada peta tambang bawah tanah yang terdapat di kantor tambang; salinan peta disampaikan kepada KaIT atau Kepala Dinas</li>
+    </ul>
+  </div>
+
+  <div id="e10-ventilasi">
+    <h3>b. Ventilasi Tambang Bawah Tanah</h3>
+    <p>Ventilasi merupakan aspek kritis keselamatan tambang bawah tanah. Ketentuan utama meliputi:</p>
+    <ul>
+      <li>Sistem ventilasi dirancang untuk menjamin pasokan udara segar yang cukup ke seluruh area kerja</li>
+      <li>Pemantauan kualitas udara di tambang bawah tanah dilakukan secara berkala</li>
+      <li>Pengendalian gas berbahaya (gas metana, CO, CO₂, H₂S, dan gas lainnya) sesuai ketentuan batas paparan yang berlaku</li>
+      <li>Kipas angin utama (<em>main fan</em>) dipastikan beroperasi dengan baik dan terpelihara</li>
+      <li>Jaringan ventilasi dipantau dan dievaluasi secara berkala</li>
+    </ul>
+
+    <h3>c. Keselamatan Operasional Tambang Bawah Tanah</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Aspek</th><th>Ketentuan Utama</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Jalan Keluar</strong></td><td>Minimal 2 (dua) jalan keluar yang berbeda; jalan keluar diperiksa dan dipelihara agar selalu dalam kondisi aman</td></tr>
+          <tr><td><strong>Penirisan Air Tambang</strong></td><td>Sistem penirisan dirancang dan dikelola untuk mengeluarkan air dari lokasi penambangan secara aman dan efektif</td></tr>
+          <tr><td><strong>Pengangkutan</strong></td><td>Jalan pengangkutan, konstruksi jalan rel, peralatan, pengangkutan orang, kawat dan gelendong, konveyor harus memenuhi standar keselamatan operasi</td></tr>
+          <tr><td><strong>Sumuran (Shaft)</strong></td><td>Spesifikasi, pengoperasian, pemeriksaan, dan uji coba sesuai standar; dilengkapi alat keselamatan; pagar pengaman pada bukaan</td></tr>
+          <tr><td><strong>Kontrol Batuan dan Penyanggaan</strong></td><td>Penyanggaan dilakukan sesuai kajian geoteknik; Pekerja tidak bekerja di bawah batuan yang tidak tersangga; pemantauan kestabilan dinding dan atap lubang bukaan</td></tr>
+          <tr><td><strong>Pencegahan Kebakaran</strong></td><td>Program pencegahan kebakaran, penyediaan alat pemadam kebakaran, sarana evakuasi, dan prosedur tanggap darurat kebakaran</td></tr>
+          <tr><td><strong>Penerangan</strong></td><td>Penerangan yang cukup di seluruh area kerja; lampu kedap gas di area berpotensi gas mudah menyala</td></tr>
+          <tr><td><strong>Komunikasi</strong></td><td>Alat dan sistem komunikasi tersedia; tata cara komunikasi dalam keadaan bahaya ditetapkan dan disosialisasikan</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- E.11 -->
+<section class="section" id="se11">
+  <div class="section-badge"><span class="roman">E.11</span> Keselamatan Kapal Keruk/Isap</div>
+  <h2>E.11 Keselamatan Kapal Keruk/Isap</h2>
+
+  <h3>a. Kapal Keruk</h3>
+  <h4>Personel Kapal Keruk</h4>
+  <ul>
+    <li>Setiap kapal keruk memiliki seorang <strong>Kepala Kapal Keruk</strong> yang dibantu oleh beberapa orang kepala gilir kerja dan Pekerja yang memenuhi kualifikasi sesuai ketetapan KTT; namanya dicatat dalam buku tambang</li>
+    <li><strong>Tugas Kepala Kapal Keruk</strong>: memimpin, mengatur, dan mengawasi keselamatan kerja pengoperasian kapal keruk; mencatat dan melaporkan kepada KTT apabila terjadi kebakaran, kerusakan peralatan, kemiringan melebihi 2 (dua) derajat, kecelakaan, dan kondisi berbahaya</li>
+    <li>KTT menindaklanjuti setiap laporan dari Kepala Kapal Keruk</li>
+    <li>Setiap orang yang berada di atas kapal keruk mendapatkan izin dari KTT dan mampu berenang dan/atau memakai rompi pelampung apabila tidak dapat berenang</li>
+  </ul>
+
+  <h3>b. Persyaratan Operasi Kapal Keruk</h3>
+  <ul>
+    <li>Kapal keruk dipastikan stabil dan laik operasi sebelum digunakan</li>
+    <li>Buku peraturan kerja tersedia di atas kapal keruk</li>
+    <li>Sistem sinyal keselamatan dan komunikasi tersedia dan berfungsi dengan baik</li>
+    <li>Pemeriksaan dan pemantauan kondisi kapal keruk dilakukan secara berkala</li>
+  </ul>
+</section>
+
+<!-- E.12 -->
+<section class="section" id="se12">
+  <div class="section-badge"><span class="roman">E.12</span> Keselamatan Pengolahan dan/atau Pemurnian</div>
+  <h2>E.12 Keselamatan Pengolahan dan/atau Pemurnian</h2>
+
+  <h3>a. Ketentuan Umum</h3>
+  <p>Pemegang IUP Operasi Produksi, IUP Khusus Operasi Produksi, dan IUP OPK Pengolahan dan/atau Pemurnian membuat dan melaksanakan:</p>
+  <ol>
+    <li>Perencanaan dan desain pabrik pengolahan dan/atau pemurnian dilengkapi dengan informasi potensi bahaya termasuk analisis bahaya proses (<em>Process Hazard Analysis/PHA</em>) serta rencana pencegahan dan mitigasi</li>
+    <li>Melakukan evaluasi PHA berdasarkan jenis proses kegiatan sehingga dapat mengurangi risiko dan upaya mitigasi</li>
+    <li>Menetapkan parameter operasi kritikal yang memiliki tingkatan risiko yang tinggi</li>
+    <li>Merencanakan dan melaksanakan program pemeliharaan/perawatan sarana dan prasarana instalasi dan sistem isolasi/proteksi peralatan</li>
+    <li>Membuat dan menetapkan prosedur kerja standar pada kegiatan pengolahan dan/atau pemurnian</li>
+    <li>Membuat program pendidikan dan pelatihan pada kegiatan pengolahan dan/atau pemurnian</li>
+    <li>Menetapkan dan melaksanakan <strong>manajemen perubahan</strong> paling sedikit terhadap perubahan proses, teknologi, peralatan kritikal (spesifikasi, rancang bangun, pemeliharaan dan perawatan); termasuk perubahan personil tenaga teknis</li>
+    <li>Merencanakan dan melakukan program inspeksi, pengawasan, pengujian, dan evaluasi tindak lanjut</li>
+    <li>Memiliki program penyelidikan kecelakaan dan/atau kejadian berbahaya</li>
+  </ol>
+</section>
+
+<!-- F & G -->
+<section class="section" id="sfg">
+  <div class="section-badge"><span class="roman">F / G</span> Ketentuan Lain &amp; Penutup</div>
+  <h2>F. Ketentuan Lain</h2>
+  <p>Pelaksanaan kesehatan kerja Pertambangan, lingkungan kerja Pertambangan, dan keselamatan operasi Pertambangan dalam petunjuk teknis ini juga mencakup:</p>
+  <ol>
+    <li>Manajemen risiko</li>
+    <li>Pendidikan dan pelatihan</li>
+    <li>Administrasi</li>
+    <li>Manajemen keadaan darurat</li>
+    <li>Inspeksi</li>
+    <li>Kampanye</li>
+  </ol>
+  <p>yang pelaksanaannya mengacu pada pelaksanaan manajemen risiko, pendidikan dan pelatihan, administrasi, manajemen keadaan darurat, inspeksi, dan kampanye pada bagian keselamatan kerja Pertambangan (Bagian D.1).</p>
+
+  <h2>G. Penutup</h2>
+  <div class="green-box">
+    <p>Dengan ditetapkannya petunjuk teknis ini yang merupakan pegangan bagi Pemerintah, Pemerintah Daerah, pemegang IUP, IUPK, IUP Operasi Produksi khusus untuk Pengolahan dan/atau Pemurnian, dan IPR dalam melaksanakan ketentuan terkait keselamatan Pertambangan dan keselamatan pengolahan dan/atau pemurnian mineral dan batubara, sehingga meningkatkan kinerja pemegang izin di bidang pengelolaan keselamatan Pertambangan untuk terciptanya penerapan kaidah Pertambangan yang baik (<em>Good Mining Practice</em>).</p>
+    <p style="margin-top:10px">Hal-hal yang belum diatur dalam petunjuk teknis ini dapat diajukan oleh KTT atau PTL kepada KaIT atau Kepala Dinas atas nama KaIT sesuai dengan kewenangannya sepanjang tidak bertentangan dengan peraturan perundang-undangan, dilengkapi dengan <strong>kajian teknis</strong>.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    const oc = n.getAttribute('onclick') || '';
+    if (oc === `showSection('${id}')`) n.classList.add('active');
+  });
+  window.scrollTo(0, 0);
+  closeSidebar();
+  clearSearch();
+}
+
+function scrollTo(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 120);
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+let matches = [], matchIdx = -1;
+const originalHTML = {};
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchCount').style.display = 'none';
+  restoreAll();
+  matches = []; matchIdx = -1;
+}
+
+function saveOriginals() {
+  document.querySelectorAll('.section').forEach(s => {
+    if (!originalHTML[s.id]) originalHTML[s.id] = s.innerHTML;
+  });
+}
+
+function restoreAll() {
+  document.querySelectorAll('.section').forEach(s => {
+    if (originalHTML[s.id]) s.innerHTML = originalHTML[s.id];
+  });
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  const countEl = document.getElementById('searchCount');
+  if (!q) { restoreAll(); countEl.style.display = 'none'; matches = []; matchIdx = -1; return; }
+  saveOriginals();
+  restoreAll();
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(escaped, 'gi');
+  let count = 0;
+  document.querySelectorAll('.section').forEach(sec => {
+    const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null, false);
+    const textNodes = [];
+    let node;
+    while (node = walker.nextNode()) {
+      if (!['SCRIPT','STYLE'].includes(node.parentElement.tagName)) textNodes.push(node);
+    }
+    textNodes.forEach(tn => {
+      const text = tn.textContent;
+      if (regex.test(text)) {
+        regex.lastIndex = 0;
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(regex, m => `<mark>${m}</mark>`);
+        tn.parentNode.replaceChild(span, tn);
+        count += (text.match(regex) || []).length;
+        regex.lastIndex = 0;
+      }
+      regex.lastIndex = 0;
+    });
+  });
+  matches = [...document.querySelectorAll('mark')];
+  matchIdx = -1;
+  if (count > 0) {
+    countEl.textContent = `${count} hasil`;
+    countEl.style.display = 'block';
+    nextMatch();
+  } else {
+    countEl.textContent = 'Tidak ditemukan';
+    countEl.style.display = 'block';
+  }
+}
+
+function nextMatch() {
+  if (!matches.length) return;
+  if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+  matchIdx = (matchIdx + 1) % matches.length;
+  const m = matches[matchIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('section')) el = el.parentElement;
+  if (el) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); el.classList.add('active'); }
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function prevMatch() {
+  if (!matches.length) return;
+  if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+  matchIdx = (matchIdx - 1 + matches.length) % matches.length;
+  const m = matches[matchIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('section')) el = el.parentElement;
+  if (el) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); el.classList.add('active'); }
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function searchNav(e) {
+  if (e.key === 'Enter') { e.shiftKey ? prevMatch() : nextMatch(); }
+  if (e.key === 'Escape') clearSearch();
+}
+
+window.addEventListener('load', saveOriginals);
+</script>
+</body>
+</html>

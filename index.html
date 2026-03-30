@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Regulasi Pertambangan Minerba</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e17;
+    --surface: #111520;
+    --border: #252b42;
+    --text: #e8eaf2;
+    --text-muted: #7a82a0;
+    --text-dim: #3d4460;
+    --gold: #c9a84c;
+    --gold-dim: #6b5520;
+    --gold-pale: #1e1810;
+    --blue: #4a7fc1;
+    --blue-dim: #1e3358;
+    --green: #3a9e6a;
+    --green-dim: #14382a;
+    --purple: #7a5ac1;
+    --purple-dim: #281e45;
+    --teal: #2eb8a0;
+    --teal-dim: #0e4038;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(74,127,193,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 55%);
+    pointer-events: none; z-index: 0;
+  }
+
+  header {
+    position: relative; z-index: 1;
+    padding: 60px 48px 40px;
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 12px;
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .logo-line { display: flex; align-items: center; gap: 14px; }
+
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--gold) 0%, #8b6820 100%);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(201,168,76,0.2);
+  }
+
+  .logo-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--gold);
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; line-height: 1.15;
+    color: var(--text); max-width: 700px;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+
+  .subtitle {
+    font-size: 15px; color: var(--text-muted);
+    max-width: 560px; line-height: 1.6; margin-top: 4px;
+  }
+
+  .meta-row {
+    display: flex; align-items: center;
+    gap: 20px; margin-top: 8px; flex-wrap: wrap;
+  }
+
+  .meta-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; color: var(--text-muted);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 4px; padding: 4px 10px; letter-spacing: 0.05em;
+  }
+
+  main {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    padding: 48px 48px 80px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 28px;
+    text-decoration: none; color: inherit;
+    display: flex; flex-direction: column; gap: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    opacity: 0; transition: opacity 0.25s;
+  }
+
+  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card:hover::before { opacity: 1; }
+
+  .card.gold   { --c: var(--gold);   --c-dim: var(--gold-dim);   --c-pale: var(--gold-pale); }
+  .card.blue   { --c: var(--blue);   --c-dim: var(--blue-dim);   --c-pale: rgba(74,127,193,0.06); }
+  .card.green  { --c: var(--green);  --c-dim: var(--green-dim);  --c-pale: rgba(58,158,106,0.06); }
+  .card.purple { --c: var(--purple); --c-dim: var(--purple-dim); --c-pale: rgba(122,90,193,0.06); }
+  .card.teal   { --c: var(--teal);   --c-dim: var(--teal-dim);   --c-pale: rgba(46,184,160,0.06); }
+
+  .card:hover { border-color: var(--c); }
+  .card::before { background: var(--c); }
+
+  .card-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--c-pale); border: 1px solid var(--c-dim);
+    display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+
+  .card-kode {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--c);
+    letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; font-weight: 700; line-height: 1.3; color: var(--text);
+  }
+
+  .card-desc {
+    font-size: 13.5px; color: var(--text-muted); line-height: 1.65; flex: 1;
+  }
+
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; padding: 3px 8px; border-radius: 4px;
+    background: var(--c-pale); color: var(--c);
+    border: 1px solid var(--c-dim); letter-spacing: 0.04em;
+  }
+
+  .card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 14px; border-top: 1px solid var(--border); margin-top: 4px;
+  }
+
+  .card-year {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim);
+  }
+
+  .card-cta {
+    font-size: 12px; font-weight: 600; color: var(--c);
+    display: flex; align-items: center; gap: 5px;
+    letter-spacing: 0.03em; opacity: 0.8;
+    transition: opacity 0.2s, gap 0.2s;
+  }
+  .card:hover .card-cta { opacity: 1; gap: 8px; }
+
+  /* Info strip */
+  .info-strip {
+    margin-top: 48px; padding: 20px 24px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: flex-start; gap: 16px;
+    color: var(--text-muted); font-size: 13px; line-height: 1.6;
+  }
+  .info-strip-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+
+  .rename-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(201,168,76,0.06);
+    border: 1px solid var(--gold-dim);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; color: var(--gold); line-height: 1.9;
+  }
+
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 24px 48px; max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; color: var(--text-dim);
+    gap: 12px; flex-wrap: wrap;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  header          { animation: fadeUp 0.5s ease both; }
+  .section-label  { animation: fadeUp 0.5s 0.12s ease both; }
+  .card:nth-child(1) { animation: fadeUp 0.5s 0.18s ease both; }
+  .card:nth-child(2) { animation: fadeUp 0.5s 0.25s ease both; }
+  .card:nth-child(3) { animation: fadeUp 0.5s 0.32s ease both; }
+  .card:nth-child(4) { animation: fadeUp 0.5s 0.39s ease both; }
+  .card:nth-child(5) { animation: fadeUp 0.5s 0.46s ease both; }
+  .info-strip     { animation: fadeUp 0.5s 0.53s ease both; }
+
+  @media (max-width: 640px) {
+    header, main, footer { padding-left: 20px; padding-right: 20px; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-line">
+    <div class="logo-icon">⛏</div>
+    <span class="logo-label">Portal Regulasi — Inspektur Tambang</span>
+  </div>
+  <h1>Referensi <em>Regulasi</em><br>Pertambangan Minerba</h1>
+  <p class="subtitle">Kumpulan dokumen peraturan perundang-undangan di bidang mineral dan batubara. Klik kartu untuk membuka explorer interaktif masing-masing regulasi.</p>
+  <div class="meta-row">
+    <span class="meta-badge">5 Dokumen</span>
+    <span class="meta-badge">UU · Perpres · Kepmen · Kepdirjen</span>
+    <span class="meta-badge">Ditjen Minerba</span>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">Dokumen Regulasi</div>
+
+  <div class="cards-grid">
+
+    <!-- UU Minerba -->
+    <a class="card gold" href="uu_minerba_explorer.html" target="_blank">
+      <div class="card-icon">📜</div>
+      <div>
+        <div class="card-kode">UU No. 4 / 2009</div>
+        <div class="card-title">Undang-Undang Minerba</div>
+      </div>
+      <p class="card-desc">
+        Undang-Undang tentang Pertambangan Mineral dan Batubara. Landasan hukum utama seluruh kegiatan pertambangan di Indonesia.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Perizinan</span>
+        <span class="tag">IUP / IUPK</span>
+        <span class="tag">Reklamasi</span>
+        <span class="tag">Sanksi</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2009</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+    <!-- Kepmen 1827 -->
+    <a class="card blue" href="kepmen_esdm_1827.html" target="_blank">
+      <div class="card-icon">📋</div>
+      <div>
+        <div class="card-kode">Kepmen ESDM 1827 K/30/MEM/2018</div>
+        <div class="card-title">Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik</div>
+      </div>
+      <p class="card-desc">
+        Panduan teknis pelaksanaan good mining practice mencakup 8 lampiran: keselamatan, lingkungan, konservasi, reklamasi, dan pascatambang.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Good Mining Practice</span>
+        <span class="tag">K3</span>
+        <span class="tag">Lingkungan</span>
+        <span class="tag">8 Lampiran</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2018</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+    <!-- Kepdirjen 185 -->
+    <a class="card green" href="kepdirjen_185_2019.html" target="_blank">
+      <div class="card-icon">🔍</div>
+      <div>
+        <div class="card-kode">Kepdirjen 185.K/37.04/DJB/2019</div>
+        <div class="card-title">Petunjuk Teknis Pengawasan Pertambangan</div>
+      </div>
+      <p class="card-desc">
+        Pedoman inspeksi dan pengawasan teknis oleh Inspektur Tambang, mencakup prosedur pemeriksaan, penilaian, dan pelaporan.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Inspeksi</span>
+        <span class="tag">Pengawasan</span>
+        <span class="tag">Pelaporan</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2019</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+    <!-- Kepdirjen 216 -->
+    <a class="card teal" href="kepdirjen_216_2022.html" target="_blank">
+      <div class="card-icon">📑</div>
+      <div>
+        <div class="card-kode">Kepdirjen 216.K/MB.01/DJB/2022</div>
+        <div class="card-title">Keputusan Dirjen Minerba No. 216 Tahun 2022</div>
+      </div>
+      <p class="card-desc">
+        Keputusan Direktur Jenderal Mineral dan Batubara tahun 2022 terkait ketentuan teknis operasional pertambangan minerba.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Teknis</span>
+        <span class="tag">Operasional</span>
+        <span class="tag">Minerba</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2022</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+    <!-- Perpres 55 -->
+    <a class="card purple" href="perpres_55_2022.html" target="_blank">
+      <div class="card-icon">🏛</div>
+      <div>
+        <div class="card-kode">Perpres No. 55 Tahun 2022</div>
+        <div class="card-title">Pendelegasian Pemberian Perizinan Berusaha di Bidang Pertambangan</div>
+      </div>
+      <p class="card-desc">
+        Peraturan Presiden tentang pendelegasian kewenangan perizinan pertambangan mineral dan batubara dari Menteri kepada Ditjen Minerba.
+      </p>
+      <div class="card-tags">
+        <span class="tag">Perizinan</span>
+        <span class="tag">Delegasi</span>
+        <span class="tag">OSS</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2022</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="info-strip">
+    <span class="info-strip-icon">⚠️</span>
+    <div>
+      <div>Simpan semua file HTML dalam <strong>satu folder yang sama</strong>. Pastikan nama file persis seperti berikut agar semua link berfungsi:</div>
+      <div class="rename-box">
+        index.html<br>
+        uu_minerba_explorer.html<br>
+        kepmen_esdm_1827.html<br>
+        kepdirjen_185_2019.html<br>
+        kepdirjen_216_2022.html<br>
+        perpres_55_2022.html
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>Portal Regulasi Pertambangan Minerba · Referensi Internal Inspektur Tambang</span>
+  <span>5 dokumen · offline-ready</span>
+</footer>
+
+</body>
+</html>

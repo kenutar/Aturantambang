@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepdirjen Minerba No. 216.K/MB.01/DJB/2022</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f5f0;
+    --paper: #fdfcfa;
+    --ink: #161e14;
+    --ink-light: #354030;
+    --ink-muted: #7a8a72;
+    --accent: #2a6e35;
+    --accent-hover: #1e5428;
+    --accent-pale: #edf7ee;
+    --accent-light: #b2d9b8;
+    --gold: #8a6a10;
+    --gold-light: #fdf5d8;
+    --blue: #1a50a0;
+    --blue-pale: #edf2ff;
+    --red: #a02020;
+    --red-pale: #fff0ef;
+    --border: #ccd8c5;
+    --sidebar-w: 310px;
+    --nav-h: 64px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+  /* ── TOPBAR ── */
+  .topbar { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: var(--ink); display: flex; align-items: center; gap: 16px; padding: 0 20px; z-index: 200; border-bottom: 3px solid var(--accent); }
+  .topbar-logo { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: #fff; white-space: nowrap; flex-shrink: 0; }
+  .topbar-logo span { color: #80c088; }
+  .search-wrapper { flex: 1; max-width: 520px; position: relative; }
+  .search-input { width: 100%; padding: 9px 42px 9px 14px; border: 1.5px solid #253020; border-radius: 6px; background: #1e2a1c; color: #e8f0e8; font-family: 'Source Sans 3', sans-serif; font-size: 0.92rem; outline: none; transition: border-color 0.2s; }
+  .search-input::placeholder { color: #507050; }
+  .search-input:focus { border-color: var(--accent); }
+  .search-icon { position: absolute; right: 13px; top: 50%; transform: translateY(-50%); color: #507050; pointer-events: none; }
+  .search-count { position: absolute; right: 38px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; color: #80c088; display: none; white-space: nowrap; }
+  .search-nav-btns { display: flex; gap: 4px; flex-shrink: 0; }
+  .snb { background: #253020; border: none; color: #e8f0e8; width: 30px; height: 30px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+  .snb:hover { background: var(--accent); }
+  .sidebar-toggle { background: none; border: none; color: #fff; font-size: 1.3rem; cursor: pointer; display: none; }
+
+  /* ── LAYOUT ── */
+  .layout { display: flex; padding-top: var(--nav-h); min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  .sidebar { width: var(--sidebar-w); flex-shrink: 0; background: var(--ink); position: fixed; top: var(--nav-h); left: 0; bottom: 0; overflow-y: auto; padding: 16px 0; transition: transform 0.3s; z-index: 100; }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #253020; border-radius: 2px; }
+  .sidebar-title { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: #405040; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 18px 10px; border-bottom: 1px solid #1e2a1c; margin-bottom: 6px; }
+  .nav-group-label { padding: 12px 18px 3px; font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; color: #304530; letter-spacing: 0.1em; text-transform: uppercase; }
+  .nav-item { display: block; padding: 8px 18px; color: #7a9a70; text-decoration: none; font-size: 0.86rem; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; line-height: 1.4; }
+  .nav-item:hover { color: #e8f0e8; background: #1e2a1c; border-left-color: var(--accent); }
+  .nav-item.active { color: #e8f0e8; background: #1e2a1c; border-left-color: var(--accent); font-weight: 600; }
+  .nav-item.sub { padding-left: 30px; font-size: 0.8rem; color: #4a6045; }
+  .nav-item.sub:hover, .nav-item.sub.active { color: #7a9a70; }
+
+  /* ── MAIN ── */
+  .main { margin-left: var(--sidebar-w); flex: 1; padding: 40px 52px; max-width: 920px; }
+
+  /* ── SECTIONS ── */
+  .section { display: none; animation: fadeIn 0.28s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── TYPOGRAPHY ── */
+  .doc-header { border-bottom: 2px solid var(--border); padding-bottom: 26px; margin-bottom: 32px; }
+  .doc-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #e8f0e8; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; padding: 5px 12px; border-radius: 3px; margin-bottom: 14px; letter-spacing: 0.05em; }
+  .doc-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .doc-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; line-height: 1.2; color: var(--ink); margin-bottom: 10px; }
+  .doc-subtitle { font-size: 0.98rem; color: var(--ink-light); line-height: 1.65; }
+  h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin: 34px 0 14px; padding-bottom: 9px; border-bottom: 2px solid var(--border); }
+  h2:first-child { margin-top: 0; }
+  h3 { font-family: 'Playfair Display', serif; font-size: 1.12rem; font-weight: 600; color: var(--accent); margin: 26px 0 10px; }
+  h4 { font-size: 0.96rem; font-weight: 600; color: var(--ink-light); margin: 18px 0 7px; }
+  p { font-size: 0.94rem; line-height: 1.75; color: var(--ink-light); margin-bottom: 11px; }
+  ul, ol { padding-left: 22px; margin-bottom: 12px; }
+  li { font-size: 0.92rem; line-height: 1.7; color: var(--ink-light); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  strong { color: var(--ink); }
+
+  /* ── TABLES ── */
+  .table-wrapper { overflow-x: auto; margin: 14px 0 22px; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  thead { background: var(--ink); color: #e8f0e8; }
+  thead th { padding: 10px 13px; text-align: left; font-weight: 600; font-size: 0.82rem; letter-spacing: 0.03em; white-space: nowrap; }
+  tbody tr:nth-child(even) { background: var(--accent-pale); }
+  tbody tr:hover { background: #d6edda; }
+  td { padding: 9px 13px; border-bottom: 1px solid var(--border); color: var(--ink-light); vertical-align: top; line-height: 1.55; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+
+  /* ── INFO / NOTE BOXES ── */
+  .info-box { background: var(--gold-light); border-left: 4px solid var(--gold); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+  .note-box { background: var(--accent-pale); border-left: 4px solid var(--accent); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+  .blue-box { background: var(--blue-pale); border-left: 4px solid var(--blue); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+  .red-box { background: var(--red-pale); border-left: 4px solid var(--red); border-radius: 0 6px 6px 0; padding: 13px 17px; margin: 14px 0; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+
+  /* ── SEARCH HIGHLIGHTS ── */
+  mark { background: #ffe066; color: var(--ink); border-radius: 2px; padding: 0 2px; }
+  mark.current { background: var(--accent); color: white; }
+
+  /* ── SECTION BADGE ── */
+  .section-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: #e8f0e8; font-family: 'Playfair Display', serif; font-size: 0.86rem; padding: 6px 16px 6px 12px; border-radius: 4px; margin-bottom: 20px; }
+  .section-badge .roman { font-size: 1.1rem; font-weight: 700; color: #80c088; }
+
+  /* ── HOME CARDS ── */
+  .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+  .card { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; padding: 18px; cursor: pointer; transition: all 0.2s; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); transform: scaleX(0); transition: transform 0.2s; }
+  .card:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-letter { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 7px; }
+  .card-title { font-size: 0.88rem; font-weight: 600; color: var(--ink); line-height: 1.4; margin-bottom: 5px; }
+  .card-sub { font-size: 0.77rem; color: var(--ink-muted); line-height: 1.4; }
+
+  /* ── WORKFLOW STEPS ── */
+  .steps { margin: 14px 0; }
+  .step { display: flex; gap: 14px; margin-bottom: 12px; }
+  .step-num { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: white; font-size: 0.82rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-num.blue { background: var(--blue); }
+  .step-num.gold { background: var(--gold); }
+  .step-content { flex: 1; }
+  .step-title { font-size: 0.92rem; font-weight: 600; color: var(--ink); }
+  .step-desc { font-size: 0.87rem; color: var(--ink-light); line-height: 1.6; }
+
+  /* ── ACTORS BADGES ── */
+  .actor-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .actor { display: inline-flex; align-items: center; gap: 6px; background: var(--paper); border: 1px solid var(--border); border-radius: 4px; padding: 5px 10px; font-size: 0.82rem; color: var(--ink-light); }
+  .actor .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot-green { background: var(--accent); }
+  .dot-blue { background: var(--blue); }
+  .dot-gold { background: var(--gold); }
+  .dot-red { background: var(--red); }
+  .dot-gray { background: #808080; }
+
+  /* ── TWO COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+  .col-card { background: var(--paper); border: 1px solid var(--border); border-radius: 6px; padding: 14px; }
+  .col-card h5 { font-size: 0.88rem; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+  .col-card ul { padding-left: 18px; }
+  .col-card li { font-size: 0.83rem; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── TIME BADGE ── */
+  .time-tag { display: inline-block; background: var(--accent); color: white; font-family: 'JetBrains Mono', monospace; font-size: 0.77rem; font-weight: 600; padding: 2px 8px; border-radius: 3px; margin-left: 6px; }
+  .time-tag.blue { background: var(--blue); }
+  .time-tag.gold { background: var(--gold); }
+
+  /* ── OVERLAY ── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+  .overlay.open { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-toggle { display: flex; }
+    .main { margin-left: 0; padding: 22px 18px; }
+    .home-grid { grid-template-columns: 1fr; }
+    .doc-title { font-size: 1.4rem; }
+    .topbar-logo { display: none; }
+  }
+  [id] { scroll-margin-top: 20px; }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="topbar-logo">Kepdirjen Minerba <span>No. 216/2022</span></div>
+  <div class="search-wrapper">
+    <input class="search-input" id="searchInput" type="text" placeholder="Cari kata kunci... (contoh: KTT, peledakan tidur, tanda batas)" oninput="doSearch()" onkeydown="searchNav(event)">
+    <span class="search-count" id="searchCount"></span>
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="search-nav-btns">
+    <button class="snb" onclick="prevMatch()" title="Sebelumnya">↑</button>
+    <button class="snb" onclick="nextMatch()" title="Berikutnya">↓</button>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Navigasi Dokumen</div>
+  <a class="nav-item active" onclick="showSection('home')">🏠 Beranda</a>
+
+  <div class="nav-group-label">Lampiran I</div>
+  <a class="nav-item" onclick="showSection('lamp1')">Pedoman Pengawasan Inspektur Tambang</a>
+  <a class="nav-item sub" onclick="showSection('lamp1'); scrollTo('l1-alur')">Alur Kerja Pengawasan</a>
+  <a class="nav-item sub" onclick="showSection('lamp1'); scrollTo('l1-keterangan')">Keterangan Langkah-Langkah</a>
+
+  <div class="nav-group-label">Lampiran II — Aspek Keselamatan</div>
+  <a class="nav-item" onclick="showSection('pk1')">1. Evaluasi Pengesahan KTT</a>
+  <a class="nav-item sub" onclick="showSection('pk1'); scrollTo('pk1-admin')">A. Evaluasi Administrasi</a>
+  <a class="nav-item sub" onclick="showSection('pk1'); scrollTo('pk1-uji')">B. Uji / Presentasi & Diskusi</a>
+  <a class="nav-item sub" onclick="showSection('pk1'); scrollTo('pk1-syarat')">Persyaratan Dokumen KTT</a>
+  <a class="nav-item" onclick="showSection('pk2')">2. Pemeriksaan Kecelakaan & Kejadian Berbahaya</a>
+  <a class="nav-item" onclick="showSection('pk3')">3. Evaluasi Kelayakan Tangki BBM</a>
+  <a class="nav-item" onclick="showSection('pk4')">4. Evaluasi Kelayakan Gudang Bahan Peledak</a>
+  <a class="nav-item" onclick="showSection('pk5')">5. Evaluasi KIM & KPP Madya</a>
+  <a class="nav-item" onclick="showSection('pk6')">6. Evaluasi Peledakan Tidur (Sleep Blasting)</a>
+  <a class="nav-item sub" onclick="showSection('pk6'); scrollTo('pk6-baru')">A. Peledakan Tidur Baru</a>
+  <a class="nav-item sub" onclick="showSection('pk6'); scrollTo('pk6-perpanjang')">B. Perpanjangan Peledakan Tidur</a>
+  <a class="nav-item" onclick="showSection('pk7')">7. Evaluasi KPO (Kartu Pengawas Operasional)</a>
+  <a class="nav-item" onclick="showSection('pk8')">8. Evaluasi Buku Tambang & Buku Daftar Kecelakaan</a>
+  <a class="nav-item" onclick="showSection('pk9')">9. Evaluasi Laporan Kajian Teknis Keselamatan</a>
+
+  <div class="nav-group-label">Lampiran II — Aspek Lainnya</div>
+  <a class="nav-item" onclick="showSection('aspB')">B. Aspek Perlindungan Lingkungan</a>
+  <a class="nav-item" onclick="showSection('aspC')">C. Aspek Teknis: Penetapan Tanda Batas WIUP</a>
+  <a class="nav-item" onclick="showSection('aspD')">D. Aspek Standardisasi: Evaluasi IUJP</a>
+</aside>
+
+<div class="layout">
+<main class="main" id="mainContent">
+
+<!-- HOME -->
+<section class="section active" id="home">
+  <div class="doc-header">
+    <div class="doc-badge"><span class="dot"></span>Direktorat Jenderal Mineral dan Batubara — Kementerian ESDM</div>
+    <div class="doc-title">Keputusan Direktur Jenderal Mineral dan Batubara<br>Nomor 216.K/MB.01/DJB/2022</div>
+    <div class="doc-subtitle">Pedoman Pelaksanaan Pengawasan Inspektur Tambang dan Evaluasi Pemberian Persetujuan/Rekomendasi Aspek Teknik dan Lingkungan pada Perizinan Berusaha di Bidang Pertambangan untuk Komoditas <strong>Mineral Bukan Logam, Mineral Bukan Logam Jenis Tertentu, dan Batuan</strong></div>
+  </div>
+  <p>Ditetapkan di Jakarta pada <strong>1 November 2022</strong> sebagai pedoman pasca terbitnya Peraturan Presiden Nomor 55 Tahun 2022 tentang Pendelegasian Pemberian Perizinan Berusaha di Bidang Pertambangan Mineral dan Batubara kepada Pemerintah Daerah Provinsi.</p>
+  <div class="two-col">
+    <div class="col-card" style="cursor:pointer" onclick="showSection('lamp1')">
+      <h5>Lampiran I</h5>
+      <p style="font-size:0.85rem;color:var(--ink-light)">Pedoman Pelaksanaan Pengawasan Inspektur Tambang pada Pemegang Perizinan Berusaha di Bidang Pertambangan untuk Komoditas Mineral Bukan Logam, Mineral Bukan Logam Jenis Tertentu, dan Batuan</p>
+    </div>
+    <div class="col-card" onclick="showSection('pk1')" style="cursor:pointer">
+      <h5>Lampiran II</h5>
+      <p style="font-size:0.85rem;color:var(--ink-light)">Pedoman Pelaksanaan Evaluasi Pemberian Persetujuan/Rekomendasi Aspek Teknik dan Lingkungan pada Perizinan Berusaha (9 Pedoman Kerja Keselamatan + Lingkungan + Teknis + Standardisasi)</p>
+    </div>
+  </div>
+  <div class="home-grid">
+    <div class="card" onclick="showSection('lamp1')"><div class="card-letter">I</div><div class="card-title">Pengawasan Inspektur Tambang</div><div class="card-sub">Alur kerja pengawasan IUP: pengusulan, penugasan, pelaksanaan, pelaporan, evaluasi, surat teguran</div></div>
+    <div class="card" onclick="showSection('pk1')"><div class="card-letter">A.1</div><div class="card-title">Evaluasi Pengesahan KTT</div><div class="card-sub">Evaluasi administrasi, uji/presentasi-diskusi, persyaratan dokumen, tim penguji, kriteria kelulusan</div></div>
+    <div class="card" onclick="showSection('pk2')"><div class="card-letter">A.2</div><div class="card-title">Pemeriksaan Kecelakaan & Kejadian Berbahaya</div><div class="card-sub">Prosedur dari laporan khusus, penugasan tim investigasi, pemeriksaan, tindak lanjut, evaluasi</div></div>
+    <div class="card" onclick="showSection('pk3')"><div class="card-letter">A.3</div><div class="card-title">Evaluasi Kelayakan Tangki BBM</div><div class="card-sub">Evaluasi kelayakan tangki bahan bakar cair baru dan pengujian teknis</div></div>
+    <div class="card" onclick="showSection('pk4')"><div class="card-letter">A.4</div><div class="card-title">Evaluasi Gudang Bahan Peledak</div><div class="card-sub">Evaluasi persetujuan pembangunan, verifikasi, dan kelayakan gudang bahan peledak baru</div></div>
+    <div class="card" onclick="showSection('pk5')"><div class="card-letter">A.5</div><div class="card-title">Evaluasi KIM & KPP Madya</div><div class="card-sub">Kartu Izin Meledakkan dan Kartu Pekerja Peledakan Madya</div></div>
+    <div class="card" onclick="showSection('pk6')"><div class="card-letter">A.6</div><div class="card-title">Evaluasi Peledakan Tidur</div><div class="card-sub">Sleep blasting baru (persetujuan + verifikasi simulasi) dan perpanjangan peledakan tidur</div></div>
+    <div class="card" onclick="showSection('pk7')"><div class="card-letter">A.7</div><div class="card-title">Evaluasi KPO</div><div class="card-sub">Kartu Pengawas Operasional: pengajuan, evaluasi, penerbitan</div></div>
+    <div class="card" onclick="showSection('pk8')"><div class="card-letter">A.8</div><div class="card-title">Evaluasi Buku Tambang & Buku Daftar Kecelakaan</div><div class="card-sub">Permohonan, evaluasi, lembar evaluasi, dan penerbitan buku tambang</div></div>
+    <div class="card" onclick="showSection('pk9')"><div class="card-letter">A.9</div><div class="card-title">Evaluasi Laporan Kajian Teknis Keselamatan</div><div class="card-sub">Evaluasi laporan hasil kajian teknis aspek keselamatan pertambangan</div></div>
+    <div class="card" onclick="showSection('aspC')"><div class="card-letter">C</div><div class="card-title">Penetapan Tanda Batas WIUP</div><div class="card-sub">Pedoman kerja dan petunjuk teknis penetapan tanda batas Wilayah IUP Mineral Bukan Logam dan Batuan</div></div>
+    <div class="card" onclick="showSection('aspD')"><div class="card-letter">D</div><div class="card-title">Evaluasi IUJP</div><div class="card-sub">Pedoman Kerja Evaluasi Permohonan Izin Usaha Jasa Pertambangan</div></div>
+  </div>
+</section>
+
+<!-- LAMPIRAN I -->
+<section class="section" id="lamp1">
+  <div class="section-badge"><span class="roman">Lamp. I</span> Pengawasan Inspektur Tambang</div>
+  <h2>Lampiran I — Pedoman Pelaksanaan Pengawasan Inspektur Tambang</h2>
+  <p>Pedoman ini mengatur alur kerja pengawasan Inspektur Tambang pada pemegang Perizinan Berusaha di Bidang Pertambangan untuk komoditas Mineral Bukan Logam, Mineral Bukan Logam Jenis Tertentu, dan Batuan.</p>
+
+  <h3>Para Pelaku dalam Proses Pengawasan</h3>
+  <div class="actor-row">
+    <div class="actor"><span class="dot dot-green"></span>Kepala Dinas (Provinsi)</div>
+    <div class="actor"><span class="dot dot-blue"></span>Direktur Teknik & Lingkungan / KaIT</div>
+    <div class="actor"><span class="dot dot-gold"></span>Inspektur Tambang Penempatan Prov.</div>
+    <div class="actor"><span class="dot dot-red"></span>Pelaku Usaha Pertambangan</div>
+  </div>
+
+  <div id="l1-alur">
+    <h3>Alur Kerja Pengawasan IUP</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Pengusulan Kegiatan Pengawasan IUP <span class="time-tag">3 hari</span></div>
+          <div class="step-desc"><strong>Output:</strong> Surat usulan kegiatan pengawasan; Data pelaku usaha pertambangan dan IT.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Penugasan Pelaksanaan Pengawasan <span class="time-tag">1 hari</span></div>
+          <div class="step-desc"><strong>Output:</strong> Lembar disposisi.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Pembuatan dan Penyampaian Surat Tugas Pengawasan</div>
+          <div class="step-desc"><strong>Output:</strong> Surat tugas pengawasan yang ditandatangani KaIT, disampaikan kepada Pelaku Usaha Pertambangan dengan tembusan kepada Kepala Dinas.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Pelaksanaan Pengawasan</div>
+          <div class="step-desc">Inspektur Tambang melakukan <strong>pertemuan awal dengan KTT</strong>, pengawasan administrasi dan lapangan, serta <strong>pertemuan akhir dengan KTT dan jajarannya</strong>. Hasilnya dituangkan dalam <strong>Berita Acara Pengawasan</strong> dan pendaftaran Buku Tambang. <strong>Output:</strong> Berita Acara dan Pendaftaran Buku Tambang.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Penyampaian Laporan & Surat Tindak Lanjut Pengawasan</div>
+          <div class="step-desc">Inspektur Tambang menyiapkan laporan hasil pelaksanaan pengawasan dan surat tindak lanjut, disampaikan kepada KaIT. KaIT menyampaikan tembusan kepada Kepala Dinas dan Pelaku Usaha Pertambangan. <strong>Output:</strong> Nota dinas dan surat tindak lanjut hasil pengawasan.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">Sanksi Administrasi (jika ada)</div>
+          <div class="step-desc">Apabila terdapat tindak lanjut perusahaan yang menyebabkan adanya sanksi administrasi (peringatan tertulis, penghentian sementara sebagian atau seluruh kegiatan, dan pencabutan izin), maka KaIT merekomendasikan Pelaku Usaha Pertambangan tersebut untuk dihentikan/dicabut izinnya melalui surat kepada Kepala Dinas. <strong>Output:</strong> Surat rekomendasi penghentian/pencabutan izin.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-content">
+          <div class="step-title">Pelaporan Pemenuhan Tindak Lanjut Pengawasan</div>
+          <div class="step-desc">Pelaku Usaha Pertambangan membuat laporan pemenuhan tindak lanjut hasil pengawasan dan menyampaikannya kepada KaIT (dengan tembusan). <strong>Output:</strong> Dokumen pemenuhan tindak lanjut hasil pengawasan.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-content">
+          <div class="step-title">Evaluasi Pelaporan Pemenuhan Tindak Lanjut</div>
+          <div class="step-desc">KaIT mendisposisikan laporan pemenuhan tindak lanjut kepada Inspektur Tambang untuk dievaluasi. Jika <strong>telah memenuhi</strong>: didokumentasikan. Jika <strong>belum memenuhi</strong>: Inspektur Tambang menyiapkan konsep surat teguran. <strong>Output:</strong> Evaluasi pemenuhan tindak lanjut hasil pengawasan.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">9</div>
+        <div class="step-content">
+          <div class="step-title">Penyampaian Surat Teguran</div>
+          <div class="step-desc">KaIT memeriksa dan menandatangani surat teguran, kemudian disampaikan kepada Direksi Pelaku Usaha Pertambangan dengan tembusan kepada Kepala Dinas. <strong>Output:</strong> Surat teguran.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="l1-keterangan">
+    <h3>Keterangan Detail Setiap Langkah</h3>
+    <h4>1. Pengusulan Kegiatan Pengawasan IUP</h4>
+    <ul>
+      <li>Kepala Dinas mengusulkan kegiatan pengawasan IUP yang menjadi kewenangan Gubernur kepada KaIT untuk dilakukan kegiatan pengawasan oleh Inspektur Tambang</li>
+      <li>KaIT membuat rencana terhadap lokasi IUP yang menjadi kewenangan Gubernur dan Inspektur Tambang yang bertugas, serta menyampaikan rencana kegiatan pengawasan kepada Kepala Dinas</li>
+      <li>KaIT dapat membantu tugas Kepala Dinas dalam menyusun jadwal pengawasan IUP yang menjadi kewenangan Gubernur dan mengusulkan kepada Kepala Dinas untuk disetujui</li>
+      <li>Kepala Dinas menerima penjadwalan pengawasan IUP yang menjadi kewenangan Gubernur</li>
+    </ul>
+    <h4>2. Penugasan Pelaksanaan Pengawasan</h4>
+    <ul>
+      <li>KaIT menugaskan Inspektur Tambang untuk melakukan kegiatan pengawasan sesuai rencana lokasi IUP yang menjadi kewenangan Gubernur</li>
+      <li>Inspektur Tambang menerima penugasan kegiatan pengawasan ke lokasi IUP yang menjadi kewenangan Gubernur</li>
+    </ul>
+    <h4>3. Pembuatan dan Penyampaian Surat Tugas Pengawasan</h4>
+    <ul>
+      <li>Inspektur Tambang membuat konsep surat tugas pengawasan ditujukan kepada Pelaku Usaha Pertambangan</li>
+      <li>KaIT memeriksa dan menandatangani surat tugas pengawasan</li>
+      <li>KaIT menyampaikan surat tugas pengawasan kepada Pelaku Usaha Pertambangan dan menyampaikan tembusan kepada Kepala Dinas</li>
+    </ul>
+    <div class="note-box"><strong>Catatan:</strong> Sanksi administrasi yang dapat diberikan meliputi: (1) peringatan tertulis; (2) penghentian sementara sebagian atau seluruh kegiatan; dan (3) pencabutan izin.</div>
+  </div>
+</section>
+
+<!-- A.1 KTT -->
+<section class="section" id="pk1">
+  <div class="section-badge"><span class="roman">A.1</span> Evaluasi Pengesahan KTT</div>
+  <h2>Pedoman Kerja Evaluasi Pengesahan Kepala Teknik Tambang (KTT)</h2>
+
+  <div id="pk1-syarat">
+    <h3>Persyaratan Dokumen Permohonan KTT</h3>
+    <p>Pelaku usaha menyiapkan dan menyampaikan dokumen kelengkapan berkas permohonan pengesahan KTT sesuai Lampiran 1 Kepmen 1827.K/MEM/30/2018 dan SE Direktur Teknik dan Lingkungan Minerba/KaIT Nomor 14.E/MB.07/DBT.KP/2021:</p>
+    <ol>
+      <li>Salinan Izin Usaha Pertambangan (IUP)</li>
+      <li>Surat pernyataan bermaterai yang ditandatangani oleh Pemimpin Tertinggi Perusahaan, yang menyatakan mendukung semua program kegiatan calon KTT</li>
+      <li>Daftar riwayat hidup calon KTT</li>
+      <li>Sertifikat kompetensi wajib calon KTT yang sudah diregistrasi di Direktorat Jenderal Mineral dan Batubara atau sertifikat kualifikasi yang diakui oleh KaIT</li>
+      <li>Struktur organisasi perusahaan yang menggambarkan posisi Calon KTT, ditandatangani oleh pemimpin perusahaan dan diberi cap basah perusahaan</li>
+      <li>Salinan pengesahan calon KTT apabila sebelumnya sudah pernah disahkan menjadi KTT</li>
+      <li>Surat pernyataan bermaterai tentang kebenaran dokumen yang ditandatangani oleh pemohon</li>
+      <li>Surat pernyataan tidak memiliki keterikatan di perusahaan tambang lain</li>
+      <li>Surat pernyataan komitmen melaksanakan tugas dan tanggung jawab KTT <strong>paling sedikit 2 tahun</strong> di perusahaan yang menunjuknya</li>
+      <li>Dokumen Beneficial Ownership</li>
+      <li>Softcopy dokumen sebagaimana dimaksud dalam angka 1 sampai dengan angka 10</li>
+    </ol>
+  </div>
+
+  <div id="pk1-admin">
+    <h3>A. Evaluasi Administrasi Pengesahan KTT</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Mengajukan permohonan pengesahan KTT</td><td>1 Hari</td><td>Lembar tanda terima surat</td></tr>
+          <tr><td>2</td><td>Evaluasi permohonan pengesahan KTT oleh Evaluator (Inspektur Tambang)</td><td>7 Hari</td><td>Lembar hasil evaluasi, draft surat hasil evaluasi</td></tr>
+          <tr><td>3</td><td>Menetapkan surat hasil evaluasi oleh Direktur Teknik & Lingkungan/KaIT</td><td>2 Hari</td><td>Surat hasil evaluasi</td></tr>
+          <tr><td>4</td><td>Membuat surat tanggapan permohonan pengesahan KTT</td><td>1 Hari</td><td>Surat Tanggapan</td></tr>
+          <tr><td>5</td><td>Menerbitkan Surat Tanggapan</td><td>1 Hari</td><td>Arsip surat</td></tr>
+          <tr><td colspan="2"><strong>JUMLAH</strong></td><td><strong>12 Hari</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>4 (Empat) Kondisi Hasil Evaluasi</h4>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:var(--red)">1</div>
+        <div class="step-content">
+          <div class="step-title">Surat Ketidaksesuaian Persyaratan</div>
+          <div class="step-desc">Apabila administrasi <strong>belum sesuai</strong> — Evaluator membuat draft surat hasil evaluasi yang menyatakan ketidaksesuaian terhadap pemenuhan persyaratan pengesahan KTT.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--accent)">2</div>
+        <div class="step-content">
+          <div class="step-title">Surat Keterangan Kompeten (Langsung Disahkan)</div>
+          <div class="step-desc">Apabila administrasi sudah sesuai <strong>DAN</strong> kondisi: pernah disahkan sebagai KTT sebelum terbitnya Permen ESDM No. 26 Tahun 2018 dan masih menjabat setelahnya selama lebih dari 2 tahun tanpa jeda lebih dari 5 tahun; <strong>ATAU</strong> pernah disahkan sebagai KTT setelah terbitnya Permen ESDM No. 26 Tahun 2018 dan menjabat lebih dari 2 tahun tanpa jeda lebih dari 5 tahun.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--blue)">3</div>
+        <div class="step-content">
+          <div class="step-title">Undangan Presentasi dan Diskusi</div>
+          <div class="step-desc">Apabila administrasi sudah sesuai <strong>DAN</strong> calon KTT diajukan untuk kelas yang lebih tinggi pada <strong>perusahaan yang sama</strong>.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--gold)">4</div>
+        <div class="step-content">
+          <div class="step-title">Undangan Uji Aspek Teknik dan Lingkungan</div>
+          <div class="step-desc">Apabila administrasi sudah sesuai <strong>DAN</strong>: belum pernah menjadi KTT; <strong>ATAU</strong> perusahaan mengajukan KTT kelas lebih tinggi pada perusahaan yang berbeda; <strong>ATAU</strong> pernah disahkan sebagai KTT namun ada jeda tidak menjabat sebagai KTT selama lebih dari <strong>5 tahun</strong>.</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-box">Evaluator juga melakukan <strong>verifikasi clearances</strong> terhadap calon KTT untuk memastikan calon KTT tidak menjabat sebagai KTT di perusahaan pertambangan lain dan tidak masuk dalam <strong>daftar blacklist KTT</strong>.</div>
+  </div>
+
+  <div id="pk1-uji">
+    <h3>B. Uji atau Presentasi dan Diskusi Dalam Rangka Pengesahan KTT</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Meminta usulan Tim Penguji</td><td>2 Hari</td><td>Surat permintaan usulan Tim Penguji</td></tr>
+          <tr><td>2</td><td>Menyampaikan penugasan Tim Penguji</td><td>2 Hari</td><td>Surat usulan Penugasan Tim Penguji</td></tr>
+          <tr><td>3</td><td>Menetapkan Panitia dan Tim Penguji</td><td>3 Hari</td><td>Surat penetapan Panitia dan Tim Penguji</td></tr>
+          <tr><td>4</td><td>Pelaksanaan Uji atau Presentasi dan Diskusi</td><td>3 Hari</td><td>Berita Acara</td></tr>
+          <tr><td>5</td><td>Membuat Surat Penyampaian Hasil Uji atau Presentasi dan Diskusi</td><td>2 Hari</td><td>Surat Penyampaian Hasil Uji atau Presentasi dan Diskusi</td></tr>
+          <tr><td>6</td><td>Menerbitkan Surat Penyampaian Hasil Uji atau Presentasi dan Diskusi</td><td>1 Hari</td><td>Arsip surat</td></tr>
+          <tr><td colspan="2"><strong>JUMLAH</strong></td><td><strong>12 Hari</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Ketentuan Tim Penguji</h4>
+    <ul>
+      <li>Tim penguji terdiri dari <strong>≥ 50% Inspektur Tambang (IT)</strong>, selebihnya adalah pejabat struktural yang membidangi aspek teknik dan lingkungan Minerba</li>
+      <li>Tim penguji <strong>paling sedikit sebanyak 3 orang</strong></li>
+    </ul>
+    <h4>Mekanisme Penilaian Uji</h4>
+    <ul>
+      <li><strong>Presentasi dan Diskusi</strong>: Tim penguji tidak melakukan penilaian, hanya memberikan masukan dan saran untuk peningkatan bagi calon KTT</li>
+      <li><strong>Uji</strong>: Tim penguji melakukan penilaian. Jika jumlah suara penguji yang menyatakan lulus <strong>&lt; 2/3 total suara</strong> → calon KTT dinyatakan <strong>belum lulus</strong> dan diberikan kesempatan mengulang <strong>1 kali</strong>. Jika mendapatkan suara penguji yang menyatakan lulus <strong>≥ 2/3 total suara</strong> → calon KTT dinyatakan <strong>lulus</strong></li>
+    </ul>
+    <div class="red-box"><strong>Konsekuensi tidak lulus:</strong> Apabila calon KTT setelah melaksanakan uji ulang namun tidak lulus, maka yang bersangkutan <strong>tidak dapat diajukan menjadi KTT selama 2 (dua) tahun</strong>.</div>
+  </div>
+</section>
+
+<!-- A.2 KECELAKAAN -->
+<section class="section" id="pk2">
+  <div class="section-badge"><span class="roman">A.2</span> Pemeriksaan Kecelakaan & Kejadian Berbahaya</div>
+  <h2>Pedoman Kerja Pemeriksaan Kecelakaan, Kejadian Berbahaya, Kejadian Akibat Penyakit Tenaga Kerja (KAPTK), dan Penyakit Akibat Kerja (PAK)</h2>
+
+  <h3>Alur Pemeriksaan Kecelakaan dan Kejadian Berbahaya</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Penyampaian Laporan Khusus Pemberitahuan Terjadinya Kecelakaan/Kejadian Berbahaya/KAPTK/PAK</td><td>Sesaat setelah terjadinya</td><td>Laporan Khusus Perusahaan</td></tr>
+        <tr><td>2</td><td>Penugasan Tim Investigasi</td><td>1 hari</td><td>Disposisi penugasan investigasi</td></tr>
+        <tr><td>3</td><td>Pembuatan Surat Tugas Pemeriksaan</td><td>1 hari</td><td>Draft Surat Tugas Pemeriksaan</td></tr>
+        <tr><td>4</td><td>Pelaksanaan Pemeriksaan</td><td>—</td><td>Dokumentasi Pemeriksaan, Berita Acara, Pendaftaran Buku Tambang</td></tr>
+        <tr><td>5</td><td>Pembuatan Laporan Pemeriksaan</td><td>10 hari</td><td>Laporan Hasil Pemeriksaan</td></tr>
+        <tr><td>6</td><td>Penyampaian Laporan Pemeriksaan</td><td>—</td><td>Laporan Hasil Pemeriksaan</td></tr>
+        <tr><td>7</td><td>Pembuatan Surat Hasil Pemeriksaan</td><td>1 hari</td><td>Surat hasil pemeriksaan</td></tr>
+        <tr><td>8</td><td>Pembuatan Surat Tindak Lanjut Pemeriksaan</td><td>1 hari</td><td>Surat Tindak Lanjut Pemeriksaan</td></tr>
+        <tr><td>9</td><td>Penyampaian Surat Tindak Lanjut Pemeriksaan</td><td>1 hari</td><td>Surat Tindak Lanjut Pemeriksaan</td></tr>
+        <tr><td colspan="2"><strong>TOTAL (Tahap 1)</strong></td><td><strong>15 hari</strong></td><td></td></tr>
+        <tr><td>10</td><td>Penyampaian Laporan Tindak Lanjut Pemeriksaan oleh Pelaku Usaha</td><td>1 hari</td><td>Laporan Tindak Lanjut dari Perusahaan</td></tr>
+        <tr><td>11</td><td>Penugasan Evaluasi Laporan Tindak Lanjut</td><td>1 hari</td><td>Penugasan Evaluasi</td></tr>
+        <tr><td>12</td><td>Evaluasi Laporan Tindak Lanjut Hasil Pemeriksaan</td><td>5 hari</td><td>Hasil Evaluasi Laporan Tindak Lanjut</td></tr>
+        <tr><td>13</td><td>Surat Evaluasi Laporan Tindak Lanjut Pemeriksaan</td><td>1 hari</td><td>Surat Balasan Tindak Lanjut</td></tr>
+        <tr><td>14</td><td>Penyampaian Surat Evaluasi Laporan Tindak Lanjut</td><td>1 hari</td><td>Surat Evaluasi Tindak Lanjut</td></tr>
+        <tr><td colspan="2"><strong>TOTAL (Tahap 2)</strong></td><td><strong>9 hari</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Ketentuan Penting</h3>
+  <h4>Pelaksana Pemeriksaan (Langkah 3)</h4>
+  <p>Penugasan dalam melaksanakan pemeriksaan dapat dilakukan oleh:</p>
+  <ul>
+    <li><strong>Evaluator (Inspektur Tambang)</strong>: apabila terjadi kecelakaan tambang berakibat <strong>mati</strong> dan/atau pertimbangan dari Direktur Teknik dan Lingkungan/KaIT</li>
+    <li><strong>Pelaku Usaha Pertambangan (KTT)</strong>: apabila terjadi kecelakaan tambang berakibat <strong>cidera ringan atau berat</strong>, kejadian berbahaya, kejadian akibat penyakit tenaga kerja, penyakit akibat kerja, dan/atau pertimbangan dari Direktur Teknik dan Lingkungan/KaIT</li>
+  </ul>
+  <div class="info-box">
+    <strong>Alur evaluasi tindak lanjut (langkah 10–14):</strong>
+    <ul style="margin-top:8px">
+      <li>Jika <strong>memadai</strong>: Gubernur/Kepala Dinas membuat Surat Evaluasi Laporan Tindak Lanjut berdasarkan surat hasil evaluasi dari Direktur Teknik dan Lingkungan/KaIT yang dinyatakan memadai</li>
+      <li>Jika <strong>belum memadai</strong>: Pelaku Usaha menerima surat hasil evaluasi yang dinyatakan belum memadai, diminta untuk memperbaiki tindak lanjut, dan proses kembali ke langkah 11</li>
+    </ul>
+  </div>
+</section>
+
+<!-- A.3 TANGKI -->
+<section class="section" id="pk3">
+  <div class="section-badge"><span class="roman">A.3</span> Evaluasi Kelayakan Tangki BBM</div>
+  <h2>Pedoman Kerja Evaluasi Kelayakan Tangki Bahan Bakar Cair</h2>
+  <p>Pedoman ini mencakup evaluasi kelayakan tangki bahan bakar cair baru yang diajukan oleh pelaku usaha pertambangan. Evaluasi dilakukan berdasarkan persyaratan teknis dan peraturan perundangan yang berlaku.</p>
+
+  <h3>Pengujian Teknis Kelayakan Tangki BBM</h3>
+  <div class="two-col">
+    <div class="col-card">
+      <h5>A. Pengujian Ketebalan Pelat Dinding</h5>
+      <ul><li><em>Shell Plate Thickness Test</em></li><li>Pengujian terhadap ketebalan pelat dinding tangki untuk memastikan kekuatan dan keamanan struktur</li></ul>
+    </div>
+    <div class="col-card">
+      <h5>B. Pengujian Hydrostatic & Leakage</h5>
+      <ul><li>Mengacu pada ANSI B16.34 (hydrostatic test)</li><li>Mengacu pada ANSI B16.104 (leakage test)</li></ul>
+    </div>
+    <div class="col-card">
+      <h5>C. Pengujian Plumbness / Ketegaklurusan</h5>
+      <ul><li>Pengujian ketegaklurusan tangki untuk memastikan posisi tangki tidak miring melebihi batas yang diizinkan</li></ul>
+    </div>
+    <div class="col-card">
+      <h5>D. Pengujian Tahanan Pembumian</h5>
+      <ul><li><em>Ground Resistance Test</em></li><li>Pengujian sistem pembumian (grounding) tangki untuk mencegah akumulasi muatan listrik statis</li></ul>
+    </div>
+  </div>
+  <div class="col-card" style="margin-top:16px">
+    <h5>E. Pemeriksaan dan Pengujian Visual</h5>
+    <ul><li>Pemeriksaan kondisi fisik tangki secara visual untuk mengidentifikasi adanya cacat, korosi, kebocoran, atau kerusakan lainnya yang dapat membahayakan keselamatan operasi</li></ul>
+  </div>
+</section>
+
+<!-- A.4 GUDANG PELEDAK -->
+<section class="section" id="pk4">
+  <div class="section-badge"><span class="roman">A.4</span> Evaluasi Kelayakan Gudang Bahan Peledak</div>
+  <h2>Pedoman Kerja Evaluasi Kelayakan Gudang Bahan Peledak</h2>
+
+  <h3>Alur Proses (Gudang Bahan Peledak Baru)</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content"><div class="step-title">Persetujuan RKAB Tahun N</div>
+      <div class="step-desc">Pelaku Usaha Pertambangan telah mendapatkan lembar persetujuan rencana pembangunan Gudang Bahan Peledak pada dokumen RKAB Tahun N.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content"><div class="step-title">Permohonan Surat Persetujuan Pembangunan Gudang <span class="time-tag">1 hari</span></div>
+      <div class="step-desc">Pengajuan surat permohonan dalam waktu <strong>14 hari setelah dokumen RKAB disetujui</strong>, melampirkan: (1) Lembar persetujuan RKAB pembangunan Gudang Bahan Peledak; (2) Dokumen teknis sesuai ketentuan pada <strong>Kepdirjen Minerba nomor 309.K/30/DJB/2018</strong>.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content"><div class="step-title">Penugasan Evaluasi Permohonan <span class="time-tag">1 hari</span></div>
+      <div class="step-desc">Direktur Teknik dan Lingkungan/KaIT menugaskan Evaluator (Inspektur Tambang) untuk melakukan evaluasi berdasarkan permintaan dari Gubernur/Kepala Dinas.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content"><div class="step-title">Pelaksanaan Evaluasi Permohonan Pembangunan Gudang <span class="time-tag">5 hari</span></div>
+      <div class="step-desc">Evaluator melakukan evaluasi terhadap seluruh persyaratan sesuai lembar <em>check list</em> evaluasi dan ketentuan peraturan perundangan.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content"><div class="step-title">Pembuatan Surat Hasil Evaluasi <span class="time-tag">1 hari</span></div>
+      <div class="step-desc">Jika memadai → Surat Persetujuan Pembangunan Gudang. Jika belum memadai → Pelaku Usaha diminta melengkapi dan proses kembali ke angka 3.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content"><div class="step-title">Penerbitan Surat Persetujuan Pembangunan Gudang <span class="time-tag">1 hari</span></div>
+      <div class="step-desc"><strong>Output:</strong> Surat Persetujuan Pembangunan Gudang Bahan Peledak. <strong>Total: 9 Hari.</strong></div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-content"><div class="step-title">Pembangunan Gudang</div>
+      <div class="step-desc">Pembangunan sesuai dengan lampiran gambar Surat Persetujuan Pembangunan Gudang Bahan Peledak, sesuai jadwal yang disetujui.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">8</div>
+      <div class="step-content"><div class="step-title">Permohonan Verifikasi Pembangunan Gudang (Kondisi 80%) <span class="time-tag">1 hari</span></div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">9–12</div>
+      <div class="step-content"><div class="step-title">Penugasan, Pembuatan Surat Tugas, Penyampaian Surat Tugas, dan Pelaksanaan Verifikasi <span class="time-tag">9 hari</span></div>
+      <div class="step-desc">Evaluator (Inspektur Tambang) melaksanakan verifikasi gudang bahan peledak kondisi 80%. Hasil verifikasi dituangkan dalam lembar <em>check list</em> dan berita acara hasil verifikasi.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">13–17</div>
+      <div class="step-content"><div class="step-title">Perbaikan, Evaluasi Kelayakan 100%, Pembuatan Surat Kelayakan, Penyampaian, dan Penggunaan <span class="time-tag">7 hari</span></div>
+      <div class="step-desc">Pelaku Usaha menyampaikan perbaikan hasil verifikasi beserta foto. Setelah dinyatakan 100%, diterbitkan <strong>Surat Kelayakan Gudang Bahan Peledak</strong> yang membolehkan gudang digunakan sesuai ketentuan peraturan.</div></div>
+    </div>
+  </div>
+  <div class="note-box"><strong>Referensi teknis:</strong> Ketentuan teknis persyaratan gudang bahan peledak mengacu pada <strong>Kepdirjen Minerba Nomor 309.K/30/DJB/2018</strong>.</div>
+</section>
+
+<!-- A.5 KIM KPP -->
+<section class="section" id="pk5">
+  <div class="section-badge"><span class="roman">A.5</span> Evaluasi KIM &amp; KPP Madya</div>
+  <h2>Pedoman Kerja Evaluasi Kartu Izin Meledakkan (KIM) dan Kartu Pekerja Peledakan Madya (KPP Madya)</h2>
+  <p>Pedoman ini mengatur alur kerja evaluasi permohonan penerbitan <strong>Kartu Izin Meledakkan (KIM)</strong> dan <strong>Kartu Pekerja Peledakan Madya (KPP Madya)</strong> bagi personel yang akan melaksanakan pekerjaan peledakan pada kegiatan pertambangan mineral bukan logam dan batuan.</p>
+  <h3>Alur Kerja Evaluasi</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Pengajuan Permohonan KIM/KPP Madya</div><div class="step-desc">Pelaku Usaha Pertambangan mengajukan permohonan kepada Gubernur/Kepala Dinas dengan dokumen kelengkapan permohonan.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Penugasan Evaluasi</div><div class="step-desc">Direktur Teknik dan Lingkungan/KaIT menugaskan Evaluator (Inspektur Tambang) untuk melakukan evaluasi.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Pelaksanaan Evaluasi</div><div class="step-desc">Evaluator melakukan evaluasi terhadap seluruh persyaratan permohonan sesuai peraturan perundangan.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Pembuatan Surat Hasil Evaluasi</div><div class="step-desc">Gubernur/Kepala Dinas membuat surat berdasarkan surat hasil evaluasi dari Direktur Teknik dan Lingkungan/KaIT. Jika memadai → Penerbitan KIM/KPP Madya. Jika belum memadai → Pelaku Usaha diminta melengkapi.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">Penerbitan KIM/KPP Madya</div><div class="step-desc">KIM/KPP Madya dicetak sesuai format yang ditetapkan oleh peraturan perundangan.</div></div></div>
+  </div>
+</section>
+
+<!-- A.6 PELEDAKAN TIDUR -->
+<section class="section" id="pk6">
+  <div class="section-badge"><span class="roman">A.6</span> Evaluasi Peledakan Tidur (Sleep Blasting)</div>
+  <h2>Pedoman Kerja Evaluasi Peledakan Tidur (Sleep Blasting)</h2>
+  <p>Peledakan Tidur (<em>Sleep Blasting</em>) adalah kondisi di mana bahan peledak telah dimasukkan ke dalam lubang bor tetapi tidak diledakkan pada hari yang sama. Pedoman ini mencakup dua alur: persetujuan baru dan perpanjangan.</p>
+
+  <div id="pk6-baru">
+    <h3>A. Peledakan Tidur Baru</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Persetujuan RKAB Tahun N (termasuk rencana Peledakan Tidur)</td><td>—</td><td>Lampiran Persetujuan Peledakan Tidur Tahun N yang telah disetujui</td></tr>
+          <tr><td>2</td><td>Pengajuan Surat Permohonan Persetujuan Peledakan Tidur</td><td>1 hari</td><td>Surat perusahaan dengan lampiran dokumen teknis latar belakang dan pelaksanaan</td></tr>
+          <tr><td>3</td><td>Penugasan Evaluasi Permohonan</td><td>2 hari</td><td>Lembar Disposisi</td></tr>
+          <tr><td>4</td><td>Pelaksanaan Evaluasi Permohonan Peledakan Tidur</td><td>10 hari</td><td>Surat tanggapan peledakan tidur</td></tr>
+          <tr><td>5</td><td>Penerbitan Surat Tanggapan Peledakan Tidur</td><td>1 hari</td><td>Surat tanggapan peledakan tidur</td></tr>
+          <tr><td colspan="2"><strong>Total (Persetujuan Simulasi)</strong></td><td><strong>14 hari</strong></td><td></td></tr>
+          <tr><td>6</td><td>Pelaporan Hasil Simulasi Peledakan Tidur dan Permohonan Verifikasi</td><td>1 hari</td><td>Lembar Disposisi</td></tr>
+          <tr><td>7</td><td>Penugasan Verifikasi Hasil Simulasi Peledakan Tidur</td><td>1 hari</td><td>Surat tugas verifikasi peledakan tidur</td></tr>
+          <tr><td>8</td><td>Verifikasi Peledakan Tidur</td><td>9 hari</td><td>Berita Acara hasil verifikasi peledakan tidur</td></tr>
+          <tr><td>9</td><td>Pembuatan Surat Hasil Verifikasi Peledakan Tidur</td><td>—</td><td>Surat hasil verifikasi</td></tr>
+          <tr><td>10</td><td>Pembuatan Surat Persetujuan Peledakan Tidur</td><td>1 hari</td><td>Surat persetujuan peledakan tidur</td></tr>
+          <tr><td>11</td><td>Penerbitan Surat Persetujuan Peledakan Tidur</td><td>1 hari</td><td>Surat persetujuan peledakan tidur</td></tr>
+          <tr><td colspan="2"><strong>Total (Verifikasi & Persetujuan)</strong></td><td><strong>14 hari</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>Ketentuan Pengajuan Permohonan</h4>
+    <ul>
+      <li>Pengajuan surat permohonan dilakukan dalam waktu <strong>14 hari setelah dokumen RKAB disetujui</strong></li>
+      <li>Dokumen teknis meliputi: <strong>latar belakang</strong> dan <strong>pelaksanaan</strong> peledakan tidur</li>
+    </ul>
+    <h4>Prosedur Evaluasi (Langkah 4)</h4>
+    <ul>
+      <li>Evaluator membuat konsep surat hasil evaluasi berupa <strong>penolakan</strong> atau <strong>diperbolehkan untuk melakukan simulasi</strong></li>
+      <li>Jika belum memadai: Pelaku Usaha menerima Surat Tanggapan yang meminta melengkapi dan/atau menindaklanjuti dokumen, dan proses kembali ke angka 3</li>
+      <li>Jika memadai: Pelaku Usaha dapat melakukan <strong>simulasi peledakan tidur</strong></li>
+    </ul>
+    <h4>Dokumen untuk Permohonan Verifikasi (Langkah 6)</h4>
+    <ul>
+      <li>Surat Simulasi Peledakan Tidur</li>
+      <li>Dokumentasi simulasi peledakan tidur</li>
+    </ul>
+  </div>
+
+  <div id="pk6-perpanjang">
+    <h3>B. Perpanjangan Persetujuan Peledakan Tidur</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Pengajuan Surat Permohonan Perpanjangan Persetujuan Peledakan Tidur</td><td>1 hari</td><td>Surat permohonan, surat persetujuan peledakan tidur sebelumnya, dokumentasi peledakan tidur</td></tr>
+          <tr><td>2</td><td>Penugasan Verifikasi Peledakan Tidur</td><td>1 hari</td><td>Lembar disposisi</td></tr>
+          <tr><td>3</td><td>Pembuatan Surat Tugas Verifikasi Peledakan Tidur</td><td>1 hari</td><td>Surat tugas verifikasi peledakan tidur</td></tr>
+          <tr><td>4</td><td>Verifikasi Peledakan Tidur</td><td>5 hari</td><td>Berita Acara hasil verifikasi peledakan tidur</td></tr>
+          <tr><td>5</td><td>Pembuatan Surat Hasil Verifikasi Peledakan Tidur</td><td>1 hari</td><td>Surat hasil verifikasi</td></tr>
+          <tr><td>6</td><td>Pembuatan Surat Persetujuan Perpanjangan Peledakan Tidur</td><td>1 hari</td><td>Surat persetujuan perpanjangan peledakan tidur</td></tr>
+          <tr><td>7</td><td>Penerbitan Surat Persetujuan Perpanjangan Peledakan Tidur</td><td>1 hari</td><td>Surat persetujuan perpanjangan peledakan tidur</td></tr>
+          <tr><td colspan="2"><strong>Total</strong></td><td><strong>14 hari</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="blue-box"><strong>Catatan alur perpanjangan:</strong> Jika hasil verifikasi dinyatakan belum memadai oleh Direktur Teknik dan Lingkungan/KaIT, Pelaku Usaha diminta untuk menindaklanjuti dan proses kembali ke langkah 2. Jika dinyatakan memadai, Gubernur/Kepala Dinas menerbitkan Surat Persetujuan Perpanjangan Peledakan Tidur.</div>
+  </div>
+</section>
+
+<!-- A.7 KPO -->
+<section class="section" id="pk7">
+  <div class="section-badge"><span class="roman">A.7</span> Evaluasi KPO</div>
+  <h2>Pedoman Kerja Evaluasi Permohonan Kartu Pengawas Operasional (KPO)</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Pengajuan Permohonan KPO</td><td>1 Hari</td><td>Dokumen permohonan KPO</td></tr>
+        <tr><td>2</td><td>Penugasan Evaluasi KPO</td><td>1 Hari</td><td>Lembar Disposisi dan Dokumen permohonan KPO</td></tr>
+        <tr><td>3</td><td>Melakukan Evaluasi Permohonan KPO</td><td>5 Hari</td><td>Lembar Hasil Evaluasi</td></tr>
+        <tr><td>4</td><td>Membuat Surat Tanggapan Permohonan KPO</td><td>3 Hari</td><td>Surat Tanggapan KPO</td></tr>
+        <tr><td>5</td><td>Penerbitan Surat Tanggapan Permohonan KPO</td><td>1 Hari</td><td>Surat Tanggapan KPO</td></tr>
+        <tr><td colspan="2"><strong>JUMLAH</strong></td><td><strong>11 Hari</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Keterangan</h3>
+  <ul>
+    <li>Pelaku Usaha Pertambangan mengajukan permohonan KPO sesuai dengan persyaratan perundangan kepada Gubernur/Kepala Dinas</li>
+    <li>Direktur Teknik dan Lingkungan/KaIT menugaskan Evaluator (Inspektur Tambang) untuk melakukan evaluasi berdasarkan surat permintaan dari Gubernur/Kepala Dinas</li>
+    <li>Evaluator melakukan evaluasi terhadap seluruh persyaratan permohonan KPO sesuai peraturan perundangan; Direktur Teknik dan Lingkungan Minerba/KaIT memeriksa dan menandatangani surat hasil evaluasi</li>
+    <li>Gubernur/Kepala Dinas membuat Surat Tanggapan Permohonan KPO berdasarkan Surat Hasil Evaluasi. <strong>KPO dicetak sesuai dengan format yang telah ditetapkan oleh peraturan perundangan</strong></li>
+  </ul>
+  <div class="note-box"><strong>Pengembalian KPO:</strong> Pelaku Usaha Pertambangan dapat mengembalikan KPO kepada Gubernur/Kepala Dinas dengan kondisi pemegang KPO <strong>tidak lagi menjadi pengawas atau tidak lagi bekerja di perusahaan tersebut</strong>.</div>
+</section>
+
+<!-- A.8 BUKU TAMBANG -->
+<section class="section" id="pk8">
+  <div class="section-badge"><span class="roman">A.8</span> Evaluasi Buku Tambang &amp; Buku Daftar Kecelakaan</div>
+  <h2>Pedoman Kerja Evaluasi Buku Tambang dan/atau Buku Daftar Kecelakaan Tambang</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Pengajuan Permohonan Buku Tambang dan/atau Buku Daftar Kecelakaan Tambang</td><td>1 hari</td><td>Surat permohonan Buku Tambang dan/atau Buku Daftar Kecelakaan Tambang</td></tr>
+        <tr><td>2</td><td>Penugasan Evaluasi Permohonan</td><td>1 hari</td><td>Lembar disposisi dan dokumen permohonan</td></tr>
+        <tr><td>3</td><td>Pelaksanaan Evaluasi Permohonan</td><td>5 hari</td><td>Hasil evaluasi permohonan Buku Tambang dan/atau Buku Daftar Kecelakaan Tambang</td></tr>
+        <tr><td>4</td><td>Pembuatan Draft Surat Pemberian/Tanggapan</td><td>3 hari</td><td>Surat Pemberian/Tanggapan Permohonan</td></tr>
+        <tr><td>5</td><td>Penerbitan Surat Pemberian/Tanggapan</td><td>1 hari</td><td>Surat Pemberian/Tanggapan Permohonan</td></tr>
+        <tr><td colspan="2"><strong>Total</strong></td><td><strong>11 hari</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Ketentuan Evaluasi Permohonan (Langkah 3)</h3>
+  <p>Evaluator memastikan kondisi sebagai berikut:</p>
+  <ol>
+    <li><strong>Baru (belum pernah mendapatkan)</strong>: Memastikan bahwa Pelaku Usaha Pertambangan yang mengajukan permohonan belum pernah mendapatkan Buku Tambang dan/atau Buku Daftar Kecelakaan Tambang sebelumnya</li>
+    <li><strong>Rusak</strong>: Pelaku Usaha harus menyampaikan bukti-bukti berupa foto yang menggambarkan kerusakan pada Buku Tambang sehingga tidak layak dipergunakan</li>
+    <li><strong>Hilang</strong>: Pimpinan perusahaan harus menyampaikan surat permintaan dilengkapi dengan <strong>Surat Pernyataan Telah Kehilangan</strong> oleh instansi yang berwenang</li>
+    <li><strong>Halaman habis terpakai</strong>: Surat permohonan harus disampaikan dengan foto yang menggambarkan kondisi tersebut</li>
+  </ol>
+  <div class="info-box"><strong>Catatan pemberian Buku Tambang:</strong> Buku Tambang yang dilampirkan agar <strong>diberi nomor dan diparaf oleh Inspektur Tambang pada tiap halaman</strong>.</div>
+</section>
+
+<!-- A.9 KAJIAN TEKNIS -->
+<section class="section" id="pk9">
+  <div class="section-badge"><span class="roman">A.9</span> Evaluasi Laporan Kajian Teknis Keselamatan</div>
+  <h2>Pedoman Kerja Evaluasi Laporan Hasil Kajian Teknis Pertambangan — Aspek Keselamatan Pertambangan</h2>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Penyampaian Laporan Hasil Kajian Teknis Pertambangan Aspek Keselamatan Pertambangan</td><td>1 hari</td><td>Dokumen laporan</td></tr>
+        <tr><td>2</td><td>Penugasan Evaluasi Laporan Hasil Kajian Teknis Aspek Keselamatan Pertambangan</td><td>1 hari</td><td>Lembar disposisi</td></tr>
+        <tr><td>3</td><td>Pelaksanaan Evaluasi Laporan Hasil Kajian Teknis Pertambangan Aspek Keselamatan Pertambangan</td><td>10 hari</td><td>Hasil evaluasi laporan</td></tr>
+        <tr><td>4</td><td>Pembuatan Surat Tanggapan Evaluasi Laporan Hasil Kajian Teknis Pertambangan Aspek Keselamatan Pertambangan</td><td>1 hari</td><td>Surat tanggapan</td></tr>
+        <tr><td>5</td><td>Penerbitan Surat Tanggapan Evaluasi Laporan Hasil Kajian Teknis Pertambangan Aspek Keselamatan Pertambangan</td><td>1 hari</td><td>Surat tanggapan</td></tr>
+        <tr><td colspan="2"><strong>Total</strong></td><td><strong>14 hari</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Keterangan</h3>
+  <ul>
+    <li>Pelaku Usaha Pertambangan menyampaikan surat pengantar laporan hasil kajian teknis pertambangan sesuai dengan <strong>format yang ditetapkan dalam peraturan perundangan</strong></li>
+    <li>Evaluator melaksanakan evaluasi terhadap laporan hasil kajian teknis pertambangan yang hasilnya tertera pada lembar evaluasi serta mengkonsepkan surat hasil evaluasi; kemudian Direktur Teknik dan Lingkungan memeriksa dan menandatangani surat hasil evaluasi</li>
+    <li>Gubernur/Kepala Dinas membuat surat tanggapan evaluasi laporan berdasarkan Surat Hasil Evaluasi dari Direktur Teknik dan Lingkungan/KaIT yang dinyatakan memadai</li>
+    <li>Pelaku Usaha Pertambangan yang menerima surat hasil evaluasi belum memadai diminta untuk menindaklanjuti dan proses kembali ke angka 2</li>
+  </ul>
+</section>
+
+<!-- B. LINGKUNGAN -->
+<section class="section" id="aspB">
+  <div class="section-badge"><span class="roman">B</span> Aspek Perlindungan Lingkungan</div>
+  <h2>B. Aspek Perlindungan Lingkungan</h2>
+  <p>Lampiran II Aspek Perlindungan Lingkungan terdiri dari 4 (empat) Pedoman Kerja:</p>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Pedoman Kerja</th><th>Keterangan</th></tr></thead>
+      <tbody>
+        <tr><td>B.1</td><td><strong>Evaluasi Rencana Reklamasi dan Penetapan Jaminan Reklamasi</strong></td><td>Evaluasi dokumen rencana reklamasi yang diajukan oleh pelaku usaha pertambangan serta penetapan besaran jaminan reklamasi yang harus ditempatkan</td></tr>
+        <tr><td>B.2</td><td><strong>Evaluasi Rencana Pascatambang dan Penetapan Jaminan Pascatambang</strong></td><td>Evaluasi dokumen rencana pascatambang serta penetapan besaran jaminan pascatambang yang harus ditempatkan</td></tr>
+        <tr><td>B.3</td><td><strong>Evaluasi Pencairan/Pelepasan Jaminan Reklamasi</strong></td><td>Evaluasi permohonan pencairan/pelepasan jaminan reklamasi berdasarkan pelaksanaan dan tingkat keberhasilan reklamasi yang dilakukan oleh pelaku usaha pertambangan</td></tr>
+        <tr><td>B.4</td><td><strong>Evaluasi Pencairan/Pelepasan Jaminan Pascatambang</strong></td><td>Evaluasi permohonan pencairan/pelepasan jaminan pascatambang berdasarkan pelaksanaan dan tingkat keberhasilan kegiatan pascatambang</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note-box">Ketentuan lengkap mengenai reklamasi dan pascatambang mengacu pada <strong>Lampiran VI Keputusan Menteri ESDM Nomor 1827 K/30/MEM/2018</strong> tentang Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik.</div>
+</section>
+
+<!-- C. TEKNIS TANDA BATAS -->
+<section class="section" id="aspC">
+  <div class="section-badge"><span class="roman">C</span> Penetapan Tanda Batas WIUP</div>
+  <h2>C. Aspek Teknis Pertambangan — Penetapan Tanda Batas WIUP Mineral Bukan Logam dan Batuan</h2>
+  <p>Lampiran II Aspek Teknis Pertambangan terdiri dari 2 (dua) pedoman:</p>
+  <ul>
+    <li><strong>Pedoman Kerja</strong> Penetapan Tanda Batas WIUP Mineral Bukan Logam dan Batuan</li>
+    <li><strong>Petunjuk Teknis</strong> Penetapan Tanda Batas WIUP Mineral Bukan Logam dan Batuan</li>
+  </ul>
+
+  <h3>Alur Kerja Penetapan Tanda Batas WIUP</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content"><div class="step-title">Penyampaian Rencana Kerja Pemasangan Tanda Batas WIUP dan Permohonan Pengumuman</div>
+      <div class="step-desc">Pelaku Usaha Pertambangan menyampaikan Rencana Kerja Pemasangan Tanda Batas WIUP dan permohonan Pengumuman Rencana Pemasangan Tanda Batas WIUP kepada Gubernur.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content"><div class="step-title">Penugasan/Disposisi Evaluasi Rencana Kerja <span class="time-tag">2 hari</span></div>
+      <div class="step-desc">Gubernur memberi penugasan kepada Kepala Dinas, kemudian Kepala Dinas menugaskan Inspektur Tambang untuk melakukan evaluasi Rencana Kerja.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content"><div class="step-title">Pelaksanaan Evaluasi Rencana Kerja <span class="time-tag">3 hari</span></div>
+      <div class="step-desc">Inspektur Tambang melakukan evaluasi dan menyampaikan hasil kepada Kepala Dinas. Kepala Dinas membuat Surat Tindak Lanjut atau Konsep Pengumuman Rencana Pemasangan Tanda Batas WIUP.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content"><div class="step-title">Penyampaian Surat Tindak Lanjut dan Pengumuman Rencana Pemasangan Tanda Batas WIUP</div>
+      <div class="step-desc">Jika Rencana Kerja <strong>tidak memadai</strong>: Kepala Dinas mengirimkan Surat Tindak Lanjut kepada Pelaku Usaha. Jika Rencana Kerja <strong>telah memadai dan disetujui</strong>: Gubernur menandatangani Pengumuman Rencana Pemasangan Tanda Batas WIUP dan mengirimkannya kepada Pelaku Usaha.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content"><div class="step-title">Pelaksanaan Kegiatan Pemasangan Tanda Batas</div>
+      <div class="step-desc">Pelaku Usaha melaksanakan kegiatan sesuai Rencana Kerja yang telah disetujui, meliputi:
+      <ul><li>Pengumuman &amp; sosialisasi</li><li>Koordinasi</li><li>Kompilasi data wilayah &amp; persiapan teknis</li><li>Pengukuran titik batas</li><li>Pemasangan Tanda Batas</li><li>Pembuatan Berita Acara</li><li>Pelaporan pelaksanaan pemasangan Tanda Batas</li></ul></div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-content"><div class="step-title">Penyampaian Permohonan Penetapan Tanda Batas WIUP</div>
+      <div class="step-desc">Pelaku Usaha menyampaikan Surat Permohonan Penetapan Tanda Batas WIUP kepada Gubernur dengan melampirkan Laporan Pemasangan Tanda Batas WIUP.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">7–8</div>
+      <div class="step-content"><div class="step-title">Penugasan dan Pelaksanaan Evaluasi Permohonan Penetapan Tanda Batas WIUP <span class="time-tag">2+5 hari</span></div>
+      <div class="step-desc">Gubernur → Kepala Dinas → Inspektur Tambang. Evaluasi permohonan penetapan terhadap laporan pemasangan tanda batas. Jika tidak memadai → Surat Tindak Lanjut kepada Pelaku Usaha. Jika memadai → lanjut ke pembuatan SK Penetapan.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">9</div>
+      <div class="step-content"><div class="step-title">Pembuatan Konsep Surat Keputusan (SK) Penetapan Tanda Batas WIUP</div>
+      <div class="step-desc">Kepala Dinas membuat Konsep SK Penetapan Tanda Batas WIUP dengan lampiran: koordinat Tanda Batas dan peta situasi Tanda Batas. Diterbitkan apabila hasil evaluasi Laporan Pemasangan Tanda Batas telah memadai.</div></div>
+    </div>
+    <div class="step">
+      <div class="step-num">10</div>
+      <div class="step-content"><div class="step-title">Penyampaian Surat Keputusan Penetapan Tanda Batas WIUP <span class="time-tag">3 hari</span></div>
+      <div class="step-desc">Gubernur menandatangani dan menyampaikan SK Penetapan Tanda Batas WIUP kepada Pelaku Usaha Pertambangan. <strong>Total: 15 hari*</strong></div></div>
+    </div>
+  </div>
+  <div class="info-box"><strong>Output akhir:</strong> Surat Keputusan Penetapan Tanda Batas WIUP beserta lampiran koordinat Tanda Batas terpasang dan peta situasi Tanda Batas.</div>
+</section>
+
+<!-- D. IUJP -->
+<section class="section" id="aspD">
+  <div class="section-badge"><span class="roman">D</span> Evaluasi IUJP</div>
+  <h2>D. Aspek Standardisasi dan Usaha Jasa — Pedoman Kerja Evaluasi Permohonan IUJP</h2>
+  <p>Pedoman ini mengatur alur kerja evaluasi permohonan <strong>Izin Usaha Jasa Pertambangan (IUJP)</strong> yang diajukan oleh Pelaku Usaha Jasa Pertambangan melalui sistem OSS (Online Single Submission).</p>
+
+  <h3>Para Pelaku dalam Proses Evaluasi IUJP</h3>
+  <div class="actor-row">
+    <div class="actor"><span class="dot dot-gray"></span>BKPM/OSS</div>
+    <div class="actor"><span class="dot dot-blue"></span>Gubernur</div>
+    <div class="actor"><span class="dot dot-green"></span>PTSP / Kepala Dinas</div>
+    <div class="actor"><span class="dot dot-gold"></span>Pelaku Usaha Jasa Pertambangan</div>
+    <div class="actor"><span class="dot dot-red"></span>Evaluator (ASN Pemda / Instansi Teknis)</div>
+  </div>
+
+  <h3>Alur Kerja Evaluasi IUJP</h3>
+  <div class="table-wrapper">
+    <table>
+      <thead><tr><th>No.</th><th>Kegiatan</th><th>Waktu</th><th>Output</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Penyampaian Dokumen Permohonan IUJP</td><td>1 hari</td><td>Dokumen Permohonan IUJP</td></tr>
+        <tr><td>2</td><td>Penugasan Pelaksanaan Evaluasi Dokumen Permohonan IUJP</td><td>1 hari</td><td>Lembar Disposisi</td></tr>
+        <tr><td>3</td><td>Pelaksanaan Evaluasi Dokumen Permohonan IUJP</td><td>5 hari</td><td>Hasil evaluasi / Rekomendasi</td></tr>
+        <tr><td>4</td><td>Pelaporan Hasil Evaluasi Dokumen Permohonan IUJP</td><td>1 hari</td><td>Laporan Hasil evaluasi / Rekomendasi</td></tr>
+        <tr><td>5</td><td>Pembuatan Konsep Persetujuan/Penolakan Dokumen Permohonan IUJP</td><td>1 hari</td><td>Konsep Surat persetujuan/penolakan</td></tr>
+        <tr><td>6</td><td>Persetujuan/Penolakan Dokumen Permohonan IUJP</td><td>1 hari</td><td>Persetujuan/Penolakan kepada Pelaku Usaha Jasa Pertambangan</td></tr>
+        <tr><td colspan="2"><strong>Total</strong></td><td><strong>10 hari</strong></td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Keterangan Alur</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Penyampaian Dokumen Permohonan IUJP</div>
+    <div class="step-desc">Pelaku Usaha menyiapkan dan menyampaikan dokumen Permohonan IUJP kepada <strong>BKPM/OSS</strong>. BKPM/OSS memberikan hak akses evaluasi permohonan IUJP kepada Gubernur. Gubernur menyampaikan hak akses permohonan dokumen IUJP kepada PTSP/Kepala Dinas.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Penugasan Evaluasi</div>
+    <div class="step-desc">PTSP/Kepala Dinas mendisposisikan kepada evaluator untuk melaksanakan tugas evaluasi dokumen permohonan IUJP. Evaluator menerima disposisi dari PTSP/Kepala Dinas.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Pelaksanaan Evaluasi</div>
+    <div class="step-desc">Evaluator melakukan evaluasi terhadap dokumen Permohonan IUJP.</div></div></div>
+    <div class="step"><div class="step-num">4–5</div><div class="step-content"><div class="step-title">Pelaporan Hasil Evaluasi dan Pembuatan Konsep Persetujuan/Penolakan</div>
+    <div class="step-desc">Evaluator menyiapkan hasil evaluasi dan rekomendasi. PTSP/Kepala Dinas memeriksa. Evaluator menyiapkan konsep/draft persetujuan/penolakan.</div></div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-content"><div class="step-title">Persetujuan/Penolakan Dokumen Permohonan IUJP</div>
+    <div class="step-desc">Evaluator menyampaikan konsep/draft kepada PTSP/Kepala Dinas. PTSP/Kepala Dinas memeriksa dan menyampaikan ke BKPM/OSS. <strong>BKPM/OSS menandatangani persetujuan/penolakan</strong>. BKPM/OSS menyampaikan persetujuan/penolakan kepada Direksi Pelaku Usaha Pertambangan.</div></div></div>
+  </div>
+  <div class="note-box"><strong>Catatan:</strong> Gubernur dapat menyampaikan hak akses yang diberikan oleh BKPM/OSS kepada PTSP/Kepala Dinas.</div>
+</section>
+
+</main>
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    const oc = n.getAttribute('onclick') || '';
+    if (oc === `showSection('${id}')`) n.classList.add('active');
+  });
+  window.scrollTo(0, 0);
+  closeSidebar();
+  clearSearch();
+}
+function scrollTo(id) {
+  setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
+}
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+let matches = [], matchIdx = -1;
+const originalHTML = {};
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchCount').style.display = 'none';
+  restoreAll(); matches = []; matchIdx = -1;
+}
+function saveOriginals() {
+  document.querySelectorAll('.section').forEach(s => { if (!originalHTML[s.id]) originalHTML[s.id] = s.innerHTML; });
+}
+function restoreAll() {
+  document.querySelectorAll('.section').forEach(s => { if (originalHTML[s.id]) s.innerHTML = originalHTML[s.id]; });
+}
+function doSearch() {
+  const q = document.getElementById('searchInput').value.trim();
+  const countEl = document.getElementById('searchCount');
+  if (!q) { restoreAll(); countEl.style.display = 'none'; matches = []; matchIdx = -1; return; }
+  saveOriginals(); restoreAll();
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(escaped, 'gi');
+  let count = 0;
+  document.querySelectorAll('.section').forEach(sec => {
+    const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null, false);
+    const textNodes = [];
+    let node;
+    while (node = walker.nextNode()) { if (!['SCRIPT','STYLE'].includes(node.parentElement.tagName)) textNodes.push(node); }
+    textNodes.forEach(tn => {
+      const text = tn.textContent;
+      if (regex.test(text)) {
+        regex.lastIndex = 0;
+        const span = document.createElement('span');
+        span.innerHTML = text.replace(regex, m => `<mark>${m}</mark>`);
+        tn.parentNode.replaceChild(span, tn);
+        count += (text.match(regex) || []).length;
+        regex.lastIndex = 0;
+      }
+      regex.lastIndex = 0;
+    });
+  });
+  matches = [...document.querySelectorAll('mark')];
+  matchIdx = -1;
+  if (count > 0) {
+    countEl.textContent = `${count} hasil`;
+    countEl.style.display = 'block';
+    nextMatch();
+  } else {
+    countEl.textContent = 'Tidak ditemukan';
+    countEl.style.display = 'block';
+  }
+}
+function nextMatch() {
+  if (!matches.length) return;
+  if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+  matchIdx = (matchIdx + 1) % matches.length;
+  const m = matches[matchIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('section')) el = el.parentElement;
+  if (el) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); el.classList.add('active'); }
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function prevMatch() {
+  if (!matches.length) return;
+  if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+  matchIdx = (matchIdx - 1 + matches.length) % matches.length;
+  const m = matches[matchIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('section')) el = el.parentElement;
+  if (el) { document.querySelectorAll('.section').forEach(s => s.classList.remove('active')); el.classList.add('active'); }
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+function searchNav(e) {
+  if (e.key === 'Enter') { e.shiftKey ? prevMatch() : nextMatch(); }
+  if (e.key === 'Escape') clearSearch();
+}
+window.addEventListener('load', saveOriginals);
+</script>
+</body>
+</html>

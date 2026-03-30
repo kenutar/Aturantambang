@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepmen ESDM No. 1827 K/30/MEM/2018</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ec;
+    --paper: #fdfaf5;
+    --ink: #1a1510;
+    --ink-light: #4a4035;
+    --ink-muted: #8a7d6e;
+    --accent: #c4381e;
+    --accent-light: #e8c4bc;
+    --accent-pale: #faf0ee;
+    --gold: #b8860b;
+    --gold-light: #f0e8cc;
+    --border: #d8cfc0;
+    --sidebar-w: 300px;
+    --nav-h: 64px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP NAV ── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: var(--ink);
+    display: flex; align-items: center; gap: 20px;
+    padding: 0 24px;
+    z-index: 200;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .topbar-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .topbar-logo span { color: var(--accent); }
+
+  .search-wrapper {
+    flex: 1;
+    max-width: 560px;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 10px 44px 10px 16px;
+    border: 1.5px solid #3a3028;
+    border-radius: 6px;
+    background: #2a2018;
+    color: var(--paper);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: var(--ink-muted); }
+  .search-input:focus { border-color: var(--accent); }
+  .search-icon {
+    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--ink-muted);
+    pointer-events: none;
+    font-size: 1rem;
+  }
+  .search-count {
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    font-size: 0.75rem; color: var(--gold);
+    display: none;
+  }
+
+  .search-nav-btns {
+    display: flex; gap: 4px; flex-shrink: 0;
+  }
+  .search-nav-btn {
+    background: #3a3028; border: none; color: var(--paper);
+    width: 30px; height: 30px; border-radius: 4px;
+    cursor: pointer; font-size: 0.9rem; display: flex;
+    align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .search-nav-btn:hover { background: var(--accent); }
+
+  .sidebar-toggle {
+    background: none; border: none; color: var(--paper);
+    font-size: 1.3rem; cursor: pointer; padding: 4px;
+    display: none;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    padding-top: var(--nav-h);
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: var(--ink);
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    bottom: 0;
+    overflow-y: auto;
+    padding: 20px 0;
+    transition: transform 0.3s;
+    z-index: 100;
+  }
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #3a3028; border-radius: 2px; }
+
+  .sidebar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 20px 12px;
+    border-bottom: 1px solid #2a2018;
+    margin-bottom: 8px;
+  }
+
+  .nav-item {
+    display: block;
+    padding: 10px 20px;
+    color: #c0b090;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.18s;
+    line-height: 1.4;
+  }
+  .nav-item:hover { color: var(--paper); background: #2a2018; border-left-color: var(--accent); }
+  .nav-item.active { color: var(--paper); background: #2a2018; border-left-color: var(--accent); font-weight: 600; }
+  .nav-item.sub { padding-left: 32px; font-size: 0.82rem; color: #8a7d6e; }
+  .nav-item.sub:hover, .nav-item.sub.active { color: #c0b090; }
+
+  .nav-lampiran-header {
+    padding: 14px 20px 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #4a3a28;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    padding: 40px 56px;
+    max-width: 900px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .doc-header {
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+  }
+  .doc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  .doc-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  .doc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .doc-subtitle {
+    font-size: 1.05rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 36px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+  }
+  h2:first-child { margin-top: 0; }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 28px 0 12px;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink-light);
+    margin: 20px 0 8px;
+    font-family: 'Source Sans 3', sans-serif;
+  }
+
+  p {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 12px;
+  }
+
+  ul, ol {
+    padding-left: 22px;
+    margin-bottom: 14px;
+  }
+  li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink-light);
+    margin-bottom: 5px;
+  }
+  li strong { color: var(--ink); }
+
+  /* ── TABLES ── */
+  .table-wrapper {
+    overflow-x: auto;
+    margin: 16px 0 24px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  thead {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.83rem;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: var(--accent-pale); }
+  tbody tr:hover { background: var(--gold-light); }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-light);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  td strong { color: var(--ink); }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: var(--gold-light);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+  .info-box strong { color: var(--ink); }
+
+  .note-box {
+    background: var(--accent-pale);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 0.92rem;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+
+  /* ── HIGHLIGHT (search) ── */
+  mark {
+    background: #ffe066;
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+  mark.current {
+    background: var(--accent);
+    color: white;
+  }
+
+  /* ── LAMPIRAN BADGE ── */
+  .lampiran-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    padding: 6px 16px 6px 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  .lampiran-badge .roman {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  /* ── HOME PAGE ── */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .card:hover::before { transform: scaleX(1); }
+  .card-roman {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .card-sub {
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-toggle { display: flex; }
+    .main { margin-left: 0; padding: 24px 20px; }
+    .home-grid { grid-template-columns: 1fr; }
+    .doc-title { font-size: 1.6rem; }
+    .topbar-logo { display: none; }
+  }
+
+  .overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+  .overlay.open { display: block; }
+
+  /* ── SCROLL OFFSET ── */
+  [id] { scroll-margin-top: 20px; }
+
+  .percent-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<nav class="topbar">
+  <button class="sidebar-toggle" onclick="toggleSidebar()" title="Menu">☰</button>
+  <div class="topbar-logo">Kepmen ESDM <span>No. 1827</span></div>
+  <div class="search-wrapper">
+    <input class="search-input" type="text" id="searchInput" placeholder="Cari kata kunci... (contoh: KTT, recovery, reklamasi)" oninput="doSearch()" onkeydown="searchNav(event)">
+    <span class="search-count" id="searchCount"></span>
+    <span class="search-icon">🔍</span>
+  </div>
+  <div class="search-nav-btns">
+    <button class="search-nav-btn" onclick="prevMatch()" title="Sebelumnya">↑</button>
+    <button class="search-nav-btn" onclick="nextMatch()" title="Berikutnya">↓</button>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-title">Navigasi Dokumen</div>
+  <a class="nav-item active" onclick="showSection('home')">🏠 Beranda</a>
+
+  <div class="nav-lampiran-header">Lampiran I</div>
+  <a class="nav-item" onclick="showSection('l1')">I — Pengesahan KTT & Personel</a>
+  <a class="nav-item sub" onclick="showSection('l1'); scrollTo('l1-ruang')">A. Ruang Lingkup</a>
+  <a class="nav-item sub" onclick="showSection('l1'); scrollTo('l1-ktt')">D. Prosedur KTT/PTL/KTBT</a>
+  <a class="nav-item sub" onclick="showSection('l1'); scrollTo('l1-pengawas')">E. Pengawas Operasional</a>
+  <a class="nav-item sub" onclick="showSection('l1'); scrollTo('l1-teknis')">F. Pengawas Teknis</a>
+  <a class="nav-item sub" onclick="showSection('l1'); scrollTo('l1-pjo')">G. PJO</a>
+
+  <div class="nav-lampiran-header">Lampiran II</div>
+  <a class="nav-item" onclick="showSection('l2')">II — Pengelolaan Teknis Tambang</a>
+  <a class="nav-item sub" onclick="showSection('l2'); scrollTo('l2-eksplorasi')">E.1 Eksplorasi</a>
+  <a class="nav-item sub" onclick="showSection('l2'); scrollTo('l2-kelayakan')">E.2 Studi Kelayakan</a>
+  <a class="nav-item sub" onclick="showSection('l2'); scrollTo('l2-konstruksi')">E.3 Konstruksi</a>
+  <a class="nav-item sub" onclick="showSection('l2'); scrollTo('l2-penambangan')">E.6 Penambangan</a>
+  <a class="nav-item sub" onclick="showSection('l2'); scrollTo('l2-pengolahan')">E.7 Pengolahan & Pemurnian</a>
+  <a class="nav-item sub" onclick="showSection('l2'); scrollTo('l2-pascatambang')">E.9 Pascatambang</a>
+
+  <div class="nav-lampiran-header">Lampiran III</div>
+  <a class="nav-item" onclick="showSection('l3')">III — Keselamatan Pertambangan</a>
+  <a class="nav-item sub" onclick="showSection('l3'); scrollTo('l3-k3')">A. K3 Pertambangan</a>
+  <a class="nav-item sub" onclick="showSection('l3'); scrollTo('l3-peledak')">B.6 Bahan Peledak</a>
+  <a class="nav-item sub" onclick="showSection('l3'); scrollTo('l3-tambang')">Keselamatan Jenis Tambang</a>
+
+  <div class="nav-lampiran-header">Lampiran IV</div>
+  <a class="nav-item" onclick="showSection('l4')">IV — SMKP Minerba</a>
+  <a class="nav-item sub" onclick="showSection('l4'); scrollTo('l4-elemen')">7 Elemen SMKP</a>
+  <a class="nav-item sub" onclick="showSection('l4'); scrollTo('l4-audit')">D. Audit SMKP</a>
+
+  <div class="nav-lampiran-header">Lampiran V</div>
+  <a class="nav-item" onclick="showSection('l5')">V — Pengelolaan Lingkungan Hidup</a>
+  <a class="nav-item sub" onclick="showSection('l5'); scrollTo('l5-eksplorasi')">1. Kegiatan Eksplorasi</a>
+  <a class="nav-item sub" onclick="showSection('l5'); scrollTo('l5-penambangan')">3. Kegiatan Penambangan</a>
+  <a class="nav-item sub" onclick="showSection('l5'); scrollTo('l5-pengolahan')">5. Pengolahan & Pemurnian</a>
+  <a class="nav-item sub" onclick="showSection('l5'); scrollTo('l5-pemantauan')">6. Pemantauan</a>
+
+  <div class="nav-lampiran-header">Lampiran VI</div>
+  <a class="nav-item" onclick="showSection('l6')">VI — Reklamasi & Pascatambang</a>
+  <a class="nav-item sub" onclick="showSection('l6'); scrollTo('l6-rencana')">1. Penyusunan Rencana</a>
+  <a class="nav-item sub" onclick="showSection('l6'); scrollTo('l6-jaminan')">3. Jaminan Reklamasi</a>
+  <a class="nav-item sub" onclick="showSection('l6'); scrollTo('l6-matrik')">E. Matrik Format</a>
+
+  <div class="nav-lampiran-header">Lampiran VII</div>
+  <a class="nav-item" onclick="showSection('l7')">VII — Konservasi Mineral & Batubara</a>
+  <a class="nav-item sub" onclick="showSection('l7'); scrollTo('l7-recovery')">1 & 2. Recovery</a>
+  <a class="nav-item sub" onclick="showSection('l7'); scrollTo('l7-pengelolaan')">3. Pengelolaan</a>
+  <a class="nav-item sub" onclick="showSection('l7'); scrollTo('l7-pendataan')">5. Pendataan</a>
+</aside>
+
+<!-- MAIN -->
+<div class="layout">
+<main class="main" id="mainContent">
+
+  <!-- HOME -->
+  <section class="section active" id="home">
+    <div class="doc-header">
+      <div class="doc-badge"><span class="dot"></span>Kementerian ESDM Republik Indonesia</div>
+      <div class="doc-title">Keputusan Menteri ESDM<br>Nomor 1827 K/30/MEM/2018</div>
+      <div class="doc-subtitle">Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik</div>
+    </div>
+    <p>Dokumen ini memuat <strong>7 (tujuh) Lampiran</strong> pedoman teknis yang mengatur seluruh aspek penyelenggaraan kegiatan pertambangan mineral dan batubara di Indonesia, mulai dari pengesahan personel teknis hingga konservasi sumber daya.</p>
+    <div class="home-grid">
+      <div class="card" onclick="showSection('l1')">
+        <div class="card-roman">I</div>
+        <div class="card-title">Pengesahan KTT, PTL, KTBT, Pengawas & PJO</div>
+        <div class="card-sub">Prosedur permohonan, evaluasi, dan pengesahan personel teknis pertambangan</div>
+      </div>
+      <div class="card" onclick="showSection('l2')">
+        <div class="card-roman">II</div>
+        <div class="card-title">Pengelolaan Teknis Pertambangan</div>
+        <div class="card-sub">Eksplorasi, konstruksi, penambangan, pengolahan, dan pascatambang</div>
+      </div>
+      <div class="card" onclick="showSection('l3')">
+        <div class="card-roman">III</div>
+        <div class="card-title">Keselamatan Pertambangan</div>
+        <div class="card-sub">K3, keselamatan operasi, bahan peledak, dan keselamatan jenis tambang</div>
+      </div>
+      <div class="card" onclick="showSection('l4')">
+        <div class="card-roman">IV</div>
+        <div class="card-title">Sistem Manajemen Keselamatan Pertambangan (SMKP)</div>
+        <div class="card-sub">7 elemen SMKP Minerba dan prosedur audit internal/eksternal</div>
+      </div>
+      <div class="card" onclick="showSection('l5')">
+        <div class="card-roman">V</div>
+        <div class="card-title">Pengelolaan Lingkungan Hidup</div>
+        <div class="card-sub">Pengelolaan air, debu, air asam tambang, dan pemantauan lingkungan</div>
+      </div>
+      <div class="card" onclick="showSection('l6')">
+        <div class="card-roman">VI</div>
+        <div class="card-title">Reklamasi dan Pascatambang</div>
+        <div class="card-sub">Penyusunan rencana, jaminan, pelaksanaan, dan penyerahan lahan</div>
+      </div>
+      <div class="card" onclick="showSection('l7')" style="grid-column:1/-1">
+        <div class="card-roman">VII</div>
+        <div class="card-title">Konservasi Mineral dan Batubara</div>
+        <div class="card-sub">Recovery penambangan dan pengolahan, pengelolaan mineral kadar rendah, dan cadangan marginal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAMPIRAN I -->
+  <section class="section" id="l1">
+    <div class="lampiran-badge"><span class="roman">I</span> Pedoman Personel Teknis Pertambangan</div>
+    <h2>Pengesahan KTT, PTL, KTBT, Pengawas, dan PJO</h2>
+
+    <div id="l1-ruang">
+      <h3>A. Ruang Lingkup</h3>
+      <ol>
+        <li>Permohonan, evaluasi, dan pengesahan <strong>Kepala Teknik Tambang (KTT)</strong></li>
+        <li>Permohonan, evaluasi, pengesahan <strong>Penanggung Jawab Teknik dan Lingkungan (PTL)</strong></li>
+        <li>Permohonan, evaluasi, dan pengesahan <strong>Kepala Tambang Bawah Tanah (KTBT)</strong></li>
+        <li>Permohonan, evaluasi, dan pengesahan <strong>Pengawas Operasional</strong></li>
+        <li>Pengesahan <strong>Pengawas Teknis</strong></li>
+        <li>Permohonan, evaluasi, pengesahan, dan evaluasi kinerja <strong>Penanggung Jawab Operasional (PJO)</strong></li>
+      </ol>
+    </div>
+
+    <h3>B. Acuan</h3>
+    <p>Peraturan perundang-undangan yang menjadi dasar hukum (Undang-Undang, Peraturan Pemerintah, Peraturan Menteri ESDM).</p>
+
+    <h3>C. Pengertian</h3>
+    <p>Definisi istilah yang digunakan dalam Lampiran I:</p>
+    <ul>
+      <li><strong>KaIT</strong> — Kepala Inspektur Tambang</li>
+      <li><strong>Inspektur Tambang</strong></li>
+      <li><strong>KTT</strong> — Kepala Teknik Tambang</li>
+      <li><strong>PTL</strong> — Penanggung Jawab Teknik dan Lingkungan</li>
+      <li><strong>KTBT</strong> — Kepala Tambang Bawah Tanah</li>
+      <li><strong>Pengawas Operasional</strong></li>
+      <li><strong>Pengawas Teknis</strong></li>
+      <li><strong>PJO</strong> — Penanggung Jawab Operasional</li>
+      <li><strong>KPO</strong> — Kartu Pengawas Operasional</li>
+    </ul>
+
+    <div id="l1-ktt">
+      <h3>D. Prosedur Permohonan, Evaluasi, dan Pengesahan KTT/PTL/KTBT</h3>
+      <h4>1. Diagram Alir Prosedur</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>No.</th><th>Kegiatan</th><th>Pemohon</th><th>KaIT/Kepala Dinas</th><th>Evaluator</th><th>Waktu</th><th>Output</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Pengajuan Permohonan</td><td>✓</td><td>✓</td><td>✓</td><td>2 Hari</td><td>Disposisi</td></tr>
+            <tr><td>2</td><td>Evaluasi</td><td>—</td><td>—</td><td>✓</td><td>10 Hari</td><td>Surat Undangan Presentasi / Rancangan Surat Pengesahan</td></tr>
+            <tr><td>3</td><td>Penerbitan Surat Pengesahan</td><td>—</td><td>✓</td><td>—</td><td>2 Hari</td><td>Surat Pengesahan</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>2. Penjelasan Tahapan</h4>
+      <ul>
+        <li><strong>Pengajuan Permohonan</strong>: Pemohon mengajukan permohonan, KaIT memberikan disposisi, evaluator menerima dan mengevaluasi dokumen.</li>
+        <li><strong>Evaluasi</strong>: Evaluator membuat konsep surat; jika memadai → rancangan surat pengesahan; jika tidak memadai → surat tanggapan.</li>
+        <li><strong>Penerbitan Surat Pengesahan</strong>: KaIT/Kepala Dinas menerbitkan surat pengesahan.</li>
+      </ul>
+
+      <h4>3. Persyaratan Administratif</h4>
+      <ul>
+        <li>Surat permohonan perusahaan</li>
+        <li>Salinan IUP</li>
+        <li>Surat pernyataan dukungan dari pimpinan perusahaan</li>
+        <li>Daftar riwayat hidup calon</li>
+        <li>Sertifikat kompetensi (teregistrasi di Ditjen Minerba)</li>
+        <li>Struktur organisasi perusahaan</li>
+        <li>Salinan pengesahan sebelumnya (jika ada)</li>
+        <li>Surat pernyataan kebenaran dokumen bermaterai</li>
+        <li><em>Softcopy</em> dokumen</li>
+      </ul>
+
+      <h4>4. Tugas dan Tanggung Jawab KTT/PTL</h4>
+      <p>Terdiri dari <strong>21 (dua puluh satu) poin</strong> tugas dan tanggung jawab.</p>
+
+      <h4>5. Kriteria KTT</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Kelas</th><th>Ketentuan</th><th>Sertifikat</th></tr></thead>
+          <tbody>
+            <tr><td>KTT Kelas IV</td><td>IPR, sertifikat kualifikasi/bimbingan teknis</td><td>Kualifikasi</td></tr>
+            <tr><td>KTT Kelas III</td><td>Eksplorasi/operasi skala kecil, produksi terbatas, ≤50 pekerja, tanpa peledak</td><td>POP</td></tr>
+            <tr><td>KTT Kelas II</td><td>Operasi produksi skala menengah, ≤200 pekerja</td><td>POM</td></tr>
+            <tr><td>KTT Kelas I</td><td>Operasi produksi skala besar, >200 pekerja</td><td>POU</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note-box"><strong>Ketentuan WNA:</strong> Sertifikat diakui, pelatihan peraturan Indonesia, wajib uji bahasa Indonesia madya dalam 6 bulan.</div>
+
+      <h4>6. Kriteria PTL</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Kelas</th><th>Ketentuan</th><th>Sertifikat</th></tr></thead>
+          <tbody>
+            <tr><td>PTL Kelas III</td><td>Pengolahan mineral bukan logam dan batuan</td><td>POP</td></tr>
+            <tr><td>PTL Kelas II</td><td>Pengolahan mineral logam/batubara, produksi &lt;100.000 ton/tahun, &lt;1.000 pekerja</td><td>POM</td></tr>
+            <tr><td>PTL Kelas I</td><td>Pengolahan mineral logam/batubara, produksi ≥100.000 ton/tahun, ≥1.000 pekerja</td><td>POU</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>7. Kriteria, Tugas, dan Fungsi KTBT</h4>
+      <ul>
+        <li><strong>Kriteria</strong>: Sertifikat POU, menduduki jabatan tertinggi di divisi tambang bawah tanah.</li>
+        <li><strong>Tugas dan Fungsi</strong>: 4 (empat) poin tugas.</li>
+      </ul>
+
+      <h4>8. Wakil KTT/PTL</h4>
+      <p>Kriteria dan tugas/fungsi Wakil KTT/PTL diatur lebih lanjut.</p>
+    </div>
+
+    <div id="l1-pengawas">
+      <h3>E. Prosedur Permohonan, Evaluasi, dan Pengesahan Pengawas Operasional</h3>
+      <h4>1. Diagram Alir Prosedur</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>No.</th><th>Kegiatan</th><th>Pemohon</th><th>KaIT/Kepala Dinas</th><th>Evaluator</th><th>Waktu</th><th>Output</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Pengajuan Permohonan</td><td>✓</td><td>✓</td><td>✓</td><td>3 Hari</td><td>Disposisi</td></tr>
+            <tr><td>2</td><td>Evaluasi</td><td>—</td><td>—</td><td>✓</td><td>8 Hari</td><td>Rancangan KPO / Surat Tanggapan</td></tr>
+            <tr><td>3</td><td>Penerbitan KPO</td><td>—</td><td>✓</td><td>—</td><td>3 Hari</td><td>KPO</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>2. Persyaratan Administratif</h4>
+      <ul>
+        <li>Sertifikat kompetensi (POP/POM/POU) teregistrasi</li>
+        <li>Pas foto 2×3 cm</li>
+        <li>Salinan KTP</li>
+        <li>Daftar riwayat hidup</li>
+        <li>Surat pernyataan KTT/PTL</li>
+        <li>Surat pernyataan kebenaran dokumen</li>
+        <li><em>Softcopy</em> dokumen</li>
+      </ul>
+
+      <h4>3. Kriteria, Tugas, dan Tanggung Jawab Pengawas Operasional</h4>
+      <ul>
+        <li><strong>Kriteria</strong>: Sertifikat kompetensi, jabatan di divisi operasional, memiliki bawahan/melakukan pengawasan.</li>
+        <li><strong>Tugas dan Tanggung Jawab</strong>: 4 (empat) poin.</li>
+        <li><strong>Pengangkatan</strong>: Ditunjuk oleh KTT/PTL, dievaluasi, diterbitkan surat penunjukan.</li>
+      </ul>
+    </div>
+
+    <div id="l1-teknis">
+      <h3>F. Pengesahan Pengawas Teknis</h3>
+      <h4>1. Kriteria</h4>
+      <ul>
+        <li>Sertifikat kompetensi sesuai bidang</li>
+        <li>Kewenangan atas peralatan, permesinan, kelistrikan</li>
+        <li>Syarat lain sesuai kebutuhan KTT/PTL</li>
+      </ul>
+      <h4>2. Tugas dan Fungsi</h4>
+      <p>6 (enam) poin tugas dan fungsi Pengawas Teknis.</p>
+      <h4>3. Pengangkatan</h4>
+      <p>Ditunjuk KTT/PTL, dievaluasi, diterbitkan surat pengesahan.</p>
+      <h4>4. Ketentuan WNA</h4>
+      <ul>
+        <li>Wajib lulus uji kemahiran bahasa Indonesia madya dalam <strong>6 bulan</strong>.</li>
+        <li>KaIT dapat membatalkan pengesahan jika tidak memenuhi ketentuan.</li>
+      </ul>
+    </div>
+
+    <div id="l1-pjo">
+      <h3>G. Prosedur PJO (Penanggung Jawab Operasional)</h3>
+      <h4>1. Persyaratan PJO</h4>
+      <ul>
+        <li><strong>Administratif</strong>: Pekerja perusahaan jasa pertambangan, riwayat hidup, jabatan tertinggi di <em>site</em>, surat dukungan direksi, surat komitmen, syarat lain dari KTT.</li>
+        <li><strong>Teknis</strong>: Memahami pengelolaan usaha jasa pertambangan, aspek teknis, konservasi, keselamatan, lingkungan, kewajiban dan sanksi; memiliki sertifikat kompetensi pengawas operasional.</li>
+      </ul>
+      <h4>2. Tata Cara Permohonan</h4>
+      <ul>
+        <li>Direksi menunjuk calon PJO</li>
+        <li>Direksi mengajukan permohonan ke KTT</li>
+        <li>KTT melakukan evaluasi</li>
+        <li>Jika layak → KTT menerbitkan surat pengesahan PJO</li>
+        <li>Jika tidak layak → KTT meminta penggantian calon</li>
+        <li>Evaluasi kinerja PJO dilakukan secara berkala oleh KTT</li>
+      </ul>
+    </div>
+
+    <h3>H. Ketentuan Umum</h3>
+    <ul>
+      <li>Keterangan lebih lanjut untuk setiap tahapan prosedur</li>
+      <li>Format dan waktu pelaksanaan evaluasi</li>
+      <li>Ketentuan bagi WNA yang akan disahkan sebagai personel teknis</li>
+    </ul>
+
+    <h3>I. Penutup</h3>
+    <ul>
+      <li>Surat pengesahan diterbitkan oleh KaIT/Kepala Dinas <strong>atas nama KaIT</strong>.</li>
+      <li>Dokumen pengesahan merupakan bagian tidak terpisahkan dari penerapan kaidah teknik pertambangan yang baik.</li>
+    </ul>
+  </section>
+
+  <!-- LAMPIRAN II -->
+  <section class="section" id="l2">
+    <div class="lampiran-badge"><span class="roman">II</span> Pengelolaan Teknis Pertambangan</div>
+    <h2>Pedoman Pengelolaan Teknis Pertambangan</h2>
+
+    <h3>A. Ruang Lingkup</h3>
+    <ul>
+      <li>Eksplorasi</li>
+      <li>Studi Kelayakan</li>
+      <li>Konstruksi dan Pengujian Alat Pertambangan (<em>Commissioning</em>)</li>
+      <li>Pemanfaatan Teknologi, Kemampuan Rekayasa, Rancang Bangun, Pengembangan, dan Penerapan Teknologi Pertambangan</li>
+      <li>Pemasangan Tanda Batas</li>
+      <li>Penambangan</li>
+      <li>Pengolahan dan/atau Pemurnian</li>
+      <li>Pengangkutan</li>
+      <li>Pengelolaan Teknis Pascatambang</li>
+    </ul>
+
+    <h3>C. Pengertian (37 Istilah)</h3>
+    <p>Termasuk: Air Tambang, Alat Pertambangan, Cadangan Mineral dan Batubara, Eksplorasi Pendahuluan dan Rinci, Geoteknik Tambang, Jalan Pertambangan, Kajian Geoteknik/Hidrologi/Hidrogeologi/Teknis, Kapal Keruk, Kelaikan Teknis, Kemajuan Tambang, Neraca Air/Energi/Material/Metalurgi, <em>Competent Person</em>, <em>Commissioning</em>, RKAB Tahunan, Rencana Kerja Teknis, Sumber Daya Mineral dan Batubara, Tanda Batas, Tata Cara Baku, Tenaga Teknis Pertambangan yang Berkompeten, dan Uji Metalurgi.</p>
+
+    <h3>D. Ketentuan Umum</h3>
+    <ul>
+      <li><strong>Personel — Orang yang Berkompeten (<em>Competent Person</em>)</strong>: Pengalaman minimal 5 tahun + sertifikat kompetensi.</li>
+      <li><strong>Tenaga Teknis Pertambangan yang Berkompeten</strong>: Pengalaman minimal 3 tahun + sertifikat kompetensi.</li>
+      <li><strong>Tata Cara Baku</strong>: 46 item kegiatan yang ditetapkan KTT/PTL.</li>
+    </ul>
+
+    <h3>E. Kegiatan</h3>
+
+    <div id="l2-eksplorasi">
+      <h4>1. Eksplorasi</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Sub-bagian</th><th>Isi</th></tr></thead>
+          <tbody>
+            <tr><td>Perencanaan</td><td>Penyusunan rencana eksplorasi (tujuan, tahapan, lokasi, metode, pelaksana, waktu, biaya)</td></tr>
+            <tr><td>Pelaksanaan Eksplorasi Pendahuluan</td><td>Studi pustaka, survei tinjau, prospeksi</td></tr>
+            <tr><td>Pelaksanaan Eksplorasi Rinci</td><td>Pemetaan geologi, geofisika, geokimia, parit uji, sumur uji, pengeboran, pemercontoan, pengelolaan dan analisis conto; survei eksplorasi (topografi, titik bor); estimasi sumber daya (pemodelan geologi)</td></tr>
+            <tr><td>Pernyataan Sumber Daya & Cadangan</td><td>Rekonsiliasi data tahunan, pencatatan di bursa saham (<em>listing</em>), tanggung jawab <em>Competent Person</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l2-kelayakan">
+      <h4>2. Studi Kelayakan Tambang</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Sub-bagian</th><th>Isi</th></tr></thead>
+          <tbody>
+            <tr><td>Ketentuan Umum</td><td>Wajib studi kelayakan, minimal 70% eksplorasi selesai, dilakukan oleh tenaga berkompeten</td></tr>
+            <tr><td>Sumber Daya dan Cadangan</td><td>Estimasi (SNI), geoteknik tambang (nilai faktor keamanan, probabilitas longsor), hidrologi dan hidrogeologi, kajian air asam tambang, perencanaan tambang/pengolahan/pengangkutan</td></tr>
+            <tr><td>Mineral Bukan Logam dan Batuan</td><td>Ketentuan khusus untuk komoditas ini</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l2-konstruksi">
+      <h4>3. Konstruksi dan Pengujian Alat (<em>Commissioning</em>)</h4>
+      <ul>
+        <li><strong>Perencanaan</strong>: <em>Detail engineering design</em>, spesifikasi teknis, jadwal.</li>
+        <li><strong>Pelaksanaan</strong>: Pembangunan, pengawasan, kelaikan teknis (minimal <strong>70% kapasitas terpasang</strong>).</li>
+      </ul>
+    </div>
+
+    <h4>4. Pemanfaatan Teknologi Pertambangan</h4>
+    <ul>
+      <li>Kajian teknis untuk teknologi baru</li>
+      <li>Persetujuan Direktur Jenderal</li>
+      <li>Pelaporan <strong>90 hari sebelum</strong> didatangkan</li>
+    </ul>
+
+    <div id="l2-penambangan">
+      <h4>6. Penambangan</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Jenis Tambang</th><th>Kegiatan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Tambang Permukaan</strong></td><td>Pembersihan lahan, penanganan tanah pucuk, pemberaian batuan, pengupasan batuan penutup, penimbunan (<em>out pit dump</em>, <em>in pit dump</em>), lereng penambangan dan akhir, pengelolaan air tambang, jalan pertambangan</td></tr>
+            <tr><td><strong>Tambang Bawah Tanah</strong></td><td>Sekuen penambangan, lubang bukaan, ventilasi, pengelolaan air, geoteknik, penyanggaan, <em>longwall mining</em>, penyangga alami, <em>surface subsidence</em>, pengelolaan lumpur (<em>wet muck</em>)</td></tr>
+            <tr><td><strong>Tambang Bawah Air</strong></td><td>Kapal keruk, kapal isap, ponton isap produksi</td></tr>
+            <tr><td><strong>Peralatan Tambang</strong></td><td>Unjuk kerja (PA, MA, UA, EU, produktivitas); alat gali-muat, alat angkut, <em>rope haulage</em>, LHD, truk tambang bawah tanah, <em>surface miner</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l2-pengolahan">
+      <h4>7. Pengolahan dan Pemurnian</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Sub-bagian</th><th>Isi</th></tr></thead>
+          <tbody>
+            <tr><td>Perencanaan</td><td>Rencana tahunan, triwulan, bulanan; <em>material balance</em>, <em>water balance</em>, <em>energy balance</em>, <em>metallurgical balance</em></td></tr>
+            <tr><td>Unjuk Kerja Peralatan</td><td>Nilai PA, MA, UA, EU, produktivitas</td></tr>
+            <tr><td>Pengolahan Batubara</td><td>Peremukan, pencucian, pencampuran, penggerusan; <em>Underground Coal Gasification</em> (UCG)</td></tr>
+            <tr><td>Pengolahan Mineral Logam</td><td><em>Comminution</em>, <em>concentrating</em>, <em>dewatering</em>, pemurnian, <em>extracting</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h4>8. Pengangkutan</h4>
+    <p>Rencana tahunan, triwulan, bulanan. Pelaksanaan dengan: truk, konveyor, lokomotif dan lori, pipa, dan tongkang.</p>
+
+    <div id="l2-pascatambang">
+      <h4>9. Pengelolaan Teknis Pascatambang</h4>
+      <ul>
+        <li>Penyusunan rencana pascatambang</li>
+        <li>Pelaksanaan pascatambang tambang permukaan</li>
+        <li>Pelaksanaan pascatambang tambang bawah tanah</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LAMPIRAN III -->
+  <section class="section" id="l3">
+    <div class="lampiran-badge"><span class="roman">III</span> Keselamatan Pertambangan</div>
+    <h2>Pedoman Pelaksanaan Keselamatan Pertambangan</h2>
+
+    <div id="l3-k3">
+      <h3>A. Keselamatan dan Kesehatan Kerja (K3) Pertambangan</h3>
+
+      <h4>1. Keselamatan Kerja</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Sub-bagian</th><th>Isi</th></tr></thead>
+          <tbody>
+            <tr><td>Manajemen Risiko</td><td>Komunikasi dan konsultasi, penetapan konteks, identifikasi bahaya, penilaian dan pengendalian risiko, pemantauan dan peninjauan</td></tr>
+            <tr><td>Program Keselamatan Kerja</td><td>Pencegahan kecelakaan, kejadian berbahaya, kebakaran; definisi kecelakaan tambang (5 unsur); kategori cidera: ringan, berat, mati</td></tr>
+            <tr><td>Pendidikan dan Pelatihan</td><td>Pekerja baru, tugas baru, pelatihan bahaya, pelatihan penyegaran tahunan; mengacu standar kompetensi KaIT</td></tr>
+            <tr><td>Kampanye</td><td>Perencanaan, pelaksanaan, evaluasi kampanye keselamatan kerja</td></tr>
+            <tr><td>Administrasi K3</td><td>Buku Tambang, Buku Daftar Kecelakaan Tambang, pelaporan, rencana kerja dan anggaran, prosedur kerja, dokumen kompetensi</td></tr>
+            <tr><td>Manajemen Keadaan Darurat</td><td>Identifikasi dan penilaian potensi, pencegahan, kesiapsiagaan, respon, dan pemulihan keadaan darurat</td></tr>
+            <tr><td>Inspeksi</td><td>Perencanaan, persiapan, pelaksanaan; rekomendasi dan tindak lanjut; evaluasi dan laporan</td></tr>
+            <tr><td>Penyelidikan Kecelakaan</td><td>Dilakukan oleh KTT, PTL, atau Inspektur Tambang dalam waktu tidak lebih dari <strong>2×24 jam</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>2. Kesehatan Kerja</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Sub-bagian</th><th>Isi</th></tr></thead>
+          <tbody>
+            <tr><td>Program Kesehatan Kerja</td><td>Pendekatan 4 pilar: promotif, preventif, kuratif, rehabilitatif</td></tr>
+            <tr><td>Pemeriksaan Kesehatan</td><td>Pemeriksaan awal, berkala (<strong>1 tahun sekali</strong>; tambang bawah tanah <strong>2 kali setahun</strong>), khusus, dan akhir; dilakukan oleh Dokter Pemeriksa Tenaga Kerja</td></tr>
+            <tr><td>P3K</td><td>Penyediaan petugas, fasilitas, peralatan, dan pelatihan</td></tr>
+            <tr><td>Pengelolaan Kelelahan (<em>Fatigue</em>)</td><td>Identifikasi, evaluasi, pengendalian, pelatihan, pengaturan gilir kerja (<em>shift</em>), penilaian kelelahan</td></tr>
+            <tr><td>Higiene dan Sanitasi</td><td>Penyediaan fasilitas higienitas dan pengelolaan sanitasi area kerja</td></tr>
+            <tr><td>Ergonomi</td><td>Kesesuaian pekerjaan, lingkungan kerja, peralatan, dan pekerja</td></tr>
+            <tr><td>Makanan, Minuman, dan Gizi</td><td>Syarat keamanan, kecukupan, higienitas, keseimbangan gizi; larangan alkohol dan narkoba</td></tr>
+            <tr><td>Penyakit Akibat Kerja</td><td>Pemeriksaan klinis, kondisi pekerja, lingkungan kerja; pelaporan kepada KaIT dalam <strong>2×24 jam</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>3. Lingkungan Kerja</h4>
+      <p>Komponen yang dikelola dan diukur oleh Tenaga Teknis Pertambangan yang Berkompeten:</p>
+      <ul>
+        <li>Debu</li><li>Kebisingan</li><li>Getaran</li><li>Pencahayaan</li>
+        <li>Kuantitas dan kualitas udara kerja</li><li>Iklim kerja</li>
+        <li>Radiasi</li><li>Faktor kimia</li><li>Faktor biologi</li>
+        <li>Kebersihan lingkungan kerja</li>
+      </ul>
+    </div>
+
+    <h3>B. Keselamatan Operasi (KO) Pertambangan</h3>
+    <ul>
+      <li>Sistem pemeliharaan/perawatan sarana, prasarana, instalasi, dan peralatan</li>
+      <li>Pengamanan instalasi</li>
+      <li>Tenaga Teknis yang Berkompeten di bidang Keselamatan Operasi</li>
+      <li>Kelayakan sarana, prasarana, instalasi, dan peralatan</li>
+      <li>Evaluasi laporan hasil kajian teknis pertambangan</li>
+    </ul>
+
+    <div id="l3-peledak">
+      <h3>B.6 Keselamatan Bahan Peledak dan Peledakan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Aspek</th><th>Ketentuan</th></tr></thead>
+          <tbody>
+            <tr><td>Penyimpanan</td><td>Gudang sementara, utama, transit; izin dan persetujuan KaIT</td></tr>
+            <tr><td>Lokasi Gudang Bawah Tanah</td><td>≥100 m dari sumuran tambang, ≥25 m dari tempat kerja, ≥10 m dari lubang naik/turun, ≥50 m dari lokasi peledakan</td></tr>
+            <tr><td>Juru Ledak</td><td>Kualifikasi: KPP Pertama, KPP Madya, KIM; pengangkatan oleh KTT/PTL; KIM minimal 21 tahun</td></tr>
+            <tr><td>Kepala Gudang</td><td>Memiliki KPP Madya; petugas gudang minimal 21 tahun</td></tr>
+            <tr><td>Pengamanan Gudang</td><td>Pengamanan <strong>24 jam</strong> oleh petugas satuan pengamanan</td></tr>
+            <tr><td>Pemeriksaan Gudang</td><td>Minimal <strong>1 kali seminggu</strong></td></tr>
+            <tr><td>Pengangkutan</td><td>Waktu penyerahan maksimal <strong>24 jam</strong>; dalam peti asli/wadah tertutup khusus</td></tr>
+            <tr><td><em>Remote Firing</em></td><td>Rekomendasi teknis dari instansi komunikasi dan informasi; hanya oleh juru ledak terlatih</td></tr>
+            <tr><td><em>Sleep Blast</em></td><td>Ada ketentuan khusus dan pelaporan</td></tr>
+            <tr><td>Peledakan Mangkir</td><td>Didefinisikan, ada penanganan khusus, dan wajib dilaporkan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l3-tambang">
+      <h3>Keselamatan Berdasarkan Jenis Kegiatan</h3>
+
+      <h4>Keselamatan Tambang Bawah Tanah</h4>
+      <ul>
+        <li>Jalan keluar minimal <strong>2 buah</strong></li>
+        <li>Perlindungan tempat kerja (coronan bijih, daerah berbahaya)</li>
+        <li>Penerangan yang cukup, lampu kedap gas</li>
+        <li>Sistem komunikasi dan tata cara komunikasi dalam keadaan bahaya</li>
+        <li>Sumuran dan derek (spesifikasi, pengoperasian, pemeriksaan, uji coba)</li>
+        <li>Pengangkutan (jalan pengangkutan, konstruksi jalan rel, peralatan, pengangkutan orang, konveyor)</li>
+        <li>Ventilasi (perencanaan, standar dan pengukuran, kipas angin utama, jaringan ventilasi)</li>
+        <li>Penirisan gas metana (alat deteksi, pemantauan, pembuangan gas)</li>
+        <li>Pencegahan penyulutan gas dan debu mudah menyala</li>
+        <li>Pencegahan kebakaran</li>
+        <li>Kontrol batuan dan penyanggaan</li>
+      </ul>
+
+      <h4>Keselamatan Fasilitas Pertambangan</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Fasilitas</th><th>Ketentuan Utama</th></tr></thead>
+          <tbody>
+            <tr><td>Gedung dan Bangunan</td><td>Kekuatan konstruksi, proteksi, jalan penyelamatan diri, penyalur petir, pencegahan terjatuh</td></tr>
+            <tr><td>Perbengkelan</td><td>Pengaturan peralatan, pencegahan kebakaran, pengamanan uap/gas berbahaya, pengelasan</td></tr>
+            <tr><td>Tangki Timbun</td><td>Jarak aman, konstruksi tangki, tangki pendam, penyimpanan bahan bakar dan pelumas</td></tr>
+            <tr><td>Stasiun Pengisian BBM</td><td>Area pengisian, lebar jalur, petugas berkemampuan, sarana pemadam kebakaran</td></tr>
+            <tr><td>Laboratorium</td><td>Safety shower/eye wash, ventilasi, sistem pemadam kebakaran, lemari asam, personal dosimeter (untuk radioaktif)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAMPIRAN IV -->
+  <section class="section" id="l4">
+    <div class="lampiran-badge"><span class="roman">IV</span> SMKP Minerba</div>
+    <h2>Sistem Manajemen Keselamatan Pertambangan (SMKP) Mineral dan Batubara</h2>
+
+    <h3>A. Ruang Lingkup</h3>
+    <p>SMKP Minerba mencakup <strong>K3 Pertambangan</strong> dan <strong>Keselamatan Operasi (KO) Pertambangan</strong>.</p>
+    <p>Diterapkan oleh:</p>
+    <ul>
+      <li>Pemegang IUP Eksplorasi dan IUPK Eksplorasi</li>
+      <li>Pemegang IUP Operasi Produksi dan IUPK Operasi Produksi</li>
+      <li>Pemegang IUP Operasi Produksi khusus pengolahan dan/atau pemurnian</li>
+      <li>Perusahaan Jasa Pertambangan</li>
+    </ul>
+
+    <div id="l4-elemen">
+      <h3>7 (Tujuh) Elemen SMKP Minerba</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>No.</th><th>Elemen</th><th>Isi Utama</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><strong>Kebijakan</strong></td><td>Disusun mempertimbangkan tinjauan awal dan masukan pekerja; disahkan oleh pimpinan tertinggi; didokumentasikan dan disebarluaskan; ditinjau berkala</td></tr>
+            <tr><td>2</td><td><strong>Perencanaan</strong></td><td>Penelaahan awal; manajemen risiko (5 kegiatan); identifikasi dan kepatuhan peraturan; penetapan tujuan/sasaran/program; rencana kerja dan anggaran (disetujui Dirjen)</td></tr>
+            <tr><td>3</td><td><strong>Organisasi dan Personel</strong></td><td>Struktur organisasi; penunjukan KTT/KTBT/Kepala Kapal Keruk; PJO; Bagian K3 dan KO; pengawas operasional dan teknis; Komite Keselamatan Pertambangan; Tim Tanggap Darurat; seleksi personel; pendidikan dan pelatihan</td></tr>
+            <tr><td>4</td><td><strong>Implementasi</strong></td><td>Pengelolaan operasional, lingkungan kerja, kesehatan kerja, KO Pertambangan; bahan peledak dan peledakan; sistem perancangan dan rekayasa; pembelian; pemantauan Perusahaan Jasa Pertambangan; pengelolaan keadaan darurat; P3K; keselamatan di luar pekerjaan</td></tr>
+            <tr><td>5</td><td><strong>Pemantauan, Evaluasi, dan Tindak Lanjut</strong></td><td>Pemantauan dan pengukuran kinerja; inspeksi; evaluasi kepatuhan; laporan penyelidikan kecelakaan/penyakit akibat kerja; evaluasi administrasi; audit internal; rencana perbaikan</td></tr>
+            <tr><td>6</td><td><strong>Dokumentasi</strong></td><td>Penyusunan Manual SMKP; pengendalian dokumen; pengendalian rekaman; penetapan jenis dokumen dan rekaman</td></tr>
+            <tr><td>7</td><td><strong>Tinjauan Manajemen dan Peningkatan Kinerja</strong></td><td>Dipimpin manajemen tertinggi; dilakukan minimal <strong>1 (satu) tahun sekali</strong>; hasilnya didokumentasikan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>C. SMKP Khusus — IUP Operasi Produksi Khusus Pengolahan dan/atau Pemurnian</h3>
+    <p>Struktur 7 elemen yang sama diterapkan dengan penyesuaian:</p>
+    <ul>
+      <li><strong>PTL</strong> sebagai pengganti KTT</li>
+      <li><strong>Komite Keselamatan Pengolahan dan/atau Pemurnian</strong> sebagai pengganti Komite Keselamatan Pertambangan</li>
+    </ul>
+
+    <div id="l4-audit">
+      <h3>D. Audit SMKP</h3>
+      <h4>1. Jenis Audit</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Jenis Audit</th><th>Pelaksana</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Audit Internal</strong></td><td>Dilakukan oleh internal perusahaan</td></tr>
+            <tr><td><strong>Audit Eksternal</strong></td><td>Dilakukan oleh lembaga yang ditetapkan oleh Direktur Jenderal</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>2. Proses Pelaksanaan Audit (7 Tahap)</h4>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Tahap</th><th>Kegiatan</th></tr></thead>
+          <tbody>
+            <tr><td>1. Permulaan Audit</td><td>Penentuan kelayakan audit, penunjukan ketua tim audit, pemilihan tim, penetapan tujuan/ruang lingkup/kriteria audit, kontak awal dengan auditi</td></tr>
+            <tr><td>2. Tinjauan Dokumen</td><td>Peninjauan dokumen sistem manajemen, penentuan kecukupan dokumen terhadap kriteria audit</td></tr>
+            <tr><td>3. Persiapan Audit Lapangan</td><td>Penyiapan rencana audit, penugasan tim audit, penyiapan dokumen kerja</td></tr>
+            <tr><td>4. Audit Lapangan</td><td>Rapat pembukaan, komunikasi selama audit, tugas pemandu dan pengamat, pengumpulan dan verifikasi informasi, perumusan temuan audit, penyiapan kesimpulan, rapat penutupan</td></tr>
+            <tr><td>5. Pelaporan Audit</td><td>Penyiapan laporan audit, pengesahan, dan penyampaian laporan</td></tr>
+            <tr><td>6. Penyelesaian Audit</td><td>—</td></tr>
+            <tr><td>7. Tindak Lanjut Audit</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>E. Penutup</h3>
+    <p>Ketentuan lebih lanjut mengenai penilaian, penerapan, dan pelaporan SMKP Minerba ditetapkan dalam petunjuk teknis oleh Direktur Jenderal.</p>
+  </section>
+
+  <!-- LAMPIRAN V -->
+  <section class="section" id="l5">
+    <div class="lampiran-badge"><span class="roman">V</span> Pengelolaan Lingkungan Hidup</div>
+    <h2>Pedoman Pelaksanaan Pengelolaan Lingkungan Hidup Pertambangan</h2>
+
+    <h3>A. Ruang Lingkup</h3>
+    <p>Pengelolaan lingkungan hidup pada kegiatan: Eksplorasi, Konstruksi, Penambangan, Pengangkutan, Pengolahan dan/atau Pemurnian; Pemantauan Lingkungan Hidup; Penanggulangan Pencemaran dan/atau Perusakan; Sistem Pengelolaan Perlindungan Lingkungan Hidup Pertambangan; dan Penghargaan.</p>
+
+    <h3>C. Pengertian (12 Istilah)</h3>
+    <p>IUP/IUPK, Pengelolaan Lingkungan Hidup Pertambangan, Pemantauan Lingkungan Hidup Pertambangan, Tanah Zona Pengakaran, Batuan/Tanah Penutup, Tambang Bawah Tanah, Air Tambang, Air Larian Permukaan, Air Asam Tambang, Air Kerja, Rencana Kerja Tahunan, Dokumen Lingkungan Hidup.</p>
+
+    <div id="l5-eksplorasi">
+      <h3>D.1 Pengelolaan Lingkungan pada Kegiatan Eksplorasi</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Kegiatan</th><th>Ketentuan</th></tr></thead>
+          <tbody>
+            <tr><td>Pembukaan Lahan</td><td>Rencana dicantumkan dalam RKAB; penyiapan sarana pengelolaan lingkungan sebelum pembukaan lahan; pelaksanaan sesuai RKAB yang disetujui</td></tr>
+            <tr><td>Pembuatan Jalan Akses</td><td>Mengutamakan jalan yang sudah ada; pembukaan lahan seoptimal mungkin</td></tr>
+            <tr><td>Sumur Uji dan Parit Uji</td><td>Penyiapan fasilitas pengelolaan lingkungan; penempatan tanah/batuan penutup pada lokasi aman</td></tr>
+            <tr><td>Pengeboran</td><td>Penyiapan: saluran drainase, kolam pengendap, wadah penampung limbah B3 dan non-B3</td></tr>
+            <tr><td>Kajian Geokimia</td><td>Dilakukan jika ada potensi air asam tambang; identifikasi potensi, pencegahan, penanggulangan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>D.2 Pengelolaan Lingkungan pada Kegiatan Konstruksi</h3>
+    <ul>
+      <li>Pembukaan lahan: penyiapan sarana pengendalian erosi dan sedimentasi, pemisahan dan pengelolaan tanah zona pengakaran</li>
+      <li>Sarana dan prasarana dilengkapi: drainase, kolam pengendap, kolam perangkap hidrokarbon, IPAL, tempat sampah, wadah limbah B3</li>
+      <li>Kolam pengendap: dibangun di lokasi stabil; dilengkapi alat penghenti aliran, alat ukur debit, papan informasi; dipelihara berkala</li>
+    </ul>
+
+    <div id="l5-penambangan">
+      <h3>D.3 Pengelolaan Lingkungan pada Kegiatan Penambangan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Aspek</th><th>Ketentuan</th></tr></thead>
+          <tbody>
+            <tr><td>Pembukaan Lahan</td><td>Identifikasi tanaman, pembersihan vegetasi, pengupasan dan pengelolaan tanah zona pengakaran</td></tr>
+            <tr><td>Air Larian dan Air Tambang</td><td>Dialirkan melalui drainase ke kolam pengendap; wajib memenuhi baku mutu lingkungan sebelum dilepas ke badan air</td></tr>
+            <tr><td>Air Asam Tambang</td><td>Kajian geokimia batuan; pencegahan: manajemen penempatan batuan penutup, <em>dry cover</em>, <em>wet cover</em>, pencampuran material; penanggulangan: cara aktif (bahan kimia penetral) dan pasif (<em>open limestone channel</em>, lahan basah)</td></tr>
+            <tr><td>Penimbunan Batuan Penutup</td><td>Utamakan pengisian kembali lubang bekas tambang; berdasarkan kajian geoteknik, geokimia, hidrologi; jarak aman dari bangunan penduduk dan badan air</td></tr>
+            <tr><td>Tambang Bawah Tanah</td><td>Identifikasi dan kaji potensi <em>subsidence</em>; pemantauan <em>subsidence</em>; air penyaliran dikelola hingga memenuhi baku mutu; cegah penurunan kualitas air tanah/permukaan</td></tr>
+            <tr><td>Tambang Semprot</td><td>Pengupasan tanah penutup sebelum operasi; luas genangan sesuai RKAB; pasir sisa untuk pengisi lubang; air kerja utamakan sirkulasi tertutup</td></tr>
+            <tr><td>Tambang Kapal Keruk Laut</td><td>Pengelolaan kualitas air laut; pencegahan abrasi dan pendangkalan pantai; perlindungan keanekaragaman hayati; pencegahan tumpahan hidrokarbon</td></tr>
+            <tr><td><em>Solution Mining</em></td><td>Pengelolaan dan pemantauan kualitas air tanah; pembuatan sumur pantau; daur ulang air kerja; pemantauan <em>subsidence</em></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l5-pengolahan">
+      <h3>D.5 Pengelolaan Lingkungan pada Kegiatan Pengolahan dan/atau Pemurnian</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Aspek</th><th>Ketentuan</th></tr></thead>
+          <tbody>
+            <tr><td>Air Kerja</td><td>Diupayakan menggunakan sirkulasi tertutup</td></tr>
+            <tr><td>Air Limbah</td><td>Dialirkan ke fasilitas pengolahan; wajib memenuhi baku mutu sebelum dilepas ke badan air</td></tr>
+            <tr><td>Emisi Cerobong</td><td>Wajib memenuhi baku mutu lingkungan</td></tr>
+            <tr><td>Penggunaan Air Raksa (Hg)</td><td><strong>Dilarang</strong> menggunakan air raksa dalam pengolahan bijih emas</td></tr>
+            <tr><td>Limbah B3</td><td>Dikelola sesuai ketentuan peraturan perundang-undangan</td></tr>
+            <tr><td>Bendungan Tailing</td><td>Dilengkapi sistem tanggap darurat dan rencana mitigasi kegagalan struktur</td></tr>
+            <tr><td>Penempatan Sisa di Bawah Laut</td><td>Dikelola sesuai ketentuan peraturan perundang-undangan</td></tr>
+            <tr><td><em>Heap Leach</em></td><td>Dilengkapi: sistem sirkulasi air kerja tertutup, <em>liner system</em> (lapisan kedap fluida), sumur pantau, parit keliling dan kolam pengaman, sistem pemantauan kebocoran, sistem tanggap darurat lingkungan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l5-pemantauan">
+      <h3>D.6 Pemantauan Lingkungan Hidup</h3>
+      <p>Jenis pemantauan yang wajib dilakukan:</p>
+      <ul>
+        <li>Kualitas air permukaan</li>
+        <li>Kualitas dan kuantitas air tanah</li>
+        <li>Kualitas air laut</li>
+        <li>Kualitas air limbah</li>
+        <li>Kualitas tanah</li>
+        <li>Kualitas udara</li>
+        <li>Keanekaragaman hayati</li>
+        <li>Penurunan permukaan tanah</li>
+        <li>Erosi dan sedimentasi</li>
+      </ul>
+      <div class="info-box">Pemantauan dilaksanakan oleh <strong>tenaga teknis yang berkompeten</strong> menggunakan peralatan pantau standar.</div>
+
+      <h3>D.7 Penanggulangan Pencemaran dan/atau Perusakan</h3>
+      <ul>
+        <li>Penyiapan tata cara baku (disusun KTT): personil, sarana peralatan dan bahan, kesiapsiagaan tanggap darurat lingkungan</li>
+        <li>Upaya penanggulangan: identifikasi sumber pencemaran, tindakan perbaikan, pemantauan dan evaluasi tindakan</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LAMPIRAN VI -->
+  <section class="section" id="l6">
+    <div class="lampiran-badge"><span class="roman">VI</span> Reklamasi dan Pascatambang</div>
+    <h2>Pedoman Pelaksanaan Reklamasi dan Pascatambang serta Pascaoperasi</h2>
+
+    <h3>A. Ruang Lingkup</h3>
+    <ol>
+      <li>Penyusunan Rencana Reklamasi, Rencana Pascatambang, dan Rencana Pascaoperasi</li>
+      <li>Penilaian dan Persetujuan</li>
+      <li>Jaminan Reklamasi dan Jaminan Pascatambang</li>
+      <li>Pelaksanaan Reklamasi, Pascatambang, dan Pascaoperasi</li>
+      <li>Pelaporan dan Pencairan Jaminan Reklamasi dan Jaminan Pascatambang</li>
+      <li>Penyerahan Lahan Reklamasi</li>
+      <li>Penyerahan Lahan Pascatambang dan Pascaoperasi</li>
+    </ol>
+
+    <h3>C. Pengertian (23 Istilah)</h3>
+    <p>Reklamasi, Kegiatan Pascatambang, Pertambangan, Mineral, Batubara, IUP Eksplorasi, IUPK Eksplorasi, IUP Operasi Produksi, IUPK Operasi Produksi, IUP Operasi Produksi khusus pengolahan/pemurnian, Eksplorasi, Studi Kelayakan, Operasi Produksi, Penambangan, Pascaoperasi, WIUP, WIUPK, Jaminan Reklamasi, Jaminan Pascatambang, Dokumen Lingkungan Hidup, Izin Lingkungan, Menteri, Direktur Jenderal.</p>
+
+    <div id="l6-rencana">
+      <h3>D.1 Penyusunan Rencana Reklamasi, Pascatambang, dan Pascaoperasi</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Jenis Rencana</th><th>Waktu Penyampaian</th><th>Komponen</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Rencana Reklamasi Tahap Eksplorasi</strong></td>
+              <td>Paling lambat <strong>45 hari</strong> sebelum memulai eksplorasi</td>
+              <td>Tata guna lahan, rencana pembukaan lahan, program reklamasi, kriteria keberhasilan, rencana biaya (langsung + tidak langsung)</td>
+            </tr>
+            <tr>
+              <td><strong>Rencana Reklamasi Tahap Operasi Produksi</strong></td>
+              <td>Bersamaan permohonan IUP Operasi Produksi; setiap <strong>5 tahun</strong></td>
+              <td>Jangka waktu 5 tahun dengan rincian tahunan; revegetasi (penatagunaan lahan, revegetasi, pemeliharaan minimal 3 tahun); pengelolaan lubang bekas tambang (<em>void</em>)</td>
+            </tr>
+            <tr>
+              <td><strong>Rencana Pascatambang</strong></td>
+              <td>Bersamaan permohonan IUP Operasi Produksi</td>
+              <td>Profil wilayah, deskripsi kegiatan, rona lingkungan akhir, program Pascatambang, organisasi, kriteria keberhasilan, rencana biaya; <strong>wajib konsultasi</strong> dengan pemangku kepentingan</td>
+            </tr>
+            <tr>
+              <td><strong>Rencana Pascaoperasi</strong></td>
+              <td>Paling lambat <strong>1 tahun</strong> setelah IUP Operasi Produksi khusus diterbitkan</td>
+              <td>Profil wilayah, deskripsi kegiatan pengolahan, rona lingkungan akhir, program Pascaoperasi (pembongkaran, reklamasi, pengelolaan air, stabilisasi, remediasi, pengembangan sosial, pemeliharaan, pemantauan)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>D.2 Penilaian dan Persetujuan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Jenis</th><th>Waktu Penilaian</th><th>Ketentuan Khusus</th></tr></thead>
+          <tbody>
+            <tr><td>Rencana Reklamasi Eksplorasi</td><td>Paling lama <strong>30 hari</strong> kalender</td><td>Dianggap disetujui jika tidak ada saran dalam 30 hari; perubahan rencana disampaikan paling lambat 30 Juni tahun berjalan</td></tr>
+            <tr><td>Rencana Reklamasi Operasi Produksi</td><td>Paling lama <strong>30 hari</strong> kalender</td><td>Dianggap disetujui jika tidak ada persetujuan atau saran dalam 30 hari</td></tr>
+            <tr><td>Rencana Pascatambang</td><td>Paling lama <strong>60 hari</strong> kalender</td><td>Perubahan rencana disampaikan paling lambat 2 tahun sebelum akhir kegiatan penambangan</td></tr>
+            <tr><td>Rencana Pascaoperasi</td><td>Paling lama <strong>60 hari</strong> kalender</td><td>Dianggap disetujui jika tidak ada saran dalam 60 hari</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l6-jaminan">
+      <h3>D.3 Jaminan Reklamasi dan Jaminan Pascatambang</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Jenis Jaminan</th><th>Bentuk</th><th>Ketentuan Penempatan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Jaminan Reklamasi Eksplorasi</strong></td><td>Deposito Berjangka pada bank Pemerintah</td><td>Ditempatkan seluruhnya di awal; paling lambat <strong>30 hari</strong> setelah RKAB eksplorasi disetujui</td></tr>
+            <tr><td><strong>Jaminan Reklamasi Operasi Produksi</strong></td><td>Rekening Bersama, Deposito Berjangka, Bank Garansi, atau Cadangan Akuntansi (syarat: terdaftar di bursa efek Indonesia, kepemilikan saham >40%, modal disetor ≥US$50.000.000)</td><td>Periode 5 tahun pertama ditempatkan seluruhnya; periode berikutnya dapat per tahun berdasarkan evaluasi kinerja lingkungan</td></tr>
+            <tr><td><strong>Jaminan Pascatambang</strong></td><td>Deposito Berjangka pada bank Pemerintah</td><td>Ditempatkan setiap tahun (dimuat dalam RKAB); wajib terkumpul seluruhnya <strong>2 tahun sebelum</strong> memasuki pelaksanaan Pascatambang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>D.4 Pelaksanaan Reklamasi dan Pascatambang</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Kegiatan</th><th>Batas Waktu Pelaksanaan</th></tr></thead>
+          <tbody>
+            <tr><td>Reklamasi Tahap Eksplorasi</td><td>Paling lambat <strong>30 hari</strong> setelah tidak ada kegiatan eksplorasi pada lahan terganggu</td></tr>
+            <tr><td>Reklamasi Tahap Operasi Produksi</td><td>Paling lambat <strong>30 hari</strong> setelah tidak ada kegiatan</td></tr>
+            <tr><td>Pascatambang</td><td>Paling lambat <strong>30 hari</strong> setelah kegiatan penambangan berakhir</td></tr>
+            <tr><td>Pascaoperasi</td><td>Paling lambat <strong>30 hari</strong> setelah kegiatan pengolahan dan/atau pemurnian berakhir</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>D.5 Pelaporan dan Pencairan Jaminan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Jenis</th><th>Pelaporan</th><th>Ketentuan Pencairan</th></tr></thead>
+          <tbody>
+            <tr><td>Reklamasi Eksplorasi</td><td>Laporan tahunan, paling lambat <strong>31 Januari</strong></td><td>Setelah penilaian mencapai <strong>100%</strong></td></tr>
+            <tr><td>Reklamasi Operasi Produksi</td><td>Laporan tahunan, paling lambat <strong>31 Januari</strong></td><td>Maks. <strong>60%</strong> setelah penatagunaan lahan, maks. <strong>80%</strong> setelah revegetasi, <strong>100%</strong> setelah penyelesaian akhir</td></tr>
+            <tr><td>Pascatambang</td><td>Laporan triwulan</td><td>Setelah evaluasi mencapai 100%; perpanjangan waktu maks. <strong>3 tahun</strong> jika belum 100%</td></tr>
+            <tr><td>Pascaoperasi</td><td>Laporan triwulan</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note-box"><strong>Penetapan Pihak Ketiga:</strong> Jika pemegang IUP tidak memenuhi kriteria keberhasilan, Direktur Jenderal/Gubernur menetapkan pihak ketiga (pemilik IUJP bidang Pascatambang dan Reklamasi) untuk melaksanakan reklamasi menggunakan jaminan.</div>
+
+      <h3>D.6 & D.7 Penyerahan Lahan</h3>
+      <ul>
+        <li>Mengajukan permohonan kepada Menteri melalui Direktur Jenderal atau Gubernur</li>
+        <li>Peninjauan lapangan</li>
+        <li>Persetujuan paling lama <strong>60 hari</strong> sejak permohonan diterima</li>
+        <li>IUP yang berakhir masa berlaku atau dicabut <strong>tidak menghilangkan kewajiban</strong> melaksanakan Pascatambang</li>
+      </ul>
+    </div>
+
+    <div id="l6-matrik">
+      <h3>E. Matrik (Format) Penyusunan dan Pelaporan</h3>
+      <p>Lampiran VI dilengkapi dengan <strong>25 (dua puluh lima) Matrik</strong>:</p>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Matrik</th><th>Judul</th></tr></thead>
+          <tbody>
+            <tr><td>Matrik 1</td><td>Format penyusunan Rencana Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 1.1</td><td>Rencana Reklamasi Tahap Eksplorasi (Tabel)</td></tr>
+            <tr><td>Matrik 1.2</td><td>Rencana Biaya Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 2</td><td>Format penyusunan Rencana Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 2.1</td><td>Rencana Reklamasi Tahap Operasi Produksi (Komoditas Mineral Logam dan Batubara)</td></tr>
+            <tr><td>Matrik 2.2</td><td>Rencana Biaya Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 3</td><td>Format penyusunan Rencana Pascatambang</td></tr>
+            <tr><td>Matrik 3.1</td><td>Rencana dan Biaya Pascatambang</td></tr>
+            <tr><td>Matrik 4</td><td>Format penyusunan Rencana Pascatambang (mineral bukan logam dan batuan, umur ≤5 tahun)</td></tr>
+            <tr><td>Matrik 5</td><td>Format penyusunan Rencana Pascaoperasi</td></tr>
+            <tr><td>Matrik 6</td><td>Tata cara penempatan Jaminan Pascatambang</td></tr>
+            <tr><td>Matrik 7</td><td>Tata cara penempatan Jaminan Pascatambang (mineral bukan logam dan batuan, umur ≤5 tahun)</td></tr>
+            <tr><td>Matrik 8</td><td>Format Laporan Pelaksanaan Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 9</td><td>Rekapitulasi Pelaksanaan Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 10</td><td>Rekapitulasi Biaya Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 11</td><td>Kriteria Keberhasilan Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 12</td><td>Penilaian Reklamasi Tahap Eksplorasi</td></tr>
+            <tr><td>Matrik 13</td><td>Format Laporan Pelaksanaan Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 14</td><td>Rekapitulasi Pelaksanaan Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 15</td><td>Rekapitulasi Biaya Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 16</td><td>Kriteria Keberhasilan Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 17</td><td>Pedoman Penilaian Reklamasi Tahap Operasi Produksi</td></tr>
+            <tr><td>Matrik 18</td><td>Format Laporan Triwulan Pelaksanaan Pascatambang</td></tr>
+            <tr><td>Matrik 19</td><td>Rekapitulasi Biaya Pelaksanaan Pascatambang</td></tr>
+            <tr><td>Matrik 20</td><td>Format Laporan Triwulan Pascatambang (mineral bukan logam dan batuan, umur ≤5 tahun)</td></tr>
+            <tr><td>Matrik 21</td><td>Kriteria Keberhasilan Pascatambang</td></tr>
+            <tr><td>Matrik 22</td><td>Pedoman Penilaian Pascatambang</td></tr>
+            <tr><td>Matrik 23</td><td>Kriteria Keberhasilan Pascatambang (mineral bukan logam dan batuan, umur ≤5 tahun)</td></tr>
+            <tr><td>Matrik 24</td><td>Pedoman Penilaian Pascatambang (mineral bukan logam dan batuan, umur ≤5 tahun)</td></tr>
+            <tr><td>Matrik 25</td><td>Format laporan pelaksanaan kegiatan Pascaoperasi</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>F. Format Berita Acara</h3>
+      <ul>
+        <li>Format 1 — Berita Acara Penilaian Keberhasilan Reklamasi Tahap Eksplorasi</li>
+        <li>Format 2 — Berita Acara Penilaian Keberhasilan Reklamasi Tahap Operasi Produksi</li>
+        <li>Format 3 — Berita Acara Penilaian Keberhasilan Pelaksanaan Pascatambang</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LAMPIRAN VII -->
+  <section class="section" id="l7">
+    <div class="lampiran-badge"><span class="roman">VII</span> Konservasi Mineral dan Batubara</div>
+    <h2>Pedoman Pelaksanaan Konservasi Mineral dan Batubara</h2>
+
+    <h3>A. Ruang Lingkup</h3>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>No</th><th>Pemegang Izin</th><th>Ruang Lingkup Konservasi</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>1.</td>
+            <td>IUP/IUPK Eksplorasi</td>
+            <td>Perencanaan <em>recovery</em> penambangan dan pengolahan; pengelolaan batubara kualitas rendah, mineral kadar rendah, dan mineral ikutan</td>
+          </tr>
+          <tr>
+            <td>2.</td>
+            <td>IUP/IUPK Operasi Produksi</td>
+            <td>Perencanaan dan pelaksanaan <em>recovery</em> penambangan dan pengolahan; pengelolaan batubara kualitas rendah, mineral kadar rendah, mineral ikutan, sisa hasil pengolahan dan pemurnian, serta cadangan marginal; pemanfaatan; pendataan cadangan tidak tertambang</td>
+          </tr>
+          <tr>
+            <td>3.</td>
+            <td>IUP Operasi Produksi Khusus Pengolahan dan/atau Pemurnian</td>
+            <td>Perencanaan dan pelaksanaan <em>recovery</em> pengolahan; pengelolaan dan pendataan sisa hasil pengolahan dan pemurnian</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>C. Pengertian (11 Istilah)</h3>
+    <p>Cadangan Marginal, Cadangan Tidak Tertambang, <em>Cut off grade</em>, <em>Cut off thickness</em>, Dilusi, Konservasi Mineral dan Batubara, Mineral Ikutan, Mineral Kadar Rendah, Batubara Kualitas Rendah, Pengolahan, <em>Recovery</em> Penambangan, <em>Recovery</em> Pengolahan.</p>
+
+    <div id="l7-recovery">
+      <h3>D.1 Perencanaan dan Pelaksanaan <em>Recovery</em> Penambangan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Metode Penambangan</th><th>Recovery Minimum</th></tr></thead>
+          <tbody>
+            <tr><td>Tambang terbuka</td><td><span class="percent-badge">≥ 90%</span></td></tr>
+            <tr><td>Tambang batubara bawah tanah</td><td><span class="percent-badge">≥ 70%</span></td></tr>
+            <tr><td>Tambang bijih bawah tanah</td><td><span class="percent-badge">≥ 70%</span></td></tr>
+            <tr><td>Kapal keruk dan kapal isap</td><td><span class="percent-badge">≥ 90%</span></td></tr>
+            <tr><td>Tambang semprot</td><td><span class="percent-badge">≥ 80%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-box">
+        <strong>Ketentuan Tambahan:</strong>
+        <ul style="margin-top:8px">
+          <li><em>Cut off thickness</em> minimal <strong>30 cm</strong> untuk batubara terbuka</li>
+          <li>Jika tidak dapat mencapai <em>recovery</em> optimal, wajib menyusun <strong>kajian teknis aspek konservasi</strong> dalam laporan khusus</li>
+        </ul>
+      </div>
+
+      <h3>D.2 Perencanaan dan Pelaksanaan <em>Recovery</em> Pengolahan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Komoditas</th><th>Recovery Minimum</th></tr></thead>
+          <tbody>
+            <tr><td>Peremukan batubara</td><td><span class="percent-badge">≥ 90%</span></td></tr>
+            <tr><td>Pencucian batubara</td><td><span class="percent-badge">≥ 70%</span></td></tr>
+            <tr><td>Emas</td><td><span class="percent-badge">≥ 85%</span></td></tr>
+            <tr><td>Nikel</td><td><span class="percent-badge">≥ 90%</span></td></tr>
+            <tr><td>Tembaga</td><td><span class="percent-badge">≥ 85%</span></td></tr>
+            <tr><td>Bauksit</td><td><span class="percent-badge">≥ 70%</span></td></tr>
+            <tr><td>Timah</td><td><span class="percent-badge">≥ 90%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l7-pengelolaan">
+      <h3>D.3 Pengelolaan Batubara Kualitas Rendah, Mineral Kadar Rendah, Mineral Ikutan, Sisa Hasil Pengolahan, dan Cadangan Marginal</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Objek</th><th>Tahap Eksplorasi</th><th>Tahap Operasi Produksi</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Batubara Kualitas Rendah & Mineral Kadar Rendah</strong></td>
+              <td>Pendataan sebaran keterdapatan (lokasi, dimensi, kualitas/kadar); dimasukkan dalam estimasi sumber daya; optimalisasi dalam studi kelayakan</td>
+              <td>Pendataan tonase dan kualitas/kadar; penempatan khusus (<em>stockpile</em>) sesuai kualitas; pengendalian penurunan tonase dan kualitas</td>
+            </tr>
+            <tr>
+              <td><strong>Mineral Ikutan</strong></td>
+              <td>Pendataan keterdapatan (jenis, lokasi); estimasi dalam neraca sumber daya (tonase, kadar)</td>
+              <td>Pendataan tonase, jenis, dan kadar mineral ikutan yang tertambang</td>
+            </tr>
+            <tr>
+              <td><strong>Sisa Hasil Pengolahan & Pemurnian</strong></td>
+              <td>—</td>
+              <td>Penempatan khusus; pengendalian penurunan tonase; pemanfaatan (retreatment); estimasi dalam neraca sumber daya</td>
+            </tr>
+            <tr>
+              <td><strong>Cadangan Marginal</strong></td>
+              <td>—</td>
+              <td>Pendataan lokasi, tipe endapan, kedalaman, tonase, kualitas/kadar; kajian teknis jika ada rencana penambangan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box"><strong>Kewajiban Kajian Teknis Konservasi:</strong> Jika memiliki timbunan batubara kualitas rendah/mineral kadar rendah dengan kondisi tertentu (belum dijadwalkan pengolahan, volume mencapai 3/4 kapasitas, atau akan memasuki pascatambang ≤3 tahun), wajib membuat kajian teknis aspek konservasi untuk rencana pemanfaatan.</div>
+
+      <h4>Sisa Hasil Pengolahan Emas</h4>
+      <p>Jika memenuhi kriteria (karakteristik konten diketahui, <em>free milling/free gold</em>, kadar tertentu, data distribusi, ukuran partikel, jarak &lt;2 km), wajib membuat kajian teknis aspek konservasi untuk <em>retreatment</em>.</p>
+
+      <h3>D.4 Pemanfaatan</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead><tr><th>Komoditas</th><th>Opsi Pemanfaatan</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Batubara Kualitas Rendah (Tertambang)</strong></td><td>Pencampuran dengan kualitas lain, pengolahan (<em>coal upgrading</em>, briket, pencairan, CWM), pemanfaatan untuk PLTU</td></tr>
+            <tr><td><strong>Batubara Kualitas Rendah (Belum Tertambang)</strong></td><td>Optimasi cadangan; gasifikasi batubara (termasuk UCG)</td></tr>
+            <tr><td><strong>Mineral Kadar Rendah</strong></td><td>Pencampuran dengan kadar lain; pengolahan berdasarkan teknologi</td></tr>
+            <tr><td><strong>Mineral Ikutan</strong></td><td>Pengolahan bersamaan mineral utama; pengolahan kembali dari sisa hasil pengolahan</td></tr>
+            <tr><td><strong>Cadangan Marginal</strong></td><td>Penjadwalan penambangan; pencampuran dengan cadangan lain; pengolahan dan/atau pemurnian berdasarkan teknologi</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="l7-pendataan">
+      <h3>D.5 Pendataan Cadangan Tidak Tertambang dan Sisa Hasil Pengolahan</h3>
+      <ul>
+        <li>Mendata volume, kedalaman, kualitas/kadar pada lokasi penambangan yang ditinggalkan <strong>paling lama 30 hari</strong></li>
+        <li>Mendata potensi cadangan pada lokasi yang direncanakan tetapi tidak direalisasikan</li>
+        <li>Pendataan dapat dilakukan dalam bentuk <strong>peta konservasi</strong></li>
+        <li>Mendatai potensi cadangan sepanjang batas WIUP/WIUPK dengan WIUP/WIUPK lainnya</li>
+      </ul>
+
+      <h3>D.6 Evaluasi Upaya Penerapan Konservasi</h3>
+      <ul>
+        <li>Kendala pelaksanaan <em>recovery</em> optimal dicantumkan dalam <strong>laporan konservasi</strong></li>
+        <li>Optimalisasi <em>recovery</em> tambang bawah tanah tetap menjaga kestabilan pillar sesuai rekomendasi kajian teknis</li>
+        <li>Paling lama <strong>3 tahun sebelum</strong> umur tambang berakhir, wajib melakukan pendataan cadangan tidak tertambang dan menyampaikan kajian teknis aspek konservasi dalam laporan khusus</li>
+        <li>Potensi cadangan pada batas wilayah dapat dioptimalkan melalui <strong>penambangan bersama</strong> antar pemegang IUP yang berbatasan, dengan kajian teknis aspek konservasi dalam laporan khusus</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+  // ── SECTION SWITCHING ──
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    const sec = document.getElementById(id);
+    if (sec) sec.classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(`'${id}'`)) {
+        const onclick = n.getAttribute('onclick');
+        if (onclick === `showSection('${id}')`) n.classList.add('active');
+      }
+    });
+    window.scrollTo(0, 0);
+    closeSidebar();
+    clearSearch();
+  }
+
+  function scrollTo(id) {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  // ── SIDEBAR TOGGLE ──
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  // ── SEARCH ──
+  let matches = [];
+  let matchIdx = -1;
+  const originalHTML = {};
+
+  function clearSearch() {
+    const input = document.getElementById('searchInput');
+    input.value = '';
+    document.getElementById('searchCount').style.display = 'none';
+    restoreAll();
+    matches = [];
+    matchIdx = -1;
+  }
+
+  function saveOriginals() {
+    document.querySelectorAll('.section').forEach(s => {
+      if (!originalHTML[s.id]) originalHTML[s.id] = s.innerHTML;
+    });
+  }
+
+  function restoreAll() {
+    document.querySelectorAll('.section').forEach(s => {
+      if (originalHTML[s.id]) s.innerHTML = originalHTML[s.id];
+    });
+  }
+
+  function doSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    const countEl = document.getElementById('searchCount');
+
+    if (!q) {
+      restoreAll();
+      countEl.style.display = 'none';
+      matches = []; matchIdx = -1;
+      return;
+    }
+
+    saveOriginals();
+    restoreAll();
+
+    // Search across ALL sections
+    let count = 0;
+    const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(escaped, 'gi');
+
+    document.querySelectorAll('.section').forEach(sec => {
+      const walker = document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, null, false);
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        if (node.parentElement.tagName !== 'SCRIPT' && node.parentElement.tagName !== 'STYLE') {
+          textNodes.push(node);
+        }
+      }
+      textNodes.forEach(tn => {
+        const text = tn.textContent;
+        if (regex.test(text)) {
+          regex.lastIndex = 0;
+          const span = document.createElement('span');
+          span.innerHTML = text.replace(regex, m => `<mark>${m}</mark>`);
+          tn.parentNode.replaceChild(span, tn);
+          count += (text.match(regex) || []).length;
+          regex.lastIndex = 0;
+        }
+        regex.lastIndex = 0;
+      });
+    });
+
+    matches = [...document.querySelectorAll('mark')];
+    matchIdx = -1;
+
+    if (count > 0) {
+      countEl.textContent = `${count} hasil`;
+      countEl.style.display = 'block';
+      nextMatch();
+    } else {
+      countEl.textContent = 'Tidak ditemukan';
+      countEl.style.display = 'block';
+    }
+  }
+
+  function nextMatch() {
+    if (!matches.length) return;
+    if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+    matchIdx = (matchIdx + 1) % matches.length;
+    const m = matches[matchIdx];
+    m.classList.add('current');
+
+    // Find which section this match belongs to
+    let el = m;
+    while (el && !el.classList.contains('section')) el = el.parentElement;
+    if (el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    }
+    m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function prevMatch() {
+    if (!matches.length) return;
+    if (matchIdx >= 0 && matches[matchIdx]) matches[matchIdx].classList.remove('current');
+    matchIdx = (matchIdx - 1 + matches.length) % matches.length;
+    const m = matches[matchIdx];
+    m.classList.add('current');
+    let el = m;
+    while (el && !el.classList.contains('section')) el = el.parentElement;
+    if (el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+    }
+    m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function searchNav(e) {
+    if (e.key === 'Enter') { e.shiftKey ? prevMatch() : nextMatch(); }
+    if (e.key === 'Escape') clearSearch();
+  }
+
+  // Save originals on load
+  window.addEventListener('load', saveOriginals);
+</script>
+</body>
+</html>

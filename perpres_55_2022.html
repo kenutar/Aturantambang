@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Perpres No. 55 Tahun 2022 — Pendelegasian Perizinan Pertambangan Minerba</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0c0f14;
+    --surface: rgba(255,255,255,0.028);
+    --surface2: rgba(255,255,255,0.05);
+    --border: rgba(255,255,255,0.07);
+    --text: #cdd5e0;
+    --muted: #3d4f62;
+    --muted2: #5a7080;
+    --bab-color: #0f3460;
+    --bab-accent: #4f9cf9;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    font-family: 'Geist', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    transition: background 0.5s ease;
+  }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes blink { 0%,100%{opacity:0.25} 50%{opacity:1} }
+
+  .fade-up { animation: fadeUp 0.28s ease forwards; }
+  input, textarea { outline: none; font-family: inherit; }
+  button { cursor: pointer; font-family: inherit; transition: opacity .15s, transform .1s; }
+  button:hover { opacity: 0.82; }
+  button:active { transform: scale(0.97); }
+
+  /* ── Header ── */
+  #header {
+    position: sticky; top: 0; z-index: 200;
+    background: rgba(12,15,20,0.92);
+    backdrop-filter: blur(20px) saturate(1.6);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 1320px; margin: 0 auto;
+    padding: 0 24px; height: 56px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .logo-badge {
+    display: flex; align-items: center; gap: 9px;
+    background: linear-gradient(135deg,rgba(15,52,96,0.5),rgba(15,52,96,0.2));
+    border: 1px solid rgba(79,156,249,0.2);
+    border-radius: 8px; padding: 5px 11px; flex-shrink: 0;
+  }
+  .logo-seal { font-size: 16px; }
+  .logo-text-top { font-size: 9px; font-weight: 700; color: #4f9cf9; letter-spacing: 0.09em; font-family:'Geist Mono',monospace; line-height:1.1; }
+  .logo-text-bot { font-size: 7.5px; color: var(--muted); font-family:'Geist Mono',monospace; line-height:1.1; }
+  .header-title { flex: 1; }
+  .header-title h1 { font-family:'Instrument Serif',serif; font-size:14px; font-weight:400; color:#e8f0fa; line-height:1; letter-spacing:0.01em; }
+  .header-title p { font-size:9.5px; color:var(--muted); margin-top:2px; font-family:'Geist Mono',monospace; }
+  .tabs { display: flex; gap: 3px; }
+  .tab-btn {
+    background: transparent; border: 1px solid transparent;
+    color: var(--muted); padding: 5px 12px; border-radius: 7px;
+    font-size: 12px; font-weight: 400;
+    display: flex; align-items: center; gap: 5px; transition: all .16s;
+  }
+  .tab-btn.active {
+    background: color-mix(in srgb,var(--bab-color) 25%,transparent);
+    border-color: color-mix(in srgb,var(--bab-accent) 30%,transparent);
+    color: var(--bab-accent); font-weight: 600;
+  }
+
+  /* ── Layout ── */
+  .layout {
+    max-width: 1320px; margin: 0 auto;
+    padding: 20px 24px; display: flex; gap: 18px; align-items: flex-start;
+  }
+
+  /* ── Sidebar ── */
+  aside { width: 238px; flex-shrink: 0; position: sticky; top: 72px; }
+  .sidebar-label {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.15em;
+    color: #1e2d3d; text-transform: uppercase; margin-bottom: 8px; padding-left: 3px;
+    font-family: 'Geist Mono', monospace;
+  }
+  .sidebar-list { display: flex; flex-direction: column; gap: 4px; }
+  .bab-btn {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 9px; padding: 9px 11px; text-align: left;
+    position: relative; overflow: hidden; width: 100%; transition: all .18s;
+  }
+  .bab-btn.active {
+    background: linear-gradient(135deg,
+      color-mix(in srgb,var(--bab-color) 20%,transparent),
+      color-mix(in srgb,var(--bab-color) 10%,transparent));
+    border-color: color-mix(in srgb,var(--bab-accent) 28%,transparent);
+  }
+  .bab-indicator {
+    position: absolute; left: 0; top: 0; width: 3px; height: 100%;
+    border-radius: 3px 0 0 3px; display: none;
+  }
+  .bab-btn.active .bab-indicator { display: block; }
+  .bab-inner { display: flex; align-items: center; gap: 9px; }
+  .bab-icon { font-size: 15px; line-height: 1; flex-shrink: 0; }
+  .bab-meta { flex: 1; min-width: 0; }
+  .bab-num {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; margin-bottom: 1px;
+    color: var(--muted); font-family: 'Geist Mono', monospace;
+  }
+  .bab-btn.active .bab-num { color: var(--bab-accent); }
+  .bab-short {
+    font-size: 11.5px; font-weight: 500; color: #3d5060;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .bab-btn.active .bab-short { color: #d0dff0; }
+
+  /* ── Main ── */
+  main { flex: 1; min-width: 0; }
+
+  /* ── Hero card ── */
+  .hero-card {
+    border-radius: 14px; padding: 26px 28px; margin-bottom: 16px;
+    position: relative; overflow: hidden; border: 1px solid;
+  }
+  .hero-bg-icon {
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    font-size: 88px; opacity: 0.06; user-select: none; pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 9px; border-radius: 20px; font-size: 10px;
+    font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+    margin-bottom: 11px; border: 1px solid;
+    font-family: 'Geist Mono', monospace;
+  }
+  .hero-card h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px; font-weight: 400; color: #ecf2fb;
+    line-height: 1.4; margin-bottom: 8px; max-width: 540px;
+  }
+  .hero-subtitle { font-size: 13px; color: var(--muted2); line-height: 1.6; max-width: 520px; }
+
+  /* ── Info grid ── */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .info-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 11px; padding: 14px 16px;
+  }
+  .info-card-label {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.13em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 9px;
+    font-family: 'Geist Mono', monospace;
+  }
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 20px;
+    font-size: 10.5px; font-weight: 500; margin-right: 5px; margin-bottom: 5px;
+    border: 1px solid;
+  }
+
+  /* ── Pasal notes panel ── */
+  .pasal-panel {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 11px; padding: 16px 18px;
+  }
+  .pasal-panel-label {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.13em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 13px;
+    font-family: 'Geist Mono', monospace;
+  }
+  .pasal-list { display: flex; flex-direction: column; gap: 5px; }
+  .pasal-row {
+    display: flex; flex-direction: column;
+    border-radius: 8px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.065);
+    transition: border-color .16s;
+  }
+  .pasal-row.active {
+    border-color: color-mix(in srgb,var(--bab-accent) 32%,transparent);
+  }
+  .pasal-row-top { display: flex; align-items: stretch; }
+  .pasal-btn {
+    flex: 1; background: rgba(255,255,255,0.018);
+    border: none; text-align: left; padding: 8px 12px;
+    color: var(--muted2); font-size: 12px; font-weight: 400;
+    display: flex; align-items: center; gap: 8px; transition: all .16s;
+  }
+  .pasal-btn:hover { background: rgba(255,255,255,0.04); color: #8aaac0; }
+  .pasal-btn.active {
+    background: color-mix(in srgb,var(--bab-color) 20%,transparent);
+    color: #cde0f4; font-weight: 500;
+  }
+  .pasal-num {
+    font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 600;
+    min-width: 22px; text-align: center; opacity: 0.45;
+  }
+  .pasal-btn.active .pasal-num { opacity: 1; color: var(--bab-accent); }
+  .pasal-note-btn {
+    background: rgba(255,255,255,0.035);
+    border: none; border-left: 1px solid rgba(255,255,255,0.055);
+    color: var(--muted); padding: 0 12px;
+    font-size: 10.5px; font-weight: 600; white-space: nowrap;
+    transition: all .16s; flex-shrink: 0;
+  }
+  .pasal-note-btn:hover {
+    background: color-mix(in srgb,var(--bab-accent) 14%,transparent);
+    color: var(--bab-accent);
+  }
+  .pasal-note-btn.has-note { color: var(--bab-accent); opacity: 0.8; }
+
+  /* ── Inline editor ── */
+  .pasal-editor {
+    border-top: 1px solid rgba(255,255,255,0.055);
+    background: rgba(0,0,0,0.2);
+    animation: fadeUp 0.18s ease forwards;
+  }
+  .pasal-editor-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 12px 5px;
+  }
+  .pasal-editor-title {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; font-family: 'Geist Mono', monospace;
+  }
+  .pasal-editor-actions { display: flex; gap: 5px; align-items: center; }
+  .pasal-save-btn {
+    font-size: 10.5px; font-weight: 700; padding: 3px 11px;
+    border-radius: 5px; border: none; color: #fff; transition: opacity .15s;
+  }
+  .pasal-save-btn:disabled { opacity: 0.35; }
+  .pasal-close-btn {
+    background: none; border: none; color: var(--muted);
+    font-size: 12px; line-height: 1; padding: 2px 5px;
+  }
+  .pasal-close-btn:hover { color: #8aaac0; }
+  .saved-indicator {
+    font-size: 9.5px; font-weight: 700; font-family: 'Geist Mono', monospace;
+    opacity: 0; transition: opacity .3s;
+  }
+  .saved-indicator.show { opacity: 1; }
+  .pasal-textarea {
+    width: 100%; background: transparent; border: none;
+    color: #c0d0e0; font-size: 12.5px; line-height: 1.72;
+    font-family: 'Geist', sans-serif;
+    resize: vertical; min-height: 85px;
+    padding: 0 12px 10px; outline: none;
+  }
+  .pasal-textarea::placeholder { color: #1e2d3d; }
+
+  /* ── Detail ── */
+  .detail-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 11px; padding: 22px 26px;
+  }
+  .detail-label {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.13em;
+    text-transform: uppercase; margin-bottom: 7px; font-family: 'Geist Mono', monospace;
+  }
+  .detail-title {
+    font-family: 'Instrument Serif', serif; font-size: 15px; font-weight: 400;
+    color: #d8e8f8; line-height: 1.5; margin-bottom: 16px;
+  }
+  .detail-body {
+    white-space: pre-wrap; font-family: 'Geist Mono', monospace;
+    font-size: 12px; line-height: 1.88; color: #4d6878;
+    max-height: 65vh; overflow-y: auto;
+    border-top: 1px solid var(--border); padding-top: 14px; padding-right: 5px;
+  }
+
+  /* ── Search ── */
+  .search-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 11px; padding: 22px 26px;
+  }
+  .search-label {
+    font-size: 8.5px; font-weight: 700; color: var(--muted); letter-spacing: 0.13em;
+    text-transform: uppercase; margin-bottom: 14px; font-family: 'Geist Mono', monospace;
+  }
+  .scope-row { display: flex; gap: 7px; margin-bottom: 11px; }
+  .scope-btn {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07);
+    color: var(--muted); padding: 5px 13px; border-radius: 7px; font-size: 11.5px; transition: all .16s;
+  }
+  .scope-btn.active {
+    background: color-mix(in srgb,var(--bab-accent) 12%,transparent);
+    border-color: color-mix(in srgb,var(--bab-accent) 32%,transparent);
+    color: var(--bab-accent); font-weight: 600;
+  }
+  .search-row { display: flex; gap: 9px; margin-bottom: 11px; }
+  .search-input {
+    flex: 1; background: rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 9px; padding: 9px 14px; color: #d0dff0; font-size: 13px;
+  }
+  .search-btn {
+    background: linear-gradient(135deg,#0f3460,#1a4a80);
+    border: none; color: #fff; padding: 9px 18px;
+    border-radius: 9px; font-size: 12.5px; font-weight: 600;
+  }
+  .search-btn:disabled { background: rgba(255,255,255,0.06); color: var(--muted); }
+  .chips-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    color: var(--muted); padding: 4px 11px; border-radius: 20px; font-size: 11px;
+  }
+  .chip:hover { border-color: rgba(79,156,249,0.3); color: #6aabdb; }
+
+  /* ── AI box ── */
+  .ai-box {
+    margin-top: 14px; background: rgba(6,10,18,0.7);
+    border-radius: 10px; overflow: hidden; border: 1px solid;
+    animation: fadeUp 0.25s ease forwards;
+  }
+  .ai-box-header {
+    padding: 7px 13px; border-bottom: 1px solid;
+    display: flex; align-items: center; gap: 7px;
+    font-size: 9.5px; font-weight: 700; letter-spacing: 0.09em;
+    text-transform: uppercase; font-family: 'Geist Mono', monospace;
+  }
+  .ai-box-body {
+    padding: 13px 15px; font-size: 13px; line-height: 1.8;
+    color: #b0c4d8; white-space: pre-wrap;
+  }
+
+  /* ── Spin ── */
+  .spin {
+    display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.12);
+    border-top-color: var(--bab-accent);
+    animation: spin 0.65s linear infinite; vertical-align: middle;
+  }
+
+  /* ── Chat ── */
+  .chat-wrap {
+    display: flex; flex-direction: column;
+    height: calc(100vh - 155px); min-height: 500px;
+  }
+  .chat-context-bar {
+    border-radius: 9px; padding: 8px 13px;
+    display: flex; align-items: center; gap: 9px;
+    margin-bottom: 11px; flex-shrink: 0; border: 1px solid;
+  }
+  .chat-context-title { font-size: 11px; font-weight: 600; }
+  .chat-context-hint { font-size: 10px; color: var(--muted); }
+  .chat-messages {
+    flex: 1; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 11px;
+    padding-right: 3px; margin-bottom: 11px;
+  }
+  .chat-empty { padding: 26px 8px; text-align: center; }
+  .chat-empty-icon { font-size: 36px; margin-bottom: 12px; }
+  .chat-empty-title {
+    font-family: 'Instrument Serif', serif; font-size: 15px; font-weight: 400;
+    color: var(--muted2); margin-bottom: 4px;
+  }
+  .chat-empty-hint { font-size: 12px; color: #2a3a4a; margin-bottom: 16px; }
+  .starters-wrap { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; }
+  .starter-btn {
+    background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.07);
+    color: var(--muted2); padding: 7px 13px; border-radius: 20px; font-size: 12px;
+  }
+  .msg { display: flex; }
+  .msg.user { justify-content: flex-end; }
+  .msg.assistant { justify-content: flex-start; }
+  .bubble {
+    max-width: 82%; border: 1px solid; padding: 10px 13px;
+    font-size: 13px; line-height: 1.7; white-space: pre-wrap;
+  }
+  .bubble.user { border-radius: 13px 13px 3px 13px; color: #d0e4f8; }
+  .bubble.assistant {
+    border-radius: 13px 13px 13px 3px;
+    background: rgba(255,255,255,0.035); border-color: rgba(255,255,255,0.07);
+    color: #a8c0d4;
+  }
+  .bubble-label {
+    font-size: 8.5px; font-weight: 700; letter-spacing: 0.09em;
+    margin-bottom: 4px; font-family: 'Geist Mono', monospace;
+  }
+  .dots-wrap { display: flex; gap: 5px; padding-left: 5px; align-items: center; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--bab-accent); }
+  .dot:nth-child(1){animation:blink 1s 0s infinite;}
+  .dot:nth-child(2){animation:blink 1s .18s infinite;}
+  .dot:nth-child(3){animation:blink 1s .36s infinite;}
+  .chat-input-wrap {
+    display: flex; gap: 9px;
+    background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 11px; padding: 7px 7px 7px 13px;
+    align-items: flex-end; flex-shrink: 0;
+  }
+  .chat-textarea {
+    flex: 1; background: transparent; border: none;
+    color: #ccdbe8; font-size: 13px; resize: none; line-height: 1.55;
+  }
+  .send-btn {
+    width: 36px; height: 36px; border-radius: 7px; border: none;
+    font-size: 16px; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+    background: rgba(255,255,255,0.04); color: var(--muted);
+    transition: all .2s;
+  }
+  .send-btn.ready { color: #fff; }
+
+  @media (max-width: 880px) {
+    .layout { flex-direction: column; }
+    aside { width: 100%; position: static; }
+    .sidebar-list { flex-direction: row; flex-wrap: wrap; }
+    .bab-btn { width: auto; }
+    .info-grid { grid-template-columns: 1fr; }
+    .tabs { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <div class="logo-badge">
+      <span class="logo-seal">🇮🇩</span>
+      <div>
+        <div class="logo-text-top">PERPRES</div>
+        <div class="logo-text-bot">55 / 2022</div>
+      </div>
+    </div>
+    <div class="header-title">
+      <h1>Peraturan Presiden Republik Indonesia Nomor 55 Tahun 2022</h1>
+      <p>Pendelegasian Pemberian Perizinan Berusaha di Bidang Pertambangan Mineral dan Batubara · 8 Halaman · 5 BAB · 8 Pasal</p>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab-btn active" data-tab="overview"><span>◈</span> Ringkasan</button>
+      <button class="tab-btn" data-tab="detail"><span>≡</span> Teks Lengkap</button>
+      <button class="tab-btn" data-tab="search"><span>⊕</span> Cari</button>
+      <button class="tab-btn" data-tab="chat"><span>◎</span> Tanya AI</button>
+    </nav>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="sidebar-label">Daftar BAB</div>
+    <div class="sidebar-list" id="sidebar"></div>
+  </aside>
+  <main id="main-panel"></main>
+</div>
+
+<script>
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const BABS = [
+  {
+    id: "I", num: 1,
+    shortTitle: "Ketentuan Umum",
+    title: "Ketentuan Umum",
+    subtitle: "Definisi · IUP · IPR · SIPB · IUJP · Pendelegasian · Perizinan Berusaha",
+    color: "#0f3460", accent: "#4f9cf9", icon: "📜",
+    pages: "Pasal 1",
+    keywords: ["Pertambangan","Pendelegasian","IUP","IPR","SIPB","IUJP","Perizinan Berusaha","Pemerintah Pusat","Pemerintah Daerah Provinsi","Menteri"],
+    pasals: ["Pasal 1 — Definisi & Pengertian"]
+  },
+  {
+    id: "II", num: 2,
+    shortTitle: "Lingkup Kewenangan",
+    title: "Lingkup Kewenangan yang Didelegasikan",
+    subtitle: "Sertifikat Standar · Izin · Pembinaan · Pengawasan · Inspektur Tambang",
+    color: "#1a3a5c", accent: "#5fb8e8", icon: "⚖️",
+    pages: "Pasal 2–3",
+    keywords: ["sertifikat standar","izin","pembinaan","pengawasan","inspektur tambang","IUJP","IUP mineral bukan logam","IPR","SIPB","gubernur"],
+    pasals: ["Pasal 2 — Lingkup Pendelegasian", "Pasal 3 — Kewenangan Tambahan"]
+  },
+  {
+    id: "III", num: 3,
+    shortTitle: "Penyelenggaraan Perizinan",
+    title: "Penyelenggaraan Pemberian Perizinan Berusaha",
+    subtitle: "Kewajiban Pemerintah Daerah Provinsi · Standar · Prosedur · Kriteria",
+    color: "#0f2a44", accent: "#38c9a0", icon: "🏛️",
+    pages: "Pasal 4",
+    keywords: ["Pemerintah Daerah Provinsi","perizinan berusaha","efektif","efisien","norma","standar","prosedur","kriteria","perangkat daerah"],
+    pasals: ["Pasal 4 — Kewajiban Pemda Provinsi"]
+  },
+  {
+    id: "IV", num: 4,
+    shortTitle: "Pembinaan & Pengawasan",
+    title: "Pembinaan, Pengawasan, dan Pelaporan",
+    subtitle: "Pembinaan Pusat ke Daerah · Pelaporan Gubernur ke Menteri",
+    color: "#1a2a40", accent: "#f0a050", icon: "🔍",
+    pages: "Pasal 5–6",
+    keywords: ["pembinaan","pengawasan","pelaporan","Pemerintah Pusat","gubernur","Menteri","peraturan perundang-undangan"],
+    pasals: ["Pasal 5 — Pembinaan & Pengawasan Pusat ke Daerah", "Pasal 6 — Kewajiban Pelaporan Pemda"]
+  },
+  {
+    id: "V", num: 5,
+    shortTitle: "Pendanaan & Penutup",
+    title: "Pendanaan dan Ketentuan Penutup",
+    subtitle: "APBD Provinsi · Mulai Berlaku · Penetapan Jakarta 11 April 2022",
+    color: "#1e1a3a", accent: "#b090f0", icon: "💰",
+    pages: "Pasal 7–8",
+    keywords: ["pendanaan","APBD Provinsi","berlaku","diundangkan","Joko Widodo","Yasonna H. Laoly","Lembaran Negara","11 April 2022"],
+    pasals: ["Pasal 7 — Sumber Pendanaan", "Pasal 8 — Mulai Berlaku"]
+  },
+];
+
+const TEXTS = {
+"I": `BAB I — KETENTUAN UMUM
+
+Pasal 1
+
+Dalam Peraturan Presiden ini yang dimaksud dengan:
+
+1. Pertambangan adalah sebagian atau seluruh tahapan kegiatan dalam rangka pengelolaan dan pengusahaan mineral atau batubara yang meliputi penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan/atau pemurnian atau pengembangan dan/atau pemanfaatan, pengangkutan dan penjualan, serta kegiatan pascatambang.
+
+2. Pendelegasian adalah penyerahan sebagian urusan pemerintahan yang menjadi kewenangan pemerintah pusat kepada pemerintah daerah provinsi dalam rangka pemberian perizinan berusaha di bidang Pertambangan mineral dan batubara.
+
+3. Perizinan Berusaha adalah legalitas yang diberikan kepada pelaku usaha untuk memulai dan menjalankan usaha dan/atau kegiatannya.
+
+4. Pemberian Perizinan Berusaha adalah kegiatan pemberian legalitas kepada pelaku usaha untuk memulai dan menjalankan usaha dan/atau kegiatannya yang disertai pembinaan dan pengawasan di bidang Pertambangan mineral dan batubara.
+
+5. Izin Usaha Pertambangan (IUP) adalah izin untuk melaksanakan Usaha Pertambangan.
+
+6. Izin Pertambangan Rakyat (IPR) adalah izin untuk melaksanakan Usaha Pertambangan dalam wilayah Pertambangan rakyat dengan luas wilayah dan investasi terbatas.
+
+7. Surat Izin Penambangan Batuan (SIPB) adalah izin yang diberikan untuk melaksanakan kegiatan Usaha Pertambangan batuan jenis tertentu atau untuk keperluan tertentu.
+
+8. Izin Pengangkutan dan Penjualan adalah izin usaha yang diberikan kepada perusahaan untuk membeli, mengangkut, dan menjual komoditas tambang mineral atau batubara.
+
+9. Izin Usaha Jasa Pertambangan (IUJP) adalah izin yang diberikan untuk melakukan kegiatan usaha jasa Pertambangan inti yang berkaitan dengan tahapan dan/atau bagian kegiatan usaha Pertambangan.
+
+10. Pemerintah Pusat adalah Presiden Republik Indonesia yang memegang kekuasaan pemerintahan negara Republik Indonesia yang dibantu oleh Wakil Presiden dan Menteri.
+
+11. Pemerintah Daerah Provinsi adalah gubernur sebagai unsur penyelenggara pemerintahan daerah provinsi yang memimpin pelaksanaan urusan pemerintahan yang menjadi kewenangan daerah otonom.
+
+12. Menteri adalah menteri yang menyelenggarakan urusan pemerintahan di bidang Pertambangan mineral dan batubara.`,
+
+"II": `BAB II — LINGKUP KEWENANGAN YANG DIDELEGASIKAN
+
+Pasal 2
+
+(1) Pendelegasian meliputi:
+    a. pemberian:
+       1. sertifikat standar; dan
+       2. izin;
+    b. pembinaan atas pelaksanaan Perizinan Berusaha yang didelegasikan; dan
+    c. pengawasan atas pelaksanaan Perizinan Berusaha yang didelegasikan.
+
+(2) Pemberian sertifikat standar sebagaimana dimaksud pada ayat (1) huruf a angka 1 meliputi kegiatan konsultasi dan perencanaan usaha jasa Pertambangan di bidang:
+    a. penyelidikan umum;
+    b. eksplorasi;
+    c. studi kelayakan;
+    d. konstruksi Pertambangan;
+    e. pengangkutan;
+    f. lingkungan Pertambangan;
+    g. reklamasi dan pascatambang;
+    h. keselamatan Pertambangan; dan/atau
+    i. penambangan.
+
+(3) Pemberian izin sebagaimana dimaksud pada ayat (1) huruf a angka 2 terdiri atas:
+    a. IUP PMDN untuk komoditas mineral bukan logam (dalam 1 provinsi atau laut ≤12 mil);
+    b. IUP PMDN untuk komoditas mineral bukan logam jenis tertentu (dalam 1 provinsi atau laut ≤12 mil);
+    c. IUP PMDN untuk komoditas batuan (dalam 1 provinsi atau laut ≤12 mil);
+    d. SIPB;
+    e. IPR;
+    f. Izin Pengangkutan dan Penjualan untuk komoditas mineral bukan logam;
+    g. Izin Pengangkutan dan Penjualan untuk komoditas mineral bukan logam jenis tertentu;
+    h. Izin Pengangkutan dan Penjualan untuk komoditas batuan;
+    i. IUJP untuk 1 (satu) daerah provinsi;
+    j. IUP untuk penjualan komoditas mineral bukan logam;
+    k. IUP untuk penjualan komoditas mineral bukan logam jenis tertentu; dan
+    l. IUP untuk penjualan komoditas batuan.
+
+(4) Pembinaan sebagaimana dimaksud pada ayat (1) huruf b terdiri atas:
+    a. pemberian norma, standar, pedoman, dan kriteria pelaksanaan usaha pertambangan;
+    b. pemberian bimbingan teknis, konsultasi, mediasi, dan/atau fasilitasi; dan
+    c. pengembangan kompetensi tenaga kerja pertambangan.
+
+(5) Pengawasan sebagaimana dimaksud pada ayat (1) huruf c terdiri atas:
+    a. perencanaan pengawasan;
+    b. pelaksanaan pengawasan; dan
+    c. monitoring dan evaluasi pengawasan.
+
+(6) Pelaksanaan pengawasan dilaksanakan atas:
+    a. kaidah teknik Pertambangan yang baik; dan
+    b. tata kelola pengusahaan Pertambangan.
+
+(7) Dalam pelaksanaan pengawasan, gubernur menugaskan:
+    a. inspektur tambang untuk pengawasan atas kaidah teknik Pertambangan yang baik; dan
+    b. pejabat pengawas Pertambangan untuk pengawasan atas tata kelola pengusahaan Pertambangan.
+
+(8) Inspektur tambang dan pejabat pengawas Pertambangan wajib melaporkan hasil pengawasan kepada gubernur.
+
+(9) Jika berdasarkan laporan hasil pengawasan terdapat pelanggaran, gubernur wajib menindaklanjuti dalam bentuk:
+    a. pembinaan; atau
+    b. pemberian sanksi administratif.
+
+(10) Pendelegasian pengawasan tidak termasuk kewenangan atas:
+    a. pengelolaan anggaran;
+    b. sarana dan prasarana; dan
+    c. operasional
+    inspektur tambang dan pejabat pengawas Pertambangan.
+
+(11) Pendelegasian sebagaimana dimaksud pada ayat (1) tidak dapat disubdelegasikan kepada pemerintah daerah kabupaten/kota.
+
+(12) Pembinaan dan pengawasan dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan.
+
+
+Pasal 3
+
+Selain Pendelegasian sebagaimana dimaksud dalam Pasal 2, Pemerintah Pusat mendelegasikan sebagian kewenangan untuk mendukung pengelolaan Pertambangan mineral dan batubara yang meliputi:
+
+a. pemberian dan penetapan wilayah izin usaha Pertambangan mineral bukan logam, mineral bukan logam jenis tertentu, dan batuan (dalam 1 provinsi atau laut ≤12 mil laut);
+
+b. penetapan harga patokan mineral bukan logam, mineral bukan logam jenis tertentu, dan batuan; dan
+
+c. pemberian rekomendasi atau persetujuan yang berkaitan dengan kewenangan yang didelegasikan.`,
+
+"III": `BAB III — PENYELENGGARAAN PEMBERIAN PERIZINAN BERUSAHA
+
+Pasal 4
+
+Pemerintah Daerah Provinsi dalam pelaksanaan Pendelegasian sebagaimana dimaksud dalam Pasal 2 wajib:
+
+a. melaksanakan Pemberian Perizinan Berusaha yang didelegasikan secara efektif dan efisien sesuai dengan norma, standar, prosedur, dan kriteria yang ditetapkan oleh Pemerintah Pusat; dan
+
+b. menyiapkan perangkat daerah yang dibutuhkan dalam pelaksanaan Pemberian Perizinan Berusaha di bidang Pertambangan mineral dan batubara.`,
+
+"IV": `BAB IV — PEMBINAAN, PENGAWASAN, DAN PELAPORAN
+
+Pasal 5
+
+(1) Pemerintah Pusat melakukan pembinaan dan pengawasan kepada Pemerintah Daerah Provinsi atas pelaksanaan Pendelegasian sebagaimana dimaksud dalam Pasal 2.
+
+(2) Pembinaan dan pengawasan sebagaimana dimaksud pada ayat (1) dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan di bidang pembinaan dan pengawasan penyelenggaraan Pemerintahan Daerah.
+
+
+Pasal 6
+
+(1) Pemerintah Daerah Provinsi wajib menyampaikan laporan pelaksanaan Pendelegasian Pemberian Perizinan Berusaha sebagaimana dimaksud dalam Pasal 2 kepada Menteri dan menteri yang menyelenggarakan urusan di bidang pemerintahan dalam negeri.
+
+(2) Laporan sebagaimana dimaksud pada ayat (1) dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan.`,
+
+"V": `BAB V — PENDANAAN
+
+Pasal 7
+
+Pendanaan dalam pelaksanaan:
+a. pemberian sertifikat standar dan izin sebagaimana dimaksud dalam Pasal 2 ayat (1) huruf a angka 1 dan angka 2;
+b. pembinaan atas pelaksanaan Perizinan Berusaha yang didelegasikan sebagaimana dimaksud dalam Pasal 2 ayat (1) huruf b; dan
+c. pengawasan atas pelaksanaan Perizinan Berusaha yang didelegasikan sebagaimana dimaksud dalam Pasal 2 ayat (1) huruf c kecuali biaya operasional pelaksanaan pengawasan yang dilaksanakan oleh inspektur tambang dan pejabat pengawas Pertambangan,
+
+bersumber dari anggaran pendapatan dan belanja daerah provinsi.
+
+
+Pasal 8
+
+Peraturan Presiden ini mulai berlaku pada tanggal diundangkan.
+
+Ditetapkan di Jakarta pada tanggal 11 April 2022
+PRESIDEN REPUBLIK INDONESIA,
+ttd.
+JOKO WIDODO
+
+Diundangkan di Jakarta pada tanggal 11 April 2022
+MENTERI HUKUM DAN HAK ASASI MANUSIA REPUBLIK INDONESIA,
+ttd.
+YASONNA H. LAOLY
+
+LEMBARAN NEGARA REPUBLIK INDONESIA TAHUN 2022 NOMOR 91`,
+};
+
+// ─── Notes ────────────────────────────────────────────────────────────────────
+const NOTES_KEY = 'perpres55_2022_notes_v1';
+
+const PRESET_NOTES = {
+"I::Pasal 1 — Definisi & Pengertian":
+`12 DEFINISI KUNCI (Pasal 1):
+
+1. Pertambangan: seluruh tahapan pengelolaan mineral/batubara mulai penyelidikan umum s.d. pascatambang.
+
+2. Pendelegasian: penyerahan kewenangan Pemerintah Pusat kepada Pemerintah Daerah Provinsi untuk pemberian perizinan berusaha pertambangan minerba.
+
+3. Perizinan Berusaha: legalitas untuk memulai dan menjalankan usaha.
+
+4. Pemberian Perizinan Berusaha: kegiatan pemberian legalitas disertai pembinaan dan pengawasan.
+
+5. IUP (Izin Usaha Pertambangan): izin untuk melaksanakan usaha pertambangan.
+
+6. IPR (Izin Pertambangan Rakyat): izin usaha pertambangan rakyat dengan luas wilayah dan investasi terbatas.
+
+7. SIPB (Surat Izin Penambangan Batuan): izin pertambangan batuan jenis tertentu atau keperluan tertentu.
+
+8. Izin Pengangkutan dan Penjualan: izin usaha untuk membeli, mengangkut, dan menjual komoditas tambang.
+
+9. IUJP (Izin Usaha Jasa Pertambangan): izin usaha jasa pertambangan inti.
+
+10. Pemerintah Pusat: Presiden RI beserta Wakil Presiden dan Menteri.
+
+11. Pemerintah Daerah Provinsi: Gubernur sebagai penyelenggara pemerintahan daerah provinsi.
+
+12. Menteri: menteri yang menyelenggarakan urusan pemerintahan di bidang pertambangan minerba.`,
+
+"II::Pasal 2 — Lingkup Pendelegasian":
+`LINGKUP PENDELEGASIAN (Pasal 2):
+
+A. TIGA CAKUPAN UTAMA PENDELEGASIAN:
+1. Pemberian: (a) Sertifikat standar; (b) Izin
+2. Pembinaan atas pelaksanaan Perizinan Berusaha yang didelegasikan
+3. Pengawasan atas pelaksanaan Perizinan Berusaha yang didelegasikan
+
+B. SERTIFIKAT STANDAR — kegiatan konsultasi & perencanaan UJPT di bidang:
+a) Penyelidikan umum  b) Eksplorasi  c) Studi kelayakan  d) Konstruksi Pertambangan
+e) Pengangkutan  f) Lingkungan Pertambangan  g) Reklamasi & pascatambang
+h) Keselamatan Pertambangan  i) Penambangan
+
+C. IZIN YANG DIDELEGASIKAN (12 jenis):
+- IUP PMDN mineral bukan logam (dalam 1 provinsi atau laut ≤12 mil)
+- IUP PMDN mineral bukan logam jenis tertentu (dalam 1 provinsi atau laut ≤12 mil)
+- IUP PMDN batuan (dalam 1 provinsi atau laut ≤12 mil)
+- SIPB
+- IPR
+- Izin Pengangkutan & Penjualan mineral bukan logam
+- Izin Pengangkutan & Penjualan mineral bukan logam jenis tertentu
+- Izin Pengangkutan & Penjualan batuan
+- IUJP untuk 1 daerah provinsi
+- IUP penjualan mineral bukan logam
+- IUP penjualan mineral bukan logam jenis tertentu
+- IUP penjualan batuan
+
+D. PEMBINAAN meliputi:
+a) Norma, standar, pedoman, dan kriteria pelaksanaan usaha pertambangan
+b) Bimbingan teknis, konsultasi, mediasi, dan/atau fasilitasi
+c) Pengembangan kompetensi tenaga kerja pertambangan
+
+E. PENGAWASAN meliputi:
+- Perencanaan, pelaksanaan, serta monitoring & evaluasi pengawasan
+- Objek: (a) kaidah teknik pertambangan yang baik; (b) tata kelola pengusahaan
+- Gubernur menugaskan: Inspektur Tambang (untuk kaidah teknik) & Pejabat Pengawas (untuk tata kelola)
+- Hasil pelanggaran → pembinaan ATAU sanksi administratif
+
+F. BATASAN PENTING:
+- Pendelegasian TIDAK termasuk pengelolaan anggaran, sarana/prasarana, dan operasional inspektur tambang
+- TIDAK dapat disubdelegasikan ke Pemda Kabupaten/Kota`,
+
+"II::Pasal 3 — Kewenangan Tambahan":
+`KEWENANGAN TAMBAHAN YANG DIDELEGASIKAN (Pasal 3):
+
+Selain Pasal 2, Pemerintah Pusat mendelegasikan:
+
+a. PENETAPAN WILAYAH IZIN USAHA:
+   - Wilayah IUP mineral bukan logam
+   - Wilayah IUP mineral bukan logam jenis tertentu
+   - Wilayah IUP batuan
+   Syarat: berada dalam 1 daerah provinsi ATAU wilayah laut sampai dengan 12 mil laut
+
+b. PENETAPAN HARGA PATOKAN:
+   - Harga patokan mineral bukan logam
+   - Harga patokan mineral bukan logam jenis tertentu
+   - Harga patokan batuan
+
+c. REKOMENDASI/PERSETUJUAN:
+   Pemberian rekomendasi atau persetujuan yang berkaitan dengan kewenangan yang didelegasikan
+
+CATATAN PENTING:
+- Kewenangan Pasal 3 merupakan kewenangan pendukung pengelolaan pertambangan minerba
+- Berlaku untuk komoditas: mineral bukan logam, mineral bukan logam jenis tertentu, dan batuan
+- TIDAK mencakup mineral logam dan batubara (tetap kewenangan Pemerintah Pusat/Menteri)`,
+
+"III::Pasal 4 — Kewajiban Pemda Provinsi":
+`KEWAJIBAN PEMERINTAH DAERAH PROVINSI (Pasal 4):
+
+Dalam melaksanakan Pendelegasian (Pasal 2), Pemda Provinsi WAJIB:
+
+a. MELAKSANAKAN PERIZINAN BERUSAHA:
+   - Secara efektif dan efisien
+   - Sesuai norma, standar, prosedur, dan kriteria yang DITETAPKAN oleh Pemerintah Pusat
+   → Pemda tidak membuat aturan sendiri; wajib mengikuti ketentuan Pusat
+
+b. MENYIAPKAN PERANGKAT DAERAH:
+   - Menyiapkan SDM, organisasi, dan kelengkapan administrasi yang dibutuhkan
+   - Dalam pelaksanaan Pemberian Perizinan Berusaha di bidang pertambangan minerba
+
+IMPLIKASI BAGI INSPEKTUR TAMBANG:
+- Pengawasan kaidah teknik pertambangan yang baik dilaksanakan oleh inspektur tambang yang ditugaskan gubernur
+- Biaya operasional pengawasan oleh inspektur tambang BUKAN beban APBD (lihat Pasal 7)
+- Inspektur tambang wajib melaporkan hasil pengawasan kepada gubernur (Pasal 2 ayat 8)`,
+
+"IV::Pasal 5 — Pembinaan & Pengawasan Pusat ke Daerah":
+`PEMBINAAN & PENGAWASAN PEMERINTAH PUSAT (Pasal 5):
+
+(1) Pemerintah Pusat melakukan pembinaan dan pengawasan kepada Pemerintah Daerah Provinsi atas pelaksanaan Pendelegasian Pasal 2.
+
+(2) Pembinaan dan pengawasan dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan di bidang pembinaan dan pengawasan penyelenggaraan Pemerintahan Daerah.
+
+HIERARKI PENGAWASAN:
+Pemerintah Pusat (Menteri ESDM)
+    ↓ membina & mengawasi
+Pemerintah Daerah Provinsi (Gubernur)
+    ↓ menugaskan
+Inspektur Tambang → pengawasan kaidah teknik
+Pejabat Pengawas → pengawasan tata kelola
+    ↓ melaporkan ke
+Gubernur → melaporkan ke Menteri (Pasal 6)
+
+DASAR HUKUM PEMBINAAN:
+Mengacu pada ketentuan UU Pemerintahan Daerah dan peraturan pelaksanaannya.`,
+
+"IV::Pasal 6 — Kewajiban Pelaporan Pemda":
+`KEWAJIBAN PELAPORAN PEMERINTAH DAERAH PROVINSI (Pasal 6):
+
+(1) Pemerintah Daerah Provinsi WAJIB menyampaikan laporan pelaksanaan Pendelegasian kepada:
+    → Menteri (Menteri ESDM)
+    → Menteri yang menyelenggarakan urusan pemerintahan dalam negeri (Mendagri)
+
+(2) Laporan dilaksanakan sesuai ketentuan peraturan perundang-undangan.
+
+CATATAN PRAKTIS:
+- Laporan mencakup pelaksanaan seluruh kewenangan yang didelegasikan (Pasal 2)
+- Format dan periodisitas laporan mengikuti ketentuan yang berlaku
+- Kewajiban pelaporan ke DUA kementerian: ESDM dan Kemendagri`,
+
+"V::Pasal 7 — Sumber Pendanaan":
+`SUMBER PENDANAAN (Pasal 7):
+
+SEMUA KEGIATAN BERIKUT BERSUMBER DARI APBD PROVINSI:
+
+a. Pemberian sertifikat standar dan izin (Pasal 2 ayat 1 huruf a angka 1 dan 2)
+
+b. Pembinaan atas pelaksanaan Perizinan Berusaha yang didelegasikan (Pasal 2 ayat 1 huruf b)
+
+c. Pengawasan atas pelaksanaan Perizinan Berusaha yang didelegasikan (Pasal 2 ayat 1 huruf c)
+   KECUALI: biaya operasional pelaksanaan pengawasan yang dilaksanakan oleh:
+   - Inspektur tambang; dan
+   - Pejabat pengawas Pertambangan
+
+IMPLIKASI PENTING:
+- Seluruh biaya perizinan, pembinaan, dan pengawasan menjadi beban APBD Provinsi
+- Biaya operasional inspektur tambang dan pejabat pengawas TIDAK dibebankan ke APBD Provinsi
+  → Biaya operasional dua pejabat ini tetap dari APBN/sumber lain
+- Provinsi perlu mengalokasikan anggaran yang memadai untuk pelaksanaan kewenangan yang didelegasikan`,
+
+"V::Pasal 8 — Mulai Berlaku":
+`KETENTUAN PENUTUP (Pasal 8):
+
+Peraturan Presiden ini mulai berlaku pada tanggal diundangkan.
+
+TANGGAL PENETAPAN: 11 April 2022
+TEMPAT: Jakarta
+DITANDATANGANI OLEH: Presiden Joko Widodo
+
+TANGGAL PENGUNDANGAN: 11 April 2022
+DIUNDANGKAN OLEH: Menteri Hukum dan HAM, Yasonna H. Laoly
+
+NOMOR LEMBARAN NEGARA: Tahun 2022 Nomor 91
+
+DASAR HUKUM PEMBENTUKAN:
+- Pasal 4 ayat (1) UUD NRI 1945
+- PP No. 96 Tahun 2021 tentang Pelaksanaan Kegiatan Usaha Pertambangan Minerba
+  (khususnya Pasal 8 PP 96/2021 yang mengamanatkan pembentukan Perpres ini)`,
+};
+
+// ─── State ────────────────────────────────────────────────────────────────────
+let state = {
+  bab: BABS[0],
+  tab: 'overview',
+  selectedPasal: null,
+  sectionNotes: {},
+  searchScope: 'all',
+  chatMsgs: [],
+  chatLoading: false,
+};
+
+function loadNotes() {
+  try {
+    const raw = localStorage.getItem(NOTES_KEY);
+    const saved = raw ? JSON.parse(raw) : {};
+    state.sectionNotes = Object.assign({}, PRESET_NOTES, saved);
+  } catch(e) { state.sectionNotes = Object.assign({}, PRESET_NOTES); }
+}
+function saveNote(babId, pasal, text) {
+  const key = `${babId}::${pasal}`;
+  if (text.trim() === '') delete state.sectionNotes[key];
+  else state.sectionNotes[key] = text;
+  try { localStorage.setItem(NOTES_KEY, JSON.stringify(state.sectionNotes)); } catch(e) {}
+}
+function getNote(babId, pasal) { return state.sectionNotes[`${babId}::${pasal}`] || ''; }
+
+loadNotes();
+
+// ─── API ──────────────────────────────────────────────────────────────────────
+const BASE_SYSTEM = `Kamu adalah ahli hukum dan regulasi pertambangan Indonesia yang memahami Peraturan Presiden No. 55 Tahun 2022 tentang Pendelegasian Pemberian Perizinan Berusaha di Bidang Pertambangan Mineral dan Batubara. Berikan jawaban yang akurat, terstruktur, dan dalam Bahasa Indonesia yang profesional. Jika informasi tidak ada di konteks, katakan dengan jujur.`;
+
+async function callClaude(msgs, system) {
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:1000, system: system || BASE_SYSTEM, messages: msgs })
+  });
+  const d = await r.json();
+  if (d.error) throw new Error(d.error.message);
+  return d.content?.[0]?.text || "";
+}
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function spinnerHTML(color) {
+  return `<span class="spin" style="border-top-color:${color||'var(--bab-accent)'}"></span>`;
+}
+function tagHTML(text, color) {
+  return `<span class="tag" style="background:${color}18;color:${color};border-color:${color}28">${escHtml(text)}</span>`;
+}
+function aiBoxHTML(text, loading, accent) {
+  if (!loading && !text) return '';
+  const ac = accent || 'var(--bab-accent)';
+  return `<div class="ai-box" style="border-color:${ac}20">
+    <div class="ai-box-header" style="background:${ac}10;border-color:${ac}18;color:${ac}">
+      ${loading ? spinnerHTML(ac) : '✦'} ${loading ? 'Menganalisis dokumen…' : 'Analisis AI'}
+    </div>
+    ${text ? `<div class="ai-box-body">${escHtml(text)}</div>` : ''}
+  </div>`;
+}
+
+// ─── Theme ────────────────────────────────────────────────────────────────────
+function applyBabTheme(b) {
+  document.documentElement.style.setProperty('--bab-color', b.color);
+  document.documentElement.style.setProperty('--bab-accent', b.accent);
+  document.body.style.background = `radial-gradient(ellipse 80% 50% at 0% 0%,${b.color}18,transparent),radial-gradient(ellipse 60% 40% at 100% 100%,${b.color}0c,transparent),#0c0f14`;
+}
+
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
+function renderSidebar() {
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = BABS.map(b => {
+    const on = state.bab.id === b.id;
+    return `<button class="bab-btn${on?' active':''}" data-id="${b.id}"
+      style="${on?`--bab-color:${b.color};--bab-accent:${b.accent}`:''}">
+      <div class="bab-indicator" style="background:${b.accent}"></div>
+      <div class="bab-inner">
+        <span class="bab-icon">${b.icon}</span>
+        <div class="bab-meta">
+          <div class="bab-num">BAB ${b.id} · ${b.pages}</div>
+          <div class="bab-short">${b.shortTitle}</div>
+        </div>
+      </div>
+    </button>`;
+  }).join('');
+  sb.querySelectorAll('.bab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const b = BABS.find(x => x.id === btn.dataset.id);
+      pickBab(b);
+    });
+  });
+}
+
+// ─── Tab nav ──────────────────────────────────────────────────────────────────
+function renderTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === state.tab);
+  });
+}
+
+// ─── Overview ─────────────────────────────────────────────────────────────────
+function renderOverview() {
+  const b = state.bab;
+  const sel = state.selectedPasal;
+
+  const pasalsHtml = b.pasals.map(p => {
+    const num = p.split('—')[0].trim();
+    const label = (p.split('—')[1] || '').trim();
+    const active = sel === p;
+    const note = getNote(b.id, p);
+    const hasNote = note.length > 0;
+
+    const editorHtml = active ? `
+      <div class="pasal-editor">
+        <div class="pasal-editor-head">
+          <div class="pasal-editor-title" style="color:${b.accent}">✎ Catatan — ${escHtml(p)}</div>
+          <div class="pasal-editor-actions">
+            <span class="saved-indicator" id="saved-${escHtml(num.replace(/\s/g,''))}" style="color:${b.accent}">✓ Tersimpan</span>
+            <button class="pasal-save-btn"
+              data-pasal="${escHtml(p)}" data-num="${escHtml(num.replace(/\s/g,''))}"
+              style="background:linear-gradient(135deg,${b.color},${b.color}bb)">
+              💾 Simpan
+            </button>
+            <button class="pasal-close-btn" data-close-pasal="${escHtml(p)}">✕</button>
+          </div>
+        </div>
+        <textarea class="pasal-textarea" id="note-${escHtml(num.replace(/\s/g,''))}"
+          placeholder="Tuliskan catatan, analisis, implikasi, atau anotasi untuk ${escHtml(num)}…"
+          data-pasal="${escHtml(p)}"
+        >${escHtml(note)}</textarea>
+      </div>` : '';
+
+    return `<div class="pasal-row${active?' active':''}">
+      <div class="pasal-row-top">
+        <button class="pasal-btn${active?' active':''}" data-pasal="${escHtml(p)}">
+          <span class="pasal-num" style="${active?`color:${b.accent}`:''}">
+            ${escHtml(num.replace('Pasal ','§'))}
+          </span>
+          <span>${escHtml(label || num)}</span>
+          ${hasNote && !active ? `<span style="margin-left:auto;font-size:10px;color:${b.accent};opacity:0.75" title="Ada catatan">📝</span>` : ''}
+        </button>
+        <button class="pasal-note-btn${hasNote?' has-note':''}" data-note-pasal="${escHtml(p)}"
+          title="${hasNote ? 'Edit catatan' : 'Tambah catatan'}">
+          ${hasNote ? '📝 Edit' : '✎ Catat'}
+        </button>
+      </div>
+      ${editorHtml}
+    </div>`;
+  }).join('');
+
+  return `<div class="fade-up">
+    <div class="hero-card" style="background:linear-gradient(145deg,${b.color}28,${b.color}0e);border-color:${b.color}38">
+      <div class="hero-bg-icon">${b.icon}</div>
+      <div class="hero-badge" style="background:${b.color}28;color:${b.accent};border-color:${b.accent}38">
+        ${b.icon} BAB ${b.id} &nbsp;·&nbsp; ${b.pages}
+      </div>
+      <h2>${b.title}</h2>
+      <p class="hero-subtitle">${b.subtitle}</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-label">Kata Kunci</div>
+        <div>${b.keywords.map(k => tagHTML(k,'#4a7090')).join('')}</div>
+      </div>
+      <div class="info-card" style="display:flex;flex-direction:column;justify-content:center;">
+        <div class="info-card-label">Tentang BAB Ini</div>
+        <p style="font-size:12.5px;color:var(--muted2);line-height:1.65">${b.subtitle}</p>
+        <p style="font-size:10.5px;color:var(--muted);margin-top:6px;font-family:'Geist Mono',monospace">${b.pages}</p>
+      </div>
+    </div>
+
+    <div class="pasal-panel">
+      <div class="pasal-panel-label">§ Daftar Pasal — Klik ✎ Catat untuk anotasi</div>
+      <div class="pasal-list">${pasalsHtml}</div>
+    </div>
+  </div>`;
+}
+
+// ─── Detail ───────────────────────────────────────────────────────────────────
+function renderDetail() {
+  const b = state.bab;
+  return `<div class="fade-up">
+    <div class="detail-card">
+      <div class="detail-label" style="color:${b.accent}">BAB ${b.id} · Teks Lengkap</div>
+      <h2 class="detail-title">${b.title}</h2>
+      <div class="detail-body">${escHtml(TEXTS[b.id])}</div>
+    </div>
+  </div>`;
+}
+
+// ─── Search ───────────────────────────────────────────────────────────────────
+const CHIPS = ["Syarat IUP Provinsi","Kewenangan Gubernur","Inspektur Tambang","Sanksi Pelanggaran","Sumber Dana APBD","IUJP Delegasi","Laporan ke Menteri","Batas 12 Mil Laut"];
+let searchState = { result: null, loading: false, q: '' };
+
+function renderSearch() {
+  const b = state.bab;
+  return `<div class="fade-up">
+    <div class="search-card">
+      <div class="search-label">🔍 Pencarian Cerdas</div>
+      <div class="scope-row">
+        <button class="scope-btn${state.searchScope==='all'?' active':''}" data-scope="all">Seluruh Dokumen</button>
+        <button class="scope-btn${state.searchScope==='current'?' active':''}" data-scope="current">BAB ${b.id} Saja</button>
+      </div>
+      <div class="search-row">
+        <input class="search-input" id="search-input"
+          placeholder="Cari ketentuan, pasal, atau istilah… (tekan Enter)"
+          value="${escHtml(searchState.q)}" />
+        <button class="search-btn" id="search-go" ${searchState.loading?'disabled':''}>
+          ${searchState.loading ? spinnerHTML('#fff') : 'Cari'}
+        </button>
+      </div>
+      <div class="chips-wrap">
+        ${CHIPS.map(c => `<button class="chip" data-chip="${escHtml(c)}">${c}</button>`).join('')}
+      </div>
+      ${aiBoxHTML(searchState.result, searchState.loading, b.accent)}
+    </div>
+  </div>`;
+}
+
+async function runSearch(q) {
+  if (!q.trim()) return;
+  searchState = { ...searchState, q, result: null, loading: true };
+  renderMain();
+  const b = state.bab;
+  try {
+    const ctx = state.searchScope === 'current'
+      ? `=== BAB ${b.id}: ${b.shortTitle} ===\n${TEXTS[b.id]}`
+      : Object.entries(TEXTS).map(([id,t]) => `=== BAB ${id}: ${BABS.find(x=>x.id===id).shortTitle} ===\n${t}`).join('\n\n');
+    const ans = await callClaude([{role:'user',content:
+      `Kamu adalah ahli hukum pertambangan Indonesia. Berikut teks resmi Perpres No. 55 Tahun 2022.\n\nPERTANYAAN: "${q}"\n\nTEKS PERPRES 55/2022:\n${ctx.slice(0,9000)}\n\nJawab berdasarkan teks dokumen, mencakup: (1) BAB/Pasal yang relevan, (2) Isi ketentuan, (3) Implikasi/kewajiban yang harus dipenuhi.`
+    }]);
+    searchState = { ...searchState, result: ans, loading: false };
+  } catch(e) {
+    searchState = { ...searchState, result: `Error: ${e.message}`, loading: false };
+  }
+  renderMain();
+}
+
+// ─── Chat ─────────────────────────────────────────────────────────────────────
+function renderChat() {
+  const b = state.bab;
+  const STARTERS = [
+    "Apa inti dari BAB ini?",
+    "Apa kewajiban utama Pemerintah Daerah?",
+    "Siapa yang berwenang mengeluarkan izin ini?",
+    "Apa sanksi jika terjadi pelanggaran?"
+  ];
+  const msgsHtml = state.chatMsgs.map(m => `
+    <div class="msg ${m.role}">
+      <div class="bubble ${m.role}" style="${m.role==='user'?`background:linear-gradient(135deg,${b.color}55,${b.color}33);border-color:${b.color}44`:''}">
+        ${m.role==='assistant' ? `<div class="bubble-label" style="color:${b.accent}">✦ AI ASISTEN</div>` : ''}
+        ${escHtml(m.content)}
+      </div>
+    </div>`).join('');
+
+  return `<div class="chat-wrap fade-up">
+    <div class="chat-context-bar" style="background:${b.color}18;border-color:${b.color}28">
+      <span style="font-size:16px">${b.icon}</span>
+      <div>
+        <div class="chat-context-title" style="color:${b.accent}">Konteks: BAB ${b.id} — ${b.shortTitle}</div>
+        <div class="chat-context-hint">Pilih BAB lain di sidebar untuk mengubah konteks</div>
+      </div>
+    </div>
+    <div class="chat-messages" id="chat-msgs">
+      ${state.chatMsgs.length === 0 ? `<div class="chat-empty">
+        <div class="chat-empty-icon">⚖️</div>
+        <div class="chat-empty-title">Tanya tentang ${b.shortTitle}</div>
+        <div class="chat-empty-hint">AI akan menjawab berdasarkan isi BAB ${b.id} Perpres 55/2022</div>
+        <div class="starters-wrap">
+          ${STARTERS.map(s => `<button class="starter-btn" data-starter="${escHtml(s)}">${s}</button>`).join('')}
+        </div>
+      </div>` : msgsHtml}
+      ${state.chatLoading ? `<div class="dots-wrap"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>` : ''}
+      <div id="chat-end"></div>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea class="chat-textarea" id="chat-input" rows="2"
+        placeholder="Tanya tentang BAB ${b.id}… (Enter kirim)"></textarea>
+      <button class="send-btn" id="send-btn" style="background:linear-gradient(135deg,${b.color},${b.color}99)">↑</button>
+    </div>
+  </div>`;
+}
+
+async function sendChat(text) {
+  if (!text.trim() || state.chatLoading) return;
+  const b = state.bab;
+  state.chatMsgs = [...state.chatMsgs, { role:'user', content:text }];
+  state.chatLoading = true;
+  renderMain();
+  scrollChatEnd();
+  try {
+    const sys = `${BASE_SYSTEM}\n\nKonteks aktif: BAB ${b.id} — ${b.shortTitle}.\n\nTeks resmi BAB ${b.id} Perpres 55/2022:\n${TEXTS[b.id]}`;
+    const reply = await callClaude(state.chatMsgs.slice(-8), sys);
+    state.chatMsgs = [...state.chatMsgs, { role:'assistant', content:reply }];
+  } catch(e) {
+    state.chatMsgs = [...state.chatMsgs, { role:'assistant', content:`⚠️ Error: ${e.message}` }];
+  }
+  state.chatLoading = false;
+  renderMain();
+  scrollChatEnd();
+}
+
+function scrollChatEnd() {
+  setTimeout(() => document.getElementById('chat-end')?.scrollIntoView({ behavior:'smooth' }), 50);
+}
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+function renderMain() {
+  const panel = document.getElementById('main-panel');
+  if (state.tab === 'overview') panel.innerHTML = renderOverview();
+  else if (state.tab === 'detail') panel.innerHTML = renderDetail();
+  else if (state.tab === 'search') panel.innerHTML = renderSearch();
+  else if (state.tab === 'chat') panel.innerHTML = renderChat();
+  attachPanelEvents();
+}
+
+function render() {
+  applyBabTheme(state.bab);
+  renderSidebar();
+  renderTabs();
+  renderMain();
+}
+
+function attachPanelEvents() {
+  // Overview — pasal name click toggle
+  document.querySelectorAll('.pasal-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const p = b.dataset.pasal;
+      state.selectedPasal = state.selectedPasal === p ? null : p;
+      renderMain();
+    });
+  });
+
+  // Overview — ✎ Catat button
+  document.querySelectorAll('.pasal-note-btn').forEach(b => {
+    b.addEventListener('click', () => {
+      const p = b.dataset.notePasal;
+      state.selectedPasal = state.selectedPasal === p ? null : p;
+      renderMain();
+      if (state.selectedPasal === p) {
+        setTimeout(() => {
+          const num = p.split('—')[0].trim().replace(/\s/g,'');
+          document.getElementById(`note-${num}`)?.focus();
+        }, 50);
+      }
+    });
+  });
+
+  // Close editor
+  document.querySelectorAll('[data-close-pasal]').forEach(b => {
+    b.addEventListener('click', () => { state.selectedPasal = null; renderMain(); });
+  });
+
+  // Save button
+  document.querySelectorAll('.pasal-save-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pasal = btn.dataset.pasal;
+      const num   = btn.dataset.num;
+      const ta = document.getElementById(`note-${num}`);
+      if (!ta) return;
+      saveNote(state.bab.id, pasal, ta.value);
+      const ind = document.getElementById(`saved-${num}`);
+      if (ind) { ind.classList.add('show'); setTimeout(() => ind.classList.remove('show'), 2000); }
+      state.selectedPasal = pasal;
+      renderMain();
+    });
+  });
+
+  // Ctrl+S shortcut
+  document.querySelectorAll('.pasal-textarea').forEach(ta => {
+    ta.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        const pasal = ta.dataset.pasal;
+        const num = pasal.split('—')[0].trim().replace(/\s/g,'');
+        saveNote(state.bab.id, pasal, ta.value);
+        const ind = document.getElementById(`saved-${num}`);
+        if (ind) { ind.classList.add('show'); setTimeout(() => ind.classList.remove('show'), 2000); }
+      }
+    });
+  });
+
+  // Search
+  document.querySelectorAll('.scope-btn').forEach(b => {
+    b.addEventListener('click', () => { state.searchScope = b.dataset.scope; renderMain(); });
+  });
+  const si = document.getElementById('search-input');
+  if (si) si.addEventListener('keydown', e => { if(e.key==='Enter') runSearch(si.value); });
+  document.getElementById('search-go')?.addEventListener('click', () => runSearch(si?.value||''));
+  document.querySelectorAll('.chip').forEach(c => {
+    c.addEventListener('click', () => { searchState.q = c.dataset.chip; runSearch(c.dataset.chip); });
+  });
+
+  // Chat
+  const ci = document.getElementById('chat-input');
+  const sb = document.getElementById('send-btn');
+  if (ci) {
+    ci.addEventListener('keydown', e => {
+      if(e.key==='Enter' && !e.shiftKey) { e.preventDefault(); sendChat(ci.value); ci.value = ''; }
+    });
+    ci.addEventListener('input', () => {
+      if(sb) sb.className = 'send-btn' + (ci.value.trim() ? ' ready' : '');
+    });
+  }
+  sb?.addEventListener('click', () => { sendChat(ci?.value||''); if(ci) ci.value = ''; });
+  document.querySelectorAll('.starter-btn').forEach(b => {
+    b.addEventListener('click', () => sendChat(b.dataset.starter));
+  });
+
+  if (state.tab === 'chat') scrollChatEnd();
+}
+
+// ─── Actions ──────────────────────────────────────────────────────────────────
+function pickBab(b) {
+  state.bab = b;
+  state.selectedPasal = null;
+  render();
+}
+
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if (btn) { state.tab = btn.dataset.tab; renderTabs(); renderMain(); }
+});
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+render();
+</script>
+</html>

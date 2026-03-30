@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UU No. 4/2009 — Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: #252a3a;
+    --gold: #c9a227;
+    --gold-dim: #7a5f15;
+    --cyan: #4ecdc4;
+    --red: #e05c5c;
+    --text: #d4d8e8;
+    --text-dim: #6b7290;
+    --text-muted: #3a3f55;
+    --accent: #5d6af0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand-badge {
+    background: var(--gold);
+    color: #000;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .header-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: calc(100vh - 64px);
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 64px;
+    height: calc(100vh - 64px);
+    overflow: hidden;
+  }
+
+  .sidebar-search {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 36px 10px 12px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .search-results-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    padding: 6px 16px 4px;
+    display: none;
+  }
+
+  .sidebar-nav {
+    overflow-y: auto;
+    flex: 1;
+    padding: 8px 0;
+  }
+
+  .sidebar-nav::-webkit-scrollbar { width: 4px; }
+  .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+  .sidebar-nav::-webkit-scrollbar-thumb { background: var(--border); }
+
+  .bab-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+
+  .bab-item:hover { background: var(--surface2); border-left-color: var(--gold-dim); }
+  .bab-item.active { background: var(--surface2); border-left-color: var(--gold); }
+
+  .bab-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 600;
+    min-width: 28px;
+    padding-top: 2px;
+  }
+
+  .bab-label {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .bab-item.active .bab-label { color: var(--text); }
+  .bab-item.match .bab-label { color: var(--cyan); }
+
+  .match-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    background: var(--gold);
+    color: #000;
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  /* MAIN */
+  .main {
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  .main::-webkit-scrollbar { width: 4px; }
+  .main::-webkit-scrollbar-track { background: transparent; }
+  .main::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* HERO PANEL */
+  .doc-hero {
+    background: linear-gradient(135deg, #141720 0%, #0d1520 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-hero::before {
+    content: 'UU 4/2009';
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 900;
+    color: var(--text-muted);
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    opacity: 0.15;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .doc-klass {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .doc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    max-width: 560px;
+  }
+
+  .doc-subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  .doc-stats {
+    display: flex;
+    gap: 32px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+
+  /* CONTENT PANEL */
+  .content-panel {
+    padding: 32px 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #000;
+    background: var(--gold);
+    padding: 4px 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  /* BAB CARD */
+  .bab-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .bab-card:target, .bab-card.active-card {
+    border-color: var(--gold);
+  }
+
+  .bab-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .bab-card-header:hover { background: var(--surface2); }
+
+  .bab-card-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .bab-roman {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 600;
+    min-width: 40px;
+  }
+
+  .bab-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .bab-card-pasal {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .chevron {
+    color: var(--text-dim);
+    font-size: 12px;
+    transition: transform 0.2s;
+    margin-left: 12px;
+  }
+
+  .bab-card.expanded .chevron { transform: rotate(180deg); }
+
+  .bab-card-body {
+    display: none;
+    border-top: 1px solid var(--border);
+  }
+
+  .bab-card.expanded .bab-card-body { display: block; }
+
+  .bab-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+
+  .bab-tab {
+    padding: 10px 20px;
+    font-size: 12px;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .bab-tab:hover { color: var(--text); }
+  .bab-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .tab-pane { display: none; padding: 20px 24px; }
+  .tab-pane.active { display: block; }
+
+  .pasal-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .pasal-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 8px;
+    background: var(--surface2);
+    color: var(--cyan);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .pasal-tag:hover { background: var(--surface); border-color: var(--cyan); }
+  .pasal-tag.highlight { background: var(--gold); color: #000; border-color: var(--gold); }
+
+  .summary-box {
+    background: var(--bg);
+    border-left: 3px solid var(--gold);
+    padding: 16px 18px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .summary-loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-dim);
+    font-size: 13px;
+    padding: 16px 18px;
+    background: var(--bg);
+    border-left: 3px solid var(--border);
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .btn-summarize {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 8px 16px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-bottom: 12px;
+  }
+
+  .btn-summarize:hover { background: var(--gold); color: #000; }
+  .btn-summarize:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .pasal-content {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .pasal-content::-webkit-scrollbar { width: 3px; }
+  .pasal-content::-webkit-scrollbar-thumb { background: var(--border); }
+
+  .highlight-text {
+    background: rgba(201, 162, 39, 0.3);
+    color: var(--gold);
+    padding: 0 2px;
+  }
+
+  /* SEARCH RESULTS */
+  .search-panel {
+    padding: 32px 48px;
+    display: none;
+  }
+
+  .search-result-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .search-result-item:hover { border-color: var(--gold-dim); }
+
+  .result-bab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .result-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--text-dim);
+  }
+
+  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+
+  /* GLOBAL SUMMARY */
+  .global-summary {
+    padding: 32px 48px;
+    display: none;
+  }
+
+  .global-sum-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+  }
+
+  .stream-text {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+
+  .cursor-blink {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--gold);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* TABS TOP */
+  .top-tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+  }
+
+  .top-tab {
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+
+  .top-tab:hover { color: var(--text); }
+  .top-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    .sidebar { position: relative; height: auto; max-height: 300px; top: 0; }
+    .doc-hero { padding: 24px; }
+    .content-panel, .search-panel, .global-summary { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">
+    <span class="brand-badge">HUKUM</span>
+    <span class="brand-title">Pertambangan Mineral & Batubara</span>
+  </div>
+  <div class="header-meta">UU RI No. 4 Tahun 2009 &nbsp;·&nbsp; 175 Pasal</div>
+</header>
+
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-search">
+      <div class="search-wrap">
+        <input type="text" class="search-input" id="searchInput" placeholder="Cari pasal, bab, atau kata kunci..." autocomplete="off">
+        <span class="search-icon">⌕</span>
+      </div>
+    </div>
+    <div class="search-results-count" id="searchCount"></div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent">
+    <div class="top-tabs">
+      <div class="top-tab active" data-view="browse" onclick="switchView('browse', this)">📋 Jelajahi Bab</div>
+      <div class="top-tab" data-view="search" onclick="switchView('search', this)">🔍 Hasil Pencarian</div>
+      <div class="top-tab" data-view="summary" onclick="switchView('summary', this)">✨ Ringkasan Dokumen</div>
+    </div>
+
+    <!-- BROWSE VIEW -->
+    <div id="browseView">
+      <div class="doc-hero">
+        <div class="doc-klass">UNDANG-UNDANG REPUBLIK INDONESIA</div>
+        <div class="doc-title">Pertambangan Mineral dan Batubara</div>
+        <div class="doc-subtitle">Nomor 4 Tahun 2009 · Ditetapkan 12 Januari 2009 · Jakarta</div>
+        <div class="doc-stats">
+          <div class="stat"><span class="stat-num" id="statBab">26</span><span class="stat-label">BAB</span></div>
+          <div class="stat"><span class="stat-num">175</span><span class="stat-label">Pasal</span></div>
+          <div class="stat"><span class="stat-num">4</span><span class="stat-label">Jenis Izin</span></div>
+          <div class="stat"><span class="stat-num">2009</span><span class="stat-label">Tahun Terbit</span></div>
+        </div>
+      </div>
+
+      <div class="content-panel">
+        <div class="section-header">
+          <span class="section-badge">STRUKTUR</span>
+          <span class="section-title">Bab & Pasal</span>
+        </div>
+        <div id="babContainer"></div>
+      </div>
+    </div>
+
+    <!-- SEARCH VIEW -->
+    <div id="searchView" style="display:none">
+      <div class="content-panel" style="padding-bottom:8px">
+        <div class="section-header">
+          <span class="section-badge">PENCARIAN</span>
+          <span class="section-title" id="searchViewTitle">Hasil Pencarian</span>
+        </div>
+      </div>
+      <div id="searchResultsContainer" style="padding:0 48px 32px"></div>
+    </div>
+
+    <!-- SUMMARY VIEW -->
+    <div id="summaryView" style="display:none">
+      <div class="content-panel">
+        <div class="section-header">
+          <span class="section-badge">AI RINGKASAN</span>
+          <span class="section-title">Ringkasan Dokumen</span>
+        </div>
+        <div class="global-sum-box">
+          <button class="btn-summarize" id="btnGlobalSummary" onclick="generateGlobalSummary()">✨ Buat Ringkasan Lengkap</button>
+          <div id="globalSummaryOutput"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ── DATA: Struktur BAB UU No. 4/2009 ──────────────────────────────────────────
+const BABS = [
+  {
+    num: "I", title: "KETENTUAN UMUM",
+    pasal: "1",
+    content: `Pasal 1 memuat 38 definisi penting: Pertambangan adalah tahapan kegiatan penelitian, pengelolaan dan pengusahaan mineral atau batubara. Mineral adalah senyawa anorganik alami. Batubara adalah endapan karbon organik. IUP (Izin Usaha Pertambangan) adalah izin untuk melaksanakan usaha pertambangan. IPR (Izin Pertambangan Rakyat) untuk wilayah rakyat. IUPK (Izin Usaha Pertambangan Khusus) untuk wilayah pencadangan negara. Definisi mencakup seluruh tahap: penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan, pemurnian, pengangkutan, penjualan, dan pascatambang. Wilayah pertambangan meliputi WP, WUP, WIUP, WPR, WPN, WUPK, WIUPK.`
+  },
+  {
+    num: "II", title: "ASAS DAN TUJUAN",
+    pasal: "2–3",
+    content: `Pasal 2: Asas pertambangan: manfaat, keadilan, keseimbangan; keberpihakan bangsa; partisipatif, transparan, akuntabel; berkelanjutan dan berwawasan lingkungan. Pasal 3: Tujuan pengelolaan minerba: menjamin efektivitas pelaksanaan; menjamin manfaat berkelanjutan; menjamin ketersediaan untuk kebutuhan dalam negeri; mendukung kemampuan nasional bersaing; meningkatkan pendapatan masyarakat dan negara; menjamin kepastian hukum.`
+  },
+  {
+    num: "III", title: "PENGUASAAN MINERAL DAN BATUBARA",
+    pasal: "4–5",
+    content: `Pasal 4: Mineral dan batubara sebagai sumber daya tak terbarukan merupakan kekayaan nasional yang dikuasai negara untuk sebesar-besar kesejahteraan rakyat. Penguasaan diselenggarakan oleh Pemerintah dan/atau pemerintah daerah. Pasal 5: Untuk kepentingan nasional, Pemerintah dapat menetapkan kebijakan pengutamaan mineral/batubara untuk kepentingan dalam negeri melalui pengendalian produksi dan ekspor. Pemerintah berwenang menetapkan jumlah produksi tiap komoditas per tahun per provinsi.`
+  },
+  {
+    num: "IV", title: "KEWENANGAN PENGELOLAAN",
+    pasal: "6–8",
+    content: `Pasal 6: Kewenangan Pemerintah Pusat: kebijakan nasional, peraturan perundangan, standar nasional, perizinan, penetapan WP, pemberian IUP lintas provinsi, pemberian IUPK, evaluasi IUP, kebijakan produksi dan pemasaran, PNBP, pembinaan dan pengawasan daerah. Pasal 7: Kewenangan pemerintah provinsi: IUP lintas kabupaten/kota dan laut 4-12 mil, pengelolaan informasi geologi, neraca sumber daya, pengawasan reklamasi. Pasal 8: Kewenangan pemerintah kabupaten/kota: IUP dan IPR dalam wilayah dan laut s/d 4 mil, pemberdayaan masyarakat setempat.`
+  },
+  {
+    num: "V", title: "WILAYAH PERTAMBANGAN",
+    pasal: "9–33",
+    content: `Pasal 9-13: WP sebagai bagian tata ruang nasional, terdiri atas WUP, WPR, dan WPN. Pasal 14-19: WUP ditetapkan Pemerintah berkoordinasi daerah; WIUP mineral logam ditetapkan berdasarkan kriteria geografis, konservasi, lingkungan, optimalisasi, dan kepadatan penduduk. Pasal 20-26: WPR ditetapkan bupati/walikota; kriteria meliputi cadangan mineral sekunder, kedalaman maks 25 meter, luas maks 25 hektar. Pasal 27-29: WPN untuk kepentingan strategis nasional dan konservasi, ditetapkan dengan persetujuan DPR. WPN dapat berubah menjadi WUPK. Pasal 30-33: WUPK terdiri atas WIUPK; luas dan batas ditetapkan Pemerintah berkoordinasi daerah.`
+  },
+  {
+    num: "VI", title: "USAHA PERTAMBANGAN",
+    pasal: "34–35",
+    content: `Pasal 34: Usaha pertambangan dibagi: pertambangan mineral (radioaktif, logam, bukan logam, batuan) dan pertambangan batubara. Pasal 35: Usaha pertambangan dilaksanakan dalam bentuk IUP, IPR, dan IUPK.`
+  },
+  {
+    num: "VII", title: "IZIN USAHA PERTAMBANGAN (IUP)",
+    pasal: "36–63",
+    content: `Pasal 36: IUP terdiri dua tahap — IUP Eksplorasi (penyelidikan umum, eksplorasi, studi kelayakan) dan IUP Operasi Produksi (konstruksi, penambangan, pengolahan, pemurnian, pengangkutan, penjualan). Pasal 37-38: IUP diberikan bupati/walikota (dalam satu kab/kota), gubernur (lintas kab/kota), atau Menteri (lintas provinsi); kepada badan usaha, koperasi, atau perseorangan. Pasal 39: Muatan minimal IUP Eksplorasi (nama, lokasi, rencana, amdal, dll) dan IUP Operasi Produksi (nama, luas, lokasi, lingkungan hidup, K3, dll). Pasal 42-45: Jangka waktu IUP Eksplorasi: logam maks 8 th, bukan logam 3-7 th, batuan 3 th, batubara 7 th. Pasal 46-49: IUP Operasi Produksi: logam maks 20 th (2x perpanjangan 10 th), bukan logam 10 th, batubara 20 th. Pasal 50-63: Ketentuan WIUP per komoditas: logam (lelang, min 5.000 ha eks, maks 25.000 ha produksi), bukan logam (permohonan), batuan (permohonan), batubara (lelang, maks 50.000 ha eks, 15.000 ha produksi).`
+  },
+  {
+    num: "VIII", title: "PERSYARATAN PERIZINAN IUP",
+    pasal: "64–65",
+    content: `Pasal 64: Pemerintah wajib mengumumkan rencana kegiatan di WIUP kepada masyarakat secara terbuka. Pasal 65: Badan usaha, koperasi, perseorangan wajib memenuhi persyaratan administratif, teknis, lingkungan, dan finansial. Ketentuan lebih lanjut diatur PP.`
+  },
+  {
+    num: "IX", title: "IZIN PERTAMBANGAN RAKYAT (IPR)",
+    pasal: "66–73",
+    content: `Pasal 66-67: IPR mencakup logam, bukan logam, batuan, batubara; diberikan bupati/walikota terutama untuk penduduk setempat. Pasal 68: Luas IPR: perseorangan maks 1 ha, kelompok maks 5 ha, koperasi maks 10 ha; jangka waktu maks 5 th dan dapat diperpanjang. Pasal 69-72: Hak pemegang IPR: pembinaan K3, lingkungan, teknis dari pemerintah; bantuan modal. Kewajiban: mulai tambang maks 3 bulan setelah IPR terbit, patuhi K3, bayar iuran, laporan berkala. Pasal 73: Pemerintah kab/kota bertanggung jawab atas pengamanan teknis dan wajib mengangkat inspektur tambang.`
+  },
+  {
+    num: "X", title: "IZIN USAHA PERTAMBANGAN KHUSUS (IUPK)",
+    pasal: "74–84",
+    content: `Pasal 74-75: IUPK diberikan Menteri; BUMN dan BUMD mendapat prioritas; badan usaha swasta melalui lelang WIUPK. Pasal 76-77: IUPK terdiri IUPK Eksplorasi dan IUPK Operasi Produksi; pemegang IUPK Eksplorasi dijamin memperoleh IUPK Operasi Produksi. Pasal 78-79: Muatan minimal IUPK Eksplorasi dan IUPK Operasi Produksi (termasuk divestasi saham). Pasal 83: Luas WIUPK: eksplorasi logam maks 100.000 ha, produksi logam maks 25.000 ha, eksplorasi batubara maks 50.000 ha, produksi batubara maks 15.000 ha; IUPK Operasi Produksi maks 20 th + 2x perpanjangan 10 th.`
+  },
+  {
+    num: "XI", title: "PERSYARATAN PERIZINAN IUPK",
+    pasal: "85–86",
+    content: `Pasal 85: Pemerintah wajib mengumumkan rencana WIUPK secara terbuka kepada masyarakat. Pasal 86: Badan usaha dalam WIUPK wajib memenuhi persyaratan administratif, teknis, lingkungan, dan finansial sesuai PP.`
+  },
+  {
+    num: "XII", title: "DATA PERTAMBANGAN",
+    pasal: "87–89",
+    content: `Pasal 87: Menteri/gubernur dapat menugasi lembaga riset untuk penyelidikan dan penelitian pertambangan. Pasal 88: Data dari kegiatan usaha pertambangan milik Pemerintah/pemerintah daerah; data daerah wajib disampaikan ke Pemerintah untuk pengelolaan nasional. Pasal 89: Tata cara penugasan dan pengelolaan data diatur PP.`
+  },
+  {
+    num: "XIII", title: "HAK DAN KEWAJIBAN",
+    pasal: "90–123",
+    content: `Pasal 90-94: Hak pemegang IUP/IUPK: melakukan seluruh tahapan usaha, memanfaatkan sarana umum, memiliki mineral/batubara setelah bayar iuran, tidak dapat memindahkan IUP/IUPK ke pihak lain. Pasal 95-98: Kewajiban: terapkan kaidah teknik pertambangan baik, kelola keuangan sesuai akuntansi Indonesia, tingkatkan nilai tambah, pemberdayaan masyarakat, patuhi daya dukung lingkungan, jaga kelestarian sumber daya air. Pasal 96: Wajib laksanakan K3, keselamatan operasi, reklamasi pascatambang, konservasi, pengelolaan sisa tambang (tailing, limbah). Pasal 99-101: Wajib serahkan rencana reklamasi dan pascatambang saat ajukan IUP Operasi Produksi; sediakan dana jaminan reklamasi dan pascatambang. Pasal 102-105: Wajib tingkatkan nilai tambah; wajib lakukan pengolahan dan pemurnian di dalam negeri; badan usaha non-tambang yang jual minerba wajib miliki IUP Operasi Produksi penjualan. Pasal 106-112: Utamakan tenaga kerja lokal dan barang/jasa dalam negeri; ikutsertakan pengusaha lokal; wajib program CSR; serahkan seluruh data eksplorasi/produksi; laporan berkala; divestasi saham setelah 5 tahun produksi (untuk perusahaan asing). Pasal 113-123: Penghentian sementara (force majeur, kondisi menghalangi, daya dukung lingkungan); berakhirnya IUP/IUPK karena dikembalikan, dicabut, atau habis masa berlaku.`
+  },
+  {
+    num: "XIV", title: "PENGHENTIAN SEMENTARA",
+    pasal: "113–116",
+    content: `Pasal 113: Penghentian sementara dapat diberikan karena: keadaan kahar (force majeur: perang, epidemi, gempa, banjir), keadaan yang menghalangi (blokade, pemogokan), atau daya dukung lingkungan tidak memadai. Pasal 114: Jangka waktu penghentian maks 1 tahun, dapat diperpanjang 1x untuk 1 tahun. Pasal 115: Keadaan kahar → kewajiban terhadap pemerintah tidak berlaku; keadaan menghalangi/lingkungan → kewajiban tetap berlaku. Pasal 116: Ketentuan lebih lanjut diatur PP.`
+  },
+  {
+    num: "XV", title: "BERAKHIRNYA IUP DAN IUPK",
+    pasal: "117–123",
+    content: `Pasal 117: IUP/IUPK berakhir karena dikembalikan, dicabut, atau habis masa berlaku. Pasal 118: Pengembalian dengan pernyataan tertulis disertai alasan jelas, sah setelah disetujui Menteri/gubernur/bupati. Pasal 119: Pencabutan jika tidak memenuhi kewajiban, melakukan tindak pidana, atau dinyatakan pailit. Pasal 121-123: Pemegang wajib selesaikan semua kewajiban; WIUP/WIUPK dikembalikan dan ditawarkan ke pihak lain; seluruh data eksplorasi/produksi diserahkan ke pemerintah.`
+  },
+  {
+    num: "XVI", title: "USAHA JASA PERTAMBANGAN",
+    pasal: "124–127",
+    content: `Pasal 124: Pemegang IUP/IUPK wajib gunakan perusahaan jasa pertambangan lokal/nasional. Jenis jasa: konsultasi, perencanaan, pelaksanaan, pengujian di bidang penyelidikan, eksplorasi, studi kelayakan, konstruksi, pengangkutan, lingkungan, pascatambang, K3, penambangan, pengolahan/pemurnian. Pasal 125: Tanggung jawab kegiatan tetap pada pemegang IUP/IUPK; pelaksana jasa wajib utamakan kontraktor dan tenaga kerja lokal. Pasal 126: Pemegang IUP/IUPK dilarang libatkan anak perusahaan/afiliasi dalam jasa pertambangan di wilayahnya, kecuali izin Menteri.`
+  },
+  {
+    num: "XVII", title: "PENDAPATAN NEGARA DAN DAERAH",
+    pasal: "128–133",
+    content: `Pasal 128: Kewajiban bayar pendapatan negara (pajak + PNBP: iuran tetap, iuran eksplorasi, iuran produksi, kompensasi data) dan pendapatan daerah (pajak daerah, retribusi). Pasal 129: Pemegang IUPK Operasi Produksi wajib bayar 4% ke Pemerintah dan 6% ke pemda dari keuntungan bersih (provinsi 1%, kab/kota penghasil 2,5%, kab/kota lain 2,5%). Pasal 130-133: Tanah/batuan ikut tergali tidak dikenai iuran produksi kecuali dimanfaatkan; besaran tarif iuran produksi berdasarkan tingkat pengusahaan, produksi, dan harga komoditas; PNBP dibagi ke daerah dan dibayar langsung ke kas daerah setiap 3 bulan.`
+  },
+  {
+    num: "XVIII", title: "PENGGUNAAN TANAH",
+    pasal: "134–138",
+    content: `Pasal 134: Hak atas WIUP/WPR/WIUPK tidak meliputi hak atas tanah permukaan; kegiatan usaha pertambangan tidak dapat dilaksanakan di tempat yang dilarang. Pasal 135: Pemegang IUP/IUPK Eksplorasi hanya dapat berkegiatan setelah mendapat persetujuan pemegang hak atas tanah. Pasal 136: Sebelum operasi produksi wajib selesaikan hak atas tanah dengan pemegang hak. Pasal 137-138: Pemegang IUP/IUPK yang sudah selesaikan tanah dapat diberi hak atas tanah; hak atas IUP/IUPK bukan pemilikan hak atas tanah.`
+  },
+  {
+    num: "XIX", title: "PEMBINAAN, PENGAWASAN & PERLINDUNGAN",
+    pasal: "139–145",
+    content: `Pasal 139: Menteri melakukan pembinaan melalui pedoman, bimbingan, supervisi, pendidikan/pelatihan, monitoring kepada pemerintah daerah. Pasal 140-141: Pengawasan meliputi teknis pertambangan, pemasaran, keuangan, data, konservasi, K3, keselamatan operasi, lingkungan, reklamasi, pascatambang, tenaga kerja, CSR, teknologi, dll. Pengawasan teknis, konservasi, K3, keselamatan operasi, lingkungan, dan teknologi dilakukan oleh inspektur tambang. Pasal 142-143: Gubernur/bupati wajib lapor ke Menteri minimal 6 bulan sekali; pemerintah daerah yang tidak sesuai ketentuan dapat ditegur. Pasal 145: Masyarakat terdampak negatif berhak memperoleh ganti rugi dan mengajukan gugatan ke pengadilan.`
+  },
+  {
+    num: "XX", title: "PENELITIAN, PENGEMBANGAN & PENDIDIKAN",
+    pasal: "146–148",
+    content: `Pasal 146: Pemerintah dan pemerintah daerah wajib mendorong dan memfasilitasi penelitian dan pengembangan mineral dan batubara. Pasal 147: Pemerintah dan pemerintah daerah wajib mendorong dan memfasilitasi pendidikan dan pelatihan di bidang pengusahaan minerba. Pasal 148: Penyelenggaraan pendidikan dan pelatihan dapat dilakukan Pemerintah, pemerintah daerah, swasta, dan masyarakat.`
+  },
+  {
+    num: "XXI", title: "PENYIDIKAN",
+    pasal: "149–150",
+    content: `Pasal 149: Selain penyidik Polri, pejabat PNS lingkup pertambangan diberi wewenang khusus sebagai penyidik. Berwenang memeriksa laporan, memeriksa orang/badan, memanggil paksa saksi/tersangka, menggeledah, memeriksa sarana pertambangan, menghentikan peralatan, menyegel/menyita alat, mendatangkan ahli, menghentikan penyidikan. Pasal 150: PPNS dapat menangkap pelaku; wajib memberitahu Polri; wajib hentikan penyidikan jika tidak cukup bukti.`
+  },
+  {
+    num: "XXII", title: "SANKSI ADMINISTRATIF",
+    pasal: "151–157",
+    content: `Pasal 151: Sanksi administratif kepada pemegang IUP/IPR/IUPK atas pelanggaran: peringatan tertulis, penghentian sementara kegiatan, pencabutan IUP/IPR/IUPK. Pasal 152-153: Jika pemerintah daerah tidak melaksanakan sanksi administratif, Menteri dapat menghentikan atau mencabut IUP/IPR; pemerintah daerah dapat ajukan keberatan. Pasal 154-156: Sengketa IUP/IUPK diselesaikan melalui pengadilan dan arbitrase dalam negeri; tata cara sanksi diatur PP. Pasal 157: Pemerintah daerah yang tidak patuhi ketentuan produksi dikenai sanksi berupa penarikan sementara kewenangan pengelolaan.`
+  },
+  {
+    num: "XXIII", title: "KETENTUAN PIDANA",
+    pasal: "158–165",
+    content: `Pasal 158: Usaha penambangan tanpa IUP/IPR/IUPK → pidana penjara maks 10 tahun dan/atau denda maks Rp10 miliar. Pasal 159: Laporan palsu → pidana penjara maks 10 tahun dan/atau denda maks Rp10 miliar. Pasal 160: Eksplorasi tanpa IUP/IUPK → kurungan maks 1 tahun atau denda maks Rp200 juta; IUP Eksplorasi tapi lakukan operasi produksi → penjara maks 5 tahun dan denda maks Rp10 miliar. Pasal 161: Menampung/mengolah/menjual minerba dari pihak tidak berizin → penjara maks 10 tahun dan denda maks Rp10 miliar. Pasal 162: Merintangi kegiatan pertambangan sah → kurungan maks 1 tahun atau denda maks Rp100 juta. Pasal 163-164: Badan hukum pelanggar: denda + 1/3; dapat dicabut izin usaha/status badan hukum; pidana tambahan perampasan barang/keuntungan dan kewajiban bayar biaya. Pasal 165: Pejabat yang keluarkan IUP/IPR/IUPK bertentangan UU → penjara maks 2 tahun dan denda maks Rp200 juta.`
+  },
+  {
+    num: "XXIV", title: "KETENTUAN LAIN-LAIN",
+    pasal: "166–168",
+    content: `Pasal 166: Masalah dampak lingkungan diselesaikan sesuai peraturan perundang-undangan. Pasal 167: WP dikelola Menteri dalam sistem informasi WP terintegrasi nasional dengan penyeragaman sistem koordinat dan peta dasar. Pasal 168: Pemerintah dapat memberikan keringanan dan fasilitas perpajakan untuk meningkatkan investasi sesuai peraturan perundang-undangan.`
+  },
+  {
+    num: "XXV", title: "KETENTUAN PERALIHAN",
+    pasal: "169–172",
+    content: `Pasal 169: Kontrak karya dan PKP2B yang ada sebelum UU ini tetap berlaku sampai habis kontrak; ketentuan disesuaikan paling lambat 1 tahun sejak UU diundangkan, kecuali penerimaan negara. Pasal 170: Pemegang kontrak karya yang sudah produksi wajib lakukan pemurnian dalam negeri paling lambat 5 tahun sejak UU diundangkan. Pasal 171: Pemegang kontrak/PKP2B wajib sampaikan rencana kegiatan seluruh wilayah kontrak paling lambat 1 tahun sejak UU berlaku; jika tidak, luas wilayah disesuaikan UU. Pasal 172: Permohonan kontrak karya/PKP2B yang sudah diajukan dan mendapat surat persetujuan prinsip sebelum 1 tahun UU berlaku tetap dapat diproses tanpa lelang.`
+  },
+  {
+    num: "XXVI", title: "KETENTUAN PENUTUP",
+    pasal: "173–175",
+    content: `Pasal 173: UU No. 11 Tahun 1967 tentang Ketentuan-Ketentuan Pokok Pertambangan dicabut dan dinyatakan tidak berlaku; semua peraturan pelaksanaan UU 11/1967 masih berlaku sepanjang tidak bertentangan dengan UU ini. Pasal 174: Peraturan pelaksanaan UU ini harus ditetapkan dalam waktu 1 tahun sejak diundangkan. Pasal 175: UU ini mulai berlaku pada tanggal diundangkan (12 Januari 2009).`
+  }
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────────────
+let currentView = 'browse';
+let summaryCache = {};
+let globalSummaryDone = false;
+
+// ── INIT ───────────────────────────────────────────────────────────────────────
+function init() {
+  buildSidebar();
+  buildBabCards();
+}
+
+function buildSidebar() {
+  const nav = document.getElementById('sidebarNav');
+  nav.innerHTML = BABS.map((b, i) => `
+    <div class="bab-item" id="nav-${i}" onclick="scrollToBab(${i})">
+      <span class="bab-num">BAB ${b.num}</span>
+      <span class="bab-label">${b.title}</span>
+    </div>
+  `).join('');
+}
+
+function buildBabCards() {
+  const container = document.getElementById('babContainer');
+  container.innerHTML = BABS.map((b, i) => `
+    <div class="bab-card" id="bab-${i}">
+      <div class="bab-card-header" onclick="toggleBab(${i})">
+        <div class="bab-card-info">
+          <span class="bab-roman">BAB ${b.num}</span>
+          <span class="bab-card-title">${b.title}</span>
+        </div>
+        <span class="bab-card-pasal">Pasal ${b.pasal}</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="bab-card-body">
+        <div class="bab-tabs">
+          <div class="bab-tab active" onclick="switchTab(event, ${i}, 'isi')">Isi Pasal</div>
+          <div class="bab-tab" onclick="switchTab(event, ${i}, 'ringkasan')">✨ Ringkasan AI</div>
+        </div>
+        <div class="tab-pane active" id="tab-isi-${i}">
+          <div class="pasal-content" id="isi-${i}">${b.content}</div>
+        </div>
+        <div class="tab-pane" id="tab-ringkasan-${i}">
+          <button class="btn-summarize" onclick="summarizeBab(${i})" id="btnSum-${i}">✨ Buat Ringkasan Bab ini</button>
+          <div id="sum-${i}"></div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleBab(i) {
+  const card = document.getElementById(`bab-${i}`);
+  card.classList.toggle('expanded');
+  // Update sidebar active
+  document.querySelectorAll('.bab-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(`nav-${i}`).classList.add('active');
+}
+
+function scrollToBab(i) {
+  switchView('browse', document.querySelector('[data-view="browse"]'));
+  const card = document.getElementById(`bab-${i}`);
+  card.classList.add('expanded');
+  setTimeout(() => {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+  document.querySelectorAll('.bab-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(`nav-${i}`).classList.add('active');
+}
+
+function switchTab(event, i, tab) {
+  event.stopPropagation();
+  const body = document.getElementById(`bab-${i}`).querySelector('.bab-card-body');
+  body.querySelectorAll('.bab-tab').forEach(t => t.classList.remove('active'));
+  body.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById(`tab-${tab}-${i}`).classList.add('active');
+}
+
+function switchView(view, el) {
+  currentView = view;
+  document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('browseView').style.display = view === 'browse' ? 'block' : 'none';
+  document.getElementById('searchView').style.display = view === 'search' ? 'block' : 'none';
+  document.getElementById('summaryView').style.display = view === 'summary' ? 'block' : 'none';
+}
+
+// ── SEARCH ─────────────────────────────────────────────────────────────────────
+const searchInput = document.getElementById('searchInput');
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim();
+  if (!q) {
+    clearSearch();
+    return;
+  }
+  performSearch(q);
+});
+
+function clearSearch() {
+  document.getElementById('searchCount').style.display = 'none';
+  document.querySelectorAll('.bab-item').forEach(el => {
+    el.classList.remove('match');
+    const badge = el.querySelector('.match-count');
+    if (badge) badge.remove();
+  });
+  if (currentView === 'search') switchView('browse', document.querySelector('[data-view="browse"]'));
+  // Restore isi content
+  BABS.forEach((b, i) => {
+    const el = document.getElementById(`isi-${i}`);
+    if (el) el.innerHTML = b.content;
+  });
+}
+
+function performSearch(q) {
+  const qLower = q.toLowerCase();
+  let totalMatches = 0;
+  const results = [];
+
+  BABS.forEach((b, i) => {
+    const text = b.title + ' ' + b.content + ' Bab ' + b.num + ' Pasal ' + b.pasal;
+    const textLower = text.toLowerCase();
+    const matchCount = (textLower.match(new RegExp(qLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+
+    // Highlight in isi
+    const isiEl = document.getElementById(`isi-${i}`);
+    if (isiEl) {
+      if (matchCount > 0) {
+        const highlighted = b.content.replace(
+          new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'),
+          '<mark class="highlight-text">$1</mark>'
+        );
+        isiEl.innerHTML = highlighted;
+      } else {
+        isiEl.innerHTML = b.content;
+      }
+    }
+
+    // Sidebar badge
+    const navItem = document.getElementById(`nav-${i}`);
+    const existingBadge = navItem.querySelector('.match-count');
+    if (existingBadge) existingBadge.remove();
+    navItem.classList.remove('match');
+
+    if (matchCount > 0) {
+      totalMatches += matchCount;
+      navItem.classList.add('match');
+      const badge = document.createElement('span');
+      badge.className = 'match-count';
+      badge.textContent = matchCount;
+      navItem.appendChild(badge);
+
+      // Collect snippets
+      const sentences = b.content.split('. ');
+      const matchingSentences = sentences.filter(s => s.toLowerCase().includes(qLower)).slice(0, 2);
+      if (matchingSentences.length > 0) {
+        results.push({ bab: b, idx: i, snippet: matchingSentences.join('. '), count: matchCount });
+      }
+    }
+  });
+
+  // Show count
+  const countEl = document.getElementById('searchCount');
+  countEl.textContent = `${totalMatches} hasil untuk "${q}"`;
+  countEl.style.display = 'block';
+
+  // Render search results
+  renderSearchResults(q, results, totalMatches);
+  switchView('search', document.querySelector('[data-view="search"]'));
+}
+
+function renderSearchResults(q, results, total) {
+  document.getElementById('searchViewTitle').textContent = `${total} hasil untuk "${q}"`;
+  const container = document.getElementById('searchResultsContainer');
+  if (results.length === 0) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-icon">∅</div><div>Tidak ada hasil ditemukan untuk "<strong>${q}</strong>"</div></div>`;
+    return;
+  }
+  container.innerHTML = results.map(r => `
+    <div class="search-result-item" onclick="scrollToBab(${r.idx})">
+      <div class="result-bab">BAB ${r.bab.num} — ${r.bab.title} &nbsp;·&nbsp; Pasal ${r.bab.pasal} &nbsp;·&nbsp; ${r.count} kemunculan</div>
+      <div class="result-text">${r.snippet.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi'), '<mark class="highlight-text">$1</mark>')}</div>
+    </div>
+  `).join('');
+}
+
+// ── SUMMARIZE BAB ──────────────────────────────────────────────────────────────
+async function summarizeBab(i) {
+  if (summaryCache[i]) {
+    document.getElementById(`sum-${i}`).innerHTML = `<div class="summary-box">${summaryCache[i]}</div>`;
+    document.getElementById(`btnSum-${i}`).style.display = 'none';
+    return;
+  }
+
+  const btn = document.getElementById(`btnSum-${i}`);
+  const out = document.getElementById(`sum-${i}`);
+  btn.disabled = true;
+  btn.textContent = '⟳ Memproses...';
+  out.innerHTML = `<div class="summary-loading"><div class="spinner"></div> Sedang membuat ringkasan...</div>`;
+
+  const bab = BABS[i];
+  const prompt = `Kamu adalah asisten hukum pertambangan Indonesia yang ahli dalam UU Minerba No. 4 Tahun 2009.
+
+Buat ringkasan komprehensif BAB ${bab.num} (${bab.title}) dari UU No. 4/2009 berdasarkan konten berikut:
+
+${bab.content}
+
+Format ringkasan:
+- Mulai dengan 1-2 kalimat pokok isi bab
+- Poin-poin kunci dalam bullet points (3-6 poin)
+- Implikasi praktis atau hal penting yang perlu diperhatikan
+- Gunakan bahasa Indonesia yang jelas dan profesional
+- Maksimal 250 kata`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || "Gagal mendapatkan ringkasan.";
+    const html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/•\s/g, '• ').replace(/\n/g, '<br>');
+    summaryCache[i] = html;
+    out.innerHTML = `<div class="summary-box">${html}</div>`;
+    btn.style.display = 'none';
+  } catch (err) {
+    out.innerHTML = `<div class="summary-loading" style="border-left-color:var(--red);color:var(--red)">⚠ Gagal terhubung ke API. Pastikan koneksi internet aktif.</div>`;
+    btn.disabled = false;
+    btn.textContent = '↺ Coba Lagi';
+  }
+}
+
+// ── GLOBAL SUMMARY ─────────────────────────────────────────────────────────────
+async function generateGlobalSummary() {
+  if (globalSummaryDone) return;
+  const btn = document.getElementById('btnGlobalSummary');
+  const out = document.getElementById('globalSummaryOutput');
+  btn.disabled = true;
+  btn.textContent = '⟳ Memproses...';
+  out.innerHTML = `<div class="summary-loading"><div class="spinner"></div> Sedang membuat ringkasan lengkap dokumen...</div>`;
+
+  const prompt = `Kamu adalah pakar hukum pertambangan Indonesia yang sangat berpengalaman.
+
+Buat ringkasan eksekutif komprehensif UU No. 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara (UU Minerba).
+
+Struktur ringkasan:
+
+**LATAR BELAKANG & TUJUAN**
+Mengapa UU ini dibuat dan apa tujuan utamanya.
+
+**ARSITEKTUR PERIZINAN**
+Sistem IUP, IPR, dan IUPK beserta hierarkinya.
+
+**WILAYAH PERTAMBANGAN**
+Pembagian WP, WUP, WPR, WPN dan implikasinya.
+
+**HAK & KEWAJIBAN PEMEGANG IZIN**
+Rangkuman hak dan kewajiban utama pelaku usaha.
+
+**PENERIMAAN NEGARA**
+Mekanisme iuran, bagi hasil, dan pembagian ke daerah.
+
+**PERLINDUNGAN LINGKUNGAN & SOSIAL**
+Reklamasi, pascatambang, CSR, dan perlindungan masyarakat.
+
+**SANKSI & PENEGAKAN HUKUM**
+Sanksi administratif dan pidana yang diatur.
+
+**KESIMPULAN**
+Signifikansi UU ini dalam tata kelola pertambangan nasional.
+
+Gunakan bahasa Indonesia profesional, padat, dan mudah dipahami. Sertakan nomor pasal yang relevan.`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+    const text = data.content?.[0]?.text || "Gagal mendapatkan ringkasan.";
+    const html = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--gold)">$1</strong>')
+      .replace(/\n\n/g, '</p><p style="margin-top:14px">')
+      .replace(/\n/g, '<br>');
+    
+    out.innerHTML = `<p class="stream-text">${html}</p>`;
+    btn.style.display = 'none';
+    globalSummaryDone = true;
+  } catch (err) {
+    out.innerHTML = `<div class="summary-loading" style="border-left-color:var(--red);color:var(--red)">⚠ Gagal terhubung ke API. Pastikan koneksi internet aktif.</div>`;
+    btn.disabled = false;
+    btn.textContent = '↺ Coba Lagi';
+  }
+}
+
+// ── START ──────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
