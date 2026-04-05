@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permen Ketenagakerjaan No. 5 Tahun 2018</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #f7f9f4;
+    --sidebar-bg: #0f2318;
+    --sidebar-text: #b8c8b4;
+    --sidebar-hover: #d4e8c8;
+    --sidebar-active: #7ec850;
+    --sidebar-section: #5a7a52;
+    --content-bg: #ffffff;
+    --ink: #1a1e18;
+    --ink-soft: #3a4438;
+    --ink-light: #7a8a74;
+    --rule: #d0dac8;
+    --accent: #1e5c30;
+    --accent-soft: #2e7a44;
+    --highlight: #edf5e8;
+    --pasal-border: #7ec850;
+    --bab-bg: #0f2318;
+    --bab-text: #d4e8c8;
+    --sidebar-width: 300px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    display: flex;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #1a3824;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: #080f09; }
+  #sidebar::-webkit-scrollbar-thumb { background: #2a4a2e; border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 28px 22px 20px;
+    border-bottom: 1px solid #1a3824;
+    position: sticky;
+    top: 0;
+    background: var(--sidebar-bg);
+    z-index: 2;
+  }
+
+  .sidebar-header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sidebar-section);
+    margin-bottom: 6px;
+  }
+
+  .sidebar-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--sidebar-active);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .sidebar-header p {
+    font-size: 11px;
+    color: var(--sidebar-text);
+    margin-top: 6px;
+    opacity: 0.75;
+    line-height: 1.5;
+  }
+
+  .sidebar-search {
+    padding: 12px 16px;
+    border-bottom: 1px solid #1a3824;
+  }
+
+  .sidebar-search input {
+    width: 100%;
+    background: #080f09;
+    border: 1px solid #2a4a2e;
+    border-radius: 6px;
+    padding: 7px 12px;
+    font-size: 12px;
+    color: var(--sidebar-text);
+    font-family: 'Source Serif 4', serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .sidebar-search input:focus { border-color: var(--sidebar-active); }
+  .sidebar-search input::placeholder { color: #2a4a2e; }
+
+  .nav-tree { padding: 8px 0 24px; }
+
+  .nav-bab-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px 8px 18px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--sidebar-section);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .nav-bab-header:hover { background: rgba(255,255,255,0.03); }
+
+  .nav-bab-header .chevron {
+    margin-left: auto;
+    transition: transform 0.2s;
+    font-size: 9px;
+    opacity: 0.5;
+  }
+
+  .nav-bab-header.open .chevron { transform: rotate(90deg); }
+
+  .nav-items { display: none; padding: 0 0 4px; }
+  .nav-items.open { display: block; }
+
+  .nav-item {
+    display: block;
+    padding: 5px 16px 5px 28px;
+    font-size: 12px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  .nav-item:hover {
+    color: var(--sidebar-hover);
+    border-left-color: #2a4a2e;
+    background: rgba(255,255,255,0.02);
+    opacity: 1;
+  }
+
+  .nav-item.active {
+    color: var(--sidebar-active);
+    border-left-color: var(--sidebar-active);
+    background: rgba(126,200,80,0.06);
+    opacity: 1;
+  }
+
+  /* ── MAIN ── */
+  #main { margin-left: var(--sidebar-width); flex: 1; }
+
+  .doc-header {
+    background: var(--bab-bg);
+    color: var(--bab-text);
+    padding: 56px 60px 48px;
+    text-align: center;
+    border-bottom: 3px solid var(--sidebar-active);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(126,200,80,0.07) 0%, transparent 70%);
+  }
+
+  .doc-header .kop {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sidebar-section);
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .doc-header .title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--sidebar-active);
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+    position: relative;
+    line-height: 1.3;
+  }
+
+  .doc-header .nomor-badge {
+    display: inline-block;
+    background: rgba(126,200,80,0.12);
+    border: 1px solid rgba(126,200,80,0.3);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--sidebar-active);
+    letter-spacing: 0.1em;
+    margin: 14px 0 20px;
+    position: relative;
+  }
+
+  .doc-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #d4e8c8;
+    line-height: 1.65;
+    max-width: 580px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .content-body { padding: 0 60px 80px; }
+
+  /* BAB blocks */
+  .bab-block { margin-top: 52px; }
+
+  .bab-title {
+    background: var(--bab-bg);
+    color: var(--bab-text);
+    padding: 15px 28px;
+    border-radius: 6px 6px 0 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-align: center;
+    border-bottom: 2px solid var(--sidebar-active);
+  }
+
+  .bab-title .bab-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sidebar-section);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .bab-content {
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+
+  .bagian-title {
+    background: var(--highlight);
+    padding: 12px 24px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+    border-top: 1px solid var(--rule);
+  }
+
+  .bagian-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .paragraf-title {
+    background: #f4f8f0;
+    padding: 9px 24px;
+    font-size: 12.5px;
+    font-style: italic;
+    color: var(--ink-soft);
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .pasal-block {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--content-bg);
+    scroll-margin-top: 24px;
+    transition: background 0.2s;
+  }
+
+  .pasal-block:last-child { border-bottom: none; }
+  .pasal-block:hover { background: #fdfffe; }
+
+  .pasal-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pasal-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--pasal-border), transparent);
+  }
+
+  .pasal-text {
+    font-size: 14px;
+    line-height: 1.82;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .pasal-text:last-child { margin-bottom: 0; }
+
+  .ayat {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 11px;
+  }
+
+  .ayat:last-child { margin-bottom: 0; }
+
+  .ayat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-soft);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+  }
+
+  .ayat-text { flex: 1; font-size: 14px; line-height: 1.82; color: var(--ink); }
+
+  .list-alpha, .list-num { margin: 9px 0 8px 16px; }
+
+  .list-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 7px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .list-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-soft);
+    min-width: 20px;
+    padding-top: 3px;
+    font-weight: 500;
+  }
+
+  .sub-list { margin: 7px 0 5px 20px; }
+
+  .sub-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 5px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .sub-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-light);
+    min-width: 20px;
+    padding-top: 2px;
+  }
+
+  .preambule-block {
+    padding: 22px 28px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--content-bg);
+  }
+
+  .preambule-row { display: flex; gap: 18px; margin-bottom: 16px; }
+  .preambule-row:last-child { margin-bottom: 0; }
+
+  .preambule-key {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 100px;
+    padding-top: 2px;
+  }
+
+  .preambule-val { flex: 1; font-size: 14px; line-height: 1.82; }
+
+  .mengingat-list { margin-top: 10px; }
+
+  .mengingat-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .mengingat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent-soft);
+    min-width: 20px;
+    padding-top: 3px;
+  }
+
+  .memutuskan-block {
+    text-align: center;
+    padding: 26px 28px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--highlight);
+  }
+
+  .memutuskan-block .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    margin-bottom: 8px;
+  }
+
+  .memutuskan-block p {
+    font-family: 'Playfair Display', serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--bab-bg);
+    line-height: 1.65;
+  }
+
+  .ttd-block {
+    padding: 30px 28px;
+    background: var(--content-bg);
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ttd-col { flex: 1; min-width: 200px; }
+
+  .ttd-col .place {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin-bottom: 30px;
+    line-height: 1.7;
+  }
+
+  .ttd-col .role {
+    font-size: 12px;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+
+  .ttd-col .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    border-top: 1px solid var(--rule);
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+
+  .lampiran-note {
+    background: var(--highlight);
+    border-left: 3px solid var(--pasal-border);
+    padding: 14px 20px;
+    margin: 10px 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+  }
+
+  /* Progress + scroll top */
+  #progress {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: 2px;
+    z-index: 300;
+  }
+
+  #progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent), var(--sidebar-active));
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  #totop {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+    background: var(--bab-bg);
+    border: 1px solid #2a4a2e;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sidebar-active);
+    font-size: 16px;
+    transition: all 0.2s;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    text-decoration: none;
+  }
+
+  #totop.visible { opacity: 1; pointer-events: all; }
+  #totop:hover { background: #1a3824; transform: translateY(-2px); }
+
+  a.anchor { display: block; position: relative; top: -80px; visibility: hidden; }
+</style>
+</head>
+<body>
+
+<div id="progress"><div id="progress-bar"></div></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="label">Regulasi Ketenagakerjaan</div>
+    <h1>Permen Ketenagakerjaan No. 5 Tahun 2018</h1>
+    <p>Keselamatan dan Kesehatan Kerja Lingkungan Kerja</p>
+  </div>
+  <div class="sidebar-search">
+    <input type="text" id="search-input" placeholder="Cari pasal, bab, atau kata kunci…" />
+  </div>
+  <div class="nav-tree" id="nav-tree">
+
+    <div class="nav-bab">
+      <div class="nav-bab-header open" onclick="toggleBab(this)">
+        <span>Pembukaan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items open">
+        <a href="#konsideran" class="nav-item">Menimbang</a>
+        <a href="#mengingat" class="nav-item">Mengingat</a>
+        <a href="#memutuskan" class="nav-item">Memutuskan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB I — Ketentuan Umum</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal1" class="nav-item">Pasal 1 — Definisi</a>
+        <a href="#pasal2" class="nav-item">Pasal 2 — Kewajiban Pengusaha</a>
+        <a href="#pasal3" class="nav-item">Pasal 3 — Syarat K3 Lingkungan Kerja</a>
+        <a href="#pasal4" class="nav-item">Pasal 4 — Tujuan Pelaksanaan</a>
+        <a href="#pasal5" class="nav-item">Pasal 5 — Cara Pelaksanaan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB II — Pengukuran &amp; Pengendalian Lingkungan Kerja</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal6" class="nav-item">Pasal 6 — Pengukuran Lingkungan Kerja</a>
+        <a href="#pasal7" class="nav-item">Pasal 7 — Pengendalian Lingkungan Kerja</a>
+        <a href="#pasal8" class="nav-item">Pasal 8 — Faktor Fisika (Umum)</a>
+        <a href="#pasal9" class="nav-item">Pasal 9 — Iklim Kerja</a>
+        <a href="#pasal10" class="nav-item">Pasal 10 — Kebisingan</a>
+        <a href="#pasal11" class="nav-item">Pasal 11 — Getaran</a>
+        <a href="#pasal12" class="nav-item">Pasal 12 — Gelombang Radio/Mikro</a>
+        <a href="#pasal13" class="nav-item">Pasal 13 — Radiasi Ultra Ungu</a>
+        <a href="#pasal14" class="nav-item">Pasal 14 — Medan Magnet Statis</a>
+        <a href="#pasal15" class="nav-item">Pasal 15 — Tekanan Udara</a>
+        <a href="#pasal16" class="nav-item">Pasal 16 — Pencahayaan</a>
+        <a href="#pasal17" class="nav-item">Pasal 17 — Pencahayaan Alami</a>
+        <a href="#pasal18" class="nav-item">Pasal 18 — Pencahayaan Buatan</a>
+        <a href="#pasal19" class="nav-item">Pasal 19 — Pencahayaan Darurat</a>
+        <a href="#pasal20" class="nav-item">Pasal 20 — Faktor Kimia</a>
+        <a href="#pasal21" class="nav-item">Pasal 21 — Pengendalian Faktor Kimia</a>
+        <a href="#pasal22" class="nav-item">Pasal 22 — Faktor Biologi</a>
+        <a href="#pasal23" class="nav-item">Pasal 23 — Faktor Ergonomi</a>
+        <a href="#pasal24" class="nav-item">Pasal 24 — Faktor Psikologi</a>
+        <a href="#pasal25" class="nav-item">Pasal 25 — Penanganan Kasus</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB III — Higiene dan Sanitasi</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal26" class="nav-item">Pasal 26 — Bangunan Tempat Kerja</a>
+        <a href="#pasal27" class="nav-item">Pasal 27 — Halaman</a>
+        <a href="#pasal28" class="nav-item">Pasal 28 — Gedung</a>
+        <a href="#pasal29" class="nav-item">Pasal 29 — Dinding dan Langit-Langit</a>
+        <a href="#pasal30" class="nav-item">Pasal 30 — Lantai</a>
+        <a href="#pasal31" class="nav-item">Pasal 31 — Atap</a>
+        <a href="#pasal32" class="nav-item">Pasal 32 — Bangunan Bawah Tanah</a>
+        <a href="#pasal33" class="nav-item">Pasal 33 — Fasilitas Kebersihan</a>
+        <a href="#pasal34" class="nav-item">Pasal 34 — Toilet</a>
+        <a href="#pasal35" class="nav-item">Pasal 35 — Ukuran Ruang Toilet</a>
+        <a href="#pasal36" class="nav-item">Pasal 36 — Pakaian Kerja</a>
+        <a href="#pasal37" class="nav-item">Pasal 37 — Tempat Sampah &amp; Kebersihan</a>
+        <a href="#pasal38" class="nav-item">Pasal 38 — Tempat Pembuangan Pembalut</a>
+        <a href="#pasal39" class="nav-item">Pasal 39 — Kebutuhan Udara</a>
+        <a href="#pasal40" class="nav-item">Pasal 40 — KUDR</a>
+        <a href="#pasal41" class="nav-item">Pasal 41 — Ventilasi</a>
+        <a href="#pasal42" class="nav-item">Pasal 42 — Ruang Udara</a>
+        <a href="#pasal43" class="nav-item">Pasal 43 — Tata Laksana Kerumahtanggaan</a>
+        <a href="#pasal44" class="nav-item">Pasal 44 — Penyimpanan Alat &amp; Bahan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB IV — Personil K3</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal45" class="nav-item">Pasal 45 — Personil K3 Lingkungan Kerja</a>
+        <a href="#pasal46" class="nav-item">Pasal 46 — Kompetensi Personil</a>
+        <a href="#pasal47" class="nav-item">Pasal 47 — Syarat Ahli K3 Muda</a>
+        <a href="#pasal48" class="nav-item">Pasal 48 — Syarat Ahli K3 Madya</a>
+        <a href="#pasal49" class="nav-item">Pasal 49 — Syarat Ahli K3 Utama</a>
+        <a href="#pasal50" class="nav-item">Pasal 50 — Permohonan Lisensi K3</a>
+        <a href="#pasal51" class="nav-item">Pasal 51 — Masa Berlaku Lisensi</a>
+        <a href="#pasal52" class="nav-item">Pasal 52 — Syarat Berlaku Lisensi</a>
+        <a href="#pasal53" class="nav-item">Pasal 53 — Sertifikat Kompetensi</a>
+        <a href="#pasal54" class="nav-item">Pasal 54 — Tugas Personil K3</a>
+        <a href="#pasal55" class="nav-item">Pasal 55 — Kewenangan Personil K3</a>
+        <a href="#pasal56" class="nav-item">Pasal 56 — Kewajiban Personil K3</a>
+        <a href="#pasal57" class="nav-item">Pasal 57 — Pencabutan Lisensi</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB V — Pemeriksaan dan Pengujian</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal58" class="nav-item">Pasal 58 — Kewajiban Pemeriksaan</a>
+        <a href="#pasal59" class="nav-item">Pasal 59 — Pelaksanaan Pemeriksaan</a>
+        <a href="#pasal60" class="nav-item">Pasal 60 — Jenis Pemeriksaan</a>
+        <a href="#pasal61" class="nav-item">Pasal 61 — Pemeriksaan Pertama</a>
+        <a href="#pasal62" class="nav-item">Pasal 62 — Pemeriksaan Berkala</a>
+        <a href="#pasal63" class="nav-item">Pasal 63 — Pemeriksaan Ulang</a>
+        <a href="#pasal64" class="nav-item">Pasal 64 — Pemeriksaan Khusus</a>
+        <a href="#pasal65" class="nav-item">Pasal 65 — Koordinasi dan Pelaporan</a>
+        <a href="#pasal66" class="nav-item">Pasal 66 — Formulir Pemeriksaan</a>
+        <a href="#pasal67" class="nav-item">Pasal 67 — Stiker K3</a>
+        <a href="#pasal68" class="nav-item">Pasal 68 — Pelaporan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB VI — Peninjauan NAB &amp; Standar</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal69" class="nav-item">Pasal 69 — Peninjauan Berkala NAB</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB VII — Pengawasan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal70" class="nav-item">Pasal 70 — Pengawasan K3</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB VIII — Sanksi</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal71" class="nav-item">Pasal 71 — Sanksi</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB IX — Ketentuan Peralihan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal72" class="nav-item">Pasal 72 — Lisensi Lama</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB X — Ketentuan Penutup</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal73" class="nav-item">Pasal 73 — Pencabutan Peraturan Lama</a>
+        <a href="#pasal74" class="nav-item">Pasal 74 — Mulai Berlaku</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+  <div class="doc-header">
+    <div class="kop">Menteri Ketenagakerjaan · Republik Indonesia</div>
+    <div class="title-main">PERATURAN MENTERI KETENAGAKERJAAN<br>REPUBLIK INDONESIA</div>
+    <div class="nomor-badge">NOMOR 5 TAHUN 2018</div>
+    <h2>TENTANG<br>KESELAMATAN DAN KESEHATAN KERJA<br>LINGKUNGAN KERJA</h2>
+  </div>
+
+  <div class="content-body">
+
+    <!-- PEMBUKAAN -->
+    <div class="bab-block" id="pembukaan">
+      <div class="bab-title">
+        <span class="bab-number">Pembukaan</span>
+        DENGAN RAHMAT TUHAN YANG MAHA ESA<br>
+        MENTERI KETENAGAKERJAAN REPUBLIK INDONESIA
+      </div>
+      <div class="bab-content">
+
+        <div class="preambule-block" id="konsideran">
+          <div class="preambule-row">
+            <div class="preambule-key">Menimbang</div>
+            <div class="preambule-val">
+              <div class="list-alpha">
+                <div class="list-item"><span class="list-key">a.</span><span>bahwa untuk melaksanakan ketentuan Pasal 5 dan Pasal 6 Undang-Undang Nomor 3 Tahun 1969 tentang Persetujuan Konvensi Organisasi Perburuhan Internasional Nomor 120 Mengenai Hygiene dalam Perniagaan dan Kantor-Kantor serta ketentuan Pasal 2 ayat (2), Pasal 3 ayat (1) huruf i, huruf j, huruf k, huruf l, dan huruf m Undang-Undang Nomor 1 Tahun 1970 tentang Keselamatan Kerja, perlu mengatur keselamatan dan kesehatan kerja lingkungan kerja;</span></div>
+                <div class="list-item"><span class="list-key">b.</span><span>bahwa dengan perkembangan teknologi dan pemenuhan syarat keselamatan dan kesehatan kerja lingkungan kerja serta perkembangan peraturan perundang-undangan, perlu dilakukan perubahan atas Peraturan Menteri Perburuhan Nomor 7 Tahun 1964 tentang Syarat Kesehatan, Kebersihan serta Penerangan dalam Tempat Kerja dan Peraturan Menteri Tenaga Kerja dan Transmigrasi Nomor PER.13/MEN/X/2011 tentang Nilai Ambang Batas Faktor Fisika dan Faktor Kimia di Tempat Kerja;</span></div>
+                <div class="list-item"><span class="list-key">c.</span><span>bahwa berdasarkan pertimbangan sebagaimana dimaksud dalam huruf a dan huruf b, perlu menetapkan Peraturan Menteri Ketenagakerjaan tentang Keselamatan dan Kesehatan Kerja Lingkungan Kerja;</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preambule-block" id="mengingat">
+          <div class="preambule-row">
+            <div class="preambule-key">Mengingat</div>
+            <div class="preambule-val">
+              <div class="mengingat-list">
+                <div class="mengingat-item"><span class="mengingat-num">1.</span><span>Undang-Undang Nomor 3 Tahun 1951 tentang Pernyataan Berlakunya Undang-Undang Pengawasan Perburuhan Tahun 1948 Nomor 23 dari Republik Indonesia untuk Seluruh Indonesia;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">2.</span><span>Undang-Undang Nomor 3 Tahun 1969 tentang Persetujuan Konvensi Organisasi Perburuhan Internasional Nomor 120 mengenai Hygiene dalam Perniagaan dan Kantor-Kantor;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">3.</span><span>Undang-Undang Nomor 1 Tahun 1970 tentang Keselamatan Kerja;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">4.</span><span>Undang-Undang Nomor 13 Tahun 2003 tentang Ketenagakerjaan;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">5.</span><span>Undang-Undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah sebagaimana telah beberapa kali diubah, terakhir dengan Undang-Undang Nomor 9 Tahun 2015;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">6.</span><span>Peraturan Pemerintah Nomor 50 Tahun 2012 tentang Penerapan Sistem Manajemen Keselamatan dan Kesehatan Kerja;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">7.</span><span>Peraturan Presiden Nomor 21 Tahun 2010 tentang Pengawasan Ketenagakerjaan;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">8.</span><span>Peraturan Menteri Ketenagakerjaan Nomor 8 Tahun 2015 tentang Tata Cara Mempersiapkan Pembentukan Rancangan Undang-Undang, Rancangan Peraturan Pemerintah, dan Rancangan Peraturan Presiden serta Pembentukan Rancangan Peraturan Menteri di Kementerian Ketenagakerjaan;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">9.</span><span>Peraturan Menteri Ketenagakerjaan Nomor 33 Tahun 2016 tentang Tata Cara Pengawasan Ketenagakerjaan.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="memutuskan-block" id="memutuskan">
+          <div class="label">MEMUTUSKAN</div>
+          <p>Menetapkan : PERATURAN MENTERI KETENAGAKERJAAN TENTANG KESELAMATAN DAN KESEHATAN KERJA LINGKUNGAN KERJA.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB I -->
+    <div class="bab-block" id="bab1">
+      <div class="bab-title"><span class="bab-number">BAB I</span>KETENTUAN UMUM</div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal1">
+          <div class="pasal-heading">Pasal 1 — Definisi</div>
+          <p class="pasal-text">Dalam Peraturan Menteri ini yang dimaksud dengan:</p>
+          <div class="list-num">
+            <div class="list-item"><span class="list-key">1.</span><span><strong>K3</strong> (Keselamatan dan Kesehatan Kerja) adalah segala kegiatan untuk menjamin dan melindungi keselamatan dan kesehatan Tenaga Kerja melalui upaya pencegahan kecelakaan kerja dan penyakit akibat kerja.</span></div>
+            <div class="list-item"><span class="list-key">2.</span><span><strong>Higiene</strong> adalah usaha kesehatan preventif yang menitikberatkan kegiatannya kepada usaha kesehatan individu maupun usaha pribadi hidup manusia.</span></div>
+            <div class="list-item"><span class="list-key">3.</span><span><strong>Sanitasi</strong> adalah usaha kesehatan preventif yang menitikberatkan kegiatan kepada usaha kesehatan lingkungan hidup manusia.</span></div>
+            <div class="list-item"><span class="list-key">4.</span><span><strong>Tempat Kerja</strong> adalah tiap ruangan atau lapangan tertutup atau terbuka, bergerak atau tetap, di mana Tenaga Kerja bekerja atau yang sering dimasuki Tenaga Kerja untuk keperluan suatu usaha dan di mana terdapat sumber atau sumber-sumber bahaya, termasuk semua ruangan, lapangan, halaman dan sekelilingnya.</span></div>
+            <div class="list-item"><span class="list-key">5.</span><span><strong>Lingkungan Kerja</strong> adalah aspek Higiene di Tempat Kerja yang di dalamnya mencakup faktor fisika, kimia, biologi, ergonomi dan psikologi yang keberadaannya di Tempat Kerja dapat mempengaruhi keselamatan dan kesehatan Tenaga Kerja.</span></div>
+            <div class="list-item"><span class="list-key">6.</span><span><strong>K3 Lingkungan Kerja</strong> adalah segala kegiatan untuk menjamin dan melindungi keselamatan dan kesehatan Tenaga Kerja melalui pengendalian Lingkungan Kerja dan penerapan Higiene Sanitasi di Tempat Kerja.</span></div>
+            <div class="list-item"><span class="list-key">7.</span><span><strong>NAB</strong> (Nilai Ambang Batas) adalah standar faktor bahaya di Tempat Kerja sebagai kadar/intensitas rata-rata tertimbang waktu (<em>time weighted average</em>) yang dapat diterima Tenaga Kerja tanpa mengakibatkan penyakit atau gangguan kesehatan, dalam pekerjaan sehari-hari untuk waktu tidak melebihi 8 jam sehari atau 40 jam seminggu.</span></div>
+            <div class="list-item"><span class="list-key">8.</span><span><strong>PSD</strong> (Pajanan Singkat Diperkenankan) adalah kadar bahan kimia di udara Tempat Kerja yang tidak boleh dilampaui agar Tenaga Kerja yang terpajan pada periode singkat yaitu tidak lebih dari 15 menit masih dapat menerimanya tanpa mengakibatkan iritasi, kerusakan jaringan tubuh maupun terbius yang tidak boleh dilakukan lebih dari 4 kali dalam satu hari kerja.</span></div>
+            <div class="list-item"><span class="list-key">9.</span><span><strong>KTD</strong> (Kadar Tertinggi Diperkenankan) adalah kadar bahan kimia di udara Tempat Kerja yang tidak boleh dilampaui meskipun dalam waktu sekejap selama Tenaga Kerja melakukan pekerjaan.</span></div>
+            <div class="list-item"><span class="list-key">10.</span><span><strong>IPB</strong> (Indeks Pajanan Biologi) adalah kadar konsentrasi bahan kimia yang didapatkan dalam spesimen tubuh Tenaga Kerja dan digunakan untuk menentukan tingkat pajanan terhadap Tenaga Kerja sehat yang terpajan bahan kimia.</span></div>
+            <div class="list-item"><span class="list-key">11.</span><span><strong>Faktor Fisika</strong> adalah faktor yang dapat mempengaruhi aktivitas Tenaga Kerja yang bersifat fisika, disebabkan oleh penggunaan mesin, peralatan, bahan dan kondisi lingkungan di sekitar Tempat Kerja, meliputi Iklim Kerja, Kebisingan, Getaran, radiasi gelombang mikro, Radiasi Ultra Ungu (Ultra Violet), radiasi Medan Magnet Statis, tekanan udara, dan Pencahayaan.</span></div>
+            <div class="list-item"><span class="list-key">12.</span><span><strong>Faktor Kimia</strong> adalah faktor yang dapat mempengaruhi aktivitas Tenaga Kerja yang bersifat kimiawi, meliputi kontaminan kimia di udara berupa gas, uap dan partikulat.</span></div>
+            <div class="list-item"><span class="list-key">13.</span><span><strong>Faktor Biologi</strong> adalah faktor yang dapat mempengaruhi aktivitas Tenaga Kerja yang bersifat biologi, disebabkan oleh makhluk hidup meliputi hewan, tumbuhan dan produknya serta mikroorganisme yang dapat menyebabkan penyakit akibat kerja.</span></div>
+            <div class="list-item"><span class="list-key">14.</span><span><strong>Faktor Ergonomi</strong> adalah faktor yang dapat mempengaruhi aktivitas Tenaga Kerja, disebabkan oleh ketidaksesuaian antara fasilitas kerja yang meliputi cara kerja, posisi kerja, alat kerja, dan beban angkat terhadap Tenaga Kerja.</span></div>
+            <div class="list-item"><span class="list-key">15.</span><span><strong>Faktor Psikologi</strong> adalah faktor yang mempengaruhi aktivitas Tenaga Kerja, disebabkan oleh hubungan antar personal di Tempat Kerja, peran dan tanggung jawab terhadap pekerjaan.</span></div>
+            <div class="list-item"><span class="list-key">16.</span><span><strong>Iklim Kerja</strong> adalah hasil perpaduan antara suhu, kelembaban, kecepatan gerakan udara dan panas radiasi dengan tingkat pengeluaran panas dari tubuh Tenaga Kerja sebagai akibat pekerjaannya, meliputi tekanan panas dan dingin.</span></div>
+            <div class="list-item"><span class="list-key">17.</span><span><strong>ISBB</strong> (<em>Wet Bulb Globe Temperature Index</em>) adalah parameter untuk menilai tingkat Iklim Kerja panas yang merupakan hasil perhitungan antara suhu udara kering, Suhu Basah Alami, dan Suhu Bola.</span></div>
+            <div class="list-item"><span class="list-key">18.</span><span><strong>Suhu Kering</strong> adalah suhu yang ditunjukkan oleh termometer Suhu Kering.</span></div>
+            <div class="list-item"><span class="list-key">19.</span><span><strong>Suhu Basah Alami</strong> adalah suhu yang ditunjukkan oleh termometer bola basah alami (<em>Natural Wet Bulb Thermometer</em>).</span></div>
+            <div class="list-item"><span class="list-key">20.</span><span><strong>Suhu Bola</strong> adalah suhu yang ditunjukkan oleh termometer bola (<em>Globe Thermometer</em>).</span></div>
+            <div class="list-item"><span class="list-key">21.</span><span><strong>Tekanan Dingin</strong> adalah pengeluaran panas akibat paparan terus menerus terhadap dingin yang mempengaruhi kemampuan tubuh untuk menghasilkan panas dan dapat mengakibatkan hipotermia (suhu tubuh di bawah 36 derajat Celsius).</span></div>
+            <div class="list-item"><span class="list-key">22.</span><span><strong>Kebisingan</strong> adalah semua suara yang tidak dikehendaki bersumber dari proses produksi dan/atau alat-alat kerja yang pada tingkat tertentu dapat menimbulkan gangguan pendengaran.</span></div>
+            <div class="list-item"><span class="list-key">23.</span><span><strong>Getaran</strong> adalah gerakan yang teratur dari benda atau media yang bergerak bolak-balik dari kedudukan keseimbangannya.</span></div>
+            <div class="list-item"><span class="list-key">24.</span><span><strong>Radiasi Gelombang Radio atau Gelombang Mikro</strong> adalah Radiasi Elektromagnetik dengan Frekuensi 30 (tiga puluh) kilohertz sampai 300 (tiga ratus) gigahertz.</span></div>
+            <div class="list-item"><span class="list-key">25.</span><span><strong>Radiasi Ultra Ungu</strong> adalah Radiasi Elektromagnetik dengan panjang gelombang 180 (seratus delapan puluh) nano meter sampai 400 (empat ratus) nano meter.</span></div>
+            <div class="list-item"><span class="list-key">26.</span><span><strong>Medan Magnet Statis</strong> adalah suatu medan atau area yang ditimbulkan oleh pergerakan arus listrik.</span></div>
+            <div class="list-item"><span class="list-key">27.</span><span><strong>Tekanan Udara Ekstrim</strong> adalah tekanan udara yang lebih tinggi atau tekanan udara yang lebih rendah dari tekanan udara normal (1 atmosphere).</span></div>
+            <div class="list-item"><span class="list-key">28.</span><span><strong>Kebersihan</strong> adalah bebas dari kotoran serta rapih dan tidak bercampur dengan unsur atau zat lain yang berbahaya.</span></div>
+            <div class="list-item"><span class="list-key">29.</span><span><strong>Pencahayaan</strong> adalah sesuatu yang memberikan terang (sinar) atau yang menerangi, meliputi Pencahayaan alami dan Pencahayaan Buatan.</span></div>
+            <div class="list-item"><span class="list-key">30.</span><span><strong>Pencahayaan Buatan</strong> adalah Pencahayaan yang dihasilkan oleh sumber cahaya selain cahaya alami.</span></div>
+            <div class="list-item"><span class="list-key">31.</span><span><strong>Bangunan Tempat Kerja</strong> adalah bagian dari Tempat Kerja berupa gedung atau bangunan lain, gedung tambahan, halaman beserta jalan, jembatan atau yang terletak dalam batas halaman perusahaan.</span></div>
+            <div class="list-item"><span class="list-key">32.</span><span><strong>Toilet</strong> adalah fasilitas sanitasi tempat buang air besar, kecil, tempat cuci tangan dan/atau muka.</span></div>
+            <div class="list-item"><span class="list-key">33.</span><span><strong>Intensitas Cahaya</strong> adalah jumlah rata-rata cahaya yang diterima pekerja setiap waktu pengamatan pada setiap titik dan dinyatakan dalam satuan Lux.</span></div>
+            <div class="list-item"><span class="list-key">34.</span><span><strong>Lux</strong> adalah satuan metrik ukuran cahaya pada suatu permukaan.</span></div>
+            <div class="list-item"><span class="list-key">35.</span><span><strong>KUDR</strong> (Kualitas Udara Dalam Ruangan) adalah kualitas udara di ruangan Tempat Kerja yang dalam kondisi buruk yang disebabkan oleh pencemaran atau kontaminasi udara Tempat Kerja, yang dapat menimbulkan ketidaknyamanan kerja sampai pada gangguan kesehatan Tenaga Kerja.</span></div>
+            <div class="list-item"><span class="list-key">36.</span><span><strong>Tenaga Kerja</strong> adalah setiap orang yang mampu melakukan pekerjaan guna menghasilkan barang dan/atau jasa baik untuk memenuhi kebutuhan sendiri maupun untuk masyarakat.</span></div>
+            <div class="list-item"><span class="list-key">37.</span><span><strong>Pengusaha</strong> adalah: (a) orang perseorangan, persekutuan, atau badan hukum yang menjalankan suatu perusahaan milik sendiri; (b) orang perseorangan, persekutuan, atau badan hukum yang secara berdiri sendiri menjalankan perusahaan bukan miliknya; (c) orang perseorangan, persekutuan, atau badan hukum yang berada di Indonesia mewakili perusahaan sebagaimana dimaksud dalam huruf a dan b yang berkedudukan di luar wilayah Indonesia.</span></div>
+            <div class="list-item"><span class="list-key">38.</span><span><strong>Pengurus</strong> adalah orang yang mempunyai tugas memimpin langsung sesuatu Tempat Kerja atau bagiannya yang berdiri sendiri.</span></div>
+            <div class="list-item"><span class="list-key">39.</span><span><strong>Pegawai Pengawas Ketenagakerjaan</strong> (disebut Pengawas Ketenagakerjaan) adalah Pegawai Negeri Sipil yang diangkat dan ditugaskan dalam jabatan fungsional Pengawas Ketenagakerjaan.</span></div>
+            <div class="list-item"><span class="list-key">40.</span><span><strong>Pengawas Ketenagakerjaan Spesialis K3 Lingkungan Kerja</strong> adalah Pengawas Ketenagakerjaan yang mempunyai keahlian khusus di bidang K3 Lingkungan Kerja yang berwenang untuk melakukan kegiatan pembinaan, Pemeriksaan, dan Pengujian bidang Lingkungan Kerja serta pengawasan, pembinaan, dan pengembangan sistem pengawasan ketenagakerjaan.</span></div>
+            <div class="list-item"><span class="list-key">41.</span><span><strong>Pemeriksaan</strong> adalah serangkaian kegiatan yang dilakukan untuk memastikan ditaatinya pelaksanaan peraturan perundang-undangan ketenagakerjaan di Perusahaan atau Tempat Kerja.</span></div>
+            <div class="list-item"><span class="list-key">42.</span><span><strong>Pengujian Ketenagakerjaan</strong> (disebut Pengujian) adalah kegiatan penilaian terhadap suatu objek Pengawasan melalui perhitungan, analisis, pengukuran dan pengetasan sesuai dengan ketentuan peraturan perundang-undangan atau standar yang berlaku.</span></div>
+            <div class="list-item"><span class="list-key">43.</span><span><strong>Penguji K3</strong> adalah Pegawai Negeri Sipil yang diberi tugas, tanggung jawab, wewenang dan hak secara penuh untuk melakukan kegiatan Pengujian K3 dan kompetensi K3.</span></div>
+            <div class="list-item"><span class="list-key">44.</span><span><strong>Pengujian K3</strong> adalah serangkaian kegiatan penilaian suatu obyek K3 secara teknis dan/atau medis yang mempunyai resiko bahaya dengan cara memberi beban uji atau dengan teknik Pengujian lainnya sesuai dengan ketentuan teknis atau medis yang telah ditentukan.</span></div>
+            <div class="list-item"><span class="list-key">45.</span><span><strong>Unit Pelaksana Teknis Bidang K3</strong> adalah satuan organisasi yang mempunyai tugas Pengujian dan Pemeriksaan K3, serta peningkatan kapasitas tenaga K3.</span></div>
+            <div class="list-item"><span class="list-key">46.</span><span><strong>Ahli Higiene Industri</strong> adalah seseorang yang mempunyai kompetensi yang mencakup pengetahuan, keterampilan dan sikap di bidang Higiene Industri yang mempunyai kualifikasi Ahli Muda Higiene Industri (HIMU), Ahli Madya Higiene Industri (HIMA), dan Ahli Utama Higiene Industri (HIU).</span></div>
+            <div class="list-item"><span class="list-key">47.</span><span><strong>Direktur Jenderal</strong> adalah Direktur Jenderal yang membidangi pembinaan pengawasan ketenagakerjaan dan K3.</span></div>
+            <div class="list-item"><span class="list-key">48.</span><span><strong>Menteri</strong> adalah Menteri yang menyelenggarakan urusan pemerintahan di bidang ketenagakerjaan.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal2">
+          <div class="pasal-heading">Pasal 2 — Kewajiban Pengusaha/Pengurus</div>
+          <p class="pasal-text">Pengusaha dan/atau Pengurus wajib melaksanakan syarat-syarat K3 Lingkungan Kerja.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal3">
+          <div class="pasal-heading">Pasal 3 — Syarat K3 Lingkungan Kerja</div>
+          <p class="pasal-text">Syarat-syarat K3 Lingkungan Kerja sebagaimana dimaksud dalam Pasal 2 meliputi:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>pengendalian Faktor Fisika dan Faktor Kimia agar berada di bawah NAB;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>pengendalian Faktor Biologi, Faktor Ergonomi, dan Faktor Psikologi Kerja agar memenuhi standar;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>penyediaan fasilitas Kebersihan dan sarana Higiene di Tempat Kerja yang bersih dan sehat; dan</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>penyediaan personil K3 yang memiliki kompetensi dan kewenangan K3 di bidang Lingkungan Kerja.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal4">
+          <div class="pasal-heading">Pasal 4 — Tujuan Pelaksanaan</div>
+          <p class="pasal-text">Pelaksanaan syarat-syarat K3 Lingkungan Kerja sebagaimana dimaksud dalam Pasal 3 bertujuan untuk mewujudkan Lingkungan Kerja yang aman, sehat, dan nyaman dalam rangka mencegah kecelakaan kerja dan penyakit akibat kerja.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal5">
+          <div class="pasal-heading">Pasal 5 — Cara Pelaksanaan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pelaksanaan syarat-syarat K3 Lingkungan Kerja dilakukan melalui kegiatan: (a) pengukuran dan pengendalian Lingkungan Kerja; dan (b) penerapan Higiene dan Sanitasi.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengukuran dan pengendalian Lingkungan Kerja meliputi faktor: (a) fisika; (b) kimia; (c) biologi; (d) ergonomi; dan (e) psikologi.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Penerapan Higiene dan Sanitasi meliputi: (a) Bangunan Tempat Kerja; (b) fasilitas Kebersihan; (c) kebutuhan udara; dan (d) tata laksana kerumahtanggaan.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB II -->
+    <div class="bab-block" id="bab2">
+      <div class="bab-title"><span class="bab-number">BAB II</span>PENGUKURAN DAN PENGENDALIAN LINGKUNGAN KERJA</div>
+      <div class="bab-content">
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kesatu</span>Umum</div>
+
+        <div class="pasal-block" id="pasal6">
+          <div class="pasal-heading">Pasal 6 — Pengukuran Lingkungan Kerja</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran Lingkungan Kerja dilakukan untuk mengetahui tingkat pajanan Faktor Fisika, Faktor Kimia, Faktor Biologi, Faktor Ergonomi, dan Faktor Psikologi terhadap Tenaga Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengukuran Lingkungan Kerja dilakukan sesuai dengan metoda uji yang ditetapkan Standar Nasional Indonesia.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Dalam hal metoda uji belum ditetapkan dalam Standar Nasional Indonesia, pengukuran dapat dilakukan dengan metoda uji lainnya sesuai dengan standar yang telah divalidasi oleh lembaga yang berwenang.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal7">
+          <div class="pasal-heading">Pasal 7 — Pengendalian Lingkungan Kerja</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengendalian Lingkungan Kerja dilakukan agar tingkat pajanan Faktor Fisika dan Faktor Kimia berada di bawah NAB.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengendalian Lingkungan Kerja dilakukan agar penerapan Faktor Biologi, Faktor Ergonomi, dan Faktor Psikologi memenuhi standar.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pengendalian Lingkungan Kerja dilakukan sesuai hirarki pengendalian meliputi upaya: (a) eliminasi; (b) substitusi; (c) rekayasa teknis; (d) administratif; dan/atau (e) penggunaan alat pelindung diri.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Upaya eliminasi merupakan upaya untuk menghilangkan sumber potensi bahaya yang berasal dari bahan, proses, operasi, atau peralatan.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Upaya substitusi merupakan upaya untuk mengganti bahan, proses, operasi atau peralatan dari yang berbahaya menjadi tidak berbahaya.</span></div>
+          <div class="ayat"><span class="ayat-num">(6)</span><span class="ayat-text">Upaya rekayasa teknis merupakan upaya memisahkan sumber bahaya dari Tenaga Kerja dengan memasang sistem pengaman pada alat, mesin, dan/atau area kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(7)</span><span class="ayat-text">Upaya administratif merupakan upaya pengendalian dari sisi Tenaga Kerja agar dapat melakukan pekerjaan secara aman.</span></div>
+          <div class="ayat"><span class="ayat-num">(8)</span><span class="ayat-text">Penggunaan alat pelindung diri merupakan upaya penggunaan alat yang berfungsi untuk mengisolasi sebagian atau seluruh tubuh dari sumber bahaya.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kedua</span>Faktor Fisika</div>
+
+        <div class="pasal-block" id="pasal8">
+          <div class="pasal-heading">Pasal 8 — Ruang Lingkup Faktor Fisika</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Faktor Fisika meliputi: (a) Iklim Kerja; (b) Kebisingan; (c) Getaran; (d) gelombang radio atau gelombang mikro; (e) sinar Ultra Ungu (Ultra Violet); (f) Medan Magnet Statis; (g) tekanan udara; dan (h) Pencahayaan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">NAB Faktor Fisika sebagaimana dimaksud pada ayat (1) huruf a sampai dengan huruf f tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal9">
+          <div class="pasal-heading">Pasal 9 — Iklim Kerja</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Iklim Kerja harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya tekanan panas dan Tekanan Dingin.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tempat Kerja yang memiliki sumber bahaya tekanan panas merupakan Tempat Kerja yang terdapat sumber panas dan/atau memiliki ventilasi yang tidak memadai.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Tempat Kerja yang memiliki sumber bahaya Tekanan Dingin merupakan Tempat Kerja yang terdapat sumber dingin dan/atau dikarenakan persyaratan operasi.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Jika hasil pengukuran Tempat Kerja melebihi dari NAB atau standar harus dilakukan pengendalian.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Pengendalian dilakukan melalui: (a) menghilangkan sumber panas atau sumber dingin dari Tempat Kerja; (b) mengganti alat, bahan, dan proses kerja yang menimbulkan sumber panas atau sumber dingin; (c) mengisolasi atau membatasi pajanan sumber panas atau sumber dingin; (d) menyediakan sistem ventilasi; (e) menyediakan air minum; (f) mengatur atau membatasi waktu pajanan; (g) penggunaan baju kerja yang sesuai; (h) penggunaan alat pelindung diri yang sesuai; dan/atau (i) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal10">
+          <div class="pasal-heading">Pasal 10 — Kebisingan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Kebisingan harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya Kebisingan dari operasi peralatan kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tempat Kerja yang memiliki sumber Kebisingan merupakan Tempat Kerja yang terdapat sumber Kebisingan terus menerus, terputus-putus, impulsif, dan impulsif berulang.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Jika hasil pengukuran Tempat Kerja melebihi dari NAB harus dilakukan pengendalian.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Pengendalian dilakukan dengan melaksanakan program pencegahan penurunan pendengaran dengan: (a) menghilangkan sumber Kebisingan dari Tempat Kerja; (b) mengganti alat, bahan, dan proses kerja yang menimbulkan sumber Kebisingan; (c) memasang pembatas, peredam suara, penutupan sebagian atau seluruh alat; (d) mengatur atau membatasi pajanan Kebisingan atau pengaturan waktu kerja; (e) menggunakan alat pelindung diri yang sesuai; dan/atau (f) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal11">
+          <div class="pasal-heading">Pasal 11 — Getaran</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Getaran harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya Getaran dari operasi peralatan kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tempat Kerja yang memiliki sumber bahaya Getaran merupakan Tempat Kerja yang terdapat sumber Getaran pada lengan dan Tangan dan Getaran seluruh tubuh.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Jika hasil pengukuran Tempat Kerja melebihi dari NAB harus dilakukan pengendalian.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Pengendalian dilakukan dengan: (a) menghilangkan sumber Getaran dari Tempat Kerja; (b) mengganti alat, bahan, dan proses kerja yang menimbulkan sumber Getaran; (c) mengurangi pajanan Getaran dengan menambah/menyisipkan <em>damping</em>/bantalan/peredam di antara alat dan bagian tubuh yang kontak dengan alat kerja; (d) membatasi pajanan Getaran melalui pengaturan waktu kerja; (e) penggunaan alat pelindung diri yang sesuai; dan/atau (f) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal12">
+          <div class="pasal-heading">Pasal 12 — Gelombang Radio atau Gelombang Mikro</div>
+          <div class="ayat"><span class="ayat-num">(1)–(5)</span><span class="ayat-text">Pengukuran dan pengendalian Gelombang Radio atau Gelombang Mikro harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya radiasi elektromagnetik. Pengendalian dilakukan dengan: (a) menghilangkan sumber radiasi; (b) mengisolasi atau membatasi pajanan; (c) merancang Tempat Kerja dengan menggunakan peralatan proteksi radiasi; (d) membatasi waktu pajanan; (e) penggunaan alat pelindung diri yang sesuai; dan/atau (f) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal13">
+          <div class="pasal-heading">Pasal 13 — Radiasi Ultra Ungu (Ultra Violet)</div>
+          <div class="ayat"><span class="ayat-num">(1)–(4)</span><span class="ayat-text">Pengukuran dan pengendalian Radiasi Ultra Ungu harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya radiasi elektromagnetik dengan panjang gelombang 180 sampai 400 nano meter. Pengendalian dilakukan dengan: (a) menghilangkan sumber radiasi; (b) mengisolasi atau membatasi pajanan; (c) merancang Tempat Kerja dengan peralatan proteksi radiasi; (d) memberikan jarak aman sesuai standar; (e) membatasi pajanan melalui pengaturan waktu kerja; (f) penggunaan alat pelindung diri; dan/atau (g) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal14">
+          <div class="pasal-heading">Pasal 14 — Medan Magnet Statis</div>
+          <div class="ayat"><span class="ayat-num">(1)–(4)</span><span class="ayat-text">Pengukuran dan pengendalian Medan Magnet Statis harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya Medan Magnet Statis. Pengendalian dilakukan dengan: (a) menghilangkan sumber; (b) mengganti alat, bahan, dan proses kerja; (c) mengisolasi atau membatasi pajanan; (d) mengatur atau membatasi waktu pajanan; (e) mengatur jarak aman sesuai Standar Nasional Indonesia; (f) menggunakan alat pelindung diri yang sesuai; dan/atau (g) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal15">
+          <div class="pasal-heading">Pasal 15 — Tekanan Udara Ekstrim</div>
+          <div class="ayat"><span class="ayat-num">(1)–(4)</span><span class="ayat-text">Pengendalian tekanan udara harus dilakukan pada Tempat Kerja yang memiliki sumber bahaya Tekanan Udara Ekstrim seperti ruang kedap air, di perairan yang dalam, dan pekerjaan di bawah tanah atau di atas ketinggian. Pengendalian dilakukan dengan: (a) menghindari pekerjaan pada Tempat Kerja dengan sumber bahaya Tekanan Udara Ekstrim; (b) mengatur atau membatasi waktu pajanan; (c) menggunakan baju kerja yang sesuai; (d) menggunakan alat pelindung diri yang sesuai; dan/atau (e) melakukan pengendalian lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal16">
+          <div class="pasal-heading">Pasal 16 — Pencahayaan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Pencahayaan harus dilakukan di Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pencahayaan meliputi: (a) Pencahayaan Alami; dan/atau (b) Pencahayaan Buatan.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Jika hasil pengukuran Pencahayaan tidak sesuai dengan standar dilakukan pengendalian agar intensitas Pencahayaan sesuai dengan jenis pekerjaannya.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Standar Pencahayaan tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal17">
+          <div class="pasal-heading">Pasal 17 — Pencahayaan Alami</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pencahayaan Alami merupakan Pencahayaan yang dihasilkan oleh sinar matahari.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tempat Kerja yang menggunakan Pencahayaan alami, desain gedung harus menjamin Intensitas Cahaya sesuai standar sebagaimana dimaksud dalam Pasal 16 ayat (4).</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal18">
+          <div class="pasal-heading">Pasal 18 — Pencahayaan Buatan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pencahayaan Buatan dapat digunakan apabila Pencahayaan alami tidak memenuhi standar Intensitas Cahaya sebagaimana dimaksud dalam Pasal 16 ayat (4).</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pencahayaan Buatan tidak boleh menyebabkan panas yang berlebihan atau mengganggu KUDR.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal19">
+          <div class="pasal-heading">Pasal 19 — Pencahayaan Darurat</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Sarana Pencahayaan darurat harus disediakan untuk penyelamatan dan evakuasi dalam keadaan darurat.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Sarana Pencahayaan darurat harus memenuhi persyaratan: (a) bekerja secara otomatis; (b) mempunyai intensitas Pencahayaan yang cukup untuk melakukan evakuasi dan/atau penyelamatan yang aman; dan (c) dipasang pada jalur evakuasi atau akses jalan keluar.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Akses jalan keluar harus dilengkapi garis penunjuk jalan keluar yang terbuat dari bahan reflektif dan/atau memancarkan cahaya.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Ketiga</span>Faktor Kimia</div>
+
+        <div class="pasal-block" id="pasal20">
+          <div class="pasal-heading">Pasal 20 — Pengukuran Faktor Kimia</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Faktor Kimia harus dilakukan pada Tempat Kerja yang memiliki potensi bahaya bahan kimia.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengukuran Faktor Kimia dilakukan terhadap pajanannnya dan terhadap pekerja yang terpajan.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pengukuran terhadap pajanan yang hasilnya untuk dibandingkan dengan NAB harus dilakukan paling singkat selama 6 (enam) jam.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Pengukuran yang hasilnya untuk dibandingkan dengan PSD harus dilakukan paling singkat selama 15 (lima belas) menit sebanyak 4 (empat) kali dalam durasi 8 (delapan) jam kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Pengukuran yang hasilnya untuk dibandingkan dengan KTD harus dilakukan menggunakan alat pembacaan langsung untuk memastikan tidak terlampaui.</span></div>
+          <div class="ayat"><span class="ayat-num">(6)</span><span class="ayat-text">Pengukuran Faktor Kimia terhadap pekerja yang mengalami pajanan dilakukan melalui Pemeriksaan kesehatan khusus pada spesimen tubuh Tenaga Kerja dan dibandingkan dengan IPB.</span></div>
+          <div class="ayat"><span class="ayat-num">(7)</span><span class="ayat-text">NAB dan IPB tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal21">
+          <div class="pasal-heading">Pasal 21 — Pengendalian Faktor Kimia</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Jika hasil pengukuran terhadap pajanan melebihi NAB dan hasil pengukuran Faktor Kimia terhadap Tenaga Kerja yang mengalami pajanan melebihi IPB harus dilakukan pengendalian.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengendalian dilakukan dengan: (a) menghilangkan sumber potensi bahaya kimia dari Tempat Kerja; (b) mengganti bahan kimia dengan bahan kimia lain yang tidak mempunyai potensi bahaya atau potensi bahaya yang lebih rendah; (c) memodifikasi proses kerja; (d) mengisolasi atau membatasi pajanan sumber potensi bahaya kimia; (e) menyediakan sistem ventilasi; (f) membatasi pajanan melalui pengaturan waktu kerja; (g) merotasi Tenaga Kerja; (h) memasukkan ke dalam proses pekerjaan yang tidak terdapat potensi bahaya bahan kimia; (i) penyediaan lembar data keselamatan bahan dan label bahan kimia; (j) penggunaan alat pelindung diri; dan/atau (k) pengendalian lainnya sesuai tingkat risiko.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Keempat</span>Faktor Biologi</div>
+
+        <div class="pasal-block" id="pasal22">
+          <div class="pasal-heading">Pasal 22 — Faktor Biologi</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran, pemantauan, dan pengendalian Faktor Biologi harus dilakukan pada Tempat Kerja yang memiliki potensi bahaya Faktor Biologi.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Potensi bahaya Faktor Biologi meliputi: (a) mikro organisme dan/atau toksinnya; (b) arthropoda dan/atau toksinnya; (c) hewan invertebrata dan/atau toksinnya; (d) alergen dan toksin dari tumbuhan; (e) binatang berbisa; (f) binatang buas; dan (g) produk binatang dan tumbuhan yang berbahaya lainnya.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)–(9)</span><span class="ayat-text">Pengendalian Faktor Biologi dilakukan dengan: menghilangkan sumber bahaya dari Tempat Kerja; mengganti bahan, dan proses kerja; mengisolasi atau membatasi pajanan; menyediakan sistem ventilasi; mengatur atau membatasi waktu pajanan; menggunakan baju kerja yang sesuai; menggunakan alat pelindung diri yang sesuai; memasang rambu-rambu yang sesuai; memberikan vaksinasi apabila memungkinkan; meningkatkan Higiene perorangan; memberikan desinfektan; penyediaan fasilitas Sanitasi berupa air mengalir dan antiseptik; dan/atau pengendalian lainnya sesuai tingkat risiko. Standar Faktor Biologi tercantum dalam Lampiran.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kelima</span>Faktor Ergonomi</div>
+
+        <div class="pasal-block" id="pasal23">
+          <div class="pasal-heading">Pasal 23 — Faktor Ergonomi</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Faktor Ergonomi harus dilakukan pada Tempat Kerja yang memiliki potensi bahaya Faktor Ergonomi.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Potensi bahaya Faktor Ergonomi meliputi: (a) cara kerja, posisi kerja, dan postur tubuh tidak sesuai saat melakukan pekerjaan; (b) desain alat kerja dan Tempat Kerja yang tidak sesuai dengan antropometri Tenaga Kerja; dan (c) pengangkatan beban yang melebihi kapasitas kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Jika hasil pengukuran terdapat potensi bahaya harus dilakukan pengendalian sehingga memenuhi standar.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Pengendalian dilakukan dengan: (a) menghindari posisi kerja yang janggal; (b) memperbaiki cara kerja dan posisi kerja; (c) mendesain kembali atau mengganti Tempat Kerja, objek kerja, bahan, desain Tempat Kerja, dan peralatan kerja; (d) memodifikasi Tempat Kerja, objek kerja, bahan, desain Tempat Kerja, dan peralatan kerja; (e) mengatur waktu kerja dan waktu istirahat; (f) melakukan pekerjaan dengan sikap tubuh dalam posisi netral atau baik; dan/atau (g) menggunakan alat bantu.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Standar Faktor Ergonomi tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Keenam</span>Faktor Psikologi</div>
+
+        <div class="pasal-block" id="pasal24">
+          <div class="pasal-heading">Pasal 24 — Faktor Psikologi</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Faktor Psikologi harus dilakukan pada Tempat Kerja yang memiliki potensi bahaya Faktor Psikologi.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Potensi bahaya Faktor Psikologi meliputi: (a) ketidakjelasan/ketaksaan peran; (b) konflik peran; (c) beban kerja berlebih secara kualitatif; (d) beban kerja berlebih secara kuantitatif; (e) pengembangan karir; dan/atau (f) tanggung jawab terhadap orang lain.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Jika hasil pengukuran terdapat potensi bahaya harus dilakukan pengendalian sesuai standar.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Pengendalian dilakukan setelah penilaian risiko dan didapatkan faktor yang berkontribusi.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Pengendalian melalui manajemen stress dengan: (a) melakukan pemilihan, penempatan dan pendidikan pelatihan bagi Tenaga Kerja; (b) mengadakan program kebugaran Kerja; (c) mengadakan program konseling; (d) mengadakan komunikasi organisasional secara memadai; (e) memberikan kebebasan bagi Tenaga Kerja untuk memberikan masukan dalam proses pengambilan keputusan; (f) mengubah struktur organisasi, fungsi dan/atau dengan merancang kembali pekerjaan yang ada; (g) menggunakan sistem pemberian imbalan tertentu; dan/atau (h) pengendalian lainnya sesuai kebutuhan.</span></div>
+          <div class="ayat"><span class="ayat-num">(6)</span><span class="ayat-text">Standar Faktor Psikologi tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal25">
+          <div class="pasal-heading">Pasal 25 — Penanganan Kasus Akibat Kerja</div>
+          <p class="pasal-text">Dalam hal terjadi kasus penyakit akibat kerja yang disebabkan oleh faktor Lingkungan Kerja dilakukan program pengendalian dan penanganan sesuai dengan standar dan ketentuan peraturan perundang-undangan.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB III -->
+    <div class="bab-block" id="bab3">
+      <div class="bab-title"><span class="bab-number">BAB III</span>PENERAPAN HIGIENE DAN SANITASI</div>
+      <div class="bab-content">
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kesatu</span>Bangunan Tempat Kerja</div>
+        <div class="paragraf-title">Paragraf 1 — Halaman</div>
+
+        <div class="pasal-block" id="pasal26">
+          <div class="pasal-heading">Pasal 26 — Kewajiban Penerapan Higiene dan Sanitasi</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Higiene dan Sanitasi harus diterapkan pada setiap Bangunan Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Penerapan Higiene dan Sanitasi meliputi: (a) halaman; (b) gedung; dan (c) bangunan bawah tanah.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal27">
+          <div class="pasal-heading">Pasal 27 — Halaman</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Halaman harus: (a) bersih, tertata rapi, rata, dan tidak becek; dan (b) cukup luas untuk lalu lintas orang dan barang.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Jika terdapat saluran air pembuangan pada halaman, maka saluran air harus tertutup dan terbuat dari bahan yang cukup kuat serta air buangan harus mengalir dan tidak boleh tergenang.</span></div>
+        </div>
+
+        <div class="paragraf-title">Paragraf 2 — Gedung</div>
+
+        <div class="pasal-block" id="pasal28">
+          <div class="pasal-heading">Pasal 28 — Gedung</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penerapan Higiene dan Sanitasi pada gedung meliputi: (a) dinding dan langit-langit; (b) atap; dan (c) lantai.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Penerapan Higiene dan Sanitasi dilakukan untuk memastikan gedung dalam kondisi: (a) terpelihara dan bersih; (b) kuat dan kokoh strukturnya; dan (c) cukup luas sehingga memberikan ruang gerak paling sedikit 2 (dua) meter persegi per orang.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal29">
+          <div class="pasal-heading">Pasal 29 — Dinding dan Langit-Langit</div>
+          <p class="pasal-text">Dinding dan langit-langit harus: (a) kering atau tidak lembab; (b) dicat dan/atau mudah dibersihkan; (c) dilakukan pengecatan ulang paling sedikit 5 (lima) tahun sekali; dan (d) dibersihkan paling sedikit 1 (satu) kali setahun.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal30">
+          <div class="pasal-heading">Pasal 30 — Lantai</div>
+          <p class="pasal-text">Lantai harus: (a) terbuat dari bahan yang keras, tahan air, dan tahan dari bahan kimia yang merusak; (b) datar, tidak licin, dan mudah dibersihkan; dan (c) dibersihkan secara teratur.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal31">
+          <div class="pasal-heading">Pasal 31 — Atap</div>
+          <p class="pasal-text">Atap harus: (a) mampu memberikan perlindungan dari panas matahari dan hujan; dan (b) tidak bocor, tidak berlubang, dan tidak berjamur.</p>
+        </div>
+
+        <div class="paragraf-title">Paragraf 3 — Bangunan Bawah Tanah</div>
+
+        <div class="pasal-block" id="pasal32">
+          <div class="pasal-heading">Pasal 32 — Bangunan Bawah Tanah</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penerapan Higiene dan Sanitasi pada bangunan bawah tanah dilakukan untuk memastikan bangunan bawah tanah: (a) mempunyai struktur yang kuat; (b) mempunyai sistem ventilasi udara; (c) mempunyai sumber Pencahayaan; (d) mempunyai saluran pembuangan air yang mengalir dengan baik; dan (e) bersih dan terawat dengan baik.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Dalam hal bangunan bawah tanah merupakan ruang terbatas, penerapan Higiene dan Sanitasi dilakukan sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kedua</span>Fasilitas Kebersihan</div>
+
+        <div class="pasal-block" id="pasal33">
+          <div class="pasal-heading">Pasal 33 — Fasilitas Kebersihan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Fasilitas Kebersihan harus disediakan pada setiap Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Fasilitas Kebersihan paling sedikit meliputi: (a) Toilet dan kelengkapannya; (b) loker dan ruang ganti pakaian; (c) tempat sampah; dan (d) peralatan Kebersihan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal34">
+          <div class="pasal-heading">Pasal 34 — Toilet</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Toilet harus: (a) bersih dan tidak menimbulkan bau; (b) tidak ada lalat, nyamuk, atau serangga yang lainnya; (c) tersedia saluran pembuangan air yang mengalir dengan baik; (d) tersedia air bersih; (e) dilengkapi dengan pintu; (f) memiliki penerangan yang cukup; (g) memiliki sirkulasi udara yang baik; (h) dibersihkan setiap hari secara periodik; dan (i) dapat digunakan selama jam kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Kelengkapan fasilitas Toilet paling sedikit meliputi: (a) jamban; (b) air bersih yang cukup; (c) alat pembersih; (d) tempat sampah; (e) tempat cuci tangan; dan (f) sabun.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Penempatan Toilet harus terpisah antara laki-laki, perempuan, dan penyandang cacat, serta diberikan tanda yang jelas.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Dalam hal Perusahaan menyediakan tempat mandi, persyaratan tempat mandi harus memenuhi ketentuan sebagaimana dimaksud pada ayat (1).</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Untuk menjamin kecukupan atas kebutuhan jamban dengan jumlah Tenaga Kerja dalam satu waktu kerja, harus memenuhi ketentuan: (a) 1–15 orang = 1 jamban; (b) 16–30 orang = 2 jamban; (c) 31–45 orang = 3 jamban; (d) 46–60 orang = 4 jamban; (e) 61–80 orang = 5 jamban; (f) 81–100 orang = 6 jamban; dan (g) setiap penambahan 40 orang ditambahkan 1 jamban.</span></div>
+          <div class="ayat"><span class="ayat-num">(6)</span><span class="ayat-text">Dalam hal Toilet laki-laki menyediakan fasilitas peturasan, jumlah jamban tidak boleh kurang dari 2/3 (dua pertiga) jumlah jamban yang dipersyaratkan.</span></div>
+          <div class="ayat"><span class="ayat-num">(7)</span><span class="ayat-text">Dalam hal Tempat Kerja termasuk dalam area konstruksi atau Tempat Kerja sementara, harus memenuhi ketentuan paling sedikit sebagai berikut: (a) 1–19 orang = 1 jamban; (b) 20–199 orang = 1 jamban dan 1 peturasan untuk setiap 40 orang; (c) 200 orang atau lebih = 1 jamban dan 1 peturasan untuk setiap 50 orang.</span></div>
+          <div class="ayat"><span class="ayat-num">(8)</span><span class="ayat-text">Dalam hal terdapat Tenaga Kerja perempuan di area konstruksi, harus memenuhi ketentuan sebagaimana dimaksud pada ayat (3).</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal35">
+          <div class="pasal-heading">Pasal 35 — Ukuran Ruang Toilet</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Ruang Toilet paling sedikit berukuran panjang 80 (delapan puluh) sentimeter, lebar 155 (seratus lima puluh lima) sentimeter, dan tinggi 220 (dua ratus dua puluh) sentimeter dengan lebar pintu 70 (tujuh puluh) sentimeter.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Ruang Toilet untuk penyandang disabilitas harus memenuhi persyaratan: (a) panjang 152,5 sentimeter; (b) lebar 227,5 sentimeter; (c) tinggi 240 sentimeter; (d) mempunyai akses masuk dan keluar yang mudah dilalui; (e) mempunyai luas ruang bebas yang cukup untuk pengguna kursi roda bermanuver 180 derajat; (f) lebar pintu masuk paling sedikit 90 sentimeter yang mudah dibuka dan ditutup; (g) pintu Toilet dilengkapi plat kicking di bagian bawah pintu; (h) kemiringan lantai tidak lebih dari 4 (tujuh) persen; dan (i) mempunyai pegangan rambat untuk memudahkan pengguna kursi roda berpindah dari kursi roda ke jamban ataupun sebaliknya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal36">
+          <div class="pasal-heading">Pasal 36 — Pakaian Kerja</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Tenaga Kerja dalam perusahaan tertentu dapat diwajibkan memakai pakaian kerja sesuai syarat-syarat K3 yang ditetapkan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pakaian kerja harus disediakan oleh Pengurus.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Dalam hal Tenaga Kerja menggunakan pakaian kerja hanya selama bekerja, Pengurus harus menyediakan ruang ganti pakaian yang bersih, terpisah antara laki-laki dan perempuan serta pemakaiannya harus diatur agar tidak berdesakan.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Ruang ganti pakaian harus tersedia tempat menyimpan pakaian (loker) untuk setiap Pekerja yang terjamin keamanannya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal37">
+          <div class="pasal-heading">Pasal 37 — Tempat Sampah dan Peralatan Kebersihan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Tempat sampah dan peralatan Kebersihan harus disediakan pada setiap Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tempat sampah paling sedikit harus: (a) terpisah dan diberikan label untuk sampah organik, non organik, dan bahan berbahaya sesuai dengan ketentuan peraturan perundang-undangan; (b) dilengkapi dengan penutup dan terbuat dari bahan kedap air; dan (c) tidak menjadi sarang lalat atau binatang serangga yang lain.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal38">
+          <div class="pasal-heading">Pasal 38 — Tempat Pembuangan Pembalut</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Tempat pembuangan pembalut harus disediakan pada ruang Toilet perempuan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tempat pembuangan pembalut harus: (a) terbuat dari bahan yang kedap cairan; (b) dilengkapi dengan penutup; dan (c) diberikan label yang jelas.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Tempat pembuangan pembalut harus dibersihkan setiap hari.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Ketiga</span>Kebutuhan Udara</div>
+
+        <div class="pasal-block" id="pasal39">
+          <div class="pasal-heading">Pasal 39 — Kebutuhan Udara</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Kebutuhan atas udara bersih dan sehat harus dipenuhi pada setiap Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemenuhan kebutuhan udara di Tempat Kerja dilakukan melalui: (a) KUDR; (b) ventilasi; dan (c) ruang udara.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal40">
+          <div class="pasal-heading">Pasal 40 — KUDR (Kualitas Udara Dalam Ruangan)</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Tempat Kerja untuk melakukan jenis pekerjaan administratif, pelayanan umum dan fungsi manajerial harus memenuhi KUDR yang sehat dan bersih.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">KUDR ditentukan oleh suhu, kelembaban, kadar oksigen dan kadar kontaminan udara.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Suhu ruangan yang nyaman harus dipertahankan dengan ketentuan: (a) Suhu Kering 23°C–26°C dengan kelembaban 40%–60%; (b) perbedaan suhu antar ruangan tidak melebihi 5°C.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Kadar oksigen sebesar 19,5% sampai dengan 23,5% dari volume udara.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Kadar kontaminan atau polutan tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal41">
+          <div class="pasal-heading">Pasal 41 — Ventilasi</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengurus dan/atau Pengusaha wajib menyediakan sistem ventilasi udara untuk menjamin kebutuhan udara Pekerja dan/atau mengurangi kadar kontaminan di Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Sistem ventilasi dapat bersifat alami atau buatan atau kombinasi keduanya.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Dalam hal menggunakan ventilasi buatan maka ventilasi tersebut harus dibersihkan secara berkala paling sedikit 3 (tiga) bulan sekali atau sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal42">
+          <div class="pasal-heading">Pasal 42 — Ruang Udara</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap orang yang bekerja dalam ruangan harus mendapat ruang udara (<em>cubic space</em>) paling sedikit 10 (sepuluh) meter kubik.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Ruangan harus memenuhi ketentuan: (a) tinggi Tempat Kerja diukur dari lantai sampai daerah langit-langit paling sedikit 3 (tiga) meter; dan (b) tinggi ruangan yang lebih dari 4 (empat) meter tidak dapat dipakai untuk memperhitungkan ruang udara sebagaimana dimaksud pada ayat (1).</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Keempat</span>Tata Laksana Kerumahtanggaan</div>
+
+        <div class="pasal-block" id="pasal43">
+          <div class="pasal-heading">Pasal 43 — Tata Laksana Kerumahtanggaan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengusaha dan/atau Pengurus harus melaksanakan ketatarumahtanggaan dengan baik di Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Ketatarumahtanggaan yang baik meliputi upaya: (a) memisahkan alat, perkakas, dan bahan yang diperlukan atau digunakan; (b) menata alat, perkakas, dan bahan sesuai dengan posisi yang ditetapkan; (c) membersihkan alat, perkakas, dan bahan secara rutin; (d) menetapkan dan melaksanakan prosedur Kebersihan, penempatan dan penataan untuk alat, perkakas, dan bahan; (e) menyempurnakan prosedur Kebersihan, penempatan dan penataan untuk alat, perkakas, dan bahan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal44">
+          <div class="pasal-heading">Pasal 44 — Penyimpanan Alat dan Bahan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Alat kerja, perkakas, dan bahan harus ditata dan disimpan secara rapi dan tertib untuk menjamin kelancaran pekerjaan dan tidak menimbulkan bahaya kecelakaan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Bahan disimpan di gudang dan diberi label yang jelas untuk membedakan barang-barang tersebut.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB IV -->
+    <div class="bab-block" id="bab4">
+      <div class="bab-title"><span class="bab-number">BAB IV</span>PERSONIL K3</div>
+      <div class="bab-content">
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kesatu</span>Umum</div>
+
+        <div class="pasal-block" id="pasal45">
+          <div class="pasal-heading">Pasal 45 — Personil K3 Lingkungan Kerja</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengukuran dan pengendalian Lingkungan Kerja harus dilakukan oleh personil K3 bidang Lingkungan Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Personil K3 meliputi: (a) Ahli K3 Muda Lingkungan Kerja; (b) Ahli K3 Madya Lingkungan Kerja; dan (c) Ahli K3 Utama Lingkungan Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Personil K3 harus memiliki kompetensi dan kewenangan K3 bidang lingkungan kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Sertifikasi kompetensi personil K3 bidang Lingkungan Kerja dilakukan sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Kewenangan personil K3 bidang Lingkungan Kerja dibuktikan dengan lisensi K3 dan surat keputusan penunjukan.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kedua</span>Kompetensi Personil K3</div>
+
+        <div class="pasal-block" id="pasal46">
+          <div class="pasal-heading">Pasal 46 — Kompetensi Personil K3</div>
+          <p class="pasal-text">Kompetensi personil K3 sebagaimana dimaksud dalam Pasal 45 ayat (2) sesuai Standar Kompetensi Kerja Nasional Indonesia yang ditetapkan oleh Menteri.</p>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Ketiga</span>Persyaratan Penunjukan Personil K3</div>
+
+        <div class="pasal-block" id="pasal47">
+          <div class="pasal-heading">Pasal 47 — Syarat Ahli K3 Muda Lingkungan Kerja</div>
+          <p class="pasal-text">Personil yang berwenang sebagai Ahli K3 Muda Lingkungan Kerja harus memenuhi persyaratan:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>berpendidikan paling rendah Diploma 3 (tiga);</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>berpengalaman paling sedikit 1 (satu) tahun dalam membantu pengukuran dan pengendalian lingkungan kerja;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>memiliki sertifikat kompetensi sesuai bidangnya; dan</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>berbadan sehat berdasarkan surat keterangan dari dokter.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal48">
+          <div class="pasal-heading">Pasal 48 — Syarat Ahli K3 Madya Lingkungan Kerja</div>
+          <p class="pasal-text">Personil yang berwenang sebagai Ahli K3 Madya Lingkungan Kerja harus memenuhi persyaratan:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>berpendidikan paling rendah Diploma 3 (tiga);</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>berpengalaman paling sedikit 3 (tiga) tahun sebagai Ahli K3 Muda Lingkungan Kerja;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>memiliki sertifikat kompetensi sesuai bidangnya; dan</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>berbadan sehat berdasarkan surat keterangan dari dokter.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal49">
+          <div class="pasal-heading">Pasal 49 — Syarat Ahli K3 Utama Lingkungan Kerja</div>
+          <p class="pasal-text">Personil yang berwenang sebagai Ahli K3 Utama Lingkungan Kerja harus memenuhi persyaratan:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>berpendidikan paling rendah Diploma 3 (tiga);</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>berpengalaman paling sedikit 5 (lima) tahun sebagai Ahli K3 Madya Lingkungan Kerja;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>memiliki sertifikat kompetensi sesuai bidangnya; dan</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>berbadan sehat berdasarkan surat keterangan dari dokter.</span></div>
+          </div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Keempat</span>Tata Cara Memperoleh Lisensi K3</div>
+
+        <div class="pasal-block" id="pasal50">
+          <div class="pasal-heading">Pasal 50 — Permohonan Lisensi K3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Untuk memperoleh lisensi K3 Ahli K3 Lingkungan Kerja, Pengusaha dan/atau Pengurus mengajukan permohonan tertulis kepada Direktur Jenderal dengan melampirkan: (a) fotokopi ijazah terakhir; (b) surat keterangan pengalaman kerja; (c) surat keterangan sehat dari dokter; (d) fotokopi kartu tanda penduduk; (e) fotokopi sertifikat kompetensi Ahli Muda/Madya/Utama Higiene Industri (HIMU/HIMA/HIU); dan (f) 2 (dua) lembar pas foto berwarna ukuran 2×3 dan 4×6.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Permohonan dilakukan Pemeriksaan dokumen oleh tim.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Dalam hal persyaratan dinyatakan lengkap, Direktur Jenderal menerbitkan lisensi K3.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal51">
+          <div class="pasal-heading">Pasal 51 — Masa Berlaku Lisensi K3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Lisensi K3 berlaku untuk jangka waktu <strong>5 (lima) tahun</strong> dan dapat diperpanjang untuk jangka waktu yang sama.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Permohonan perpanjangan diajukan oleh Pengusaha dan/atau Pengurus kepada Direktur Jenderal dengan melampirkan persyaratan sebagaimana dimaksud dalam Pasal 50 ayat (1) dan lisensi K3.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Permohonan diajukan paling lambat 30 (tiga puluh) hari sebelum masa berlaku lisensi K3 berakhir.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal52">
+          <div class="pasal-heading">Pasal 52 — Syarat Berlaku Lisensi K3</div>
+          <p class="pasal-text">Lisensi K3 hanya berlaku selama Ahli K3 Lingkungan Kerja yang bersangkutan bekerja di perusahaan yang mengajukan permohonan.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal53">
+          <div class="pasal-heading">Pasal 53 — Sertifikat Kompetensi</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Dalam hal sertifikat kompetensi sebagaimana dimaksud dalam Pasal 50 ayat (1) huruf e belum ada, dapat menggunakan surat keterangan telah mengikuti pembinaan K3 yang diterbitkan oleh Direktur Jenderal.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Surat keterangan telah mengikuti pembinaan K3 diberikan setelah dilakukan pembinaan dengan pedoman pelaksanaan pembinaan yang tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Kelima</span>Tugas dan Kewenangan</div>
+
+        <div class="pasal-block" id="pasal54">
+          <div class="pasal-heading">Pasal 54 — Tugas Personil K3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text"><strong>Ahli K3 Muda Lingkungan Kerja</strong> mempunyai tugas untuk: (a) melaksanakan peraturan perundang-undangan dan standar yang berkaitan dengan bidang K3 lingkungan kerja; (b) melaksanakan program antisipasi, rekognisi, evaluasi, dan pengendalian bahaya lingkungan kerja; (c) melaksanakan dan mengantisipasi resiko kesehatan kerja yang disebabkan oleh pajanan bahaya lingkungan kerja; (d) melaksanakan program promosi kesehatan Tenaga Kerja; (e) melaksanakan teknik pengambilan dan pengukuran sampel, meliputi Faktor Fisika, Faktor Kimia, Faktor Biologi, Faktor Ergonomi, dan Faktor Psikologi; (f) melaksanakan persyaratan Higiene dan Sanitasi lingkungan kerja; (g) melaksanakan sistem informasi K3 Lingkungan Kerja; dan (h) menyusun laporan pengukuran dan pengendalian bahaya Lingkungan Kerja serta penerapan Higiene dan Sanitasi di Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text"><strong>Ahli K3 Madya Lingkungan Kerja</strong> mempunyai tugas untuk mengelola pelaksanaan peraturan perundang-undangan dan standar, mengelola program antisipasi-rekognisi-evaluasi-pengendalian bahaya, mengelola antisipasi resiko kesehatan, mengelola program promosi kesehatan, mengelola teknik pengambilan dan pengukuran sampel, mengelola persyaratan Higiene dan Sanitasi, mengelola sistem informasi K3, melaksanakan modifikasi terhadap program K3, melaksanakan dan mengelola manajemen program K3, melaksanakan penilaian resiko kesehatan, melaksanakan program pengendalian resiko kesehatan, melaksanakan analisa penyebab kecelakaan kerja dan penyakit akibat kerja, melaksanakan identifikasi kebutuhan peralatan pengambilan sampel, merumuskan dan memodifikasi sistem informasi K3, melaksanakan inspeksi K3 lingkungan kerja; dan mengelola penyusunan laporan pengukuran dan pengendalian bahaya Lingkungan Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text"><strong>Ahli K3 Utama Lingkungan Kerja</strong> mempunyai kewenangan untuk mengelola dan mengevaluasi seluruh pelaksanaan peraturan perundang-undangan dan standar, semua program antisipasi-rekognisi-evaluasi-pengendalian bahaya, program promosi kesehatan, teknik pengambilan dan pengukuran sampel, persyaratan Higiene dan Sanitasi, sistem informasi K3, modifikasi program K3, manajemen program K3, penilaian risiko kesehatan, pengendalian risiko kesehatan, pemeriksaan dan analisa penyebab kecelakaan kerja dan penyakit akibat kerja, identifikasi kebutuhan peralatan, sistem informasi K3 Lingkungan Kerja, inspeksi K3, laporan pengukuran dan pengendalian bahaya, metoda pembacaan dan menganalisa hasil pengukuran data, hasil dari tindakan pengendalian pajanan, analisa pengukuran sampel lingkungan kerja, program pengendalian pajanan risiko kesehatan secara teknis sebagai metoda pengendalian utama, pengendalian pajanan risiko kesehatan secara administrasi dan penggunaan alat pelindung diri, serta bimbingan terhadap kontraktor terkait program K3 Lingkungan Kerja.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal55">
+          <div class="pasal-heading">Pasal 55 — Kewenangan Personil K3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text"><strong>Ahli K3 Muda</strong> mempunyai kewenangan untuk: (a) memasuki Tempat Kerja sesuai dengan penunjukannya; dan (b) menentukan program K3 lingkungan kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text"><strong>Ahli K3 Madya</strong> mempunyai kewenangan untuk: (a) memasuki Tempat Kerja; (b) menentukan program K3 lingkungan kerja; (c) mengawasi pelaksanaan program K3 lingkungan kerja; dan (d) menetapkan rekomendasi teknis terhadap syarat K3 lingkungan kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text"><strong>Ahli K3 Utama</strong> mempunyai kewenangan untuk: (a) memasuki Tempat Kerja; (b) menentukan program K3 lingkungan kerja; (c) mengawasi pelaksanaan program K3 lingkungan kerja; (d) menetapkan rekomendasi teknis terhadap syarat K3 lingkungan kerja; dan (e) mengevaluasi dan menetapkan program pengembangan K3 Lingkungan Kerja.</span></div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Keenam</span>Kewajiban Personil K3</div>
+
+        <div class="pasal-block" id="pasal56">
+          <div class="pasal-heading">Pasal 56 — Kewajiban Personil K3</div>
+          <p class="pasal-text">Personil K3 bidang Lingkungan Kerja berkewajiban untuk:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>mematuhi peraturan perundang-undangan dan standar yang telah ditetapkan;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>melaporkan pada atasan langsung mengenai kondisi pelaksanaan pengukuran, pengendalian lingkungan kerja, dan penerapan Higiene Sanitasi;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>bertanggungjawab atas hasil pelaksanaan pengukuran, pengendalian lingkungan kerja, dan penerapan Higiene Sanitasi di Tempat Kerja;</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>membantu Pengawas Ketenagakerjaan Spesialis K3 Lingkungan Kerja dalam melaksanakan pemeriksaan dan Pengujian K3 Lingkungan Kerja; dan</span></div>
+            <div class="list-item"><span class="list-key">e.</span><span>melaksanakan kode etik profesi.</span></div>
+          </div>
+        </div>
+
+        <div class="bagian-title"><span class="bagian-number">Bagian Ketujuh</span>Pencabutan Lisensi K3</div>
+
+        <div class="pasal-block" id="pasal57">
+          <div class="pasal-heading">Pasal 57 — Pencabutan Lisensi K3</div>
+          <p class="pasal-text">Lisensi K3 dapat dicabut apabila personil K3 bidang Lingkungan Kerja:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>melaksanakan tugas tidak sesuai dengan penugasan dan Lisensi K3;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>melakukan kesalahan, kelalaian, dan kecerobohan yang menimbulkan keadaan berbahaya atau kecelakaan kerja; dan/atau</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>tidak melaksanakan kewajiban sebagaimana dimaksud dalam Pasal 56.</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB V -->
+    <div class="bab-block" id="bab5">
+      <div class="bab-title"><span class="bab-number">BAB V</span>PEMERIKSAAN DAN PENGUJIAN</div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal58">
+          <div class="pasal-heading">Pasal 58 — Kewajiban Pemeriksaan dan Pengujian</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Tempat Kerja yang memiliki potensi bahaya Lingkungan Kerja wajib dilakukan Pemeriksaan dan/atau Pengujian.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemeriksaan merupakan kegiatan mengamati, menganalisis, membandingkan, dan mengevaluasi kondisi Lingkungan Kerja untuk memastikan terpenuhinya persyaratan sebagaimana dimaksud dalam Pasal 3.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pengujian merupakan kegiatan pengetesan dan pengukuran kondisi Lingkungan Kerja yang bersumber dari alat, bahan, dan proses kerja untuk mengetahui tingkat konsentrasi dan pajanan terhadap Tenaga Kerja untuk memastikan terpenuhinya persyaratan sebagaimana dimaksud dalam Pasal 3.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal59">
+          <div class="pasal-heading">Pasal 59 — Pelaksanaan Pemeriksaan dan Pengujian</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian dilakukan secara internal maupun melibatkan lembaga eksternal dari luar Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian internal dilakukan untuk mengukur besaran pajanan sesuai dengan risiko Lingkungan Kerja dan tidak menggugurkan kewajiban Tempat Kerja untuk melakukan pengukuran dengan pihak eksternal.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian secara internal harus dilakukan oleh personil K3 bidang Lingkungan Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Lembaga eksternal meliputi: (a) Unit Pelaksana Teknis Pengawasan Ketenagakerjaan; (b) Direktorat Bina Keselamatan dan Kesehatan Kerja beserta Unit Pelaksana Teknis Bidang K3; (c) Unit Pelaksana Teknis Daerah (UPTD) yang membidangi pelayanan Pengujian K3; atau (d) lembaga lain yang terakreditasi dan ditunjuk oleh Menteri.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian sebagaimana dimaksud pada ayat (4) dilakukan oleh: (a) Pengawas Ketenagakerjaan Spesialis K3 Lingkungan Kerja; (b) Penguji K3; atau (c) Ahli K3 Lingkungan Kerja.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal60">
+          <div class="pasal-heading">Pasal 60 — Jenis Pemeriksaan dan Pengujian</div>
+          <p class="pasal-text">Pemeriksaan dan/atau Pengujian meliputi:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>pertama;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>berkala;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>ulang; dan</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>khusus.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal61">
+          <div class="pasal-heading">Pasal 61 — Pemeriksaan dan Pengujian Pertama</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian pertama dilakukan untuk mengidentifikasi potensi bahaya Lingkungan Kerja di Tempat Kerja.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian meliputi: (a) area kerja dengan pajanan Faktor Fisika, Faktor Kimia, Faktor Biologi, Faktor Ergonomi, dan Faktor Psikologi; (b) KUDR; dan (c) Sarana dan fasilitas Sanitasi.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal62">
+          <div class="pasal-heading">Pasal 62 — Pemeriksaan dan Pengujian Berkala</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian berkala dilakukan secara eksternal paling sedikit <strong>1 (satu) tahun sekali</strong> atau sesuai dengan penilaian risiko atau ketentuan peraturan perundang-undangan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian berkala dilakukan sesuai Pemeriksaan dan/atau Pengujian sebagaimana dimaksud dalam Pasal 61 ayat (2).</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal63">
+          <div class="pasal-heading">Pasal 63 — Pemeriksaan dan Pengujian Ulang</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian ulang dilakukan apabila hasil Pemeriksaan dan/atau Pengujian sebelumnya baik secara internal maupun eksternal terdapat keraguan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian ulang dilakukan sesuai ketentuan peraturan perundang-undangan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal64">
+          <div class="pasal-heading">Pasal 64 — Pemeriksaan dan Pengujian Khusus</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian khusus merupakan kegiatan Pemeriksaan dan/atau Pengujian yang dilakukan setelah kecelakaan kerja atau laporan dugaan tingkat pajanan di atas NAB.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian khusus dilakukan sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal65">
+          <div class="pasal-heading">Pasal 65 — Koordinasi dan Pelaporan Hasil Pemeriksaan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemeriksaan dan/atau Pengujian yang dilakukan oleh lembaga eksternal dilaksanakan dengan berkoordinasi dengan Unit Pengawasan Ketenagakerjaan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Hasil Pemeriksaan dan/atau Pengujian dilaporkan kepada Unit Pengawasan Ketenagakerjaan sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Dalam hal Pemeriksaan dan/atau Pengujian dilakukan oleh lembaga eksternal, hasil disetujui oleh manajer teknis.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Hasil Pemeriksaan dan/atau Pengujian atas permintaan perusahaan, laporan hasil Pengujian disampaikan kepada perusahaan yang bersangkutan.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Hasil Pemeriksaan dan/atau Pengujian wajib dituangkan dalam surat keterangan memenuhi/tidak memenuhi persyaratan K3 yang diterbitkan oleh unit kerja pengawasan ketenagakerjaan.</span></div>
+          <div class="ayat"><span class="ayat-num">(6)–(8)</span><span class="ayat-text">Surat keterangan dilengkapi dengan hasil Pemeriksaan dan/atau Pengujian pada lembar terpisah, dibuat dalam 3 (tiga) rangkap untuk: Pengurus Tempat Kerja (dimasukkan dalam dokumen Pemeriksaan), unit pengawasan ketenagakerjaan setempat, dan unit pengawasan ketenagakerjaan pusat. Unit kerja pengawasan ketenagakerjaan wajib menyampaikan surat keterangan tersebut kepada unit pengawasan ketenagakerjaan di pusat setiap 1 (satu) bulan sekali.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal66">
+          <div class="pasal-heading">Pasal 66 — Formulir Pemeriksaan</div>
+          <p class="pasal-text">Pemeriksaan dan/atau Pengujian menggunakan formulir tertentu yang tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal67">
+          <div class="pasal-heading">Pasal 67 — Stiker K3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Area kerja yang telah dilakukan Pemeriksaan dan/atau Pengujian dan tidak memenuhi persyaratan K3 diberikan stiker yang dibubuhi stempel.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Stiker tercantum dalam Lampiran yang merupakan bagian tidak terpisahkan dari Peraturan Menteri ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal68">
+          <div class="pasal-heading">Pasal 68 — Pelaporan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pelaporan sebagaimana dimaksud dalam Pasal 65 ayat (2) dapat dilakukan secara luring maupun daring.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pelaporan secara daring dilakukan secara bertahap.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB VI -->
+    <div class="bab-block" id="bab6">
+      <div class="bab-title"><span class="bab-number">BAB VI</span>PENINJAUAN BERKALA NILAI AMBANG BATAS DAN STANDAR</div>
+      <div class="bab-content">
+        <div class="pasal-block" id="pasal69">
+          <div class="pasal-heading">Pasal 69 — Peninjauan Berkala NAB</div>
+          <p class="pasal-text">NAB dan/atau standar sebagaimana dimaksud dalam Pasal 3 dapat ditinjau secara berkala paling sedikit <strong>3 (tiga) tahun sekali</strong> sesuai dengan perkembangan ilmu pengetahuan dan teknologi.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAB VII -->
+    <div class="bab-block" id="bab7">
+      <div class="bab-title"><span class="bab-number">BAB VII</span>PENGAWASAN</div>
+      <div class="bab-content">
+        <div class="pasal-block" id="pasal70">
+          <div class="pasal-heading">Pasal 70 — Pengawasan K3 Lingkungan Kerja</div>
+          <p class="pasal-text">Pengawasan pelaksanaan K3 Lingkungan Kerja dilaksanakan oleh Pengawas Ketenagakerjaan Spesialis K3 Lingkungan Kerja sesuai dengan ketentuan peraturan perundang-undangan.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAB VIII -->
+    <div class="bab-block" id="bab8">
+      <div class="bab-title"><span class="bab-number">BAB VIII</span>SANKSI</div>
+      <div class="bab-content">
+        <div class="pasal-block" id="pasal71">
+          <div class="pasal-heading">Pasal 71 — Sanksi</div>
+          <p class="pasal-text">Pengusaha dan/atau Pengurus yang tidak memenuhi ketentuan dalam Peraturan Menteri ini dikenakan sanksi sesuai dengan Undang-Undang Nomor 1 Tahun 1970 tentang Keselamatan Kerja dan Undang-Undang Nomor 13 Tahun 2003 tentang Ketenagakerjaan.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAB IX -->
+    <div class="bab-block" id="bab9">
+      <div class="bab-title"><span class="bab-number">BAB IX</span>KETENTUAN PERALIHAN</div>
+      <div class="bab-content">
+        <div class="pasal-block" id="pasal72">
+          <div class="pasal-heading">Pasal 72 — Lisensi Lama</div>
+          <p class="pasal-text">Lisensi Petugas Pemantauan Lingkungan Kerja yang telah diterbitkan sebelum Peraturan Menteri ini diundangkan, tetap berlaku sampai dengan berakhirnya lisensi tersebut dan selanjutnya disebut lisensi Ahli K3 Muda Lingkungan Kerja.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAB X -->
+    <div class="bab-block" id="bab10">
+      <div class="bab-title"><span class="bab-number">BAB X</span>KETENTUAN PENUTUP</div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal73">
+          <div class="pasal-heading">Pasal 73 — Pencabutan Peraturan Lama</div>
+          <p class="pasal-text">Pada saat Peraturan Menteri ini mulai berlaku, peraturan-peraturan berikut dicabut dan dinyatakan tidak berlaku:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>Peraturan Menteri Perburuhan Nomor 7 Tahun 1964 tentang Syarat Kesehatan, Kebersihan serta Penerangan dalam Tempat Kerja;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>Peraturan Menteri Tenaga Kerja dan Transmigrasi Nomor PER.13/MEN/X/2011 tentang Nilai Ambang Batas Faktor Fisika dan Faktor Kimia di Tempat Kerja (Berita Negara Republik Indonesia Tahun 2011 Nomor 684); dan</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>Surat Edaran Menteri Tenaga Kerja dan Transmigrasi Nomor SE.01/MEN/1978 tentang Nilai Ambang Batas untuk Iklim Kerja dan Nilai Ambang Batas untuk Kebisingan di Tempat Kerja.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal74">
+          <div class="pasal-heading">Pasal 74 — Mulai Berlaku</div>
+          <p class="pasal-text">Peraturan Menteri ini mulai berlaku pada tanggal diundangkan. Agar setiap orang mengetahuinya, memerintahkan pengundangan Peraturan Menteri ini dengan penempatannya dalam Berita Negara Republik Indonesia.</p>
+        </div>
+
+        <div class="ttd-block">
+          <div class="ttd-col">
+            <div class="place">Ditetapkan di Jakarta<br>pada tanggal 27 April 2018</div>
+            <div class="role">MENTERI KETENAGAKERJAAN REPUBLIK INDONESIA</div>
+            <div class="name">M. HANIF DHAKIRI</div>
+          </div>
+          <div class="ttd-col">
+            <div class="place">Diundangkan di Jakarta<br>pada tanggal 27 April 2018</div>
+            <div class="role">DIREKTUR JENDERAL PERATURAN PERUNDANG-UNDANGAN<br>KEMENTERIAN HUKUM DAN HAK ASASI MANUSIA REPUBLIK INDONESIA</div>
+            <div class="name">WIDODO EKATJAHJANA</div>
+          </div>
+        </div>
+
+        <div style="padding: 16px 28px; background: var(--highlight); border-top: 1px solid var(--rule);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-light);letter-spacing:0.1em;">BERITA NEGARA REPUBLIK INDONESIA TAHUN 2018 NOMOR 567</p>
+          <div class="lampiran-note" style="margin-top:12px;">Peraturan ini dilengkapi dengan Lampiran yang merupakan bagian tidak terpisahkan, terdiri atas: (1) Nilai Ambang Batas Faktor Fisika; (2) Standar Pencahayaan; (3) Nilai Ambang Batas Faktor Kimia; (4) Indeks Pajanan Biologi; (5) Standar Faktor Biologi; (6) Standar Faktor Ergonomi; (7) Standar Faktor Psikologi; (8) Pedoman Pelaksanaan Pembinaan Ahli K3 Lingkungan Kerja; (9) Formulir Pemeriksaan dan/atau Pengujian; dan (10) Stiker Tidak Memenuhi Persyaratan K3 Lingkungan Kerja.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end content-body -->
+</main>
+
+<a href="#" id="totop" title="Kembali ke atas">↑</a>
+
+<script>
+function toggleBab(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const bar = document.getElementById('progress-bar');
+  const totop = document.getElementById('totop');
+
+  window.addEventListener('scroll', function() {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    totop.classList.toggle('visible', scrolled > 400);
+    updateActiveNav();
+  });
+
+  document.getElementById('search-input').addEventListener('input', function() {
+    const q = this.value.toLowerCase().trim();
+    document.querySelectorAll('.nav-item').forEach(item => {
+      if (!q) {
+        item.style.display = '';
+        item.style.background = '';
+      } else {
+        const match = item.textContent.toLowerCase().includes(q);
+        item.style.display = match ? '' : 'none';
+        item.style.background = match ? 'rgba(126,200,80,0.07)' : '';
+        if (match) {
+          const parent = item.closest('.nav-items');
+          if (parent) { parent.classList.add('open'); parent.previousElementSibling.classList.add('open'); }
+        }
+      }
+    });
+  });
+});
+
+function updateActiveNav() {
+  const blocks = document.querySelectorAll('.pasal-block[id]');
+  const items = document.querySelectorAll('.nav-item');
+  let current = '';
+  blocks.forEach(b => { if (b.getBoundingClientRect().top <= 120) current = b.id; });
+  items.forEach(item => item.classList.toggle('active', item.getAttribute('href') === '#' + current));
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>

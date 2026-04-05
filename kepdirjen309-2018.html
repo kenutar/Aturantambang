@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kepdirjen 309.K/30/DJB/2018 — Handak & BBC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --red: #c0392b;
+    --red-dark: #8b1a10;
+    --red-pale: #fdf0ee;
+    --fuel: #1a4b6e;
+    --fuel-light: #2e6f9e;
+    --fuel-pale: #eaf3fa;
+    --ink: #1c1510;
+    --ink-mid: #3a2e25;
+    --ink-light: #6b5c4e;
+    --cream: #faf8f5;
+    --rule: #d4c5b5;
+    --sidebar-w: 290px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 14.5px;
+    line-height: 1.8;
+  }
+
+  .shell { display: flex; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  aside {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: #14100d;
+    color: #c4b8a8;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #3a2e25 transparent;
+  }
+
+  .sidebar-brand {
+    padding: 1.4rem 1.2rem 1rem;
+    background: #0d0a08;
+    border-bottom: 1px solid #2a2018;
+  }
+  .sidebar-brand .kode {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.35rem;
+  }
+  .sidebar-brand h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 12.5px;
+    color: #e0d5c5;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+
+  /* Tab switcher */
+  .tab-bar {
+    display: flex;
+    border-bottom: 1px solid #2a2018;
+  }
+  .tab-btn {
+    flex: 1;
+    padding: 0.65rem 0.4rem;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+    color: #6b5c4e;
+    background: none;
+    border: none;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn.active-tab { color: var(--red); border-bottom-color: var(--red); }
+  .tab-btn:hover { color: #c4b8a8; }
+
+  .nav-panel { display: none; padding-bottom: 2rem; }
+  .nav-panel.active { display: block; }
+
+  .nav-group { padding: 0.8rem 0 0; }
+  .nav-group-title {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    padding: 0 1.1rem 0.3rem;
+  }
+  .nav-item {
+    display: block;
+    padding: 0.38rem 1.1rem;
+    color: #9a8b7c;
+    text-decoration: none;
+    font-size: 12px;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+    line-height: 1.4;
+  }
+  .nav-item:hover { color: #e0d5c5; border-left-color: var(--red); background: rgba(192,57,43,0.06); }
+  .nav-item.fuel:hover { border-left-color: var(--fuel-light); }
+  .nav-item .num { font-size: 10px; opacity: 0.5; margin-right: 0.3rem; }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 3rem 6rem;
+  }
+
+  /* ── DOC HEADER ── */
+  .doc-header {
+    text-align: center;
+    padding: 2rem 0 2rem;
+    border-bottom: 3px double var(--rule);
+    margin-bottom: 2.5rem;
+  }
+  .doc-header .instansi {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.2rem;
+  }
+  .doc-header .jenis {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 0.6rem 0 0.2rem;
+  }
+  .doc-header .nomor {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.5px;
+  }
+  .doc-header .tentang {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.5rem;
+  }
+  .doc-header .judul {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto 0.8rem;
+  }
+  .doc-header .meta {
+    font-size: 11.5px;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+
+  /* ── LAMPIRAN HEADER ── */
+  .lampiran-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.4rem;
+    margin: 2.5rem 0 1.5rem;
+    border-radius: 4px;
+  }
+  .lampiran-header.handak { background: linear-gradient(135deg, #8b1a10 0%, #c0392b 100%); color: white; }
+  .lampiran-header.bbc { background: linear-gradient(135deg, #1a4b6e 0%, #2e6f9e 100%); color: white; }
+  .lampiran-header .lamp-icon { font-size: 28px; opacity: 0.9; }
+  .lampiran-header .lamp-text .lamp-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.1rem;
+  }
+  .lampiran-header .lamp-text .lamp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 2rem;
+    scroll-margin-top: 2rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-title .sec-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--red);
+    color: white;
+    border-radius: 50%;
+    font-size: 13px;
+    flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+  }
+  .section-title .sec-letter.blue { background: var(--fuel); }
+
+  .sub-section {
+    margin: 1.2rem 0;
+    scroll-margin-top: 2rem;
+  }
+  .sub-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14.5px;
+    color: var(--ink-mid);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .sub-num {
+    background: #f0ebe4;
+    color: var(--ink-light);
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  /* ── TEXT ── */
+  p.body-text { margin-bottom: 0.55rem; color: var(--ink-mid); }
+  p.indent { padding-left: 1.6rem; text-indent: -1.6rem; margin-bottom: 0.5rem; color: var(--ink-mid); }
+
+  .list-alpha { margin: 0.4rem 0 0.5rem 1.5rem; }
+  .list-alpha li { margin-bottom: 0.35rem; color: var(--ink-mid); }
+  .list-num { margin: 0.3rem 0 0.4rem 1.5rem; list-style-type: decimal; }
+  .list-num li { margin-bottom: 0.3rem; color: var(--ink-mid); }
+  .list-sub { margin: 0.25rem 0 0.3rem 1.5rem; list-style-type: lower-alpha; }
+  .list-sub li { margin-bottom: 0.2rem; }
+  .list-subsub { margin: 0.2rem 0 0.25rem 1.5rem; list-style-type: decimal; }
+  .list-subsub li { margin-bottom: 0.15rem; }
+
+  /* ── KONSIDERAN ── */
+  .konsideran {
+    background: #f5f0ea;
+    border-left: 3px solid var(--red);
+    padding: 0.9rem 1.1rem;
+    margin: 0.6rem 0;
+    border-radius: 0 3px 3px 0;
+  }
+  .konsideran-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+  }
+
+  /* ── MEMUTUSKAN ── */
+  .memutuskan-box {
+    text-align: center;
+    background: var(--ink);
+    color: #e0d5c5;
+    padding: 1.1rem 2rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+    font-family: 'DM Serif Display', serif;
+  }
+  .memutuskan-box .kata {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+    display: block;
+    margin-bottom: 0.3rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .memutuskan-box .isi { font-size: 14px; line-height: 1.5; }
+
+  /* ── KETETAPAN ── */
+  .ketetapan {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0.2rem 0.8rem;
+    margin: 0.7rem 0;
+    padding: 0.8rem 1rem;
+    background: #faf8f5;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+  }
+  .ketetapan .ket-label {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--red);
+    padding-top: 0.05rem;
+  }
+  .ketetapan .ket-body { color: var(--ink-mid); }
+
+  /* ── DEFINITION ── */
+  .def-list { margin: 0.5rem 0; }
+  .def-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0 0.6rem;
+    margin-bottom: 0.5rem;
+    padding: 0.55rem 0.8rem;
+    background: white;
+    border-radius: 3px;
+    border: 1px solid #ede7de;
+    align-items: start;
+  }
+  .def-num {
+    color: var(--red);
+    font-weight: 600;
+    font-size: 12px;
+    padding-top: 0.1rem;
+  }
+  .def-num.blue { color: var(--fuel); }
+  .def-body { color: var(--ink-mid); font-size: 13.5px; }
+  .def-term { font-weight: 600; color: var(--ink); }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; margin: 0.8rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--ink);
+    color: #e0d5c5;
+    padding: 0.55rem 0.7rem;
+    text-align: left;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  td {
+    padding: 0.45rem 0.7rem;
+    border-bottom: 1px solid #ede7de;
+    color: var(--ink-mid);
+  }
+  tr:nth-child(even) td { background: #faf8f5; }
+  tr:hover td { background: var(--red-pale); }
+  .table-caption {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-mid);
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.3px;
+  }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: #fff8e1;
+    border-left: 3px solid #f0a500;
+    padding: 0.7rem 1rem;
+    margin: 0.6rem 0;
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    border-radius: 0 3px 3px 0;
+  }
+  .callout.red { background: var(--red-pale); border-left-color: var(--red); }
+  .callout.blue { background: var(--fuel-pale); border-left-color: var(--fuel-light); }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-right: 0.3rem;
+    vertical-align: middle;
+    font-weight: 600;
+  }
+  .badge-red { background: var(--red-pale); color: var(--red); }
+  .badge-blue { background: var(--fuel-pale); color: var(--fuel); }
+  .badge-gray { background: #ede7de; color: var(--ink-light); }
+
+  /* ── PENUTUP ── */
+  .penutup {
+    text-align: right;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .penutup .nama { font-family: 'DM Serif Display', serif; font-size: 16px; margin-top: 0.4rem; }
+  .penutup .jabatan { font-size: 12px; color: var(--ink-light); font-style: italic; }
+
+  .divider { border: none; border-top: 1px solid var(--rule); margin: 1.5rem 0; }
+
+  /* Progress bar */
+  .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--red); width: 0; z-index: 999; transition: width 0.1s; }
+
+  @media (max-width: 800px) {
+    aside { display: none; }
+    main { padding: 1.5rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<div class="shell">
+
+<!-- SIDEBAR -->
+<aside>
+  <div class="sidebar-brand">
+    <div class="kode">Kepdirjen 309.K/30/DJB/2018</div>
+    <h2>Petunjuk Teknis Keselamatan Handak & Fasilitas BBC Pertambangan</h2>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab-btn active-tab" onclick="switchTab('handak', this)">💥 Handak</button>
+    <button class="tab-btn" onclick="switchTab('bbc', this)">⛽ BBC</button>
+  </div>
+
+  <!-- NAV HANDAK -->
+  <div class="nav-panel active" id="nav-handak">
+    <div class="nav-group">
+      <div class="nav-group-title">Penetapan</div>
+      <a class="nav-item" href="#header"><span class="num">▸</span>Identitas & Konsideran</a>
+      <a class="nav-item" href="#memutuskan"><span class="num">▸</span>Memutuskan</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title">Lampiran I — Handak</div>
+      <a class="nav-item" href="#h-pendahuluan"><span class="num">A</span>Pendahuluan</a>
+      <a class="nav-item" href="#h-pengertian"><span class="num">B</span>Pengertian</a>
+      <a class="nav-item" href="#h-persyaratan"><span class="num">C</span>Persyaratan Pembangunan</a>
+      <a class="nav-item" href="#h-tahapan"><span class="num">D</span>Tahapan Pembangunan</a>
+      <a class="nav-item" href="#h-ketentuan"><span class="num">E</span>Ketentuan Umum & Keselamatan</a>
+      <a class="nav-item" href="#h-ruangan"><span class="num">F</span>Pengaturan Ruangan</a>
+      <a class="nav-item" href="#h-jarak"><span class="num">F.4</span>Jarak Aman (Tabel)</a>
+      <a class="nav-item" href="#h-penyimpanan"><span class="num">G</span>Penyimpanan & Pencatatan</a>
+      <a class="nav-item" href="#h-pengangkutan"><span class="num">H</span>Pengangkutan & Peledakan</a>
+      <a class="nav-item" href="#h-penutup"><span class="num">I</span>Penutup Lampiran I</a>
+    </div>
+  </div>
+
+  <!-- NAV BBC -->
+  <div class="nav-panel" id="nav-bbc">
+    <div class="nav-group">
+      <div class="nav-group-title">Lampiran II — BBC</div>
+      <a class="nav-item fuel" href="#b-pendahuluan"><span class="num">A</span>Pendahuluan</a>
+      <a class="nav-item fuel" href="#b-pengertian"><span class="num">B</span>Pengertian</a>
+      <a class="nav-item fuel" href="#b-pembangunan"><span class="num">C</span>Pembangunan Fasilitas</a>
+      <a class="nav-item fuel" href="#b-jarak-bbc"><span class="num">C.4</span>Jarak Aman BBC</a>
+      <a class="nav-item fuel" href="#b-pelaporan"><span class="num">D</span>Pelaporan & Pengelolaan</a>
+      <a class="nav-item fuel" href="#b-portable"><span class="num">E</span>Tangki Portable & SPBB</a>
+      <a class="nav-item fuel" href="#b-penutup"><span class="num">F</span>Penutup Lampiran II</a>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
+
+  <!-- HEADER -->
+  <div class="doc-header" id="header">
+    <div class="instansi">Kementerian Energi dan Sumber Daya Mineral — Direktorat Jenderal Mineral dan Batubara</div>
+    <div class="jenis">Keputusan Direktur Jenderal</div>
+    <div class="nomor">309.K/30/DJB/2018</div>
+    <div class="tentang">Tentang</div>
+    <div class="judul">Petunjuk Teknis Keselamatan Bahan Peledak dan Peledakan serta Keselamatan Fasilitas Penimbunan Bahan Bakar Cair pada Kegiatan Usaha Pertambangan Mineral dan Batubara</div>
+    <div class="meta">Ditetapkan di Jakarta, 21 November 2018 &nbsp;|&nbsp; Ditandatangani: Bambang Gatot Ariyono</div>
+  </div>
+
+  <!-- KONSIDERAN -->
+  <div class="konsideran">
+    <span class="konsideran-label">Menimbang</span>
+    Bahwa untuk memberikan petunjuk teknis terkait keselamatan bahan peledak dan peledakan serta keselamatan fasilitas penimbunan bahan bakar cair pada kegiatan usaha pertambangan mineral dan batubara, serta sebagai tindak lanjut dari Keputusan Menteri ESDM Nomor 1827 K/30/MEM/2018, perlu menetapkan Keputusan Direktur Jenderal ini.
+  </div>
+  <div class="konsideran">
+    <span class="konsideran-label">Mengingat</span>
+    <ol class="list-num">
+      <li>UU No. 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara;</li>
+      <li>PP No. 23 Tahun 2010 tentang Pelaksanaan Kegiatan Usaha Pertambangan Mineral dan Batubara (terakhir diubah dengan PP No. 8 Tahun 2018);</li>
+      <li>PP No. 55 Tahun 2010 tentang Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara;</li>
+      <li>Perpres No. 68 Tahun 2015 tentang Kementerian ESDM (sebagaimana diubah dengan Perpres No. 105 Tahun 2016);</li>
+      <li>Permen ESDM No. 13 Tahun 2016 tentang Organisasi dan Tata Kerja Kementerian ESDM;</li>
+      <li>Permen ESDM No. 26 Tahun 2018 tentang Pelaksanaan Kaidah Teknik Pertambangan yang Baik dan Pengawasan Pertambangan Mineral dan Batubara; dan</li>
+      <li>Kepmen ESDM No. 1827 K/30/MEM/2018 tentang Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik.</li>
+    </ol>
+  </div>
+
+  <!-- MEMUTUSKAN -->
+  <div class="memutuskan-box" id="memutuskan">
+    <span class="kata">Memutuskan — Menetapkan</span>
+    <div class="isi">Petunjuk Teknis Keselamatan Bahan Peledak dan Peledakan serta Keselamatan Fasilitas Penimbunan Bahan Bakar Cair pada Kegiatan Usaha Pertambangan Mineral dan Batubara</div>
+  </div>
+
+  <div class="ketetapan">
+    <div class="ket-label">KESATU</div>
+    <div class="ket-body">Menetapkan Petunjuk Teknis Keselamatan Bahan Peledak dan Peledakan serta Keselamatan Fasilitas Penimbunan Bahan Bakar Cair, yang terdiri atas: (a) Lampiran I — Petunjuk Teknis Keselamatan Bahan Peledak dan Peledakan; dan (b) Lampiran II — Petunjuk Teknis Keselamatan Fasilitas Penimbunan Bahan Bakar Cair.</div>
+  </div>
+  <div class="ketetapan">
+    <div class="ket-label">KEDUA</div>
+    <div class="ket-body">Keputusan Direktur Jenderal ini mulai berlaku pada tanggal ditetapkan.</div>
+  </div>
+
+  <!-- ═══════════════════════════
+       LAMPIRAN I — HANDAK
+  ═══════════════════════════ -->
+  <div class="lampiran-header handak">
+    <div class="lamp-icon">💥</div>
+    <div class="lamp-text">
+      <div class="lamp-label">Lampiran I</div>
+      <div class="lamp-title">Petunjuk Teknis Keselamatan Bahan Peledak dan Peledakan</div>
+    </div>
+  </div>
+
+  <!-- A. PENDAHULUAN -->
+  <div class="section" id="h-pendahuluan">
+    <div class="section-title"><span class="sec-letter">A</span>Pendahuluan</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Umum</div>
+      <ol class="list-alpha" type="a">
+        <li>Sesuai Pasal 15 Permen ESDM No. 26 Tahun 2018, Menteri menetapkan pedoman pelaksanaan keselamatan pertambangan.</li>
+        <li>Sesuai Lampiran III Huruf B butir 6 huruf a butir 4) Kepmen ESDM No. 1827 K/30/MEM/2018, persyaratan teknis pembangunan gudang bahan peledak diatur lebih lanjut dalam petunjuk teknis yang ditetapkan oleh Direktur Jenderal Mineral dan Batubara.</li>
+        <li>Diperlukan Petunjuk Teknis Keselamatan Bahan Peledak dan Peledakan pada Kegiatan Usaha Pertambangan Mineral dan Batubara.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Dasar Hukum</div>
+      <ol class="list-alpha" type="a">
+        <li>UU No. 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara;</li>
+        <li>PP No. 55 Tahun 2010 tentang Pembinaan dan Pengawasan Penyelenggaraan Pengelolaan Usaha Pertambangan Mineral dan Batubara;</li>
+        <li>Permen ESDM No. 26 Tahun 2018 tentang Pelaksanaan Kaidah Teknik Pertambangan yang Baik dan Pengawasan Pertambangan Mineral dan Batubara; dan</li>
+        <li>Kepmen ESDM No. 1827 K/30/MEM/2018 tentang Pedoman Pelaksanaan Kaidah Teknik Pertambangan yang Baik.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">3</span> Maksud dan Tujuan</div>
+      <ol class="list-alpha" type="a">
+        <li>Dimaksudkan sebagai pedoman bagi perusahaan pertambangan dalam pelaksanaan keselamatan bahan peledak dan peledakan, serta sebagai pedoman bagi satuan kerja Ditjen Minerba dan Dinas ESDM Provinsi dalam melakukan pemeriksaan dan memberikan persetujuan pembangunan gudang bahan peledak.</li>
+        <li>Bertujuan agar terdapat standardisasi dan keseragaman dalam pemenuhan persyaratan teknis pembangunan gudang bahan peledak.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">4</span> Ruang Lingkup</div>
+      <ol class="list-alpha" type="a">
+        <li>Persyaratan Gambar Gudang Bahan Peledak;</li>
+        <li>Ketentuan Umum dan Keselamatan Pembangunan Gudang Bahan Peledak;</li>
+        <li>Pengaturan Ruangan dan Persyaratan Teknis Gudang Bahan Peledak;</li>
+        <li>Tahapan Pembangunan Gudang Bahan Peledak; dan</li>
+        <li>Ketentuan Pengangkutan Bahan Peledak dan Pekerjaan Peledakan.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- B. PENGERTIAN -->
+  <div class="section" id="h-pengertian">
+    <div class="section-title"><span class="sec-letter">B</span>Pengertian</div>
+    <div class="def-list">
+      <div class="def-item"><span class="def-num">1</span><span class="def-body"><span class="def-term">Bahan Peledak</span> — suatu bahan kimia senyawa tunggal atau campuran berbentuk padat, cair, gas atau campurannya yang apabila dikenai aksi panas, benturan, gesekan atau ledakan awal akan mengalami reaksi kimia eksotermis sangat cepat yang hasilnya sebagian atau seluruhnya berbentuk gas disertai panas dan tekanan sangat tinggi.</span></div>
+      <div class="def-item"><span class="def-num">2</span><span class="def-body"><span class="def-term">Gudang Bahan Peledak</span> — suatu bangunan, kontener atau tangki yang secara teknis mampu menyimpan bahan peledak secara aman.</span></div>
+      <div class="def-item"><span class="def-num">3</span><span class="def-body"><span class="def-term">Detonator</span> — suatu benda yang mengandung isian bahan peledak yang digunakan sebagai penyala awal ledakan; termasuk detonator listrik, detonator biasa, detonator bukan listrik (nonel)/tunda, dan detonator elektronik.</span></div>
+      <div class="def-item"><span class="def-num">4</span><span class="def-body"><span class="def-term">Bahan Ramuan</span> — bahan baku yang apabila dicampur dengan bahan tertentu akan menjadi bahan peledak peka primer.</span></div>
+      <div class="def-item"><span class="def-num">5</span><span class="def-body"><span class="def-term">Bahan Peledak Peka Primer</span> — bahan peledak yang hanya dapat meledak dengan menggunakan primer atau booster dengan detonator.</span></div>
+      <div class="def-item"><span class="def-num">6</span><span class="def-body"><span class="def-term">Bahan Peledak Peka Detonator</span> — bahan peledak yang dapat meledak dengan detonator.</span></div>
+      <div class="def-item"><span class="def-num">7</span><span class="def-body"><span class="def-term">Jarak Aman Gudang</span> — jarak minimum dimana gudang bahan peledak harus terpisah dengan gudang lainnya, bangunan yang dihuni orang, jalan kereta api serta jalan umum, tergantung jenis dan jumlah bahan peledak yang disimpan.</span></div>
+      <div class="def-item"><span class="def-num">8</span><span class="def-body"><span class="def-term">KTT (Kepala Teknik Tambang)</span> — seseorang yang memiliki posisi tertinggi dalam struktur organisasi lapangan pertambangan yang memimpin dan bertanggung jawab atas terlaksananya operasional pertambangan sesuai kaidah teknik pertambangan yang baik.</span></div>
+      <div class="def-item"><span class="def-num">9</span><span class="def-body"><span class="def-term">PTL (Penanggung Jawab Teknik dan Lingkungan)</span> — seseorang yang memiliki posisi tertinggi dalam struktur organisasi lapangan yang memimpin dan bertanggung jawab atas kegiatan operasional pengolahan dan/atau pemurnian.</span></div>
+      <div class="def-item"><span class="def-num">10</span><span class="def-body"><span class="def-term">KaIT (Kepala Inspektur Tambang)</span> — pejabat yang secara <em>ex-officio</em> menduduki jabatan Direktur yang mempunyai tugas pokok dan fungsi di bidang keteknikan dan lingkungan pertambangan Mineral dan Batubara.</span></div>
+      <div class="def-item"><span class="def-num">11</span><span class="def-body"><span class="def-term">Pekerjaan Peledakan</span> — pekerjaan yang terdiri atas peracikan bahan peledak, pembuatan primer, pengisian dan penyumbatan lubang ledak, perangkaian dan penyambungan pola peledakan, penetapan daerah bahaya, menyuruh orang menyingkir dan berlindung, pengujian sirkuit, peledakan lubang ledak, penanganan kegagalan peledakan, dan pengendalian dampak negatif peledakan.</span></div>
+    </div>
+  </div>
+
+  <!-- C. PERSYARATAN PEMBANGUNAN -->
+  <div class="section" id="h-persyaratan">
+    <div class="section-title"><span class="sec-letter">C</span>Persyaratan Pembangunan Gudang Bahan Peledak</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Persyaratan Umum</div>
+      <p class="body-text">Persyaratan pembangunan gudang bahan peledak meliputi dokumen-dokumen berikut:</p>
+      <p class="body-text"><strong>a. Gambar Konstruksi Gudang</strong>, mencantumkan sekurang-kurangnya:</p>
+      <ol class="list-num">
+        <li><strong>Gambar konstruksi</strong> — skala min. 1:400; mencantumkan dimensi; tampak atas, depan, samping; serta menggambarkan persyaratan keselamatan: tanggul, parit drainase, oil trap, hydrant, pagar, APAR/sprinkle, lampu penerangan, penyalur petir, tahanan pembumian, CCTV, pos jaga, dan tanda bahaya/sirine.</li>
+        <li><strong>Detail pondasi, kuda-kuda atap, ventilasi, pintu, kunci, pagar, dan penyalur petir</strong> — skala min. 1:25; tinggi pagar ≥2,5 meter; jarak teralis ventilasi maks. 9 cm.</li>
+        <li><strong>Tata letak (lay out)</strong> — skala min. 1:500; menunjukkan posisi seluruh peralatan keselamatan dan keamanan.</li>
+        <li><strong>Kepala gambar</strong> — di sudut kanan bawah; berisi judul, nama perusahaan, jenis/kapasitas/lokasi gudang; kolom tanda tangan pengesahan (penggambar, pemeriksa, penanggung jawab, KTT/PTL, stempel perusahaan).</li>
+      </ol>
+      <p class="body-text" style="margin-top:0.7rem;"><strong>b. Gambar Situasi Gudang</strong> — skala min. 1:5.000; grid koordinat; jarak aman ke bangunan terdekat; kontur interval 1–2 meter.</p>
+      <p class="body-text"><strong>Dokumen pendukung lainnya:</strong></p>
+      <ol class="list-alpha" type="c">
+        <li>Detail rencana waktu dan tahapan pembangunan;</li>
+        <li>Salinan pengesahan KTT/PTL;</li>
+        <li>Salinan IPPKH (jika dalam kawasan hutan);</li>
+        <li>Berita Acara Penentuan Lokasi (diketahui KTT/PTL dan aparat desa);</li>
+        <li>Laporan kajian daya dukung tanah dan kestabilan lokasi;</li>
+        <li>Rencana jenis/tipe pondasi konstruksi;</li>
+        <li>Dasar pertimbangan dan penentuan kapasitas gudang;</li>
+        <li>Foto situasi permukaan dari minimal 4 sudut berbeda;</li>
+        <li>Salinan persetujuan izin lingkungan dan studi kelayakan;</li>
+        <li>Surat pernyataan kebenaran dokumen dari manajemen (bermaterai); dan</li>
+        <li>Soft copy seluruh dokumen di atas.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Persyaratan Tambahan pada Area Timbunan</div>
+      <p class="body-text">Jika gudang dibangun pada area timbunan, harus melampirkan: rencana pembersihan lahan; kontur asli lahan; sayatan kontur dan rencana timbunan; kajian daya dukung tanah; jenis material; dan sistem kendali aliran air permukaan.</p>
+    </div>
+  </div>
+
+  <!-- D. TAHAPAN -->
+  <div class="section" id="h-tahapan">
+    <div class="section-title"><span class="sec-letter">D</span>Tahapan Pembangunan Gudang Bahan Peledak</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Alur Pembangunan</div>
+      <ol class="list-alpha" type="a">
+        <li>Kepemilikan gudang bahan peledak hanya boleh diajukan atas nama pemegang Izin Usaha Pertambangan.</li>
+        <li>Permohonan pembangunan diajukan pada Rencana Kerja Anggaran Biaya (RKAB).</li>
+        <li>Setelah evaluasi data dukung diterima, pemegang IUP/IUPK dapat mulai membangun dan wajib melaporkan kepada Direktur Jenderal Minerba cq. Direktur Teknik dan Lingkungan / KaIT / Kepala Dinas atas nama KaIT apabila kondisi pembangunan sudah mencapai <strong>80%</strong>.</li>
+        <li>KaIT/Kepala Dinas menugaskan Inspektur Tambang untuk memeriksa kondisi fisik dan peralatan keselamatan. Gudang dapat digunakan saat kondisi mencapai <strong>100%</strong> dan hasil tindak lanjut Berita Acara dinyatakan layak untuk jangka waktu <strong>paling lama 5 tahun</strong>.</li>
+        <li>Pemegang IUP/IUPK melaporkan <strong>paling lama 3 bulan</strong> sebelum masa berlaku kelayakan berakhir untuk pemeriksaan kembali.</li>
+        <li>Pemeriksaan ulang dilakukan oleh Inspektur Tambang; hasil ketidaksesuaian dituangkan dalam Berita Acara.</li>
+        <li>Untuk gudang bawah tanah, diperlukan peta dan spesifikasi rancang bangun.</li>
+      </ol>
+      <div class="callout red" style="margin-top:0.8rem;">
+        <strong>Jangka Waktu Kelayakan:</strong> Gudang Sementara = 2 tahun &nbsp;|&nbsp; Gudang Transit = 5 tahun &nbsp;|&nbsp; Gudang Utama = 5 tahun
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">i</span> Persyaratan Unit Pengangkut Bahan Ramuan (Tangki)</div>
+      <ol class="list-num">
+        <li>Kekuatan material mempertimbangkan <em>safety factor</em> dan ketebalan minimum yang mampu menahan beban dinamis;</li>
+        <li>Kekuatan pengelasan minimal sama atau lebih kuat dari <em>base metal</em>;</li>
+        <li>Sistem pengereman sesuai standar pabrikan; dilakukan pengecekan sebelum operasi dan pemeliharaan berkala;</li>
+        <li>Posisi knalpot tidak menimbulkan efek panas terhadap tangki; desain kabin kedap gas buang;</li>
+        <li>Pengujian kelayakan: (a) <em>hydrostatic pressure test</em> sebesar 1,3× tekanan kerja maksimum; (b) <em>leakage test</em> untuk mendeteksi kebocoran;</li>
+        <li>Pengujian kelayakan dilakukan berkala setiap <strong>2 tahun</strong>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- E. KETENTUAN UMUM & KESELAMATAN -->
+  <div class="section" id="h-ketentuan">
+    <div class="section-title"><span class="sec-letter">E</span>Ketentuan Umum dan Keselamatan Pembangunan Gudang Bahan Peledak</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Pembangunan Gudang</div>
+      <ol class="list-alpha" type="a">
+        <li>Gudang di permukaan tanah harus memenuhi jarak aman terhadap lingkungan.</li>
+        <li>Apabila 2 atau lebih gudang berada pada satu lokasi, setiap gudang harus memenuhi jarak aman minimum.</li>
+        <li>Apabila jarak antar gudang tidak memenuhi ketentuan, jarak aman diberlakukan terhadap jumlah keseluruhan bahan peledak dalam kelompok gudang tersebut.</li>
+        <li>Jika terdapat lebih dari 1 bangunan untuk bahan peledak sejenis, harus dipisahkan tanggul pengaman; jarak tanggul ke dinding gudang minimal <strong>2 meter</strong>.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Perlengkapan Keselamatan Gudang</div>
+      <p class="body-text"><strong>a. Setiap gudang bahan peledak harus dilengkapi:</strong></p>
+      <ol class="list-num">
+        <li>Termometer (pencatatan suhu harian pada suhu tertinggi);</li>
+        <li>Tahanan pembumian ≤ <strong>5 ohm</strong>;</li>
+        <li>Tanda "dilarang merokok" dan "dilarang masuk bagi yang tidak berkepentingan";</li>
+        <li>Satu jalan masuk (gudang peka primer/bahan ramuan dapat memiliki 2 jalan masuk setelah evaluasi Inspektur Tambang);</li>
+        <li>Alat pemadam api di luar bangunan gudang; dan</li>
+        <li>Hidran di luar gudang yang terhubung sumber air bertekanan.</li>
+      </ol>
+      <p class="body-text" style="margin-top:0.6rem;"><strong>b. Sekitar gudang</strong> harus dilengkapi: lampu penerangan seluruh areal + CCTV mencakup seluruh area; dijaga <strong>24 jam</strong> oleh minimal <strong>2 petugas jaga</strong>; rumah jaga di luar pagar.</p>
+      <p class="body-text"><strong>c. Pagar pengaman</strong> — tinggi ≥ <strong>2,5 meter</strong>; material tidak mudah dirusak/dipotong; dilengkapi kawat berduri dan pintu terkunci; jarak pagar dari tanggul ≥ <strong>5 meter</strong>.</p>
+      <p class="body-text"><strong>d. Ventilasi</strong> — teralis tidak tersingkap di dalam gudang; jarak teralis maks. <strong>9 cm</strong>.</p>
+      <p class="body-text"><strong>e–f. Larangan masuk</strong> — hanya boleh menggunakan lampu senter kedap gas; dilarang memakai alas besi, korek api, atau barang yang menimbulkan bunga api.</p>
+      <p class="body-text"><strong>g. Tanggul pengaman</strong> (gudang peka detonator) — tinggi <strong>2 meter</strong>, lebar atas <strong>1 meter</strong>; apabila pintu masuk berhadapan langsung dengan pintu gudang, harus dilengkapi tanggul pelindung.</p>
+      <p class="body-text"><strong>i. Gudang AN/ANFO</strong> kapasitas &lt; 5.000 kg — harus dipasang pemadam api otomatis pada bagian atas dalam.</p>
+    </div>
+  </div>
+
+  <!-- F. PENGATURAN RUANGAN DAN PERSYARATAN TEKNIS -->
+  <div class="section" id="h-ruangan">
+    <div class="section-title"><span class="sec-letter">F</span>Pengaturan Ruangan dan Persyaratan Teknis</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Pengaturan Ruangan</div>
+      <ol class="list-alpha" type="a">
+        <li>Gudang berbentuk bangunan untuk bahan peledak peka detonator harus terdiri dari: (1) <strong>ruangan belakang</strong> untuk penyimpanan; dan (2) <strong>ruangan depan</strong> untuk penerimaan dan pengeluaran. Pintu kedua ruangan tidak boleh saling berhadapan langsung.</li>
+        <li>Gudang jenis lainnya dapat terdiri satu ruangan, namun harus tersedia tempat khusus pemeriksaan/penghitungan di dekatnya.</li>
+        <li>Gudang bawah tanah: kering dan datar; satu pintu kuat bergembok; dua ruangan (depan untuk penerimaan/pengeluaran; belakang untuk penyimpanan).</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Persyaratan Teknis Gudang di Permukaan</div>
+
+      <p class="body-text"><strong>a. Gudang Sementara</strong></p>
+      <p class="body-text">Persyaratan berlaku untuk jenis: peka detonator, peka primer, dan bahan ramuan. Gudang berbentuk <em>bangunan</em>: (1) tidak mudah terbakar; (2) atap seringan mungkin; (3) dinding pejal (untuk peka detonator); (4) ventilasi tidak bisa dilewati orang; (5) satu pintu; (6) penyalur petir &lt; 5 ohm; (7) tahanan pembumian; (8) jarak aman kebakaran <strong>30 meter</strong>; (9) lantai tidak menimbulkan percikan bunga api; (10) tidak ada besi tersingkap sampai <strong>3 meter</strong> dari lantai.</p>
+      <p class="body-text">Gudang berbentuk <em>kontener</em>: pelat logam ≥ <strong>3 mm</strong>; ventilasi; dilapisi kayu bagian dalam; kedap air hujan; satu pintu; penyalur petir (tidak menempel kontener); tahanan pembumian.</p>
+
+      <p class="body-text" style="margin-top:0.7rem;"><strong>b. Gudang Utama</strong></p>
+      <p class="body-text">Persyaratan sama dengan gudang sementara, ditambah: tinggi tumpukan maksimum <strong>180 cm</strong> (peka detonator, kontener). Gudang peka primer dan bahan ramuan berbentuk tangki: tidak boleh terbuat dari tembaga, timah hitam, seng, atau besi galvanisir; bukaan lubang pemeriksaan di atas; pipa pengeluaran di bawah; katup tekanan udara di atas; tahanan pembumian.</p>
+
+      <p class="body-text" style="margin-top:0.7rem;"><strong>c. Gudang Transit</strong></p>
+      <div class="callout red">Bahan peledak peka detonator TIDAK BOLEH disimpan dalam gudang transit — harus langsung ke gudang utama.</div>
+      <p class="body-text" style="margin-top:0.5rem;">Gudang bahan ramuan berbentuk bangunan — ditambahkan: lantai tidak boleh dari kayu/bahan yang menyerap lelehan Amonium Nitrat; bangunan dan sekitarnya harus kering; tidak boleh menggunakan besi galvanisir, seng, tembaga, atau timah hitam di bagian dalam. Kontener/tangki hanya ditempatkan pada lokasi yang disetujui KaIT/Kepala Dinas; bahan ramuan tetap dalam kemasan aslinya.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">3</span> Persyaratan Teknis Gudang di Bawah Tanah</div>
+      <ol class="list-alpha" type="a">
+        <li>Dibangun di lokasi kering, bebas dari bahaya api, jauh dari jalan masuk udara utama, terlindung dari kejatuhan batuan dan banjir, serta terpisah dari tempat kerja tambang.</li>
+        <li>Konstruksi kuat, dinding rata, dilengkapi ventilasi dan aliran udara yang cukup.</li>
+      </ol>
+    </div>
+
+    <!-- JARAK AMAN -->
+    <div class="sub-section" id="h-jarak">
+      <div class="sub-title"><span class="sub-num">4</span> Jarak Aman</div>
+
+      <p class="body-text"><strong>Cara penetapan:</strong> Setiap 1.000 detonator No. 8 setara 1 kg bahan peka detonator. Setiap 330 m sumbu ledak (50–60 grain) setara 4 kg bahan peledak peka detonator.</p>
+      <p class="body-text">Untuk kapasitas yang tidak terdapat dalam tabel, gunakan nilai tertinggi dari kapasitas terdekat dan/atau sesuai evaluasi Inspektur Tambang.</p>
+
+      <p class="table-caption" style="margin-top:1rem;">Tabel 1.1 — Jarak Aman Minimum Gudang Bahan Peledak Peka Detonator terhadap Lingkungan</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kapasitas (kg)</th>
+              <th>I*) Bangunan Berpenghuni (m)</th>
+              <th>II**) Tangki/Bengkel/Jalan Besar (m)</th>
+              <th>III***) Rel/Jalan Kecil (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50</td><td>60</td><td>45</td><td>24</td></tr>
+            <tr><td>100</td><td>71</td><td>43</td><td>29</td></tr>
+            <tr><td>500</td><td>120</td><td>90</td><td>48</td></tr>
+            <tr><td>1.000</td><td>152</td><td>113</td><td>56</td></tr>
+            <tr><td>2.000</td><td>191</td><td>142</td><td>63</td></tr>
+            <tr><td>5.000</td><td>260</td><td>194</td><td>78</td></tr>
+            <tr><td>10.000</td><td>293</td><td>244</td><td>87</td></tr>
+            <tr><td>20.000</td><td>383</td><td>308</td><td>114</td></tr>
+            <tr><td>30.000</td><td>455</td><td>352</td><td>137</td></tr>
+            <tr><td>50.000</td><td>545</td><td>418</td><td>164</td></tr>
+            <tr><td>100.000</td><td>609</td><td>527</td><td>183</td></tr>
+            <tr><td>150.000</td><td>700</td><td>650</td><td>225</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="body-text" style="font-size:12px; margin-top:0.3rem;">*) Bangunan berpenghuni, rumah sakit, kantor &nbsp;&nbsp;**) Tangki bahan bakar, bengkel, jalan besar &nbsp;&nbsp;***) Rel kereta api, jalan kecil</p>
+
+      <p class="table-caption" style="margin-top:1.2rem;">Tabel 1.2 — Jarak Aman Minimum Antar Gudang Bahan Peledak (seleksi)</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kapasitas Maks. Peka Detonator (kg)</th>
+              <th>Jarak min. antar Gudang Peka Detonator (m)</th>
+              <th>Jarak min. ke Gudang Bahan Ramuan (m)</th>
+              <th>Jarak min. ke Gudang Peka Primer (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50</td><td>1</td><td>4</td><td>5</td></tr>
+            <tr><td>300</td><td>2</td><td>6</td><td>10</td></tr>
+            <tr><td>1.000</td><td>3</td><td>10</td><td>15</td></tr>
+            <tr><td>5.000</td><td>4,5</td><td>16</td><td>26</td></tr>
+            <tr><td>10.000</td><td>5,5</td><td>19</td><td>32</td></tr>
+            <tr><td>25.000</td><td>7,5</td><td>27</td><td>45</td></tr>
+            <tr><td>50.000</td><td>11</td><td>38</td><td>61</td></tr>
+            <tr><td>100.000</td><td>16</td><td>57</td><td>95</td></tr>
+            <tr><td>150.000</td><td>21</td><td>76</td><td>120</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="table-caption" style="margin-top:1.2rem;">Tabel 1.3 — Jarak Aman Gudang Bahan Ramuan terhadap Berbagai Objek</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Objek</th>
+              <th>&lt; 50 ton (m)</th>
+              <th>50–150 ton (m)</th>
+              <th>150–2.000 ton (m)</th>
+              <th>2.000–4.000 ton (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Bengkel dan tempat kerja lainnya</td><td>8</td><td>12</td><td>15</td><td>18</td></tr>
+            <tr><td>Jalan utama</td><td>8</td><td>8</td><td>15</td><td>18</td></tr>
+            <tr><td>Tempat-tempat umum</td><td>15</td><td>25</td><td>50</td><td>85</td></tr>
+            <tr><td>Batas tempat usaha pertambangan</td><td>8</td><td>15</td><td>50</td><td>85</td></tr>
+            <tr><td>Tempat pencampuran bahan ramuan</td><td>10</td><td>10</td><td>10</td><td>10</td></tr>
+            <tr><td>Bahan berbahaya lain (tangki BBM, dll.)</td><td>8</td><td>15</td><td>15</td><td>15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- G. PENYIMPANAN DAN PENCATATAN -->
+  <div class="section" id="h-penyimpanan">
+    <div class="section-title"><span class="sec-letter">G</span>Tata Cara Penyimpanan dan Pencatatan Bahan Peledak</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Penyimpanan Bahan Peledak Peka Detonator</div>
+      <div class="callout red">Temperatur ruangan maksimal <strong>35°C</strong></div>
+      <p class="body-text" style="margin-top:0.6rem;">Dalam gudang bangunan: tetap dalam kemasan aslinya; diletakkan di atas bangku ≥30 cm dari lantai; tinggi tumpukan maks. <strong>180 cm</strong>; lebar tumpukan maks. 4 peti; jarak antartumpukan ≥30 cm; ruang bebas ke dinding ≥30 cm.</p>
+      <p class="body-text">Dalam gudang kontener: ditumpuk agar udara mengalir; kapasitas maks. <strong>4.000 kg</strong>.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Penyimpanan Bahan Peledak Peka Primer</div>
+      <div class="callout red">Temperatur ruangan maksimal <strong>55°C</strong></div>
+      <p class="body-text" style="margin-top:0.6rem;">Kemasan 25–50 kg: tinggi tumpukan maks. 180 cm; lebar maks. 8 kantong. Kemasan ~1.000 kg: disimpan dengan palet kayu asli; tidak manual; maks. 3 kemasan tinggi; ruang bebas ke dinding ≥75 cm; lorong bebas hambatan untuk alat angkut; alat angkut bermotor tidak boleh ditinggalkan tanpa operator.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">3</span> Penyimpanan Bahan Ramuan</div>
+      <div class="callout red">Temperatur ruangan maksimal <strong>55°C</strong></div>
+      <p class="body-text" style="margin-top:0.6rem;">Ketentuan serupa dengan penyimpanan peka primer. Dalam kontener: ditumpuk agar udara mengalir. Kontener hanya ditempatkan pada lokasi yang diizinkan dan disusun dengan rapat dan baik.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">4</span> Penyimpanan Detonator</div>
+      <ol class="list-alpha" type="a">
+        <li>Persediaan detonator harus seimbang dengan persediaan bahan peledak;</li>
+        <li>Detonator harus disimpan terpisah dalam gudang bahan peledak peka detonator; dan</li>
+        <li>Dilarang menyimpan detonator bersama-sama dengan bahan peledak lainnya.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">5</span> Penyimpanan di Bawah Tanah</div>
+      <ol class="list-alpha" type="a">
+        <li>Bahan peledak di bawah tanah harus disimpan dalam gudang bahan peledak.</li>
+        <li>Gudang bawah tanah hanya untuk pemakaian paling lama <strong>2 hari 2 malam</strong>, dengan jumlah maks. <strong>5.000 kg</strong>.</li>
+        <li>Apabila tidak ada gudang bawah tanah dan pemakaian &gt; 50 kg dalam &lt; 24 jam, harus tersedia tempat penyimpanan sementara yang disetujui KaIT/Kepala Dinas.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">6</span> Bahan Ramuan Sisa (Akhir Kerja)</div>
+      <p class="body-text">Unit pembuat/pencampur bahan peledak harus berada di area gudang bahan ramuan dengan: tempat parkir khusus; truk ANFO parkir dengan kompartemen/bin fuel kosong; menerapkan LOTO; menyediakan APAR khusus hidrokarbon; dan membuat SOP terkait parkir dan keadaan darurat.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">7</span> Buku Catatan Bahan Peledak</div>
+      <p class="body-text">Di dalam gudang harus tersedia buku catatan berisi: nama, jenis, jumlah keseluruhan, tanggal penerimaan, dan lokasi penyimpanan. Setiap gudang harus memiliki daftar persediaan yang mencatat: nama dan tanda tangan petugas penerima/pengeluaran; jumlah setiap jenis bahan peledak masuk/keluar; tanggal dan waktu pengeluaran/pengembalian; nama penerima; dan lokasi/tujuan permintaan.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">8–10</span> Ketentuan Tambahan</div>
+      <ul class="list-alpha" type="a">
+        <li>Bahan peledak yang tidak akan dipergunakan kembali harus ditangani sesuai ketentuan perundang-undangan.</li>
+        <li>Data bahan peledak yang rusak (jumlah, jenis, merek, kerusakan) harus dilaporkan kepada KaIT/Kepala Dinas untuk saran penanggulangan.</li>
+        <li>Dilarang menggunakan bahan peledak yang melebihi batas <strong>kadaluarsa (<em>expired date</em>)</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- H. PENGANGKUTAN DAN PELEDAKAN -->
+  <div class="section" id="h-pengangkutan">
+    <div class="section-title"><span class="sec-letter">H</span>Pengangkutan Bahan Peledak dan Pekerjaan Peledakan</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Pendidikan dan Pelatihan</div>
+      <p class="body-text">KTT/PTL harus menyediakan sarana pendidikan kepada orang yang akan bertugas dalam pekerjaan peledakan, terutama bagi yang belum menunjukkan kemampuan sebagai juru ledak. Program diklat disusun oleh KTT/PTL; calon juru ledak bekerja di bawah pengawasan ketat juru ledak yang ditugaskan.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2–6</span> KPP dan KIM</div>
+      <div class="callout">
+        <strong>Masa berlaku sertifikasi:</strong><br>
+        KPP Pertama = 2 tahun (disahkan KTT/PTL)<br>
+        KPP Madya = 2 tahun (disahkan KaIT/Kepala Dinas)<br>
+        KIM = 2 tahun (disahkan KaIT/Kepala Dinas)
+      </div>
+      <p class="body-text" style="margin-top:0.6rem;">Pemegang KPP Pertama harus dilaporkan kepada KaIT. Perpanjangan KIM dan KPP Madya diajukan <strong>1 bulan sebelumnya</strong>. Jika pekerja tidak bekerja lagi di tempat semula, KTT/PTL mengembalikan KIM/KPP Madya ke KaIT disertai surat pernyataan, paling lambat <strong>1 bulan</strong>.</p>
+      <p class="body-text"><strong>Format kartu</strong>: plastik PVC ukuran 85,6 × 54 mm. KPP Pertama dikeluarkan KTT/PTL; KPP Madya dan KIM dikeluarkan KaIT/Kepala Dinas atas nama KaIT.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">8</span> Pengangkutan Bahan Peledak</div>
+      <p class="body-text"><strong>a. Persyaratan kendaraan khusus pengangkut:</strong></p>
+      <ol class="list-num">
+        <li>Rotary lamp berwarna merah;</li>
+        <li>Bendera merah 30 × 40 cm di belakang kabin;</li>
+        <li>Tulisan "awas bahan peledak" di sisi kiri, kanan, dan belakang;</li>
+        <li>Bak pengangkut bukan konduktor listrik (atau dilapisi isolator);</li>
+        <li>Detonator dalam wadah khusus non-konduktor, terpisah satu sama lain;</li>
+        <li>Unit pengangkut detonator dan dinamit/booster memiliki tempat terpisah yang dapat dikunci;</li>
+        <li>APAR siap pakai dan tanda "dilarang merokok"; dan</li>
+        <li>Unit dinyatakan layak oleh KTT/PTL.</li>
+      </ol>
+      <p class="body-text" style="margin-top:0.6rem;"><strong>b–f. Ketentuan pengawalan:</strong> Selama pengangkutan harus ada petugas keamanan dan personil peledakan; rotary lamp dan lampu bahaya senantiasa dinyalakan; unit pengawalan berada di depan unit pengangkut dengan sirine, rotary lamp, dan lampu dinyalakan; unit pengangkut tetap berada pada jalur unit pengawalan.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">9</span> Pekerjaan Peledakan</div>
+      <ol class="list-alpha" type="a">
+        <li>KTT/PTL memastikan bahan peledak dapat digunakan secara aman;</li>
+        <li>Semua karyawan harus mengetahui jadwal rencana peledakan;</li>
+        <li>Lokasi peledakan dipasang pita pengaman dan tanda peringatan;</li>
+        <li>Juru ledak memastikan setiap tahap dilaksanakan secara aman;</li>
+        <li>Dilarang melakukan peledakan kecuali juru ledak yang memiliki <strong>KIM</strong>;</li>
+        <li>Dilarang mengisi atau meledakkan lubang yang sebelumnya sudah diledakkan, kecuali untuk menangani peledakan mangkir;</li>
+        <li>Dilarang mencabut kabel detonator/sumbu api dari lubang yang sudah diisi dan diprimer;</li>
+        <li>Dilarang merokok atau membuat nyala api dalam jarak &lt; <strong>10 meter</strong> dari bahan peledak;</li>
+        <li>Sumbu api diperiksa sebelum digunakan; kecepatan nyala yang baik: <strong>90–110 detik per meter</strong>; dan</li>
+        <li>Juru ledak memastikan tidak ada dampak negatif melebihi ambang batas (lontaran batu, getaran, ledakan udara, gas beracun).</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">10</span> Peledakan Tidur (<em>Sleep Blast</em>)</div>
+      <p class="body-text">Rencana peledakan tidur diajukan dalam RKAB. Setelah disetujui, KTT/PTL menyampaikan data kepada KaIT/Kepala Dinas paling lambat <strong>14 hari kerja</strong> setelah RKAB disetujui, melampirkan: salinan persetujuan RKAB; SOP peledakan tidur; identifikasi bahaya dan pengendalian risiko; kajian teknis; serta area dan rencana waktu tidur.</p>
+      <div class="callout red" style="margin-top:0.5rem;">
+        Peledakan tidur diberikan untuk jangka waktu paling lama <strong>3 hari</strong>. Dilaporkan berkala setiap <strong>3 bulan</strong> dan dievaluasi ulang setiap <strong>2 tahun</strong>.
+      </div>
+    </div>
+  </div>
+
+  <!-- I. PENUTUP HANDAK -->
+  <div class="section" id="h-penutup">
+    <div class="section-title"><span class="sec-letter">I</span>Penutup — Lampiran I</div>
+    <p class="body-text">Pedoman teknis ini agar dijadikan acuan untuk melakukan pekerjaan yang berhubungan dengan peledakan secara aman. Hal-hal yang belum diatur dapat diajukan oleh KTT/PTL kepada KaIT/Kepala Dinas, sepanjang tidak bertentangan dengan peraturan perundangan dan didukung kajian teknis.</p>
+    <div class="penutup">
+      <p class="jabatan">Direktur Jenderal Mineral dan Batubara, Kementerian ESDM</p>
+      <p class="nama">BAMBANG GATOT ARIYONO</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════
+       LAMPIRAN II — BBC
+  ═══════════════════════════ -->
+  <div class="lampiran-header bbc">
+    <div class="lamp-icon">⛽</div>
+    <div class="lamp-text">
+      <div class="lamp-label">Lampiran II</div>
+      <div class="lamp-title">Petunjuk Teknis Keselamatan Fasilitas Penimbunan Bahan Bakar Cair (BBC)</div>
+    </div>
+  </div>
+
+  <!-- A. PENDAHULUAN BBC -->
+  <div class="section" id="b-pendahuluan">
+    <div class="section-title"><span class="sec-letter blue">A</span>Pendahuluan</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">3</span> Maksud dan Tujuan</div>
+      <ol class="list-alpha" type="a">
+        <li>Memberikan panduan kepada perusahaan agar bahaya dari kegiatan penyimpanan/penimbunan bahan bakar cair dapat dihindarkan dan dikendalikan, serta kegiatan operasional berjalan produktif dan efisien.</li>
+        <li>Memberikan instruksi tertulis dalam pelaksanaan penanganan fasilitas penyimpanan/penimbunan bahan bakar cair untuk menjaga konsistensi dan standardisasi sesuai ketentuan perundang-undangan.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">4</span> Ruang Lingkup</div>
+      <ol class="list-alpha" type="a">
+        <li>Pembangunan dan Kelayakan Fasilitas Penyimpanan/Penimbunan BBC;</li>
+        <li>Ketentuan Umum dan Keselamatan Penyimpanan/Penimbunan BBC;</li>
+        <li>Perawatan, Pemeliharaan, dan Penanganan Fasilitas Penimbunan BBC;</li>
+        <li>Pelaporan dan Pengelolaan Fasilitas Penimbunan/Penyimpanan BBC; dan</li>
+        <li>Tangki Portable dan Stasiun Pengisian Bahan Bakar Cair.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- B. PENGERTIAN BBC -->
+  <div class="section" id="b-pengertian">
+    <div class="section-title"><span class="sec-letter blue">B</span>Pengertian</div>
+    <div class="def-list">
+      <div class="def-item"><span class="def-num blue">1</span><span class="def-body"><span class="def-term">Bahan Bakar Cair</span> — gabungan senyawa hidrokarbon yang diperoleh dari alam maupun secara buatan, seperti bensin, minyak solar, minyak tanah, avtur, dan sebagainya.</span></div>
+      <div class="def-item"><span class="def-num blue">2</span><span class="def-body"><span class="def-term">Tangki Timbun</span> — tangki penyimpan bahan bakar cair yang dibangun secara vertikal atau horizontal dan dioperasikan pada kondisi atmosferik atau tekanan di atas level volume cairan.</span></div>
+      <div class="def-item"><span class="def-num blue">3</span><span class="def-body"><span class="def-term">BBC yang Mudah Menyala:</span>
+        <ul class="list-alpha" type="a" style="margin-top:0.3rem;">
+          <li>Kelas I A — titik nyala &lt; 22,8°C dan titik didih &lt; 37,8°C;</li>
+          <li>Kelas I B — titik nyala &lt; 22,8°C dan titik didih ≥ 37,8°C;</li>
+          <li>Kelas I C — titik nyala ≥ 22,8°C dan titik didih &lt; 60°C.</li>
+        </ul>
+      </span></div>
+      <div class="def-item"><span class="def-num blue">4</span><span class="def-body"><span class="def-term">BBC yang Mudah Terbakar:</span>
+        <ul class="list-alpha" type="a" style="margin-top:0.3rem;">
+          <li>Kelas II A — titik nyala ≥ 37,8°C dan titik didih &lt; 60°C;</li>
+          <li>Kelas II B — titik nyala ≥ 60°C dan titik didih &lt; 93°C;</li>
+          <li>Kelas II C — titik nyala ≥ 93°C.</li>
+        </ul>
+      </span></div>
+      <div class="def-item"><span class="def-num blue">5</span><span class="def-body"><span class="def-term">Perusahaan</span> — pemegang IUP, IUPK, IUP Operasi Produksi khusus pengolahan dan/atau pemurnian, KK, atau PKP2B.</span></div>
+    </div>
+  </div>
+
+  <!-- C. PEMBANGUNAN BBC -->
+  <div class="section" id="b-pembangunan">
+    <div class="section-title"><span class="sec-letter blue">C</span>Pembangunan Fasilitas Penimbunan/Penyimpanan BBC</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Permohonan Pembangunan</div>
+      <ol class="list-alpha" type="a">
+        <li>Kepemilikan hanya boleh diajukan atas nama Perusahaan;</li>
+        <li>Permohonan diajukan pada RKAB;</li>
+        <li>Setelah RKAB disetujui, KTT/PTL menyampaikan data kepada KaIT/Kepala Dinas paling lambat <strong>14 hari kerja</strong>;</li>
+        <li>KaIT/Kepala Dinas dapat meminta presentasi dan/atau menugaskan Inspektur Tambang untuk verifikasi lapangan;</li>
+        <li>Setelah menerima hasil evaluasi, Perusahaan memulai pembangunan;</li>
+        <li>Perusahaan melaporkan saat kondisi pembangunan mencapai <strong>80%</strong> untuk pemeriksaan fisik dan peralatan keselamatan;</li>
+        <li>KaIT/Kepala Dinas menugaskan Inspektur Tambang untuk memeriksa dan menuangkan hasil dalam Berita Acara;</li>
+        <li>Pemeriksaan wajib dilakukan untuk fasilitas dengan kapasitas total ≥ <strong>40.000 liter</strong> dan untuk BBC mudah menyala ≥ <strong>10.000 liter</strong>;</li>
+        <li>Fasilitas dapat digunakan saat kondisi mencapai <strong>100%</strong> dan dinyatakan layak untuk jangka waktu paling lama <strong>5 tahun</strong>; dan</li>
+        <li>Ketidaksesuaian hasil pemeriksaan harus ditindaklanjuti dan dilaporkan kembali.</li>
+      </ol>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Persyaratan Pembangunan</div>
+      <p class="body-text"><strong>Gambar Konstruksi dan Peta Situasi BBC</strong> (satu kesatuan gambar, sesuai format 1.1) mencantumkan:</p>
+      <ol class="list-num">
+        <li>Gambar konstruksi (skala min. 1:400): dimensi dan ukuran; tampak atas, depan, samping; menggambarkan persyaratan keselamatan: tanggul, pipa masuk/keluar, stasiun pengisian, drainase, oil trap, hydrant, pagar, APAR, lampu penerangan, penyalur petir, tahanan pembumian, CCTV (bila diperlukan).</li>
+        <li>Detail pondasi, dinding, atap, pipa gas, pagar, penyalur petir (skala min. 1:400; tinggi pagar ≥ 2,5 meter).</li>
+        <li>Tata letak (skala min. 1:400; menunjukkan seluruh peralatan keselamatan).</li>
+        <li>Kepala gambar: sudut kanan bawah; berisi logo, nama Perusahaan, jenis BBC, kapasitas, lokasi; kolom pengesahan (penggambar, pemeriksa, KTT/PTL, stempel).</li>
+        <li>Gambar situasi (skala min. 1:5.000; koordinat; radius aman ke fasilitas lain; kontur interval 2 meter).</li>
+      </ol>
+      <p class="body-text" style="margin-top:0.7rem;"><strong>Dokumen pendukung lainnya:</strong> detail rencana waktu pembangunan; salinan pengesahan KTT/PTL; salinan IPPKH (jika dalam kawasan hutan); Berita Acara Penentuan Lokasi; kajian daya dukung tanah; rencana pondasi; kajian teknis (WPS/PQR, MDR, <em>engineering plan</em>); foto lapangan 4 sudut; salinan izin lingkungan; surat pernyataan kebenaran bermaterai; dan soft copy.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">3</span> Persyaratan Tambahan pada Area Timbunan</div>
+      <p class="body-text">Melampirkan: rencana pembersihan lahan; kontur asli; sayatan kontur dan rencana timbunan; kajian daya dukung tanah; jenis material; dan sistem kendali aliran air permukaan.</p>
+    </div>
+
+    <!-- C.4 JARAK AMAN BBC -->
+    <div class="sub-section" id="b-jarak-bbc">
+      <div class="sub-title"><span class="sub-num">4</span> Ketentuan Umum dan Keselamatan Fasilitas Penimbunan BBC</div>
+
+      <p class="body-text"><strong>a. Jarak Aman Minimum</strong></p>
+      <p class="table-caption">Tabel 1.1 — Jarak Pagar Pengaman terhadap Jalan Umum atau Bangunan</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kelas BBC</th>
+              <th>Kapasitas Tangki (liter)</th>
+              <th>Jarak min. pagar ke jalan (m)</th>
+              <th>Jarak min. pagar ke bangunan (m)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td rowspan="9">I – IIB</td><td>0 – 1.500</td><td>1,5</td><td>1,5</td></tr>
+            <tr><td>1.501 – 3.000</td><td>3</td><td>1,5</td></tr>
+            <tr><td>3.001 – 46.000</td><td>4,5</td><td>1,5</td></tr>
+            <tr><td>46.001 – 115.000</td><td>6</td><td>1,5</td></tr>
+            <tr><td>115.001 – 190.000</td><td>9</td><td>3</td></tr>
+            <tr><td>190.001 – 380.000</td><td>15</td><td>4,5</td></tr>
+            <tr><td>380.001 – 1.900.000</td><td>24</td><td>7,5</td></tr>
+            <tr><td>1.900.001 – 3.800.000</td><td>30</td><td>10,5</td></tr>
+            <tr><td>&gt; 11.400.000</td><td>52,5</td><td>18</td></tr>
+            <tr><td rowspan="5">II C</td><td>0 – 40.000</td><td>1,5</td><td>1,5</td></tr>
+            <tr><td>40.001 – 114.000</td><td>3</td><td>1,5</td></tr>
+            <tr><td>114.001 – 190.000</td><td>3</td><td>3</td></tr>
+            <tr><td>190.001 – 380.000</td><td>4,5</td><td>3</td></tr>
+            <tr><td>&gt; 380.000</td><td>4,5</td><td>4,5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="body-text" style="margin-top:1rem;"><strong>b. Konstruksi Fasilitas</strong> — harus memenuhi SNI 13-3501-2002 dan/atau API 650 (Welded Steel Tanks for Oil Storage) dan/atau API 653 (Tank Inspection, Repair, Alteration, and Reconstruction).</p>
+
+      <p class="body-text" style="margin-top:0.7rem;"><strong>c. Pemeriksaan Pembangunan Tangki</strong> — meliputi: penyesuaian spesifikasi material (<em>material test certificate</em>); spesifikasi pengelasan (WPS/PQR); proses fabrikasi sesuai <em>engineering data</em>; <em>vacuum test</em> sambungan; <em>non-destructive test</em> (NDT); dan <em>water filling test</em> (hydro test) secara bertahap sampai penuh. Laporan hasil pemeriksaan dipelihara dan didokumentasikan oleh KTT/PTL.</p>
+
+      <p class="body-text" style="margin-top:0.7rem;"><strong>d. Tangki Pendam</strong> — harus: anti karat atau dilapisi anti karat; ditanam min. <strong>1 meter</strong> dihitung dari bagian atas tangki; galian diisi pasir; tahan tekanan sampai <strong>7 atmosfir</strong>; dilarang ditanam di bawah rel/jalan lalulintas; titik pengisian berjarak min. <strong>10 meter</strong> dari titik pengeluaran; dilengkapi alat deteksi kebocoran/sumur pantau.</p>
+
+      <p class="body-text" style="margin-top:0.7rem;"><strong>e. Penyimpanan, Penimbunan, Pembongkaran, dan Pemuatan</strong></p>
+      <ol class="list-num">
+        <li>Setiap tangki untuk bahan berbahaya/mudah terbakar harus dipasang tanggul (<em>secondary containment/bund wall</em>).</li>
+        <li>Tanggul dilengkapi saluran dengan pompa pengering dan wadah yang dapat dibuka/ditutup.</li>
+        <li>Pembongkaran dan pemuatan harus memenuhi standar yang diakui.</li>
+        <li>Pengawas wajib mengawasi proses pemindahan cairan; kebocoran harus dapat dihentikan segera dari tempat aman.</li>
+      </ol>
+
+      <p class="body-text" style="margin-top:0.7rem;"><strong>f. Ketentuan Fasilitas Penimbunan BBC</strong></p>
+      <ol class="list-num">
+        <li>Setiap lokasi penyimpanan/penimbunan harus memiliki: tanda "Dilarang Merokok" dan "Dilarang Masuk Tanpa Izin"; lampu penerangan kedap udara (instalasi di luar pagar); APAR sesuai risiko; hidran di luar pagar; Lembar Data Keselamatan Bahan; penyalur petir dengan tahanan pembumian ≤ <strong>5 ohm</strong>.</li>
+        <li>Pondasi dibangun di atas tanah stabil dengan konstruksi beton dan/atau tiang pancang.</li>
+        <li>Tanggul pengaman: untuk 1 tangki = kapasitas maks. + 20 cm; untuk sekumpulan tangki = ½ × jumlah seluruh kapasitas + 20 cm.</li>
+        <li>Tahanan pembumian penangkal petir diukur setiap <strong>6 bulan</strong> atau setelah petir hebat.</li>
+        <li>Pipa pernapasan (<em>breather</em>) tiga lapis kawat kasa kuningan dipasang di atas tangki.</li>
+        <li>Dinding tangki mencantumkan nomor, kapasitas, dan jenis BBC yang terbaca jelas.</li>
+        <li>Titik pengisian berjarak min. <strong>10 meter</strong> dari titik pengeluaran.</li>
+        <li>Pagar pengaman berjarak <strong>5 meter</strong> dari tanggul, dilengkapi pintu terkunci.</li>
+        <li>Panel listrik, pompa, lampu, dan peralatan listrik ditempatkan di luar pagar pengaman.</li>
+        <li>Jarak antar fasilitas dalam satu area penimbunan min. <strong>10 meter</strong>; jika kurang dari 10 meter, harus dilengkapi instalasi penyemprot air.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- D. PELAPORAN DAN PENGELOLAAN BBC -->
+  <div class="section" id="b-pelaporan">
+    <div class="section-title"><span class="sec-letter blue">D</span>Pelaporan dan Pengelolaan Fasilitas Penimbunan BBC</div>
+
+    <p class="body-text">Perusahaan melaporkan kepada KaIT/Kepala Dinas <strong>paling lama 3 bulan</strong> sebelum masa berlaku kelayakan berakhir, melampirkan: gambar konstruksi dan situasi; salinan pengesahan KTT/PTL; salinan IPPKH (jika ada); salinan izin lingkungan; surat pernyataan kebenaran bermaterai; dan soft copy dokumen.</p>
+
+    <p class="body-text">KaIT/Kepala Dinas menugaskan Inspektur Tambang untuk melakukan pemeriksaan kondisi fisik antara lain:</p>
+    <ol class="list-alpha" type="a">
+      <li>Pemeriksaan ketebalan pelat dasar tangki (non-coating) pada <em>shell plate</em> dan <em>roof plate</em> disesuaikan laju korosi;</li>
+      <li>Pemeriksaan instalasi pipa penyalur dan katup pengaman;</li>
+      <li>Pemeriksaan instalasi penyalur petir;</li>
+      <li>Pemeriksaan ketegaklurusan tangki;</li>
+      <li>Pemeriksaan <em>vacuum test</em>, <em>hydro test</em>, dan <em>non-destructive test</em> (pada awal uji kelayakan dan jika umur tangki ≥ 15 tahun atau sesuai data desain awal).</li>
+    </ol>
+
+    <p class="body-text" style="margin-top:0.6rem;">Berita Acara dibuat dari hasil pemeriksaan. Fasilitas dapat digunakan kembali setelah tindak lanjut dinyatakan layak untuk jangka waktu paling lama <strong>5 tahun</strong>.</p>
+
+    <div class="callout blue">
+      Untuk kapasitas di bawah 40.000 liter (BBC mudah terbakar) atau di bawah 10.000 liter (BBC mudah menyala), pengujian kelayakan dilakukan oleh <strong>KTT/PTL</strong> dan hasilnya dilaporkan kepada KaIT/Kepala Dinas.
+    </div>
+  </div>
+
+  <!-- E. TANGKI PORTABLE DAN SPBB -->
+  <div class="section" id="b-portable">
+    <div class="section-title"><span class="sec-letter blue">E</span>Tangki Portable dan Stasiun Pengisian Bahan Bakar Cair</div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">1</span> Tangki Portable</div>
+      <p class="body-text"><strong>Statis</strong>: didesain sesuai standar; jika tidak dilengkapi dinding ganda, harus memiliki tanggul pengaman dan lantai dilapisi terpal kedap bocor.</p>
+      <p class="body-text"><strong>Dinamis (unit pengangkut tangki)</strong>: persyaratan sama dengan unit pengangkut bahan ramuan bahan peledak (kekuatan material, pengelasan, pengereman, posisi knalpot, pengujian kelayakan). Pengujian kelayakan berkala setiap <strong>2 tahun</strong>.</p>
+    </div>
+
+    <div class="sub-section">
+      <div class="sub-title"><span class="sub-num">2</span> Stasiun Pengisian Bahan Bakar dalam Kegiatan Pertambangan</div>
+      <p class="body-text">Paling sedikit harus memenuhi:</p>
+      <ol class="list-alpha" type="a">
+        <li>Area pengisian (<em>pump station</em>) minimal terdiri atas <em>fuel dispenser</em>, <em>refuse container</em>, dan bollard pengaman;</li>
+        <li>Jalur masuk/keluar unit mudah berbelok tanpa halangan dan jarak pandang baik;</li>
+        <li>Jalur masuk dan keluar tidak boleh saling bersilangan;</li>
+        <li>Lebar jalur min. selebar unit terbesar yang dilayani ditambah kelonggaran;</li>
+        <li>Petugas pompa memiliki kemampuan mengoperasikan pengisian BBC;</li>
+        <li>Unit kendaraan harus dilengkapi kabel pembumian;</li>
+        <li>Terdapat instalasi penyalur petir;</li>
+        <li>Memiliki lantai kedap air;</li>
+        <li>Terdapat oil trap;</li>
+        <li>Terdapat pasir sebagai sarana pengendali bahaya tumpahan hidrokarbon;</li>
+        <li>Terdapat sarana pencegahan dan pemadam kebakaran; dan</li>
+        <li>Terdapat sarana pencegahan dan pengendalian pencemaran lingkungan.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- F. PENUTUP BBC -->
+  <div class="section" id="b-penutup">
+    <div class="section-title"><span class="sec-letter blue">F</span>Penutup — Lampiran II</div>
+    <p class="body-text">Petunjuk teknis ini agar dijadikan acuan untuk melakukan pekerjaan secara aman. Hal-hal yang belum diatur dapat diajukan oleh KTT/PTL kepada KaIT/Kepala Dinas, sepanjang tidak bertentangan dengan peraturan perundang-undangan serta didukung kajian teknis.</p>
+    <div class="penutup">
+      <p class="jabatan">Direktur Jenderal Mineral dan Batubara, Kementerian ESDM</p>
+      <p class="nama">BAMBANG GATOT ARIYONO</p>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const el = document.getElementById('progress');
+    const h = document.documentElement;
+    el.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  });
+
+  // Tab switcher
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+    document.querySelectorAll('.nav-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active-tab');
+    document.getElementById('nav-' + tab).classList.add('active');
+  }
+</script>
+</body>
+</html>

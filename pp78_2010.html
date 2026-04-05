@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP No. 78 Tahun 2010 — Reklamasi dan Pascatambang</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --green:       #2c4a2e;
+    --green-dark:  #1a2e1b;
+    --green-mid:   #3a5e3c;
+    --green-pale:  #eef4ee;
+    --gold:        #8b6914;
+    --gold-light:  #c9a84c;
+    --orange:      #c0600a;
+    --ink:         #1a1a18;
+    --ink-mid:     #2e2e2a;
+    --ink-light:   #5e5e55;
+    --cream:       #faf8f6;
+    --cream-dark:  #f0ebe0;
+    --rule:        #d4c9b0;
+    --sidebar-w:   285px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 14.5px; line-height: 1.8; }
+  .shell { display: flex; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  aside {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: #0a1208; color: #b0c4b1;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: #1a2e1b transparent;
+  }
+  .sb-brand { padding: 1.3rem 1.2rem 0.9rem; background: #070e07; border-bottom: 1px solid #1a2e1b; }
+  .sb-brand .label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.3rem; }
+  .sb-brand h2 { font-family: 'Lora', serif; font-size: 12px; color: #dce8dc; line-height: 1.4; font-weight: 400; }
+  .sb-badge { margin: 0.6rem 1.2rem 0; background: var(--green); color: white; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 0.4rem 0.8rem; border-radius: 3px; display: inline-block; }
+
+  .nav-group { padding: 0.8rem 0 0.2rem; }
+  .nav-group-title { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-light); padding: 0 1.2rem 0.3rem; }
+  .nav-item { display: block; padding: 0.37rem 1.2rem; color: #7a9a7c; text-decoration: none; font-size: 12px; transition: all 0.15s; border-left: 2px solid transparent; line-height: 1.4; }
+  .nav-item:hover { color: #dce8dc; border-left-color: var(--gold-light); background: rgba(44,74,46,0.12); }
+  .nav-item .n { font-size: 10px; opacity: 0.5; margin-right: 0.3rem; }
+
+  /* ── MAIN ── */
+  main { flex: 1; max-width: 870px; margin: 0 auto; padding: 2.5rem 3rem 6rem; }
+
+  .breadcrumb { font-size: 11px; color: var(--ink-light); margin-bottom: 1.5rem; }
+  .breadcrumb span { color: var(--green-mid); }
+
+  /* ── DOC HEADER ── */
+  .doc-header { text-align: center; padding: 1.8rem 0; border-bottom: 2px solid var(--rule); margin-bottom: 2.2rem; }
+  .doc-header .instansi { font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem; }
+  .doc-badge { display: inline-block; background: var(--green); color: white; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; margin: 0.6rem 0 0.4rem; font-family: 'IBM Plex Sans', sans-serif; }
+  .doc-header .nomor { font-family: 'Lora', serif; font-size: 13px; color: var(--gold); margin-bottom: 0.4rem; }
+  .doc-header h1 { font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.45; max-width: 640px; margin: 0 auto 0.6rem; }
+  .doc-header .meta { font-size: 11.5px; color: var(--ink-light); font-style: italic; }
+
+  /* ── BAB HEADERS ── */
+  .bagian { margin-bottom: 2.5rem; scroll-margin-top: 2rem; }
+  .bagian-header { display: flex; align-items: center; gap: 0.8rem; background: var(--green); color: white; padding: 0.9rem 1.2rem; border-radius: 6px; margin-bottom: 1.2rem; }
+  .bagian-header .bh-num { font-size: 22px; font-weight: 700; font-family: 'Lora', serif; opacity: 0.9; min-width: 2rem; }
+  .bagian-header .bh-title { font-family: 'Lora', serif; font-size: 15px; line-height: 1.3; }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 1.8rem; scroll-margin-top: 2rem; }
+  .section-title { display: flex; align-items: center; gap: 0.6rem; font-family: 'Lora', serif; font-size: 16px; color: var(--ink); margin-bottom: 0.8rem; padding-bottom: 0.45rem; border-bottom: 1.5px solid var(--rule); }
+  .sec-num { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; background: var(--green); color: white; border-radius: 4px; font-size: 12px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; flex-shrink: 0; }
+
+  .sub-section { margin: 1.1rem 0 0.8rem; }
+  .sub-title { font-family: 'Lora', serif; font-size: 14px; color: var(--green-dark); margin-bottom: 0.45rem; display: flex; align-items: baseline; gap: 0.5rem; }
+  .sub-num { font-size: 11px; font-weight: 600; background: var(--green-pale); color: var(--green-mid); padding: 1px 8px; border-radius: 20px; flex-shrink: 0; font-family: 'IBM Plex Sans', sans-serif; }
+  .sub-sub-title { font-size: 13.5px; font-weight: 600; color: var(--ink-mid); margin: 0.8rem 0 0.35rem; }
+
+  /* ── PROSE ── */
+  p.body { margin-bottom: 0.55rem; color: var(--ink-mid); }
+
+  /* ── LISTS ── */
+  .list-alpha { margin: 0.4rem 0 0.5rem 1.5rem; }
+  .list-alpha li { margin-bottom: 0.3rem; color: var(--ink-mid); }
+  .list-num { margin: 0.35rem 0 0.45rem 1.5rem; list-style-type: decimal; }
+  .list-num li { margin-bottom: 0.3rem; color: var(--ink-mid); }
+
+  /* ── CALLOUTS ── */
+  .callout       { border-left: 3px solid var(--green-mid); background: var(--green-pale); padding: 0.7rem 1rem; margin: 0.6rem 0; border-radius: 0 4px 4px 0; font-size: 14px; color: var(--ink-mid); }
+  .callout.gold  { border-left-color: var(--gold); background: #fdf8ec; }
+  .callout.dark  { border-left-color: var(--green-dark); background: #e4ede4; }
+
+  /* ── PRINSIP 3-CARDS ── */
+  .prinsip-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem; margin: 0.8rem 0; }
+  .prinsip-card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .prinsip-card .pch { padding: 0.5rem 0.8rem; font-weight: 600; font-size: 13px; color: white; }
+  .prinsip-card .pcb { padding: 0.6rem 0.8rem; font-size: 13px; color: var(--ink-mid); background: white; }
+  .pch-lh { background: var(--green-mid); }
+  .pch-k3 { background: var(--orange); }
+  .pch-kv { background: #2c3e50; }
+
+  /* ── SANKSI 3-CARDS ── */
+  .sanksi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem; margin: 0.8rem 0; }
+  .sanksi-card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .sanksi-card .sch { padding: 0.5rem 0.8rem; font-weight: 600; font-size: 13px; color: white; }
+  .sanksi-card .scb { padding: 0.6rem 0.8rem; font-size: 13px; color: var(--ink-mid); background: white; }
+  .sch-a { background: var(--orange); }
+  .sch-b { background: var(--green-mid); }
+  .sch-c { background: #7a1f1f; }
+
+  /* ── 2-COL CARDS ── */
+  .duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 0.8rem 0; }
+  .duo-card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .duo-card .dch { background: var(--green-dark); color: white; padding: 0.55rem 0.9rem; font-size: 13px; font-weight: 600; font-family: 'Lora', serif; }
+  .duo-card .dcb { padding: 0.7rem 0.9rem; background: white; font-size: 13px; color: var(--ink-mid); }
+  .duo-card .dcb ul { margin-left: 1.1rem; }
+  .duo-card .dcb li { margin-bottom: 0.2rem; }
+
+  /* ── TIMELINE TABLE ── */
+  .waktu-table { width: 100%; border-collapse: collapse; margin: 0.7rem 0; font-size: 13.5px; }
+  .waktu-table th { background: var(--ink); color: #dce8dc; padding: 0.5rem 0.7rem; text-align: left; font-weight: 500; }
+  .waktu-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid var(--cream-dark); color: var(--ink-mid); vertical-align: top; }
+  .waktu-table tr:nth-child(even) td { background: #f3f7f3; }
+  .waktu-tag { display: inline-block; background: var(--green-pale); color: var(--green-dark); font-weight: 600; font-size: 12px; padding: 1px 8px; border-radius: 20px; white-space: nowrap; }
+
+  /* ── SIGNATURE ── */
+  .sig-block { background: var(--cream-dark); border: 1px solid var(--rule); padding: 1.4rem 1.8rem; margin: 1.5rem 0; border-radius: 6px; }
+  .sig-row { display: flex; gap: 3rem; flex-wrap: wrap; }
+  .sig-col { min-width: 180px; }
+  .sig-label { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink-light); margin-bottom: 4px; }
+  .sig-name { font-family: 'Lora', serif; font-size: 14px; font-weight: 700; color: var(--ink); margin-top: 24px; }
+  .sig-role { font-size: 12px; color: var(--ink-light); font-style: italic; }
+
+  hr.div { border: none; border-top: 1px solid var(--rule); margin: 1.8rem 0; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold-light); width: 0; z-index: 999; transition: width 0.1s; }
+
+  @media (max-width: 800px) {
+    aside { display: none; }
+    main { padding: 1.5rem 1rem 4rem; }
+    .prinsip-grid, .sanksi-grid, .duo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="prog"></div>
+<div class="shell">
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside>
+  <div class="sb-brand">
+    <div class="label">Peraturan Pemerintah RI</div>
+    <h2>Nomor 78 Tahun 2010 tentang Reklamasi dan Pascatambang</h2>
+  </div>
+  <div style="padding:0.5rem 1.2rem 0.3rem;">
+    <span class="sb-badge">20 Desember 2010</span>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Konsiderans</div>
+    <a class="nav-item" href="#dasar"><span class="n">▸</span>Dasar &amp; Pertimbangan</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab I — Ketentuan Umum</div>
+    <a class="nav-item" href="#bab1"><span class="n">1</span>Pasal 1 — Definisi</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab II — Prinsip</div>
+    <a class="nav-item" href="#bab2-kewajiban"><span class="n">2</span>Kewajiban Reklamasi</a>
+    <a class="nav-item" href="#bab2-prinsip"><span class="n">3</span>Prinsip Pelaksanaan</a>
+    <a class="nav-item" href="#bab2-rincian"><span class="n">4</span>Rincian Prinsip</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab III — Tata Laksana</div>
+    <a class="nav-item" href="#bab3-umum"><span class="n">5–6</span>Umum</a>
+    <a class="nav-item" href="#bab3-rek"><span class="n">7</span>Rencana Reklamasi</a>
+    <a class="nav-item" href="#bab3-pasca"><span class="n">10</span>Rencana Pascatambang</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab IV — Persetujuan</div>
+    <a class="nav-item" href="#bab4-rek"><span class="n">▸</span>Persetujuan Reklamasi</a>
+    <a class="nav-item" href="#bab4-pasca"><span class="n">▸</span>Persetujuan Pascatambang</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab V — Pelaksanaan</div>
+    <a class="nav-item" href="#bab5-eksplorasi"><span class="n">19</span>Reklamasi Eksplorasi</a>
+    <a class="nav-item" href="#bab5-oprod"><span class="n">20</span>Reklamasi Op. Produksi</a>
+    <a class="nav-item" href="#bab5-laporan"><span class="n">22</span>Pelaporan</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab VI — Jaminan</div>
+    <a class="nav-item" href="#bab6-umum"><span class="n">29</span>Kewajiban Jaminan</a>
+    <a class="nav-item" href="#bab6-rek"><span class="n">30</span>Jaminan Reklamasi</a>
+    <a class="nav-item" href="#bab6-pasca"><span class="n">37</span>Jaminan Pascatambang</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Bab VII – XI</div>
+    <a class="nav-item" href="#bab7"><span class="n">VII</span>Pemegang IPR</a>
+    <a class="nav-item" href="#bab8"><span class="n">VIII</span>Penyerahan Lahan</a>
+    <a class="nav-item" href="#bab9"><span class="n">IX</span>Sanksi Administratif</a>
+    <a class="nav-item" href="#bab10"><span class="n">X</span>Ketentuan Peralihan</a>
+    <a class="nav-item" href="#bab11"><span class="n">XI</span>Ketentuan Penutup</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Penjelasan</div>
+    <a class="nav-item" href="#penj-umum"><span class="n">I</span>Umum</a>
+    <a class="nav-item" href="#penj-pasal"><span class="n">II</span>Pasal demi Pasal</a>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main>
+  <div class="breadcrumb">Peraturan Pemerintah Republik Indonesia &rsaquo; <span>Nomor 78 Tahun 2010</span></div>
+
+  <div class="doc-header">
+    <div class="instansi">Presiden Republik Indonesia</div>
+    <div class="doc-badge">PP No. 78 Tahun 2010</div>
+    <div class="nomor">Ditetapkan 20 Desember 2010 &nbsp;|&nbsp; LN RI Nomor 138 &nbsp;|&nbsp; TLN Nomor 5172</div>
+    <h1>Peraturan Pemerintah tentang<br>Reklamasi dan Pascatambang</h1>
+    <div class="meta">Melaksanakan Pasal 101 UU No. 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara · Mencakup IUP/IUPK Eksplorasi dan Operasi Produksi · Jaminan Reklamasi dan Pascatambang</div>
+  </div>
+
+  <!-- ─── KONSIDERANS ─── -->
+  <div class="section" id="dasar">
+    <div class="section-title"><span class="sec-num">▸</span>Dasar Pertimbangan dan Landasan Hukum</div>
+    <div class="callout gold">
+      <strong>Menimbang:</strong> Bahwa untuk melaksanakan ketentuan Pasal 101 Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara, perlu menetapkan Peraturan Pemerintah tentang Reklamasi dan Pascatambang.
+    </div>
+    <p class="body" style="margin-top:0.5rem;"><strong>Mengingat:</strong></p>
+    <ol class="list-num">
+      <li>Pasal 5 ayat (2) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945;</li>
+      <li>Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara (LN RI Tahun 2009 Nomor 4, TLN RI Nomor 4959).</li>
+    </ol>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB I ═════════ -->
+  <div class="bagian" id="bab1">
+    <div class="bagian-header">
+      <div class="bh-num">I</div>
+      <div class="bh-title">Ketentuan Umum</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">1</span>Pasal 1 — Definisi</div>
+      <ol class="list-num">
+        <li>Pertambangan, Mineral, Batubara, Usaha Pertambangan, IUP, IUPK, IUP Eksplorasi, IUP Operasi Produksi, IUPK Eksplorasi, IUPK Operasi Produksi, Eksplorasi, Studi Kelayakan, Operasi Produksi, Penambangan, Pengolahan dan Pemurnian, Reklamasi, serta <strong>Pascatambang (Kegiatan Pascatambang)</strong> adalah sebagaimana dimaksud dalam Undang-Undang Nomor 4 Tahun 2009 tentang Pertambangan Mineral dan Batubara.</li>
+        <li><strong>Menteri</strong> adalah menteri yang menyelenggarakan urusan pemerintahan di bidang pertambangan mineral dan batubara.</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB II ═════════ -->
+  <div class="bagian" id="bab2-kewajiban">
+    <div class="bagian-header">
+      <div class="bh-num">II</div>
+      <div class="bh-title">Prinsip Reklamasi dan Pascatambang</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">2</span>Pasal 2 — Kewajiban</div>
+      <ol class="list-num">
+        <li>Pemegang <strong>IUP Eksplorasi dan IUPK Eksplorasi</strong> wajib melaksanakan reklamasi.</li>
+        <li>Pemegang <strong>IUP Operasi Produksi dan IUPK Operasi Produksi</strong> wajib melaksanakan reklamasi dan pascatambang.</li>
+        <li>Reklamasi sebagaimana dimaksud pada ayat (1) dilakukan terhadap lahan terganggu pada kegiatan eksplorasi.</li>
+        <li>Reklamasi dan pascatambang sebagaimana dimaksud pada ayat (2) dilakukan terhadap lahan terganggu pada kegiatan pertambangan dengan sistem dan metode: (a) penambangan terbuka; dan (b) penambangan bawah tanah.</li>
+      </ol>
+    </div>
+
+    <div class="section" id="bab2-prinsip">
+      <div class="section-title"><span class="sec-num">3</span>Pasal 3 — Prinsip Pelaksanaan</div>
+      <div class="prinsip-grid">
+        <div class="prinsip-card">
+          <div class="pch pch-lh">a. Perlindungan Lingkungan Hidup</div>
+          <div class="pcb">Wajib dipenuhi pemegang IUP/IUPK Eksplorasi <em>maupun</em> Operasi Produksi. Mencakup perlindungan dan pengelolaan lingkungan hidup pertambangan.</div>
+        </div>
+        <div class="prinsip-card">
+          <div class="pch pch-k3">b. Keselamatan &amp; Kesehatan Kerja</div>
+          <div class="pcb">Wajib dipenuhi pemegang IUP/IUPK Eksplorasi <em>maupun</em> Operasi Produksi. Melindungi keselamatan dan kesehatan setiap pekerja/buruh.</div>
+        </div>
+        <div class="prinsip-card">
+          <div class="pch pch-kv">c. Konservasi Mineral &amp; Batubara</div>
+          <div class="pcb">Hanya wajib bagi pemegang IUP/IUPK <em>Operasi Produksi</em>. Mencakup penambangan yang optimum dan efisiensi pengolahan.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" id="bab2-rincian">
+      <div class="section-title"><span class="sec-num">4</span>Pasal 4 — Rincian Prinsip</div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">ayat 1</span>Prinsip Perlindungan Lingkungan Hidup (paling sedikit meliputi):</div>
+        <ol class="list-alpha" type="a">
+          <li>Perlindungan kualitas air permukaan, air tanah, air laut, dan tanah serta udara berdasarkan standar baku mutu;</li>
+          <li>Perlindungan dan pemulihan keanekaragaman hayati;</li>
+          <li>Penjaminan stabilitas dan keamanan timbunan batuan penutup, kolam tailing, lahan bekas tambang, dan struktur buatan lainnya;</li>
+          <li>Pemanfaatan lahan bekas tambang sesuai dengan peruntukannya;</li>
+          <li>Memperhatikan nilai-nilai sosial dan budaya setempat; dan</li>
+          <li>Perlindungan terhadap kuantitas air tanah.</li>
+        </ol>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">ayat 2</span>Prinsip K3 meliputi:</div>
+        <ol class="list-alpha" type="a">
+          <li>Perlindungan keselamatan terhadap setiap pekerja/buruh; dan</li>
+          <li>Perlindungan setiap pekerja/buruh dari penyakit akibat kerja.</li>
+        </ol>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">ayat 3</span>Prinsip Konservasi Mineral dan Batubara meliputi:</div>
+        <ol class="list-alpha" type="a">
+          <li>Penambangan yang optimum;</li>
+          <li>Penggunaan metode dan teknologi pengolahan dan pemurnian yang efektif dan efisien;</li>
+          <li>Pengelolaan dan/atau pemanfaatan cadangan marjinal, mineral kadar rendah, mineral ikutan, serta batubara kualitas rendah; dan</li>
+          <li>Pendataan sumber daya serta cadangan mineral dan batubara yang tidak tertambang serta sisa pengolahan dan pemurnian.</li>
+        </ol>
+      </div>
+      <div class="callout dark">
+        <strong>Ayat (4):</strong> Dalam hal mineral ikutan dari sisa penambangan, pengolahan dan pemurnian mengandung radioaktif, wajib melakukan analisis keselamatan radiasi untuk TENORM dan melaksanakan intervensi terhadap paparan radiasi sesuai dengan ketentuan peraturan perundang-undangan.
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB III ═════════ -->
+  <div class="bagian" id="bab3-umum">
+    <div class="bagian-header">
+      <div class="bh-num">III</div>
+      <div class="bh-title">Tata Laksana Reklamasi dan Pascatambang</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">▸</span>Umum — Pasal 5 &amp; 6</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 5</span>Kewajiban Sebelum Eksplorasi</div>
+        <p class="body">Pemegang IUP/IUPK Eksplorasi sebelum melakukan kegiatan eksplorasi wajib menyusun <strong>rencana reklamasi</strong> berdasarkan dokumen lingkungan hidup. Rencana reklamasi dimuat dalam rencana kerja dan anggaran biaya eksplorasi.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 6</span>Pengajuan Persetujuan</div>
+        <p class="body">Pemegang IUP/IUPK Eksplorasi yang telah menyelesaikan kegiatan studi kelayakan harus mengajukan permohonan persetujuan rencana reklamasi dan rencana pascatambang kepada Menteri, gubernur, atau bupati/walikota sesuai kewenangannya — diajukan bersamaan dengan permohonan IUP/IUPK Operasi Produksi.</p>
+        <p class="body">Rencana harus sesuai dengan: (a) prinsip Pasal 3; (b) sistem dan metode penambangan berdasarkan studi kelayakan; (c) kondisi spesifik wilayah izin usaha pertambangan; dan (d) ketentuan peraturan perundang-undangan.</p>
+      </div>
+    </div>
+
+    <div class="section" id="bab3-rek">
+      <div class="section-title"><span class="sec-num">7</span>Pasal 7 — Rencana Reklamasi</div>
+      <div class="callout gold">Rencana reklamasi disusun untuk jangka waktu <strong>5 (lima) tahun</strong> dan memuat rencana untuk masing-masing tahun. Bila umur tambang kurang dari 5 tahun, disusun sesuai umur tambang.</div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">ayat 4</span>Muatan Rencana Reklamasi (paling sedikit):</div>
+        <ol class="list-alpha" type="a">
+          <li>Tata guna lahan sebelum dan sesudah ditambang;</li>
+          <li>Rencana pembukaan lahan;</li>
+          <li>Program reklamasi terhadap lahan terganggu — meliputi lahan bekas tambang dan lahan di luar bekas tambang (bersifat sementara dan/atau permanen);</li>
+          <li>Kriteria keberhasilan — standar keberhasilan penataan lahan, revegetasi, pekerjaan sipil, dan penyelesaian akhir; dan</li>
+          <li>Rencana biaya reklamasi — terdiri atas biaya langsung dan biaya tidak langsung.</li>
+        </ol>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">ayat 5</span>Lahan di Luar Bekas Tambang meliputi:</div>
+        <ol class="list-alpha" type="a">
+          <li>Tempat penimbunan tanah penutup;</li>
+          <li>Tempat penimbunan sementara dan tempat penimbunan bahan tambang;</li>
+          <li>Jalan;</li>
+          <li>Pabrik/instalasi pengolahan dan pemurnian;</li>
+          <li>Bangunan/instalasi sarana penunjang;</li>
+          <li>Kantor dan perumahan;</li>
+          <li>Pelabuhan khusus; dan/atau</li>
+          <li>Lahan penimbunan dan/atau pengendapan tailing.</li>
+        </ol>
+      </div>
+      <p class="body"><strong>Pasal 8:</strong> Reklamasi di kawasan hutan, wilayah pesisir, dan pulau-pulau kecil dilakukan sesuai ketentuan peraturan perundang-undangan.</p>
+      <p class="body"><strong>Pasal 9:</strong> Ketentuan lebih lanjut mengenai penyusunan rencana reklamasi diatur dengan Peraturan Menteri.</p>
+    </div>
+
+    <div class="section" id="bab3-pasca">
+      <div class="section-title"><span class="sec-num">10</span>Pasal 10 — Rencana Pascatambang</div>
+      <p class="body">Rencana pascatambang memuat:</p>
+      <ol class="list-alpha" type="a">
+        <li><strong>Profil wilayah</strong> — lokasi dan aksesibilitas, kepemilikan dan peruntukan lahan, rona lingkungan awal, dan kegiatan usaha lain di sekitar tambang;</li>
+        <li><strong>Deskripsi kegiatan pertambangan</strong> — keadaan cadangan awal, sistem dan metode penambangan, pengolahan dan pemurnian, serta fasilitas penunjang;</li>
+        <li><strong>Rona lingkungan akhir</strong> — keadaan cadangan tersisa, peruntukan lahan, morfologi, air permukaan dan air tanah, serta biologi akuatik dan teresterial;</li>
+        <li><strong>Program pascatambang</strong>, meliputi: (1) reklamasi lahan bekas tambang dan lahan di luar bekas tambang; (2) pemeliharaan hasil reklamasi; (3) pengembangan dan pemberdayaan masyarakat; dan (4) pemantauan;</li>
+        <li><strong>Organisasi</strong> termasuk jadwal pelaksanaan pascatambang;</li>
+        <li><strong>Kriteria keberhasilan</strong> pascatambang; dan</li>
+        <li><strong>Rencana biaya</strong> pascatambang — meliputi biaya langsung dan biaya tidak langsung.</li>
+      </ol>
+      <div class="callout" style="margin-top:0.7rem;">
+        <strong>Pasal 11:</strong> Pemegang IUP/IUPK Eksplorasi dalam menyusun rencana pascatambang harus <strong>berkonsultasi</strong> dengan instansi Pemerintah, pemerintah provinsi dan/atau kabupaten/kota, instansi terkait, dan masyarakat yang terkena dampak langsung.
+      </div>
+      <p class="body" style="margin-top:0.5rem;"><strong>Pasal 12:</strong> Ketentuan lebih lanjut mengenai tata cara penyusunan rencana dan kriteria keberhasilan pascatambang diatur dengan Peraturan Menteri.</p>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB IV ═════════ -->
+  <div class="bagian" id="bab4-rek">
+    <div class="bagian-header">
+      <div class="bh-num">IV</div>
+      <div class="bh-title">Persetujuan Rencana Reklamasi dan Rencana Pascatambang</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">▸</span>Persetujuan Rencana Reklamasi — Pasal 13–15</div>
+      <table class="waktu-table">
+        <thead><tr><th>Ketentuan</th><th>Jangka Waktu</th><th>Keterangan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Persetujuan rencana reklamasi oleh Menteri/gubernur/bupati</td>
+            <td><span class="waktu-tag">30 hari kalender</span></td>
+            <td>Sejak IUP/IUPK Operasi Produksi diterbitkan</td>
+          </tr>
+          <tr>
+            <td>Penyampaian kembali rencana yang belum memenuhi syarat</td>
+            <td><span class="waktu-tag">30 hari kalender</span></td>
+            <td>Setelah dikembalikan oleh pejabat berwenang</td>
+          </tr>
+          <tr>
+            <td>Pengajuan perubahan rencana reklamasi</td>
+            <td><span class="waktu-tag">180 hari kalender</span></td>
+            <td>Sebelum pelaksanaan reklamasi tahun berikutnya</td>
+          </tr>
+          <tr>
+            <td>Persetujuan atas perubahan rencana reklamasi</td>
+            <td><span class="waktu-tag">30 hari kalender</span></td>
+            <td>Sejak menerima pengajuan perubahan</td>
+          </tr>
+          <tr>
+            <td>Penyampaian kembali perubahan yang belum memenuhi syarat</td>
+            <td><span class="waktu-tag">30 hari kalender</span></td>
+            <td>Setelah perubahan dikembalikan</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 14</span>Wajib Mengajukan Perubahan Apabila Terjadi Perubahan Atas:</div>
+        <ol class="list-alpha" type="a">
+          <li>Sistem dan metode penambangan yang telah disetujui;</li>
+          <li>Kapasitas produksi;</li>
+          <li>Umur tambang;</li>
+          <li>Tata guna lahan; dan/atau</li>
+          <li>Dokumen lingkungan hidup yang telah disetujui oleh instansi berwenang.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section" id="bab4-pasca">
+      <div class="section-title"><span class="sec-num">▸</span>Persetujuan Rencana Pascatambang — Pasal 16–18</div>
+      <table class="waktu-table">
+        <thead><tr><th>Ketentuan</th><th>Jangka Waktu</th><th>Keterangan</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Persetujuan rencana pascatambang</td>
+            <td><span class="waktu-tag">60 hari kalender</span></td>
+            <td>Sejak IUP/IUPK Operasi Produksi diterbitkan</td>
+          </tr>
+          <tr>
+            <td>Penyampaian kembali rencana yang belum memenuhi syarat</td>
+            <td><span class="waktu-tag">30 hari kalender</span></td>
+            <td>Setelah dikembalikan oleh pejabat berwenang</td>
+          </tr>
+          <tr>
+            <td>Persetujuan perubahan rencana pascatambang</td>
+            <td><span class="waktu-tag">90 hari kalender</span></td>
+            <td>Sejak menerima pengajuan perubahan</td>
+          </tr>
+          <tr>
+            <td>Batas waktu perubahan rencana pascatambang</td>
+            <td><span class="waktu-tag">2 tahun sebelum akhir</span></td>
+            <td>Sebelum akhir kegiatan penambangan</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB V ═════════ -->
+  <div class="bagian" id="bab5-eksplorasi">
+    <div class="bagian-header">
+      <div class="bh-num">V</div>
+      <div class="bh-title">Pelaksanaan dan Pelaporan</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">19</span>Reklamasi Tahap Eksplorasi</div>
+      <ol class="list-num">
+        <li>Pelaksanaan reklamasi dilakukan pada lahan terganggu akibat kegiatan eksplorasi yang tidak digunakan pada tahap operasi produksi.</li>
+        <li>Lahan terganggu meliputi: lubang pengeboran, sumur uji, parit uji, dan/atau sarana penunjang.</li>
+        <li>Pelaksanaan dilakukan sampai memenuhi kriteria keberhasilan.</li>
+      </ol>
+    </div>
+
+    <div class="section" id="bab5-oprod">
+      <div class="section-title"><span class="sec-num">20</span>Reklamasi &amp; Pascatambang Tahap Operasi Produksi</div>
+      <ol class="list-num">
+        <li>Pemegang IUP/IUPK Operasi Produksi wajib melaksanakan reklamasi dan pascatambang sesuai rencana sampai memenuhi kriteria keberhasilan.</li>
+        <li>Wajib menunjuk <strong>Kepala Teknik Tambang (KTT)</strong> sebagai pejabat yang bertanggung jawab atas pelaksanaan reklamasi dan pascatambang.</li>
+      </ol>
+      <div class="callout">
+        <strong>Pasal 21:</strong> Pelaksanaan reklamasi wajib dilakukan paling lambat <strong>30 (tiga puluh) hari kalender</strong> setelah tidak ada kegiatan usaha pertambangan pada lahan terganggu — dilaksanakan secepatnya untuk menghindari kerusakan lahan lebih parah.
+      </div>
+    </div>
+
+    <div class="section" id="bab5-laporan">
+      <div class="section-title"><span class="sec-num">▸</span>Pelaporan — Pasal 22–28</div>
+      <div class="duo-grid">
+        <div class="duo-card">
+          <div class="dch">Laporan Reklamasi (Pasal 22–24)</div>
+          <div class="dcb">
+            <ul>
+              <li>Disampaikan setiap <strong>1 (satu) tahun</strong> kepada Menteri, gubernur, atau bupati/walikota;</li>
+              <li>Evaluasi dilakukan paling lambat <strong>30 hari kalender</strong> sejak laporan diterima;</li>
+              <li>Tingkat keberhasilan diberitahukan secara tertulis (Pasal 23);</li>
+              <li>Reklamasi di kawasan hutan/pesisir/pulau kecil mengikuti ketentuan tersendiri (Pasal 24).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="duo-card">
+          <div class="dch">Laporan Pascatambang (Pasal 25–27)</div>
+          <div class="dcb">
+            <ul>
+              <li>Pascatambang wajib dilaksanakan paling lambat <strong>30 hari kalender</strong> setelah kegiatan berakhir;</li>
+              <li>Laporan disampaikan setiap <strong>3 (tiga) bulan</strong>;</li>
+              <li>Evaluasi dilakukan paling lambat <strong>30 hari kalender</strong> sejak laporan diterima;</li>
+              <li>Tingkat keberhasilan diberitahukan secara tertulis (Pasal 27).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <p class="body"><strong>Pasal 28:</strong> Ketentuan lebih lanjut mengenai tata cara pelaporan dan evaluasi reklamasi serta pascatambang diatur dengan Peraturan Menteri.</p>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB VI ═════════ -->
+  <div class="bagian" id="bab6-umum">
+    <div class="bagian-header">
+      <div class="bh-num">VI</div>
+      <div class="bh-title">Jaminan Reklamasi dan Pascatambang</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">29</span>Pasal 29 — Kewajiban Jaminan</div>
+      <p class="body">Pemegang IUP dan IUPK wajib menyediakan: (a) <strong>jaminan reklamasi</strong>; dan (b) <strong>jaminan pascatambang</strong>. Jaminan reklamasi terdiri atas jaminan reklamasi tahap eksplorasi dan jaminan reklamasi tahap operasi produksi.</p>
+      <div class="callout dark">Penempatan jaminan <strong>tidak menghilangkan kewajiban</strong> pemegang IUP dan IUPK untuk melaksanakan reklamasi (Pasal 32) dan pascatambang (Pasal 38).</div>
+    </div>
+
+    <div class="section" id="bab6-rek">
+      <div class="section-title"><span class="sec-num">▸</span>Jaminan Reklamasi — Pasal 30–36</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 30</span>Tahap Eksplorasi</div>
+        <p class="body">Ditetapkan sesuai rencana reklamasi dalam RKAB eksplorasi. Ditempatkan pada <strong>bank pemerintah dalam bentuk deposito berjangka</strong>, paling lambat <strong>30 hari kalender</strong> sejak RKAB eksplorasi disetujui.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 31</span>Tahap Operasi Produksi</div>
+        <p class="body">Ditetapkan sesuai rencana reklamasi. Dapat berupa:</p>
+        <ol class="list-alpha" type="a">
+          <li>Rekening bersama (<em>escrow account</em>) pada bank pemerintah;</li>
+          <li>Deposito berjangka pada bank pemerintah;</li>
+          <li>Bank garansi pada bank pemerintah atau bank swasta nasional; atau</li>
+          <li>Cadangan akuntansi.</li>
+        </ol>
+        <p class="body">Penempatan paling lambat <strong>30 hari kalender</strong> sejak rencana reklamasi disetujui.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 33–35</span>Penggunaan &amp; Pencairan Jaminan</div>
+        <ol class="list-num">
+          <li>Apabila reklamasi tidak memenuhi kriteria keberhasilan, pejabat berwenang dapat menetapkan <strong>pihak ketiga</strong> (kontraktor reklamasi) untuk melaksanakan reklamasi menggunakan jaminan;</li>
+          <li>Kekurangan biaya dari jaminan menjadi tanggung jawab pemegang IUP/IUPK; kelebihan dapat dicairkan dengan persetujuan pejabat berwenang;</li>
+          <li>Permohonan pencairan atau pelepasan jaminan diajukan berdasarkan tingkat keberhasilan reklamasi (Pasal 35).</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="section" id="bab6-pasca">
+      <div class="section-title"><span class="sec-num">▸</span>Jaminan Pascatambang — Pasal 37–43</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 37</span>Ketentuan Jaminan Pascatambang</div>
+        <p class="body">Ditetapkan sesuai rencana pascatambang. Ditempatkan <strong>setiap tahun</strong> dalam bentuk <strong>deposito berjangka</strong> pada bank pemerintah, paling lambat <strong>30 hari kalender</strong> sejak rencana pascatambang disetujui.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Pasal 39–43</span>Penggunaan &amp; Pencairan Jaminan Pascatambang</div>
+        <ol class="list-num">
+          <li>Apabila pascatambang tidak memenuhi kriteria keberhasilan, pejabat berwenang dapat menetapkan pihak ketiga (kontraktor pascatambang) menggunakan jaminan;</li>
+          <li>Kekurangan biaya menjadi tanggung jawab pemegang IUP/IUPK Operasi Produksi (Pasal 40);</li>
+          <li>Bila kegiatan berakhir sebelum jadwal, pemegang IUP/IUPK wajib tetap menyediakan jaminan sesuai yang telah ditetapkan (Pasal 41);</li>
+          <li>Permohonan pencairan jaminan diajukan dengan melampirkan program dan rencana biaya pascatambang (Pasal 42).</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB VII ═════════ -->
+  <div class="bagian" id="bab7">
+    <div class="bagian-header">
+      <div class="bh-num">VII</div>
+      <div class="bh-title">Reklamasi dan Pascatambang bagi Pemegang IPR</div>
+    </div>
+    <div class="section">
+      <div class="section-title"><span class="sec-num">44</span>Pasal 44–46</div>
+      <ol class="list-num">
+        <li>Pemerintah kabupaten/kota sebelum menerbitkan IPR wajib menyusun rencana reklamasi dan rencana pascatambang untuk setiap wilayah pertambangan rakyat, berdasarkan dokumen lingkungan hidup yang telah disetujui instansi berwenang.</li>
+        <li>Bupati/walikota menetapkan rencana reklamasi dan rencana pascatambang tersebut untuk pemegang IPR.</li>
+        <li>Pemegang IPR bersama dengan bupati/walikota wajib melaksanakan reklamasi dan pascatambang sesuai rencana yang telah ditetapkan.</li>
+        <li>Ketentuan lebih lanjut diatur dengan <strong>peraturan daerah kabupaten/kota</strong> dengan berpedoman pada Peraturan Pemerintah ini.</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB VIII ═════════ -->
+  <div class="bagian" id="bab8">
+    <div class="bagian-header">
+      <div class="bh-num">VIII</div>
+      <div class="bh-title">Penyerahan Lahan Reklamasi dan Lahan Pascatambang</div>
+    </div>
+    <div class="section">
+      <div class="section-title"><span class="sec-num">47</span>Pasal 47–49</div>
+      <div class="duo-grid">
+        <div class="duo-card">
+          <div class="dch">Lahan Reklamasi (Pasal 47)</div>
+          <div class="dcb">
+            <ul>
+              <li>Pemegang IUP/IUPK wajib menyerahkan lahan yang telah direklamasi kepada pihak yang berhak melalui Menteri, gubernur, atau bupati/walikota;</li>
+              <li>Dapat mengajukan permohonan <strong>penundaan penyerahan</strong> apabila lahan masih diperlukan untuk pertambangan;</li>
+              <li>Lahan yang diserahkan adalah lahan yang telah memenuhi kriteria keberhasilan reklamasi.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="duo-card">
+          <div class="dch">Lahan Pascatambang (Pasal 48)</div>
+          <div class="dcb">
+            <ul>
+              <li>Pemegang IUP/IUPK Operasi Produksi yang telah selesai melaksanakan pascatambang wajib menyerahkan lahan pascatambang kepada pihak yang berhak;</li>
+              <li>Dinyatakan selesai apabila telah memenuhi kriteria keberhasilan berdasarkan evaluasi pejabat berwenang;</li>
+              <li>Tata cara penyerahan diatur dengan Peraturan Menteri (Pasal 49).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB IX ═════════ -->
+  <div class="bagian" id="bab9">
+    <div class="bagian-header">
+      <div class="bh-num">IX</div>
+      <div class="bh-title">Sanksi Administratif</div>
+    </div>
+    <div class="section">
+      <div class="section-title"><span class="sec-num">50</span>Pasal 50–51</div>
+      <p class="body">Pemegang IUP, IUPK, atau IPR yang melanggar ketentuan peraturan ini dikenai sanksi administratif berupa:</p>
+      <div class="sanksi-grid">
+        <div class="sanksi-card">
+          <div class="sch sch-a">a. Peringatan Tertulis</div>
+          <div class="scb">Sanksi bertingkat pertama yang diberikan atas pelanggaran ketentuan yang berlaku dalam PP ini.</div>
+        </div>
+        <div class="sanksi-card">
+          <div class="sch sch-b">b. Penghentian Sementara</div>
+          <div class="scb">Penghentian sementara sebagian atau seluruh kegiatan usaha pertambangan.</div>
+        </div>
+        <div class="sanksi-card">
+          <div class="sch sch-c">c. Pencabutan IUP/IUPK/IPR</div>
+          <div class="scb">Pencabutan izin tidak menghilangkan kewajiban untuk tetap melaksanakan reklamasi dan pascatambang.</div>
+        </div>
+      </div>
+      <div class="callout dark" style="margin-top:0.8rem;">
+        Sanksi diberikan oleh Menteri, gubernur, atau bupati/walikota sesuai kewenangannya. Tata cara pengenaan sanksi kepada pemegang IUP/IUPK diatur dengan <strong>Peraturan Menteri</strong>; kepada pemegang IPR diatur dengan <strong>peraturan daerah kabupaten/kota</strong>.
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB X ═════════ -->
+  <div class="bagian" id="bab10">
+    <div class="bagian-header">
+      <div class="bh-num">X</div>
+      <div class="bh-title">Ketentuan Peralihan</div>
+    </div>
+    <div class="section">
+      <div class="section-title"><span class="sec-num">52</span>Pasal 52–53</div>
+      <div class="callout gold">
+        Rencana reklamasi dan/atau rencana pascatambang yang telah memperoleh persetujuan sebelum berlakunya PP ini dinyatakan tetap berlaku dan wajib disesuaikan dengan ketentuan PP ini dalam jangka waktu paling lambat <strong>3 (tiga) bulan</strong> sejak berlakunya PP ini.
+      </div>
+      <p class="body" style="margin-top:0.6rem;">Pemegang Kontrak Karya, Perjanjian Karya Pengusahaan Pertambangan Batubara, dan pemegang IUP Eksplorasi yang belum menempatkan jaminan reklamasi wajib menempatkannya dalam jangka waktu paling lambat <strong>3 (tiga) bulan</strong>.</p>
+      <p class="body">Pemegang Kontrak Karya, PKP2B, dan pemegang IUP Operasi Produksi yang belum menempatkan jaminan reklamasi dan jaminan pascatambang wajib menempatkannya paling lambat <strong>3 (tiga) bulan</strong> sejak berlakunya PP ini.</p>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ BAB XI ═════════ -->
+  <div class="bagian" id="bab11">
+    <div class="bagian-header">
+      <div class="bh-num">XI</div>
+      <div class="bh-title">Ketentuan Penutup</div>
+    </div>
+    <div class="section">
+      <div class="section-title"><span class="sec-num">54</span>Pasal 54</div>
+      <p class="body">Peraturan Pemerintah ini mulai berlaku pada tanggal diundangkan. Agar setiap orang mengetahuinya, memerintahkan pengundangan Peraturan Pemerintah ini dengan penempatannya dalam Lembaran Negara Republik Indonesia.</p>
+    </div>
+    <div class="sig-block">
+      <p style="font-size:12px;color:var(--ink-light);margin-bottom:1.2rem;">Ditetapkan dan Diundangkan di Jakarta pada tanggal 20 Desember 2010</p>
+      <div class="sig-row">
+        <div class="sig-col">
+          <p class="sig-label">Presiden Republik Indonesia</p>
+          <p class="sig-name">DR. H. SUSILO BAMBANG YUDHOYONO</p>
+        </div>
+        <div class="sig-col">
+          <p class="sig-label">Menteri Hukum dan Hak Asasi Manusia RI</p>
+          <p class="sig-name">PATRIALIS AKBAR</p>
+          <p class="sig-role">Lembaran Negara RI Tahun 2010 Nomor 138</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ PENJELASAN UMUM ═════════ -->
+  <div class="bagian" id="penj-umum">
+    <div class="bagian-header">
+      <div class="bh-num">P</div>
+      <div class="bh-title">Penjelasan atas PP No. 78 Tahun 2010 — I. Umum</div>
+    </div>
+    <div class="section">
+      <div class="section-title"><span class="sec-num">▸</span>Latar Belakang Pengaturan</div>
+      <div class="callout gold">
+        Dalam rangka terciptanya pembangunan berkelanjutan, kegiatan usaha pertambangan harus dilaksanakan dengan memperhatikan prinsip lingkungan hidup, transparansi, dan partisipasi masyarakat.
+      </div>
+      <p class="body">Kegiatan pertambangan jika tidak dilaksanakan secara tepat dapat menimbulkan dampak negatif terhadap lingkungan, terutama gangguan keseimbangan permukaan tanah. Dampak lingkungan antara lain meliputi:</p>
+      <ol class="list-alpha" type="a">
+        <li>penurunan produktivitas lahan;</li>
+        <li>tanah bertambah padat;</li>
+        <li>terjadinya erosi dan sedimentasi;</li>
+        <li>terjadinya gerakan tanah atau longsoran;</li>
+        <li>terganggunya flora dan fauna;</li>
+        <li>terganggunya kesehatan masyarakat; serta</li>
+        <li>perubahan iklim mikro.</li>
+      </ol>
+      <p class="body">Oleh karena itu perlu dilakukan kegiatan reklamasi dan pascatambang yang tepat serta terintegrasi dengan kegiatan pertambangan. <strong>Kegiatan reklamasi harus dilakukan sedini mungkin</strong> dan tidak harus menunggu proses pertambangan secara keseluruhan selesai.</p>
+      <p class="body">Praktik terbaik pengelolaan lingkungan di pertambangan menuntut proses yang terus-menerus dan terpadu pada seluruh tahapan kegiatan pertambangan yang meliputi: penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan dan pemurnian, pengangkutan dan penjualan, serta kegiatan pascatambang.</p>
+      <p class="body">Perencanaan dan pelaksanaan yang tepat merupakan rangkaian pengelolaan pertambangan yang berkelanjutan dan berwawasan lingkungan sehingga akan mengurangi dampak negatif akibat kegiatan usaha pertambangan.</p>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ═════════ PENJELASAN PASAL ═════════ -->
+  <div class="bagian" id="penj-pasal">
+    <div class="bagian-header">
+      <div class="bh-num">II</div>
+      <div class="bh-title">Penjelasan Pasal demi Pasal</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">7</span>Pasal 7 — Rencana Reklamasi</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Huruf a</span>Tata Guna Lahan</div>
+        <p class="body">Tata guna lahan sebelum dan sesudah ditambang disesuaikan dengan status lahan dan tata ruang saat dokumen lingkungan hidup disusun. Tata guna lahan sesudah ditambang disesuaikan dengan peruntukan lahan pascatambang sesuai kesepakatan dengan pemilik lahan dan tata ruang.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Huruf b</span>Pembukaan Lahan</div>
+        <p class="body">Mencakup kegiatan pembersihan lahan (<em>land clearing</em>) dan penggalian untuk keperluan tambang, timbunan, jalan, kolam sedimen, dan sarana penunjang.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Huruf c</span>Program Reklamasi</div>
+        <p class="body">Program pemulihan untuk kurun waktu 5 (lima) tahun yang dirinci setiap tahun, meliputi: lokasi lahan yang akan direklamasi, teknik dan peralatan yang digunakan, sumber material pengisi untuk <em>back filling</em>, revegetasi, pekerjaan sipil, pemeliharaan, pemantauan, dan rincian biaya reklamasi.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Huruf e</span>Biaya Reklamasi</div>
+        <p class="body"><strong>Biaya langsung</strong> meliputi: biaya penatagunaan lahan, revegetasi, pencegahan dan penanggulangan air asam tambang, dan pekerjaan sipil sesuai peruntukan lahan pascatambang.</p>
+        <p class="body"><strong>Biaya tidak langsung</strong> meliputi: biaya mobilisasi dan demobilisasi alat, perencanaan reklamasi, administrasi, dan supervisi.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">10</span>Pasal 10 — Rencana Pascatambang</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">Huruf g</span>Biaya Pascatambang</div>
+        <p class="body"><strong>Biaya langsung</strong> meliputi: biaya pascatambang pada tapak bekas tambang, fasilitas pengolahan dan pemurnian, fasilitas penunjang, pemeliharaan dan peralatan, sosial dan ekonomi, serta pemantauan.</p>
+        <p class="body"><strong>Biaya tidak langsung</strong> meliputi: biaya mobilisasi dan demobilisasi alat, perencanaan pascatambang, administrasi, dan supervisi.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">11</span>Pasal 11 — Konsultasi Penyusunan Rencana Pascatambang</div>
+      <p class="body">Konsultasi adalah dalam rangka tukar pikiran untuk mendapatkan saran terhadap penyusunan program rencana pascatambang. Instansi terkait antara lain instansi yang menyelenggarakan urusan pemerintahan di bidang lingkungan hidup, kehutanan, atau tata ruang. <em>"Masyarakat"</em> adalah warga masyarakat yang terkena dampak langsung kegiatan usaha pertambangan.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">▸</span>Pasal 17, 20, 21 &amp; 25</div>
+      <div class="duo-grid">
+        <div class="duo-card">
+          <div class="dch">Pasal 17 ayat (4) — Batas 2 Tahun</div>
+          <div class="dcb">Batas waktu 2 (dua) tahun dimaksudkan untuk memberikan waktu yang mencukupi bagi pemegang IUP/IUPK Operasi Produksi untuk mempersiapkan pelaksanaan pascatambang, seperti lelang pelaksana kegiatan, pengaturan peralatan dan karyawan, dan lain-lain.</div>
+        </div>
+        <div class="duo-card">
+          <div class="dch">Pasal 20 ayat (2) — Kepala Teknik Tambang</div>
+          <div class="dcb">"Pejabat yang bertanggung jawab atas pelaksanaan reklamasi dan pascatambang" yang dimaksud adalah <strong>Kepala Teknik Tambang</strong>.</div>
+        </div>
+        <div class="duo-card">
+          <div class="dch">Pasal 21 — Reklamasi Segera</div>
+          <div class="dcb">Pelaksanaan reklamasi wajib dilaksanakan secepatnya untuk menghindari kerusakan lahan yang lebih parah dan untuk efisiensi penggunaan peralatan, bahan, dan sumber daya manusia.</div>
+        </div>
+        <div class="duo-card">
+          <div class="dch">Pasal 25 — Pascatambang Bertahap</div>
+          <div class="dcb">Pelaksanaan pascatambang dapat dilakukan secara bertahap sesuai tahapan pengakhiran kegiatan atau secara sekaligus setelah seluruh kegiatan berakhir. Berakhir sebelum jadwal dapat terjadi karena ketidaklayakan usaha pertambangan secara permanen.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">30</span>Pasal 30 &amp; 31 — Jaminan Reklamasi</div>
+      <div class="callout">
+        Jaminan reklamasi harus <strong>menutupi seluruh biaya pelaksanaan reklamasi</strong>. Biaya dihitung berdasarkan pelaksanaan reklamasi oleh pihak ketiga. Rekening bersama (<em>escrow account</em>) merupakan rekening antara pemegang IUP/IUPK dengan Menteri, gubernur, atau bupati/walikota sesuai ketentuan peraturan perundang-undangan di bidang keuangan.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">37</span>Pasal 37 — Jaminan Pascatambang</div>
+      <div class="callout">
+        Jaminan pascatambang harus <strong>menutupi seluruh biaya pelaksanaan pekerjaan pascatambang</strong>. Biaya dihitung berdasarkan pascatambang yang dilakukan oleh pihak ketiga (kontraktor pelaksana pascatambang).
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">47</span>Pasal 47 &amp; 48 — Penyerahan Lahan</div>
+      <p class="body">Lahan yang telah direklamasi adalah lahan yang telah memenuhi kriteria keberhasilan reklamasi berdasarkan evaluasi oleh Menteri, gubernur, atau bupati/walikota. Penundaan penyerahan dapat diberikan sepanjang sesuai dengan perjanjian penggunaan tanah antara pemegang IUP/IUPK dengan pemegang hak atas tanah atau izin pinjam pakai kawasan hutan.</p>
+      <p class="body">Dinyatakan selesai melaksanakan pascatambang apabila telah memenuhi kriteria keberhasilan pascatambang berdasarkan evaluasi pejabat berwenang.</p>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem; padding-top:1.2rem; border-top:1px solid var(--rule);">
+      <p style="font-size:12px; color:var(--ink-light); font-style:italic;">TAMBAHAN LEMBARAN NEGARA REPUBLIK INDONESIA NOMOR 5172</p>
+    </div>
+
+  </div><!-- /penj-pasal -->
+
+</main>
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('prog');
+  const h  = document.documentElement;
+  el.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+</script>
+</body>
+</html>

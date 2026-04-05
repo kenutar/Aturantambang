@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UU Pertambangan Mineral & Batubara — UU 4/2009 & UU 3/2020</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1eb;
+    --paper: #fdfaf4;
+    --ink: #1a1508;
+    --ink-light: #3d3015;
+    --ink-muted: #7a6c48;
+    --accent: #5c3a00;
+    --accent-pale: #fff8ec;
+    --gold: #c47e00;
+    --gold-light: #fdf0cc;
+    --gold-dim: #7a5500;
+    --cyan: #0a7a6a;
+    --cyan-pale: #e8f7f4;
+    --red: #9a2020;
+    --red-pale: #fff0ef;
+    --border: #d8cca8;
+    --sidebar-w: 300px;
+    --nav-h: 60px;
+    --uu-tab-h: 48px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; overflow-x: hidden; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    background: var(--ink);
+    display: flex; align-items: center; gap: 14px;
+    padding: 0 18px; z-index: 300;
+    border-bottom: 3px solid var(--gold);
+  }
+  .topbar-brand { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+  .brand-badge {
+    background: var(--gold); color: #000;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; font-weight: 600;
+    padding: 3px 8px; letter-spacing: 0.08em;
+  }
+  .brand-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem; font-weight: 700; color: #f5eedc;
+  }
+  .search-wrapper { flex: 1; max-width: 460px; position: relative; }
+  .search-input {
+    width: 100%; padding: 8px 40px 8px 13px;
+    border: 1.5px solid #302808; border-radius: 3px;
+    background: #251c08; color: #f5eedc;
+    font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .search-input::placeholder { color: #60502a; }
+  .search-input:focus { border-color: var(--gold); }
+  .search-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: #60502a; pointer-events: none; }
+  .search-count {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+    color: var(--gold); white-space: nowrap; display: none;
+  }
+  .search-nav-btns { display: flex; gap: 3px; }
+  .snb {
+    background: #302808; border: none; color: #f5eedc;
+    width: 28px; height: 28px; border-radius: 3px;
+    cursor: pointer; font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s;
+  }
+  .snb:hover { background: var(--gold); color: #000; }
+  .topbar-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: #7a6030; white-space: nowrap;
+  }
+  .sidebar-toggle {
+    background: none; border: none; color: #f5eedc;
+    font-size: 1.2rem; cursor: pointer; display: none;
+  }
+
+  /* ── UU SWITCHER (below topbar) ── */
+  .uu-switcher {
+    position: fixed;
+    top: var(--nav-h); left: 0; right: 0;
+    height: var(--uu-tab-h);
+    background: #120e04;
+    display: flex; align-items: stretch;
+    z-index: 250;
+    border-bottom: 1px solid #302808;
+  }
+  .uu-tab {
+    display: flex; align-items: center; gap: 10px;
+    padding: 0 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem; font-weight: 600;
+    color: #60502a; cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    letter-spacing: 0.06em;
+    flex: 1; justify-content: center;
+    text-transform: uppercase;
+  }
+  .uu-tab:hover { color: #c9b07a; background: #1a1406; }
+  .uu-tab.active { color: var(--gold); border-bottom-color: var(--gold); background: #1e1508; }
+  .uu-tab-badge {
+    background: var(--gold-dim); color: var(--gold-light);
+    font-size: 0.58rem; padding: 2px 5px; border-radius: 2px;
+  }
+  .uu-tab.active .uu-tab-badge { background: var(--gold); color: #000; }
+  .uu-divider { width: 1px; background: #302808; margin: 10px 0; }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: flex;
+    padding-top: calc(var(--nav-h) + var(--uu-tab-h));
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: var(--ink);
+    position: fixed;
+    top: calc(var(--nav-h) + var(--uu-tab-h));
+    left: 0; bottom: 0;
+    overflow-y: auto; z-index: 200;
+    transition: transform 0.3s;
+  }
+  .sidebar::-webkit-scrollbar { width: 3px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #302808; }
+
+  .sidebar-uu-label {
+    padding: 12px 16px 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem; color: var(--gold);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    border-bottom: 1px solid #1e1508;
+    background: #0e0a02;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .sidebar-uu-label span { color: #403010; }
+
+  .nav-bab-list { display: none; }
+  .nav-bab-list.active { display: block; }
+
+  .nav-group-label {
+    padding: 10px 16px 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem; color: #403010;
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .nav-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 8px 16px; color: #9a8a60; cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.15s; line-height: 1.35;
+  }
+  .nav-item:hover { color: #f5eedc; background: #1e1508; border-left-color: var(--gold-dim); }
+  .nav-item.active { color: #f5eedc; background: #1e1508; border-left-color: var(--gold); }
+  .nav-item.match { color: #7dcfc5; }
+  .nav-bab-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; color: var(--gold); font-weight: 600;
+    min-width: 42px; padding-top: 1px; flex-shrink: 0;
+  }
+  .nav-bab-title { font-size: 0.8rem; line-height: 1.4; flex: 1; }
+  .match-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.62rem;
+    background: var(--gold); color: #000;
+    padding: 1px 5px; border-radius: 2px; flex-shrink: 0;
+  }
+
+  /* ── MAIN ── */
+  .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+  /* ── TOP TABS ── */
+  .top-tabs {
+    display: flex; padding: 0 36px;
+    border-bottom: 1px solid var(--border);
+    background: var(--paper);
+    position: sticky;
+    top: calc(var(--nav-h) + var(--uu-tab-h));
+    z-index: 50;
+  }
+  .top-tab {
+    padding: 12px 16px; font-size: 0.82rem; font-weight: 500;
+    color: var(--ink-muted); cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s; letter-spacing: 0.02em;
+  }
+  .top-tab:hover { color: var(--ink); }
+  .top-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── UU CONTENT WRAPPER ── */
+  .uu-content { display: none; }
+  .uu-content.active { display: block; }
+
+  /* ── HERO ── */
+  .doc-hero {
+    background: var(--ink); padding: 32px 44px;
+    position: relative; overflow: hidden;
+    border-bottom: 2px solid var(--gold);
+  }
+  .doc-hero-watermark {
+    font-family: 'Playfair Display', serif;
+    font-size: 90px; font-weight: 700; color: #2a1e08;
+    position: absolute; right: -5px; top: -10px;
+    opacity: 0.45; pointer-events: none; line-height: 1;
+  }
+  .doc-klass {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: var(--gold); letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .doc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem; font-weight: 700; line-height: 1.2;
+    color: #f5eedc; margin-bottom: 6px; max-width: 500px;
+  }
+  .doc-sub { font-size: 0.84rem; color: #7a6a40; margin-bottom: 18px; }
+  .doc-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+  .stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.4rem; font-weight: 600; color: var(--gold); display: block;
+  }
+  .stat-label { font-size: 0.68rem; color: #7a6a40; display: block; margin-top: 2px; }
+
+  /* ── UPDATE BADGE (untuk UU 3/2020) ── */
+  .update-flag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--cyan); color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem; padding: 4px 10px;
+    margin-bottom: 14px; letter-spacing: 0.06em;
+  }
+
+  /* ── CONTENT PANEL ── */
+  .content-panel { padding: 28px 44px; }
+  .view-panel { display: none; }
+  .view-panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .section-badge-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: #000; background: var(--gold);
+    padding: 3px 9px; font-weight: 600; letter-spacing: 0.08em;
+  }
+  .section-title-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--ink);
+  }
+
+  /* ── BAB CARD ── */
+  .bab-card {
+    background: var(--paper); border: 1px solid var(--border);
+    margin-bottom: 10px; transition: border-color 0.2s;
+  }
+  .bab-card.active-card { border-color: var(--gold); }
+  .bab-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; cursor: pointer; user-select: none;
+    transition: background 0.15s;
+  }
+  .bab-card-header:hover { background: var(--accent-pale); }
+  .bab-card-info { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .bab-roman {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+    color: var(--gold); font-weight: 600; min-width: 46px;
+  }
+  .bab-card-title { font-size: 0.9rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .bab-card-pasal {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.66rem;
+    color: var(--ink-muted); white-space: nowrap; margin-right: 6px;
+  }
+  .chevron { color: var(--ink-muted); font-size: 0.78rem; transition: transform 0.2s; }
+  .bab-card.expanded .chevron { transform: rotate(180deg); }
+  .bab-card-body { display: none; border-top: 1px solid var(--border); }
+  .bab-card.expanded .bab-card-body { display: block; }
+
+  /* ── PASAL CONTENT ── */
+  .pasal-wrapper { padding: 18px 20px; }
+  .pasal-content {
+    font-size: 0.875rem; line-height: 1.8;
+    color: var(--ink-light);
+    max-height: 380px; overflow-y: auto;
+  }
+  .pasal-content::-webkit-scrollbar { width: 3px; }
+  .pasal-content::-webkit-scrollbar-thumb { background: var(--border); }
+
+  /* ── PERUBAHAN BADGE untuk UU 3/2020 ── */
+  .perubahan-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.58rem;
+    background: var(--cyan-pale); color: var(--cyan);
+    border: 1px solid var(--cyan); padding: 1px 6px;
+    margin-bottom: 8px; letter-spacing: 0.04em;
+  }
+
+  /* ── HIGHLIGHT ── */
+  mark, .highlight-text { background: rgba(196,126,0,0.22); color: var(--gold); padding: 0 2px; border-radius: 2px; }
+  mark.current { background: var(--gold); color: #000; }
+
+  /* ── SEARCH RESULTS ── */
+  .search-result-item {
+    background: var(--paper); border: 1px solid var(--border);
+    padding: 13px 17px; margin-bottom: 9px;
+    cursor: pointer; transition: border-color 0.15s;
+  }
+  .search-result-item:hover { border-color: var(--gold-dim); }
+  .result-bab-meta {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.67rem;
+    color: var(--gold); margin-bottom: 5px;
+  }
+  .result-snippet { font-size: 0.85rem; color: var(--ink-muted); line-height: 1.55; }
+  .empty-state { text-align: center; padding: 56px 20px; color: var(--ink-muted); }
+  .empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.35; }
+
+  /* ── OVERLAY ── */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 180; }
+  .overlay.open { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-toggle { display: flex; }
+    .main { margin-left: 0; }
+    .doc-hero { padding: 22px; }
+    .content-panel { padding: 18px 18px; }
+    .top-tabs { padding: 0 18px; }
+    .brand-title { display: none; }
+    .topbar-meta { display: none; }
+    .uu-tab { font-size: 0.64rem; padding: 0 14px; gap: 6px; }
+    .search-result-item { margin: 0 18px 9px; }
+  }
+  @media (min-width: 801px) {
+    .topbar-meta { display: block; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+  <div class="topbar-brand">
+    <span class="brand-badge">HUKUM</span>
+    <span class="brand-title">Pertambangan Mineral &amp; Batubara</span>
+  </div>
+  <div class="search-wrapper">
+    <input class="search-input" id="searchInput" type="text"
+      placeholder="Cari pasal, bab, atau kata kunci..."
+      autocomplete="off"
+      oninput="performSearch(this.value)"
+      onkeydown="searchKeyNav(event)">
+    <span class="search-icon">⌕</span>
+  </div>
+  <span class="search-count" id="searchCount"></span>
+  <div class="search-nav-btns">
+    <button class="snb" onclick="prevMark()" title="Sebelumnya">↑</button>
+    <button class="snb" onclick="nextMark()" title="Berikutnya">↓</button>
+  </div>
+  <div class="topbar-meta" id="topbarMeta">UU RI No. 4 Tahun 2009 · 175 Pasal · 26 BAB</div>
+</nav>
+
+<!-- UU SWITCHER -->
+<div class="uu-switcher">
+  <div class="uu-tab active" id="uuTabA" onclick="switchUU('A')">
+    <span>UU No. 4 Tahun 2009</span>
+    <span class="uu-tab-badge">INDUK</span>
+  </div>
+  <div class="uu-divider"></div>
+  <div class="uu-tab" id="uuTabB" onclick="switchUU('B')">
+    <span>UU No. 3 Tahun 2020</span>
+    <span class="uu-tab-badge">PERUBAHAN</span>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <!-- UU 4/2009 BAB LIST -->
+  <div class="sidebar-uu-label">UU No. 4 Tahun 2009 <span>26 BAB</span></div>
+  <div class="nav-bab-list active" id="navListA"></div>
+
+  <!-- UU 3/2020 BAB LIST -->
+  <div class="sidebar-uu-label" id="sidebarLabelB" style="display:none">UU No. 3 Tahun 2020 <span id="navCountB"></span></div>
+  <div class="nav-bab-list" id="navListB"></div>
+</aside>
+
+<div class="layout">
+<main class="main" id="mainContent">
+
+  <!-- ==================== UU 4/2009 ==================== -->
+  <div class="uu-content active" id="contentA">
+
+    <!-- TOP TABS -->
+    <div class="top-tabs">
+      <div class="top-tab active" data-view="browse" onclick="switchViewA('browse', this)">📋 Jelajahi Bab</div>
+      <div class="top-tab" data-view="search" onclick="switchViewA('search', this)">🔍 Hasil Pencarian</div>
+    </div>
+
+    <!-- BROWSE VIEW -->
+    <div class="view-panel active" id="browseViewA">
+      <div class="doc-hero">
+        <div class="doc-hero-watermark">UU 4/2009</div>
+        <div class="doc-klass">Undang-Undang Republik Indonesia</div>
+        <div class="doc-title">Pertambangan Mineral dan Batubara</div>
+        <div class="doc-sub">Nomor 4 Tahun 2009 &nbsp;·&nbsp; Ditetapkan 12 Januari 2009, Jakarta &nbsp;·&nbsp; LNRI Tahun 2009 Nomor 4</div>
+        <div class="doc-stats">
+          <div><span class="stat-num">26</span><span class="stat-label">BAB</span></div>
+          <div><span class="stat-num">175</span><span class="stat-label">Pasal</span></div>
+          <div><span class="stat-num">4</span><span class="stat-label">Jenis Izin Utama</span></div>
+          <div><span class="stat-num">2009</span><span class="stat-label">Tahun Terbit</span></div>
+        </div>
+      </div>
+      <div class="content-panel">
+        <div class="section-header">
+          <span class="section-badge-tag">STRUKTUR</span>
+          <span class="section-title-text">Bab &amp; Pasal — UU No. 4 Tahun 2009</span>
+        </div>
+        <div id="babContainerA"></div>
+      </div>
+    </div>
+
+    <!-- SEARCH VIEW -->
+    <div class="view-panel" id="searchViewA">
+      <div class="content-panel" style="padding-bottom:0">
+        <div class="section-header">
+          <span class="section-badge-tag">PENCARIAN</span>
+          <span class="section-title-text" id="searchViewTitleA">Hasil Pencarian</span>
+        </div>
+      </div>
+      <div id="searchResultsA" style="padding:0 44px 32px"></div>
+    </div>
+
+  </div><!-- /contentA -->
+
+  <!-- ==================== UU 3/2020 ==================== -->
+  <div class="uu-content" id="contentB">
+
+    <!-- TOP TABS -->
+    <div class="top-tabs">
+      <div class="top-tab active" data-view="browse" onclick="switchViewB('browse', this)">📋 Jelajahi Bab</div>
+      <div class="top-tab" data-view="search" onclick="switchViewB('search', this)">🔍 Hasil Pencarian</div>
+    </div>
+
+    <!-- BROWSE VIEW -->
+    <div class="view-panel active" id="browseViewB">
+      <div class="doc-hero">
+        <div class="doc-hero-watermark">UU 3/2020</div>
+        <div class="doc-klass">Undang-Undang Republik Indonesia</div>
+        <div class="update-flag">⟳ PERUBAHAN ATAS UU No. 4 Tahun 2009</div>
+        <div class="doc-title">Pertambangan Mineral dan Batubara</div>
+        <div class="doc-sub">Nomor 3 Tahun 2020 &nbsp;·&nbsp; Ditetapkan 10 Juni 2020, Jakarta &nbsp;·&nbsp; LNRI Tahun 2020 Nomor 147</div>
+        <div class="doc-stats">
+          <div><span class="stat-num">124</span><span class="stat-label">Ketentuan Diubah</span></div>
+          <div><span class="stat-num">2020</span><span class="stat-label">Tahun Terbit</span></div>
+          <div><span class="stat-num">Pusat</span><span class="stat-label">Kewenangan</span></div>
+          <div><span class="stat-num">SIPB</span><span class="stat-label">Izin Baru</span></div>
+        </div>
+      </div>
+      <div class="content-panel">
+        <div class="section-header">
+          <span class="section-badge-tag">STRUKTUR</span>
+          <span class="section-title-text">Pokok Perubahan — UU No. 3 Tahun 2020</span>
+        </div>
+        <div id="babContainerB"></div>
+      </div>
+    </div>
+
+    <!-- SEARCH VIEW -->
+    <div class="view-panel" id="searchViewB">
+      <div class="content-panel" style="padding-bottom:0">
+        <div class="section-header">
+          <span class="section-badge-tag">PENCARIAN</span>
+          <span class="section-title-text" id="searchViewTitleB">Hasil Pencarian</span>
+        </div>
+      </div>
+      <div id="searchResultsB" style="padding:0 44px 32px"></div>
+    </div>
+
+  </div><!-- /contentB -->
+
+</main>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// DATA — UU No. 4 Tahun 2009
+// ═══════════════════════════════════════════════════════════════════════════════
+const BABS_A = [
+  { num: "I", title: "KETENTUAN UMUM", pasal: "1",
+    content: `Pasal 1 memuat 38 definisi penting: Pertambangan adalah tahapan kegiatan penelitian, pengelolaan dan pengusahaan mineral atau batubara. Mineral adalah senyawa anorganik alami. Batubara adalah endapan karbon organik. IUP (Izin Usaha Pertambangan) adalah izin untuk melaksanakan usaha pertambangan. IPR (Izin Pertambangan Rakyat) untuk wilayah rakyat. IUPK (Izin Usaha Pertambangan Khusus) untuk wilayah pencadangan negara. Definisi mencakup seluruh tahap: penyelidikan umum, eksplorasi, studi kelayakan, konstruksi, penambangan, pengolahan, pemurnian, pengangkutan, penjualan, dan pascatambang. Wilayah pertambangan meliputi WP, WUP, WIUP, WPR, WPN, WUPK, WIUPK.` },
+  { num: "II", title: "ASAS DAN TUJUAN", pasal: "2–3",
+    content: `Pasal 2: Asas pertambangan: manfaat, keadilan, keseimbangan; keberpihakan bangsa; partisipatif, transparan, akuntabel; berkelanjutan dan berwawasan lingkungan. Pasal 3: Tujuan pengelolaan minerba: menjamin efektivitas pelaksanaan; menjamin manfaat berkelanjutan; menjamin ketersediaan untuk kebutuhan dalam negeri; mendukung kemampuan nasional bersaing; meningkatkan pendapatan masyarakat dan negara; menjamin kepastian hukum.` },
+  { num: "III", title: "PENGUASAAN MINERAL DAN BATUBARA", pasal: "4–5",
+    content: `Pasal 4: Mineral dan batubara sebagai sumber daya tak terbarukan merupakan kekayaan nasional yang dikuasai negara untuk sebesar-besar kesejahteraan rakyat. Penguasaan diselenggarakan oleh Pemerintah dan/atau pemerintah daerah. Pasal 5: Untuk kepentingan nasional, Pemerintah dapat menetapkan kebijakan pengutamaan mineral/batubara untuk kepentingan dalam negeri melalui pengendalian produksi dan ekspor. Pemerintah berwenang menetapkan jumlah produksi tiap komoditas per tahun per provinsi.` },
+  { num: "IV", title: "KEWENANGAN PENGELOLAAN", pasal: "6–8",
+    content: `Pasal 6: Kewenangan Pemerintah Pusat: kebijakan nasional, peraturan perundangan, standar nasional, perizinan, penetapan WP, pemberian IUP lintas provinsi, pemberian IUPK, evaluasi IUP, kebijakan produksi dan pemasaran, PNBP, pembinaan dan pengawasan daerah. Pasal 7: Kewenangan pemerintah provinsi: IUP lintas kabupaten/kota dan laut 4–12 mil, pengelolaan informasi geologi, neraca sumber daya, pengawasan reklamasi. Pasal 8: Kewenangan pemerintah kabupaten/kota: IUP dan IPR dalam wilayah dan laut s/d 4 mil, pemberdayaan masyarakat setempat.` },
+  { num: "V", title: "WILAYAH PERTAMBANGAN", pasal: "9–33",
+    content: `Pasal 9–13: WP sebagai bagian tata ruang nasional, terdiri atas WUP, WPR, dan WPN. Pasal 14–19: WUP ditetapkan Pemerintah berkoordinasi daerah; WIUP mineral logam ditetapkan berdasarkan kriteria geografis, konservasi, lingkungan, optimalisasi, dan kepadatan penduduk. Pasal 20–26: WPR ditetapkan bupati/walikota; kriteria meliputi cadangan mineral sekunder, kedalaman maks 25 meter, luas maks 25 hektar. Pasal 27–29: WPN untuk kepentingan strategis nasional dan konservasi, ditetapkan dengan persetujuan DPR. WPN dapat berubah menjadi WUPK. Pasal 30–33: WUPK terdiri atas WIUPK; luas dan batas ditetapkan Pemerintah berkoordinasi daerah.` },
+  { num: "VI", title: "USAHA PERTAMBANGAN", pasal: "34–35",
+    content: `Pasal 34: Usaha pertambangan dibagi: pertambangan mineral (radioaktif, logam, bukan logam, batuan) dan pertambangan batubara. Pasal 35: Usaha pertambangan dilaksanakan dalam bentuk IUP, IPR, dan IUPK.` },
+  { num: "VII", title: "IZIN USAHA PERTAMBANGAN (IUP)", pasal: "36–63",
+    content: `Pasal 36: IUP terdiri dua tahap — IUP Eksplorasi (penyelidikan umum, eksplorasi, studi kelayakan) dan IUP Operasi Produksi (konstruksi, penambangan, pengolahan, pemurnian, pengangkutan, penjualan). Pasal 37–38: IUP diberikan bupati/walikota (dalam satu kab/kota), gubernur (lintas kab/kota), atau Menteri (lintas provinsi); kepada badan usaha, koperasi, atau perseorangan. Pasal 39: Muatan minimal IUP Eksplorasi dan IUP Operasi Produksi. Pasal 42–45: Jangka waktu IUP Eksplorasi: logam maks 8 th, bukan logam 3–7 th, batuan 3 th, batubara 7 th. Pasal 46–49: IUP Operasi Produksi: logam maks 20 th (2x perpanjangan 10 th), bukan logam 10 th, batubara 20 th. Pasal 50–63: Ketentuan WIUP per komoditas: logam (lelang, maks 100.000 ha eks), bukan logam (permohonan, maks 25.000 ha), batuan (permohonan), batubara (lelang, maks 50.000 ha eks).` },
+  { num: "VIII", title: "PERSYARATAN PERIZINAN IUP", pasal: "64–65",
+    content: `Pasal 64: Pemerintah wajib mengumumkan rencana kegiatan di WIUP kepada masyarakat secara terbuka. Pasal 65: Badan usaha, koperasi, perseorangan wajib memenuhi persyaratan administratif, teknis, lingkungan, dan finansial. Ketentuan lebih lanjut diatur PP.` },
+  { num: "IX", title: "IZIN PERTAMBANGAN RAKYAT (IPR)", pasal: "66–73",
+    content: `Pasal 66–67: IPR mencakup logam, bukan logam, batuan, batubara; diberikan bupati/walikota terutama untuk penduduk setempat. Pasal 68: Luas IPR: perseorangan maks 1 ha, kelompok maks 5 ha, koperasi maks 10 ha; jangka waktu maks 5 th dan dapat diperpanjang. Pasal 69–72: Hak pemegang IPR: pembinaan K3, lingkungan, teknis dari pemerintah; bantuan modal. Kewajiban: mulai tambang maks 3 bulan setelah IPR terbit, patuhi K3, bayar iuran, laporan berkala. Pasal 73: Pemerintah kab/kota bertanggung jawab atas pengamanan teknis dan wajib mengangkat inspektur tambang.` },
+  { num: "X", title: "IZIN USAHA PERTAMBANGAN KHUSUS (IUPK)", pasal: "74–84",
+    content: `Pasal 74–75: IUPK diberikan Menteri; BUMN dan BUMD mendapat prioritas; badan usaha swasta melalui lelang WIUPK. Pasal 76–77: IUPK terdiri IUPK Eksplorasi dan IUPK Operasi Produksi; pemegang IUPK Eksplorasi dijamin memperoleh IUPK Operasi Produksi. Pasal 78–79: Muatan minimal IUPK Eksplorasi dan IUPK Operasi Produksi (termasuk divestasi saham). Pasal 83: Luas WIUPK: eksplorasi logam maks 100.000 ha, produksi logam maks 25.000 ha, eksplorasi batubara maks 50.000 ha, produksi batubara maks 15.000 ha; IUPK Operasi Produksi maks 20 th + 2x perpanjangan 10 th.` },
+  { num: "XI", title: "PERSYARATAN PERIZINAN IUPK", pasal: "85–86",
+    content: `Pasal 85: Pemerintah wajib mengumumkan rencana WIUPK secara terbuka kepada masyarakat. Pasal 86: Badan usaha dalam WIUPK wajib memenuhi persyaratan administratif, teknis, lingkungan, dan finansial sesuai PP.` },
+  { num: "XII", title: "DATA PERTAMBANGAN", pasal: "87–89",
+    content: `Pasal 87: Menteri/gubernur dapat menugasi lembaga riset untuk penyelidikan dan penelitian pertambangan. Pasal 88: Data dari kegiatan usaha pertambangan milik Pemerintah/pemerintah daerah; data daerah wajib disampaikan ke Pemerintah untuk pengelolaan nasional. Pasal 89: Tata cara penugasan dan pengelolaan data diatur PP.` },
+  { num: "XIII", title: "HAK DAN KEWAJIBAN", pasal: "90–123",
+    content: `Pasal 90–94: Hak pemegang IUP/IUPK: melakukan seluruh tahapan usaha, memanfaatkan sarana umum, memiliki mineral/batubara setelah bayar iuran, tidak dapat memindahkan IUP/IUPK ke pihak lain. Pasal 95–98: Kewajiban: terapkan kaidah teknik pertambangan baik, kelola keuangan sesuai akuntansi Indonesia, tingkatkan nilai tambah, pemberdayaan masyarakat, patuhi daya dukung lingkungan, jaga kelestarian sumber daya air. Pasal 96: Wajib laksanakan K3, keselamatan operasi, reklamasi pascatambang, konservasi, pengelolaan sisa tambang. Pasal 99–101: Wajib serahkan rencana reklamasi dan pascatambang; sediakan dana jaminan reklamasi dan pascatambang. Pasal 102–105: Wajib tingkatkan nilai tambah; wajib lakukan pengolahan dan pemurnian di dalam negeri; badan usaha non-tambang yang jual minerba wajib miliki IUP Operasi Produksi penjualan. Pasal 106–112: Utamakan tenaga kerja lokal dan barang/jasa dalam negeri; wajib program CSR; serahkan seluruh data; laporan berkala; divestasi saham setelah 5 tahun produksi. Pasal 113–123: Penghentian sementara dan berakhirnya IUP/IUPK.` },
+  { num: "XIV", title: "PENGHENTIAN SEMENTARA", pasal: "113–116",
+    content: `Pasal 113: Penghentian sementara dapat diberikan karena: keadaan kahar (force majeur: perang, epidemi, gempa, banjir), keadaan yang menghalangi (blokade, pemogokan), atau daya dukung lingkungan tidak memadai. Pasal 114: Jangka waktu penghentian maks 1 tahun, dapat diperpanjang 1x untuk 1 tahun. Pasal 115: Keadaan kahar → kewajiban terhadap pemerintah tidak berlaku; keadaan menghalangi/lingkungan → kewajiban tetap berlaku. Pasal 116: Ketentuan lebih lanjut diatur PP.` },
+  { num: "XV", title: "BERAKHIRNYA IUP DAN IUPK", pasal: "117–123",
+    content: `Pasal 117: IUP/IUPK berakhir karena dikembalikan, dicabut, atau habis masa berlaku. Pasal 118: Pengembalian dengan pernyataan tertulis disertai alasan jelas, sah setelah disetujui Menteri/gubernur/bupati. Pasal 119: Pencabutan jika tidak memenuhi kewajiban, melakukan tindak pidana, atau dinyatakan pailit. Pasal 121–123: Pemegang wajib selesaikan semua kewajiban; WIUP/WIUPK dikembalikan dan ditawarkan ke pihak lain; seluruh data diserahkan ke pemerintah.` },
+  { num: "XVI", title: "USAHA JASA PERTAMBANGAN", pasal: "124–127",
+    content: `Pasal 124: Pemegang IUP/IUPK wajib gunakan perusahaan jasa pertambangan lokal/nasional. Jenis jasa: konsultasi, perencanaan, pelaksanaan, pengujian di bidang penyelidikan, eksplorasi, studi kelayakan, konstruksi, pengangkutan, lingkungan, pascatambang, K3, penambangan, pengolahan/pemurnian. Pasal 125: Tanggung jawab kegiatan tetap pada pemegang IUP/IUPK; pelaksana jasa wajib utamakan kontraktor dan tenaga kerja lokal. Pasal 126: Pemegang IUP/IUPK dilarang libatkan anak perusahaan/afiliasi dalam jasa pertambangan di wilayahnya, kecuali izin Menteri.` },
+  { num: "XVII", title: "PENDAPATAN NEGARA DAN DAERAH", pasal: "128–133",
+    content: `Pasal 128: Kewajiban bayar pendapatan negara (pajak + PNBP: iuran tetap, iuran eksplorasi, iuran produksi, kompensasi data) dan pendapatan daerah (pajak daerah, retribusi). Pasal 129: Pemegang IUPK Operasi Produksi wajib bayar 4% ke Pemerintah dan 6% ke pemda dari keuntungan bersih (provinsi 1%, kab/kota penghasil 2,5%, kab/kota lain 2,5%). Pasal 130–133: Besaran tarif iuran produksi berdasarkan tingkat pengusahaan, produksi, dan harga komoditas; PNBP dibagi ke daerah.` },
+  { num: "XVIII", title: "PENGGUNAAN TANAH", pasal: "134–138",
+    content: `Pasal 134: Hak atas WIUP/WPR/WIUPK tidak meliputi hak atas tanah permukaan; kegiatan usaha pertambangan tidak dapat dilaksanakan di tempat yang dilarang. Pasal 135: Pemegang IUP/IUPK Eksplorasi hanya dapat berkegiatan setelah mendapat persetujuan pemegang hak atas tanah. Pasal 136: Sebelum operasi produksi wajib selesaikan hak atas tanah dengan pemegang hak. Pasal 137–138: Pemegang IUP/IUPK yang sudah selesaikan tanah dapat diberi hak atas tanah; hak atas IUP/IUPK bukan pemilikan hak atas tanah.` },
+  { num: "XIX", title: "PEMBINAAN, PENGAWASAN & PERLINDUNGAN", pasal: "139–145",
+    content: `Pasal 139: Menteri melakukan pembinaan melalui pedoman, bimbingan, supervisi, pendidikan/pelatihan, monitoring kepada pemerintah daerah. Pasal 140–141: Pengawasan meliputi teknis pertambangan, pemasaran, keuangan, data, konservasi, K3, keselamatan operasi, lingkungan, reklamasi, pascatambang, tenaga kerja, CSR, teknologi, dll. Pengawasan teknis dilakukan oleh inspektur tambang. Pasal 142–143: Gubernur/bupati wajib lapor ke Menteri minimal 6 bulan sekali. Pasal 145: Masyarakat terdampak negatif berhak memperoleh ganti rugi dan mengajukan gugatan ke pengadilan.` },
+  { num: "XX", title: "PENELITIAN, PENGEMBANGAN & PENDIDIKAN", pasal: "146–148",
+    content: `Pasal 146: Pemerintah dan pemerintah daerah wajib mendorong dan memfasilitasi penelitian dan pengembangan mineral dan batubara. Pasal 147: Pemerintah dan pemerintah daerah wajib mendorong dan memfasilitasi pendidikan dan pelatihan di bidang pengusahaan minerba. Pasal 148: Penyelenggaraan pendidikan dan pelatihan dapat dilakukan Pemerintah, pemerintah daerah, swasta, dan masyarakat.` },
+  { num: "XXI", title: "PENYIDIKAN", pasal: "149–150",
+    content: `Pasal 149: Selain penyidik Polri, pejabat PNS lingkup pertambangan diberi wewenang khusus sebagai penyidik. Berwenang memeriksa laporan, memeriksa orang/badan, memanggil paksa saksi/tersangka, menggeledah, memeriksa sarana pertambangan, menghentikan peralatan, menyegel/menyita alat, mendatangkan ahli, menghentikan penyidikan. Pasal 150: PPNS dapat menangkap pelaku; wajib memberitahu Polri; wajib hentikan penyidikan jika tidak cukup bukti.` },
+  { num: "XXII", title: "SANKSI ADMINISTRATIF", pasal: "151–157",
+    content: `Pasal 151: Sanksi administratif kepada pemegang IUP/IPR/IUPK atas pelanggaran: peringatan tertulis, penghentian sementara kegiatan, pencabutan IUP/IPR/IUPK. Pasal 152–153: Jika pemerintah daerah tidak melaksanakan sanksi administratif, Menteri dapat menghentikan atau mencabut IUP/IPR. Pasal 154–156: Sengketa IUP/IUPK diselesaikan melalui pengadilan dan arbitrase dalam negeri; tata cara sanksi diatur PP. Pasal 157: Pemerintah daerah yang tidak patuhi ketentuan produksi dikenai sanksi berupa penarikan sementara kewenangan pengelolaan.` },
+  { num: "XXIII", title: "KETENTUAN PIDANA", pasal: "158–165",
+    content: `Pasal 158: Usaha penambangan tanpa IUP/IPR/IUPK → pidana penjara maks 10 tahun dan/atau denda maks Rp10 miliar. Pasal 159: Laporan palsu → pidana penjara maks 10 tahun dan/atau denda maks Rp10 miliar. Pasal 160: Eksplorasi tanpa IUP/IUPK → kurungan maks 1 tahun atau denda maks Rp200 juta; IUP Eksplorasi tapi lakukan operasi produksi → penjara maks 5 tahun dan denda maks Rp10 miliar. Pasal 161: Menampung/mengolah/menjual minerba dari pihak tidak berizin → penjara maks 10 tahun dan denda maks Rp10 miliar. Pasal 162: Merintangi kegiatan pertambangan sah → kurungan maks 1 tahun atau denda maks Rp100 juta. Pasal 163–164: Badan hukum pelanggar: denda + 1/3; pidana tambahan perampasan barang/keuntungan. Pasal 165: Pejabat yang keluarkan IUP/IPR/IUPK bertentangan UU → penjara maks 2 tahun dan denda maks Rp200 juta.` },
+  { num: "XXIV", title: "KETENTUAN LAIN-LAIN", pasal: "166–168",
+    content: `Pasal 166: Masalah dampak lingkungan diselesaikan sesuai peraturan perundang-undangan. Pasal 167: WP dikelola Menteri dalam sistem informasi WP terintegrasi nasional dengan penyeragaman sistem koordinat dan peta dasar. Pasal 168: Pemerintah dapat memberikan keringanan dan fasilitas perpajakan untuk meningkatkan investasi sesuai peraturan perundang-undangan.` },
+  { num: "XXV", title: "KETENTUAN PERALIHAN", pasal: "169–172",
+    content: `Pasal 169: Kontrak karya dan PKP2B yang ada sebelum UU ini tetap berlaku sampai habis kontrak; ketentuan disesuaikan paling lambat 1 tahun sejak UU diundangkan, kecuali penerimaan negara. Pasal 170: Pemegang kontrak karya yang sudah produksi wajib lakukan pemurnian dalam negeri paling lambat 5 tahun sejak UU diundangkan. Pasal 171: Pemegang kontrak/PKP2B wajib sampaikan rencana kegiatan seluruh wilayah kontrak paling lambat 1 tahun sejak UU berlaku. Pasal 172: Permohonan kontrak karya/PKP2B yang sudah diajukan dan mendapat surat persetujuan prinsip sebelum 1 tahun UU berlaku tetap dapat diproses tanpa lelang.` },
+  { num: "XXVI", title: "KETENTUAN PENUTUP", pasal: "173–175",
+    content: `Pasal 173: UU No. 11 Tahun 1967 tentang Ketentuan-Ketentuan Pokok Pertambangan dicabut dan dinyatakan tidak berlaku; semua peraturan pelaksanaan UU 11/1967 masih berlaku sepanjang tidak bertentangan dengan UU ini. Pasal 174: Peraturan pelaksanaan UU ini harus ditetapkan dalam waktu 1 tahun sejak diundangkan. Pasal 175: UU ini mulai berlaku pada tanggal diundangkan (12 Januari 2009).` }
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// DATA — UU No. 3 Tahun 2020
+// ═══════════════════════════════════════════════════════════════════════════════
+const BABS_B = [
+  { num: "1", title: "DEFINISI & ISTILAH BARU", pasal: "Pasal 1",
+    tag: "DIUBAH",
+    content: `UU 3/2020 mengubah dan menambahkan sejumlah definisi kunci dalam Pasal 1. Ditambahkan: Kontrak Karya (KK) adalah perjanjian antara pemerintah dengan perusahaan berbadan hukum Indonesia untuk Usaha Pertambangan Mineral (angka 6a). PKP2B (Perjanjian Karya Pengusahaan Pertambangan Batubara) adalah perjanjian antara pemerintah dengan perusahaan berbadan hukum Indonesia untuk Usaha Pertambangan Batubara (angka 6b). Perizinan Berusaha adalah legalitas yang diberikan kepada pelaku usaha untuk memulai dan menjalankan usaha (angka 6c). Ditambahkan pula: SIPB (Surat Izin Penambangan Batuan), IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian, Izin Pengangkutan dan Penjualan, IUJP (Izin Usaha Jasa Pertambangan), Wilayah Hukum Pertambangan (seluruh ruang darat, laut, dan dalam bumi sebagai satu kesatuan), BUMN bidang pertambangan, dan Setiap Orang. Definisi Pemerintah Pusat dan Pemerintah Daerah disesuaikan dengan UU tentang Pemerintahan.` },
+  { num: "2", title: "PENGUASAAN MINERAL & BATUBARA", pasal: "Pasal 4",
+    tag: "DIUBAH",
+    content: `Pasal 4 diubah: Penguasaan Mineral dan Batubara oleh negara kini diselenggarakan oleh Pemerintah Pusat (tidak lagi dibagi ke pemerintah daerah). Penguasaan dilaksanakan melalui fungsi kebijakan, pengaturan, pengurusan, pengelolaan, dan pengawasan. Perubahan ini merupakan sentralisasi kewenangan pertambangan ke Pemerintah Pusat.` },
+  { num: "3", title: "PENGUTAMAAN KEBUTUHAN DALAM NEGERI", pasal: "Pasal 5",
+    tag: "DIUBAH",
+    content: `Pasal 5 diubah: Untuk kepentingan nasional, Pemerintah Pusat setelah berkonsultasi dengan DPR menetapkan kebijakan pengutamaan Mineral dan/atau Batubara untuk kepentingan dalam negeri. Pemerintah Pusat berwenang menetapkan jumlah produksi, Penjualan, dan harga Mineral logam, Mineral bukan logam jenis tertentu, atau Batubara. Ketentuan lebih lanjut diatur dengan PP.` },
+  { num: "4", title: "KEWENANGAN PEMERINTAH PUSAT", pasal: "Pasal 6",
+    tag: "DIPERLUAS",
+    content: `Pasal 6 diubah secara signifikan: Seluruh kewenangan pengelolaan Pertambangan Mineral dan Batubara kini berada di Pemerintah Pusat, meliputi: menetapkan rencana pengelolaan minerba nasional; menetapkan kebijakan minerba nasional; menetapkan peraturan perundangan; menetapkan standar nasional; melakukan penyelidikan dan penelitian; menetapkan WP; menetapkan WIUP semua jenis komoditas; menetapkan WIUPK; melaksanakan penawaran WIUPK prioritas; menerbitkan Perizinan Berusaha; melakukan pembinaan dan pengawasan; menetapkan kebijakan produksi dan pemasaran; mengelola PNBP; mengelola informasi geologi; pembinaan reklamasi dan pascatambang; menyusun neraca sumber daya; pengembangan nilai tambah; menetapkan harga patokan; mengelola inspektur tambang; mengelola pejabat pengawas. Pasal 7 (kewenangan provinsi) dan Pasal 8 (kewenangan kabupaten/kota) dihapus sepenuhnya.` },
+  { num: "5", title: "RENCANA PENGELOLAAN MINERBA NASIONAL", pasal: "Pasal 8A–8B",
+    tag: "BARU",
+    content: `Ditambahkan BAB IVA dan Pasal 8A–8B (baru): Menteri menetapkan rencana pengelolaan Mineral dan Batubara nasional secara sistematis, terpadu, terarah, menyeluruh, transparan, dan akuntabel. Disusun dengan mempertimbangkan daya dukung SDA, pelestarian lingkungan, rencana tata ruang, perkembangan IPTEK, pertumbuhan ekonomi, prioritas komoditas, jumlah dan luas WP, ketersediaan lahan, jumlah cadangan, dan ketersediaan sarana prasarana. Harus disesuaikan dengan rencana pembangunan nasional dan daerah. Rencana ditetapkan untuk jangka waktu 5 tahun dan dapat ditinjau 1 kali dalam 5 tahun. Wajib diintegrasikan dengan RPJP dan RPJM nasional. Wajib ditetapkan oleh Menteri paling lambat 2 tahun sejak UU ini berlaku (Pasal 172E).` },
+  { num: "6", title: "WILAYAH HUKUM PERTAMBANGAN", pasal: "Pasal 28a",
+    tag: "BARU",
+    content: `Ditambahkan definisi Wilayah Hukum Pertambangan: seluruh ruang darat, ruang laut, termasuk ruang dalam bumi sebagai satu kesatuan wilayah yakni kepulauan Indonesia, tanah di bawah perairan, dan landas kontinen. Konsep baru ini mempertegas yurisdiksi negara atas sumber daya mineral di seluruh dimensi ruang.` },
+  { num: "7", title: "PERIZINAN BERUSAHA", pasal: "Pasal 35",
+    tag: "DIUBAH TOTAL",
+    content: `Pasal 35 diubah total: Usaha Pertambangan dilaksanakan berdasarkan Perizinan Berusaha dari Pemerintah Pusat. Perizinan Berusaha dilaksanakan melalui pemberian: nomor induk berusaha; sertifikat standar; dan/atau izin. Izin terdiri atas: IUP; IUPK; IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian; IPR; SIPB; izin penugasan; Izin Pengangkutan dan Penjualan; IUJP; dan IUP untuk Penjualan. Pemerintah Pusat dapat mendelegasikan kewenangan Perizinan Berusaha kepada Pemerintah Daerah provinsi sesuai ketentuan peraturan perundangan.` },
+  { num: "8", title: "SURAT IZIN PENAMBANGAN BATUAN (SIPB)", pasal: "Pasal 86A–86H",
+    tag: "BARU",
+    content: `Ditambahkan BAB XIA dan Pasal 86A–86H (baru): SIPB diberikan untuk pengusahaan pertambangan batuan jenis tertentu atau untuk keperluan tertentu. Dapat diterbitkan kepada: badan usaha milik daerah/desa; Badan Usaha swasta (penanaman modal dalam negeri); koperasi; atau perusahaan perseorangan. Batuan jenis tertentu adalah batuan untuk kebutuhan konstruksi; keperluan tertentu adalah mendukung proyek pembangunan yang dibiayai Pemerintah. SIPB diberikan Menteri berdasarkan permohonan yang telah memenuhi persyaratan administratif, teknis, lingkungan, dan finansial, dilengkapi koordinat dan luas wilayah. SIPB terdiri atas tahap perencanaan, Penambangan, Pengolahan, serta Pengangkutan dan Penjualan. Pemegang SIPB dapat diberikan wilayah paling luas 50 hektare. Larangan: memindahtangankan SIPB dan menggunakan bahan peledak.` },
+  { num: "9", title: "KONSERVASI MINERAL & BATUBARA", pasal: "Pasal 36A",
+    tag: "BARU",
+    content: `Ditambahkan Pasal 36A (baru): Dalam rangka konservasi Mineral dan Batubara, pemegang IUP atau IUPK tahap kegiatan Operasi Produksi wajib melakukan kegiatan Eksplorasi lanjutan setiap tahun dan menyediakan anggaran. Eksplorasi lanjutan adalah kegiatan untuk meningkatkan status keyakinan data dan informasi geologi berupa sumber daya dan/atau cadangan pada tahap Operasi Produksi.` },
+  { num: "10", title: "JANGKA WAKTU IUP DIPERPANJANG", pasal: "Pasal 47",
+    tag: "DIUBAH",
+    content: `Pasal 47 diubah, menambahkan jangka waktu IUP yang lebih panjang untuk investasi terintegrasi: Mineral logam: maks 20 tahun + 2x perpanjangan 10 tahun. Mineral bukan logam: maks 10 tahun + 2x perpanjangan 5 tahun. Mineral bukan logam jenis tertentu: maks 20 tahun + 2x perpanjangan 10 tahun. Batuan: maks 5 tahun + 2x perpanjangan 5 tahun. Batubara: maks 20 tahun + 2x perpanjangan 10 tahun. Mineral logam terintegrasi dengan fasilitas pengolahan/pemurnian: 30 tahun + perpanjangan 10 tahun setiap kali. Batubara terintegrasi dengan Pengembangan/Pemanfaatan: 30 tahun + perpanjangan 10 tahun setiap kali.` },
+  { num: "11", title: "IPR — KEWENANGAN KE MENTERI", pasal: "Pasal 67–73",
+    tag: "DIUBAH",
+    content: `Pasal 67 diubah: IPR kini diberikan oleh Menteri (sebelumnya oleh bupati/walikota) kepada orang perseorangan yang merupakan penduduk setempat atau koperasi yang anggotanya merupakan penduduk setempat. Pemohon harus menyampaikan permohonan kepada Menteri. Pasal 68: Luas IPR perseorangan maks 5 hektare, koperasi maks 10 hektare; jangka waktu maks 10 tahun + 2x perpanjangan 5 tahun. Ditambahkan Pasal 70A: Pemegang IPR dilarang memindahtangankan IPR kepada pihak lain. Pasal 73: Menteri bertanggung jawab atas pelaksanaan kaidah teknis pada IPR (K3 dan pengelolaan lingkungan hidup termasuk reklamasi dan pascatambang).` },
+  { num: "12", title: "IUPK — PRIORITAS BUMN", pasal: "Pasal 75",
+    tag: "DIUBAH",
+    content: `Pasal 75 diubah: IUPK dapat diberikan kepada BUMN, badan usaha milik daerah, atau Badan Usaha swasta. BUMN dan badan usaha milik daerah mendapat prioritas dalam mendapatkan IUPK. Badan Usaha swasta untuk mendapatkan IUPK dilaksanakan dengan cara lelang WIUPK. Lelang WIUPK dilakukan oleh Menteri dengan mempertimbangkan luas WIUPK, kemampuan administratif/manajemen, kemampuan teknis dan pengelolaan lingkungan, dan kemampuan finansial.` },
+  { num: "13", title: "PENGOLAHAN & PEMURNIAN DI DALAM NEGERI", pasal: "Pasal 102–104",
+    tag: "DIUBAH",
+    content: `Pasal 102 diubah: Pemegang IUP atau IUPK pada tahap Operasi Produksi wajib meningkatkan nilai tambah Mineral melalui Pengolahan dan Pemurnian (logam), Pengolahan (bukan logam dan batuan). Peningkatan nilai tambah wajib memenuhi batasan minimum Pengolahan dan/atau Pemurnian. Pasal 103: Wajib melakukan Pengolahan dan/atau Pemurnian Mineral hasil Penambangan di dalam negeri. Jika sudah melakukan, Pemerintah menjamin keberlangsungan pemanfaatan hasilnya. Pasal 104: Dapat dilakukan sendiri secara terintegrasi atau bekerja sama dengan pemegang IUP/IUPK lain yang memiliki fasilitas, atau pihak lain yang mendapat izin perindustrian.` },
+  { num: "14", title: "PENGEMBANGAN & PEMBERDAYAAN MASYARAKAT", pasal: "Pasal 108",
+    tag: "DIUBAH",
+    content: `Pasal 108 diubah: Pemegang IUP dan IUPK wajib menyusun program pengembangan dan pemberdayaan masyarakat. Pemegang IUP dan IUPK wajib mengalokasikan dana untuk pelaksanaan program pengembangan dan pemberdayaan masyarakat yang besaran minimumnya ditetapkan oleh Menteri. Penyusunan program dikonsultasikan kepada Menteri, Pemerintah Daerah, dan masyarakat.` },
+  { num: "15", title: "DIVESTASI SAHAM", pasal: "Pasal 112",
+    tag: "DIUBAH",
+    content: `Pasal 112 diubah: Badan Usaha pemegang IUP atau IUPK pada tahap Operasi Produksi yang sahamnya dimiliki oleh asing wajib melakukan divestasi saham sebesar 51% secara berjenjang kepada Pemerintah Pusat, Pemerintah Daerah, BUMN, badan usaha milik daerah, dan/atau Badan Usaha swasta nasional. Dalam hal divestasi berjenjang tidak dapat terlaksana, penawaran divestasi saham dilakukan melalui bursa saham Indonesia.` },
+  { num: "16", title: "DANA KETAHANAN CADANGAN", pasal: "Pasal 112A",
+    tag: "BARU",
+    content: `Ditambahkan Pasal 112A (baru): Pemegang IUP atau IUPK pada tahap kegiatan Operasi Produksi wajib menyediakan dana ketahanan cadangan Mineral dan Batubara. Dana ketahanan cadangan digunakan untuk kegiatan penemuan cadangan baru. Ketentuan lebih lanjut diatur dengan Peraturan Pemerintah.` },
+  { num: "17", title: "REKLAMASI & PASCATAMBANG", pasal: "Pasal 99, 100, 123A",
+    tag: "DIPERTEGAS",
+    content: `Pasal 99 diubah: Dalam pelaksanaan Reklamasi, pemegang IUP atau IUPK wajib memenuhi keseimbangan antara lahan yang akan dibuka dan lahan yang sudah direklamasi; dan melakukan pengelolaan lubang bekas tambang akhir. Wajib menyerahkan lahan yang telah direklamasi/pascatambang kepada pihak yang berhak melalui Menteri. Ditambahkan Pasal 123A (baru): Pemegang IUP atau IUPK sebelum menciutkan atau mengembalikan WIUP/WIUPK wajib melaksanakan Reklamasi dan Pascatambang hingga mencapai tingkat keberhasilan 100%. Eks pemegang IUP/IUPK yang IUP/IUPK berakhir juga wajib melaksanakan Reklamasi dan Pascatambang hingga 100% serta menempatkan dana jaminan.` },
+  { num: "18", title: "PEMBINAAN & PENGAWASAN", pasal: "Pasal 139–141A",
+    tag: "DIUBAH",
+    content: `Pasal 139 diubah: Menteri bertanggung jawab melakukan pembinaan atas pelaksanaan kegiatan Usaha Pertambangan yang dilakukan oleh pemegang IUP, IUPK, IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian, IPR, SIPB, Izin Pengangkutan dan Penjualan, atau IUJP. Pasal 141 diubah: Pengawasan meliputi 11 bidang; dibedakan antara pengawasan oleh inspektur tambang (teknis, konservasi, K3, lingkungan, teknologi) dan pejabat pengawas (produksi, keuangan, data, barang/jasa, tenaga kerja, CSR). Tanggung jawab pengelolaan anggaran inspektur tambang dan pejabat pengawas dibebankan kepada Menteri. Pengawasan dilakukan secara berkala dan laporan disampaikan kepada publik.` },
+  { num: "19", title: "SANKSI ADMINISTRATIF", pasal: "Pasal 151",
+    tag: "DIUBAH",
+    content: `Pasal 151 diubah: Menteri berhak memberikan sanksi administratif kepada pemegang IUP, IUPK, IPR, SIPB, atau IUP untuk Penjualan atas pelanggaran berbagai ketentuan. Sanksi administratif berupa: peringatan tertulis; denda; penghentian sementara sebagian atau seluruh kegiatan Eksplorasi atau Operasi Produksi; dan/atau pencabutan IUP, IUPK, IPR, SIPB, atau IUP untuk Penjualan.` },
+  { num: "20", title: "KETENTUAN PIDANA", pasal: "Pasal 158–161B",
+    tag: "DIUBAH",
+    content: `Pasal 158: Penambangan tanpa izin → pidana penjara maks 5 tahun dan denda maks Rp100 miliar (diubah dari 10 tahun/Rp10 miliar). Pasal 159: Laporan palsu → pidana penjara maks 5 tahun dan denda maks Rp100 miliar. Pasal 160: Ayat (1) dihapus; Ayat (2): IUP/IUPK Eksplorasi tapi lakukan Operasi Produksi → penjara maks 5 tahun dan denda maks Rp100 miliar. Pasal 161: Menampung/mengolah/menjual minerba dari pihak tidak berizin → penjara maks 5 tahun dan denda maks Rp100 miliar. Ditambahkan Pasal 161A (baru): Memindahtangankan IUP/IUPK/IPR/SIPB → penjara maks 2 tahun dan denda maks Rp5 miliar. Ditambahkan Pasal 161B (baru): Tidak melaksanakan Reklamasi dan/atau Pascatambang → penjara maks 5 tahun dan denda maks Rp100 miliar; dapat dijatuhkan pidana tambahan kewajiban membayar dana reklamasi/pascatambang.` },
+  { num: "21", title: "KELANJUTAN OPERASI KK & PKP2B", pasal: "Pasal 169A–169C",
+    tag: "BARU",
+    content: `Ditambahkan Pasal 169A–169C (baru): KK dan PKP2B diberikan jaminan perpanjangan menjadi IUPK sebagai Kelanjutan Operasi Kontrak/Perjanjian: kontrak yang belum memperoleh perpanjangan dijamin mendapatkan 2x perpanjangan masing-masing maks 10 tahun; kontrak yang sudah memperoleh perpanjangan pertama dijamin mendapatkan perpanjangan kedua maks 10 tahun. Perpanjangan dilakukan dengan mempertimbangkan upaya peningkatan penerimaan negara (pengaturan kembali pajak/PNBP dan luas wilayah). Pemegang IUPK sebagai Kelanjutan Operasi KK/PKP2B untuk komoditas Batubara wajib melaksanakan kegiatan Pengembangan dan/atau Pemanfaatan Batubara di dalam negeri. Pemegang KK dan PKP2B harus mengajukan permohonan IUPK kepada Menteri paling cepat 5 tahun dan paling lambat 1 tahun sebelum KK/PKP2B berakhir.` },
+  { num: "22", title: "SENTRALISASI KEWENANGAN DAERAH", pasal: "Pasal 169C",
+    tag: "KETENTUAN PERALIHAN",
+    content: `Pasal 169C huruf g (krusial): Seluruh kewenangan Pemerintah Daerah dalam UU No. 4 Tahun 2009 dan UU lain yang mengatur tentang kewenangan Pemerintah Daerah di bidang Pertambangan Mineral dan Batubara wajib dimaknai sebagai kewenangan Pemerintah Pusat kecuali ditentukan lain dalam UU ini. Gubernur wajib menyerahkan dokumen IUP Eksplorasi, IUP Operasi Produksi, IPR, dll. yang menjadi kewenangannya kepada Menteri paling lambat 2 tahun sejak UU ini berlaku. IUP Operasi Produksi khusus pengolahan dan pemurnian disesuaikan menjadi perizinan usaha industri berdasarkan ketentuan perindustrian dalam waktu paling lambat 1 tahun.` },
+  { num: "23", title: "DATA & INFORMASI PERTAMBANGAN", pasal: "Pasal 87A–87D",
+    tag: "BARU",
+    content: `Ditambahkan Pasal 87A–87D (baru): Menteri wajib menyediakan data dan informasi Pertambangan untuk menunjang penyiapan WP, mengembangkan IPTEK, dan melakukan alih teknologi. Pusat data dan informasi Pertambangan dikelola oleh Menteri, memuat minimal: peta geospasial, peta WP, jumlah pemegang izin, potensi sumber daya, sebaran potensi, jumlah investasi, informasi tata ruang, volume produksi, reklamasi dan pascatambang, data geologi, sarana prasarana, peluang investasi, dan pendidikan/pelatihan. Wajib menyajikan informasi secara akurat, mutakhir, dan mudah diakses oleh pemegang Perizinan Berusaha dan masyarakat.` },
+  { num: "24", title: "PENJUALAN MINERAL LOGAM BELUM DIMURNIKAN", pasal: "Pasal 170A",
+    tag: "KETENTUAN PERALIHAN",
+    content: `Ditambahkan Pasal 170A (baru): Pemegang KK, IUP Operasi Produksi, atau IUPK Operasi Produksi Mineral logam yang telah melakukan/dalam proses pembangunan fasilitas Pengolahan dan/atau Pemurnian atau telah melakukan kerjasama Pengolahan/Pemurnian, dapat melakukan Penjualan produk Mineral logam tertentu yang belum dimurnikan dalam jumlah tertentu ke luar negeri dalam jangka waktu paling lama 3 tahun sejak UU ini mulai berlaku. Wajib membayar bea keluar. Ketentuan lebih lanjut diatur dalam Peraturan Menteri.` }
+];
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════════════════════
+let activeUU = 'A';
+let currentViewA = 'browse';
+let currentViewB = 'browse';
+let markList = [], markIdx = -1;
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════════════════════
+function init() {
+  buildSidebarA();
+  buildSidebarB();
+  buildBabCardsA();
+  buildBabCardsB();
+}
+
+// ── BUILD SIDEBAR A ──────────────────────────────────────────────────────────
+function buildSidebarA() {
+  const nav = document.getElementById('navListA');
+  nav.innerHTML = BABS_A.map((b, i) => `
+    <div class="nav-item" id="navA-${i}" onclick="scrollToBabA(${i})">
+      <span class="nav-bab-num">BAB ${b.num}</span>
+      <span class="nav-bab-title">${b.title}</span>
+    </div>
+  `).join('');
+}
+
+// ── BUILD SIDEBAR B ──────────────────────────────────────────────────────────
+function buildSidebarB() {
+  const nav = document.getElementById('navListB');
+  document.getElementById('navCountB').textContent = BABS_B.length + ' Pokok Perubahan';
+  nav.innerHTML = BABS_B.map((b, i) => `
+    <div class="nav-item" id="navB-${i}" onclick="scrollToBabB(${i})">
+      <span class="nav-bab-num" style="min-width:26px;font-size:0.58rem;color:#5abdb0">${b.tag || ''}</span>
+      <span class="nav-bab-title">${b.title}</span>
+    </div>
+  `).join('');
+}
+
+// ── BUILD BAB CARDS A ────────────────────────────────────────────────────────
+function buildBabCardsA() {
+  const container = document.getElementById('babContainerA');
+  container.innerHTML = BABS_A.map((b, i) => `
+    <div class="bab-card" id="babA-${i}">
+      <div class="bab-card-header" onclick="toggleBabA(${i})">
+        <div class="bab-card-info">
+          <span class="bab-roman">BAB ${b.num}</span>
+          <span class="bab-card-title">${b.title}</span>
+        </div>
+        <span class="bab-card-pasal">Pasal ${b.pasal}</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="bab-card-body">
+        <div class="pasal-wrapper">
+          <div class="pasal-content" id="isiA-${i}">${b.content}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── BUILD BAB CARDS B ────────────────────────────────────────────────────────
+function buildBabCardsB() {
+  const container = document.getElementById('babContainerB');
+  container.innerHTML = BABS_B.map((b, i) => `
+    <div class="bab-card" id="babB-${i}">
+      <div class="bab-card-header" onclick="toggleBabB(${i})">
+        <div class="bab-card-info">
+          <span class="bab-roman" style="min-width:30px;font-size:0.62rem;color:var(--gold)">#${b.num}</span>
+          <span class="bab-card-title">${b.title}</span>
+        </div>
+        <span class="bab-card-pasal">${b.pasal}</span>
+        <span class="chevron">▾</span>
+      </div>
+      <div class="bab-card-body">
+        <div class="pasal-wrapper">
+          <span class="perubahan-tag">${b.tag || 'DIUBAH'}</span>
+          <div class="pasal-content" id="isiB-${i}">${b.content}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// UU SWITCHER
+// ═══════════════════════════════════════════════════════════════════════════════
+function switchUU(uu) {
+  activeUU = uu;
+  document.getElementById('contentA').classList.toggle('active', uu === 'A');
+  document.getElementById('contentB').classList.toggle('active', uu === 'B');
+  document.getElementById('uuTabA').classList.toggle('active', uu === 'A');
+  document.getElementById('uuTabB').classList.toggle('active', uu === 'B');
+
+  // Toggle sidebar lists
+  document.getElementById('navListA').classList.toggle('active', uu === 'A');
+  document.getElementById('navListB').classList.toggle('active', uu === 'B');
+  document.getElementById('sidebarLabelB').style.display = uu === 'B' ? 'flex' : 'none';
+
+  // Update topbar meta
+  const meta = document.getElementById('topbarMeta');
+  if (uu === 'A') meta.textContent = 'UU RI No. 4 Tahun 2009 · 175 Pasal · 26 BAB';
+  else meta.textContent = 'UU RI No. 3 Tahun 2020 · Perubahan UU Minerba · ' + BABS_B.length + ' Pokok Perubahan';
+
+  // Clear search
+  document.getElementById('searchInput').value = '';
+  clearHighlights();
+  clearSearchUI();
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════════════════════════
+function toggleBabA(i) { document.getElementById(`babA-${i}`).classList.toggle('expanded'); }
+function toggleBabB(i) { document.getElementById(`babB-${i}`).classList.toggle('expanded'); }
+
+function scrollToBabA(i) {
+  switchViewA('browse', document.querySelector('#contentA [data-view="browse"]'));
+  const card = document.getElementById(`babA-${i}`);
+  card.classList.add('expanded');
+  setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  document.querySelectorAll('#navListA .nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(`navA-${i}`).classList.add('active');
+  closeSidebar();
+}
+
+function scrollToBabB(i) {
+  switchViewB('browse', document.querySelector('#contentB [data-view="browse"]'));
+  const card = document.getElementById(`babB-${i}`);
+  card.classList.add('expanded');
+  setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  document.querySelectorAll('#navListB .nav-item').forEach(el => el.classList.remove('active'));
+  document.getElementById(`navB-${i}`).classList.add('active');
+  closeSidebar();
+}
+
+// ── VIEW SWITCH ──────────────────────────────────────────────────────────────
+function switchViewA(view, el) {
+  currentViewA = view;
+  const tabs = document.querySelectorAll('#contentA .top-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('browseViewA').classList.toggle('active', view === 'browse');
+  document.getElementById('searchViewA').classList.toggle('active', view === 'search');
+}
+
+function switchViewB(view, el) {
+  currentViewB = view;
+  const tabs = document.querySelectorAll('#contentB .top-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('browseViewB').classList.toggle('active', view === 'browse');
+  document.getElementById('searchViewB').classList.toggle('active', view === 'search');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// SIDEBAR TOGGLE
+// ═══════════════════════════════════════════════════════════════════════════════
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// SEARCH
+// ═══════════════════════════════════════════════════════════════════════════════
+function performSearch(q) {
+  q = q.trim();
+  clearHighlights();
+  if (!q) { clearSearchUI(); return; }
+
+  const qLower = q.toLowerCase();
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  let totalMatches = 0;
+  const results = [];
+
+  if (activeUU === 'A') {
+    BABS_A.forEach((b, i) => {
+      const text = `BAB ${b.num} ${b.title} ${b.content} Pasal ${b.pasal}`;
+      const count = (text.toLowerCase().match(new RegExp(qLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+      const el = document.getElementById(`isiA-${i}`);
+      if (el) el.innerHTML = count > 0 ? b.content.replace(re, '<mark class="highlight-text">$&</mark>') : b.content;
+      const nav = document.getElementById(`navA-${i}`);
+      const ex = nav.querySelector('.match-badge'); if (ex) ex.remove();
+      nav.classList.remove('match');
+      if (count > 0) {
+        totalMatches += count;
+        nav.classList.add('match');
+        const badge = document.createElement('span');
+        badge.className = 'match-badge'; badge.textContent = count;
+        nav.appendChild(badge);
+        const snip = b.content.split('. ').filter(s => s.toLowerCase().includes(qLower)).slice(0, 2).join('. ');
+        if (snip) results.push({ bab: b, idx: i, snippet: snip, count });
+      }
+    });
+    document.getElementById('searchViewTitleA').textContent = `${totalMatches} hasil untuk "${q}"`;
+    renderSearchResults('A', q, results, totalMatches);
+    switchViewA('search', document.querySelector('#contentA [data-view="search"]'));
+  } else {
+    BABS_B.forEach((b, i) => {
+      const text = `${b.title} ${b.content} ${b.pasal} ${b.tag || ''}`;
+      const count = (text.toLowerCase().match(new RegExp(qLower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g')) || []).length;
+      const el = document.getElementById(`isiB-${i}`);
+      if (el) el.innerHTML = count > 0 ? b.content.replace(re, '<mark class="highlight-text">$&</mark>') : b.content;
+      const nav = document.getElementById(`navB-${i}`);
+      const ex = nav.querySelector('.match-badge'); if (ex) ex.remove();
+      nav.classList.remove('match');
+      if (count > 0) {
+        totalMatches += count;
+        nav.classList.add('match');
+        const badge = document.createElement('span');
+        badge.className = 'match-badge'; badge.textContent = count;
+        nav.appendChild(badge);
+        const snip = b.content.split('. ').filter(s => s.toLowerCase().includes(qLower)).slice(0, 2).join('. ');
+        if (snip) results.push({ bab: b, idx: i, snippet: snip, count });
+      }
+    });
+    document.getElementById('searchViewTitleB').textContent = `${totalMatches} hasil untuk "${q}"`;
+    renderSearchResults('B', q, results, totalMatches);
+    switchViewB('search', document.querySelector('#contentB [data-view="search"]'));
+  }
+
+  document.getElementById('searchCount').textContent = `${totalMatches} hasil`;
+  document.getElementById('searchCount').style.display = 'inline';
+  markList = [...document.querySelectorAll('.highlight-text')];
+  markIdx = -1;
+}
+
+function renderSearchResults(uu, q, results, total) {
+  const c = document.getElementById(`searchResults${uu}`);
+  if (!results.length) {
+    c.innerHTML = `<div class="empty-state"><div class="empty-icon">∅</div><div>Tidak ada hasil ditemukan untuk "<strong>${q}</strong>"</div></div>`;
+    return;
+  }
+  const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  c.innerHTML = results.map(r => {
+    const meta = uu === 'A'
+      ? `BAB ${r.bab.num} — ${r.bab.title} · Pasal ${r.bab.pasal} · ${r.count} kemunculan`
+      : `#${r.bab.num} — ${r.bab.title} · ${r.bab.tag || ''} · ${r.count} kemunculan`;
+    const fn = uu === 'A' ? `scrollToBabA(${r.idx})` : `scrollToBabB(${r.idx})`;
+    return `<div class="search-result-item" onclick="${fn}">
+      <div class="result-bab-meta">${meta}</div>
+      <div class="result-snippet">${r.snippet.replace(re, '<mark class="highlight-text">$&</mark>')}</div>
+    </div>`;
+  }).join('');
+}
+
+function clearHighlights() {
+  BABS_A.forEach((b, i) => {
+    const el = document.getElementById(`isiA-${i}`);
+    if (el) el.innerHTML = b.content;
+  });
+  BABS_B.forEach((b, i) => {
+    const el = document.getElementById(`isiB-${i}`);
+    if (el) el.innerHTML = b.content;
+  });
+  markList = []; markIdx = -1;
+}
+
+function clearSearchUI() {
+  document.getElementById('searchCount').style.display = 'none';
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.classList.remove('match');
+    const badge = el.querySelector('.match-badge');
+    if (badge) badge.remove();
+  });
+  if (currentViewA === 'search') switchViewA('browse', document.querySelector('#contentA [data-view="browse"]'));
+  if (currentViewB === 'search') switchViewB('browse', document.querySelector('#contentB [data-view="browse"]'));
+}
+
+function nextMark() {
+  if (!markList.length) return;
+  if (markIdx >= 0 && markList[markIdx]) markList[markIdx].classList.remove('current');
+  markIdx = (markIdx + 1) % markList.length;
+  const m = markList[markIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('bab-card')) el = el.parentElement;
+  if (el) el.classList.add('expanded');
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function prevMark() {
+  if (!markList.length) return;
+  if (markIdx >= 0 && markList[markIdx]) markList[markIdx].classList.remove('current');
+  markIdx = (markIdx - 1 + markList.length) % markList.length;
+  const m = markList[markIdx];
+  m.classList.add('current');
+  let el = m;
+  while (el && !el.classList.contains('bab-card')) el = el.parentElement;
+  if (el) el.classList.add('expanded');
+  m.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function searchKeyNav(e) {
+  if (e.key === 'Enter') { e.shiftKey ? prevMark() : nextMark(); }
+  if (e.key === 'Escape') {
+    document.getElementById('searchInput').value = '';
+    clearHighlights();
+    clearSearchUI();
+  }
+}
+
+init();
+</script>
+</body>
+</html>

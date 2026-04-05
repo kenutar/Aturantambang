@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNI 4726:2019 — Pedoman Pelaporan Hasil Eksplorasi, Sumber Daya, dan Cadangan Mineral</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --blue:       #1a3a5c;
+    --blue-dark:  #0f2440;
+    --blue-mid:   #24527a;
+    --blue-pale:  #eaf1f8;
+    --gold:       #8b6914;
+    --gold-light: #c9a84c;
+    --orange:     #c07020;
+    --ink:        #1a1a18;
+    --ink-mid:    #2e2e2a;
+    --ink-light:  #5e5e55;
+    --cream:      #faf8f6;
+    --cream-dark: #f0ebe0;
+    --rule:       #d4c9b0;
+    --sidebar-w:  290px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'IBM Plex Sans', sans-serif; background: var(--cream); color: var(--ink); font-size: 14.5px; line-height: 1.8; }
+  .shell { display: flex; min-height: 100vh; }
+
+  /* ── SIDEBAR ── */
+  aside {
+    width: var(--sidebar-w); flex-shrink: 0;
+    background: #0a1520; color: #a0b8d0;
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    scrollbar-width: thin; scrollbar-color: #1a3a5c transparent;
+  }
+  .sb-brand { padding: 1.3rem 1.2rem 0.9rem; background: #070f18; border-bottom: 1px solid #1a3a5c; }
+  .sb-brand .label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.3rem; }
+  .sb-brand h2 { font-family: 'Lora', serif; font-size: 12px; color: #d8e8f0; line-height: 1.4; font-weight: 400; }
+  .sb-badge { margin: 0.6rem 1.2rem 0; background: var(--blue); color: white; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 0.4rem 0.8rem; border-radius: 3px; display: inline-block; }
+
+  .nav-group { padding: 0.8rem 0 0.2rem; }
+  .nav-group-title { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold-light); padding: 0 1.2rem 0.3rem; }
+  .nav-item { display: block; padding: 0.37rem 1.2rem; color: #7090b0; text-decoration: none; font-size: 12px; transition: all 0.15s; border-left: 2px solid transparent; line-height: 1.4; }
+  .nav-item:hover { color: #d8e8f0; border-left-color: var(--gold-light); background: rgba(26,58,92,0.15); }
+  .nav-item .n { font-size: 10px; opacity: 0.5; margin-right: 0.3rem; }
+
+  /* ── MAIN ── */
+  main { flex: 1; max-width: 900px; margin: 0 auto; padding: 2.5rem 3rem 6rem; }
+
+  .breadcrumb { font-size: 11px; color: var(--ink-light); margin-bottom: 1.5rem; }
+  .breadcrumb span { color: var(--blue-mid); }
+
+  /* ── DOC HEADER ── */
+  .doc-header { text-align: center; padding: 1.8rem 0; border-bottom: 2px solid var(--rule); margin-bottom: 2.2rem; }
+  .doc-header .instansi { font-size: 10.5px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.3rem; }
+  .doc-badge { display: inline-block; background: var(--blue); color: white; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 20px; margin: 0.6rem 0 0.4rem; }
+  .doc-header .nomor { font-family: 'Lora', serif; font-size: 13px; color: var(--gold); margin-bottom: 0.4rem; }
+  .doc-header h1 { font-family: 'Lora', serif; font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.45; max-width: 660px; margin: 0 auto 0.6rem; }
+  .doc-header .meta { font-size: 11.5px; color: var(--ink-light); font-style: italic; }
+
+  /* ── BAGIAN / BAB HEADERS ── */
+  .bagian { margin-bottom: 2.5rem; scroll-margin-top: 2rem; }
+  .bagian-header { display: flex; align-items: center; gap: 0.8rem; background: var(--blue); color: white; padding: 0.9rem 1.2rem; border-radius: 6px; margin-bottom: 1.2rem; }
+  .bagian-header .bh-num { font-size: 22px; font-weight: 700; font-family: 'Lora', serif; opacity: 0.9; min-width: 2rem; }
+  .bagian-header .bh-title { font-family: 'Lora', serif; font-size: 15px; line-height: 1.3; }
+
+  /* ── SECTIONS ── */
+  .section { margin-bottom: 1.8rem; scroll-margin-top: 2rem; }
+  .section-title { display: flex; align-items: center; gap: 0.6rem; font-family: 'Lora', serif; font-size: 16px; color: var(--ink); margin-bottom: 0.8rem; padding-bottom: 0.45rem; border-bottom: 1.5px solid var(--rule); }
+  .sec-num { display: inline-flex; align-items: center; justify-content: center; min-width: 28px; height: 28px; padding: 0 6px; background: var(--blue); color: white; border-radius: 4px; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+
+  .sub-section { margin: 1.1rem 0 0.8rem; }
+  .sub-title { font-family: 'Lora', serif; font-size: 14px; color: var(--blue-dark); margin-bottom: 0.45rem; display: flex; align-items: baseline; gap: 0.5rem; }
+  .sub-num { font-size: 11px; font-weight: 600; background: var(--blue-pale); color: var(--blue-mid); padding: 1px 8px; border-radius: 20px; flex-shrink: 0; }
+  .sub-sub-title { font-size: 13.5px; font-weight: 600; color: var(--ink-mid); margin: 0.8rem 0 0.35rem; }
+
+  /* ── PROSE ── */
+  p.body { margin-bottom: 0.55rem; color: var(--ink-mid); }
+
+  /* ── LISTS ── */
+  .list-alpha { margin: 0.4rem 0 0.5rem 1.5rem; }
+  .list-alpha li { margin-bottom: 0.3rem; color: var(--ink-mid); }
+  .list-num { margin: 0.35rem 0 0.45rem 1.5rem; list-style-type: decimal; }
+  .list-num li { margin-bottom: 0.3rem; color: var(--ink-mid); }
+  .list-dash { margin: 0.3rem 0 0.4rem 1.5rem; list-style-type: '– '; }
+  .list-dash li { margin-bottom: 0.25rem; color: var(--ink-mid); }
+
+  /* ── CALLOUTS ── */
+  .callout      { border-left: 3px solid var(--blue-mid); background: var(--blue-pale); padding: 0.7rem 1rem; margin: 0.6rem 0; border-radius: 0 4px 4px 0; font-size: 14px; color: var(--ink-mid); }
+  .callout.gold { border-left-color: var(--gold); background: #fdf8ec; }
+  .callout.dark { border-left-color: var(--blue-dark); background: #e4ecf4; }
+  .callout.note { border-left-color: var(--orange); background: #fdf4e8; }
+
+  /* ── DEFINITION TERMS ── */
+  .def-block { margin-bottom: 0.9rem; padding-left: 0; }
+  .def-num { font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 0.1rem; }
+  .def-term { font-size: 14px; font-weight: 700; color: var(--ink); font-family: 'Lora', serif; }
+  .def-term em { font-style: italic; color: var(--ink-light); font-size: 12.5px; }
+  .def-body { font-size: 14px; color: var(--ink-mid); margin-top: 0.2rem; }
+
+  /* ── KLASIFIKASI CARDS ── */
+  .klas-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem; margin: 0.8rem 0; }
+  .klas-card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .klas-card .kch { padding: 0.5rem 0.8rem; font-weight: 600; font-size: 13px; color: white; }
+  .klas-card .kcb { padding: 0.6rem 0.8rem; font-size: 13px; color: var(--ink-mid); background: white; }
+  .kch-tereka    { background: #6b8fad; }
+  .kch-tertunjuk { background: var(--blue-mid); }
+  .kch-terukur   { background: var(--blue-dark); }
+  .kch-terkira   { background: #b07830; }
+  .kch-terbukti  { background: #7a4010; }
+
+  /* ── 2-COL CARDS ── */
+  .duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 0.8rem 0; }
+  .duo-card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .duo-card .dch { background: var(--blue-dark); color: white; padding: 0.55rem 0.9rem; font-size: 13px; font-weight: 600; font-family: 'Lora', serif; }
+  .duo-card .dcb { padding: 0.7rem 0.9rem; background: white; font-size: 13px; color: var(--ink-mid); }
+  .duo-card .dcb ul { margin-left: 1.1rem; }
+  .duo-card .dcb li { margin-bottom: 0.2rem; }
+
+  /* ── PRINSIP 3-CARDS ── */
+  .trio-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.7rem; margin: 0.8rem 0; }
+  .trio-card { border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .trio-card .tch { padding: 0.5rem 0.8rem; font-weight: 600; font-size: 13px; color: white; }
+  .trio-card .tcb { padding: 0.6rem 0.8rem; font-size: 13px; color: var(--ink-mid); background: white; }
+  .tch-1 { background: var(--blue-mid); }
+  .tch-2 { background: var(--orange); }
+  .tch-3 { background: #5a8040; }
+
+  /* ── GENERIC TABLE ── */
+  .std-table { width: 100%; border-collapse: collapse; margin: 0.7rem 0; font-size: 13px; }
+  .std-table th { background: var(--ink); color: #d8e8f0; padding: 0.5rem 0.7rem; text-align: left; font-weight: 500; }
+  .std-table td { padding: 0.45rem 0.7rem; border-bottom: 1px solid var(--cream-dark); color: var(--ink-mid); vertical-align: top; }
+  .std-table tr:nth-child(even) td { background: #f0f5fa; }
+  .std-table th:last-child, .std-table td:last-child { text-align: center; }
+
+  /* ── KAJIAN TABLE ── */
+  .kajian-table { width: 100%; border-collapse: collapse; margin: 0.7rem 0; font-size: 12.5px; }
+  .kajian-table th { background: var(--blue-dark); color: white; padding: 0.5rem 0.7rem; text-align: center; font-weight: 600; }
+  .kajian-table th.left { text-align: left; }
+  .kajian-table td { padding: 0.4rem 0.7rem; border-bottom: 1px solid var(--cream-dark); color: var(--ink-mid); vertical-align: top; }
+  .kajian-table tr:nth-child(even) td { background: #f0f5fa; }
+  .kajian-table .group-row td { background: var(--blue-pale); font-weight: 700; color: var(--blue-dark); }
+
+  /* ── FORMAT LIST (TOC style) ── */
+  .format-list { margin: 0.5rem 0 0.5rem 1.5rem; list-style: none; }
+  .format-list li { padding: 0.2rem 0; color: var(--ink-mid); font-size: 14px; }
+  .format-list li::before { content: '▸ '; color: var(--blue-mid); font-size: 11px; }
+  .format-list.sub { margin-left: 2.5rem; }
+  .format-list.sub li::before { content: '– '; color: var(--ink-light); }
+
+  hr.div { border: none; border-top: 1px solid var(--rule); margin: 1.8rem 0; }
+
+  .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--gold-light); width: 0; z-index: 999; transition: width 0.1s; }
+
+  .tag { display: inline-block; background: var(--blue-pale); color: var(--blue-dark); font-size: 11px; font-weight: 600; padding: 1px 8px; border-radius: 20px; margin: 0 2px; }
+
+  @media (max-width: 800px) {
+    aside { display: none; }
+    main { padding: 1.5rem 1rem 4rem; }
+    .klas-grid, .trio-grid { grid-template-columns: 1fr; }
+    .duo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="prog"></div>
+<div class="shell">
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside>
+  <div class="sb-brand">
+    <div class="label">Badan Standardisasi Nasional</div>
+    <h2>SNI 4726:2019 — Pedoman Pelaporan Hasil Eksplorasi, Sumber Daya, dan Cadangan Mineral</h2>
+  </div>
+  <div style="padding:0.5rem 1.2rem 0.3rem;">
+    <span class="sb-badge">ICS 07.060; 73.020</span>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Pendahuluan</div>
+    <a class="nav-item" href="#prakata"><span class="n">▸</span>Prakata</a>
+    <a class="nav-item" href="#pendahuluan"><span class="n">▸</span>Pendahuluan</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Batang Tubuh</div>
+    <a class="nav-item" href="#s1"><span class="n">1</span>Ruang Lingkup</a>
+    <a class="nav-item" href="#s2"><span class="n">2</span>Acuan Normatif</a>
+    <a class="nav-item" href="#s3"><span class="n">3</span>Istilah &amp; Definisi</a>
+    <a class="nav-item" href="#s4"><span class="n">4</span>Klasifikasi</a>
+    <a class="nav-item" href="#s5"><span class="n">5</span>Pelaporan</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Seksi 5 — Pelaporan</div>
+    <a class="nav-item" href="#s51"><span class="n">5.1</span>Ketentuan Umum</a>
+    <a class="nav-item" href="#s52"><span class="n">5.2</span>Laporan Hasil Eksplorasi</a>
+    <a class="nav-item" href="#s53"><span class="n">5.3</span>Sumber Daya Mineral</a>
+    <a class="nav-item" href="#s54"><span class="n">5.4</span>Cadangan Mineral</a>
+    <a class="nav-item" href="#s55"><span class="n">5.5</span>Material Isian &amp; Tailing</a>
+    <a class="nav-item" href="#s56"><span class="n">5.6</span>Intan &amp; Batu Mulia</a>
+    <a class="nav-item" href="#s57"><span class="n">5.7</span>Mineral Industri</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Lampiran</div>
+    <a class="nav-item" href="#lampa"><span class="n">A</span>Daftar Pengecekan (Normatif)</a>
+    <a class="nav-item" href="#lampb"><span class="n">B</span>Pedoman Kajian Teknis</a>
+    <a class="nav-item" href="#lampc"><span class="n">C</span>Format Laporan (Rekomendasi)</a>
+    <a class="nav-item" href="#biblio"><span class="n">▸</span>Bibliografi</a>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<main>
+  <div class="breadcrumb">Badan Standardisasi Nasional &rsaquo; <span>SNI 4726:2019</span></div>
+
+  <div class="doc-header">
+    <div class="instansi">Standar Nasional Indonesia · Badan Standardisasi Nasional</div>
+    <div class="doc-badge">SNI 4726:2019</div>
+    <div class="nomor">Revisi dari SNI 4726:2011 &nbsp;|&nbsp; ICS 07.060; 73.020 &nbsp;|&nbsp; Ditetapkan 2019</div>
+    <h1>Pedoman Pelaporan Hasil Eksplorasi,<br>Sumber Daya, dan Cadangan Mineral</h1>
+    <div class="meta">Mencakup: Klasifikasi Sumber Daya &amp; Cadangan · Prinsip Transparansi, Materialitas, Kompetensi · Lampiran Pengecekan Normatif · Pedoman Kajian Teknis</div>
+  </div>
+
+  <!-- ══ PRAKATA ══ -->
+  <div class="bagian" id="prakata">
+    <div class="bagian-header">
+      <div class="bh-num">▸</div>
+      <div class="bh-title">Prakata</div>
+    </div>
+    <div class="section">
+      <p class="body">SNI 4726:2019 dengan judul <em>Pedoman pelaporan hasil eksplorasi, sumber daya, dan cadangan mineral</em> merupakan revisi dari SNI 4726:2011. Revisi dilakukan pada bagian penjelasan sumber daya, cadangan, tingkat keakuratan dalam kajian keekonomian, serta penambahan acuan pelaporan yang harus ditandatangani oleh <strong>orang yang berkompeten (<em>competent person</em>)</strong>.</p>
+      <p class="body">Standar ini disusun oleh <strong>Komite Teknis 73-02, Teknik Pertambangan Mineral dan Batubara</strong> dan telah disepakati oleh para pihak terkait (<em>stakeholders</em>) pada forum konsensus nasional di Yogyakarta, 4 September 2019. Jajak pendapat: 20 September – 18 November 2019.</p>
+      <p class="body">Penyusunan standar ini mengacu kepada Peraturan Kepala BSN Nomor 4 Tahun 2016 tentang Pedoman Penulisan Standar Nasional Indonesia.</p>
+      <div class="callout note">Beberapa unsur dalam dokumen standar ini mungkin berupa hak paten. BSN tidak bertanggung jawab untuk pengidentifikasian salah satu atau seluruh hak paten yang ada.</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ PENDAHULUAN ══ -->
+  <div class="bagian" id="pendahuluan">
+    <div class="bagian-header">
+      <div class="bh-num">▸</div>
+      <div class="bh-title">Pendahuluan</div>
+    </div>
+    <div class="section">
+      <p class="body">Cebakan mineral merupakan salah satu kekayaan alam yang mempengaruhi perekonomian nasional. Upaya mengetahui kuantitas dan kualitas cebakan mineral hendaknya selalu diusahakan dengan tingkat kepastian yang lebih tinggi, seiring dengan tahapan eksplorasinya.</p>
+      <div class="callout gold">Prinsip yang digunakan dalam standar ini adalah:
+        <ul class="list-alpha" type="none" style="margin-top:0.4rem;margin-left:1.2rem;">
+          <li><strong>Transparansi</strong> — laporan disuguhkan dengan informasi yang cukup, penyajian jelas, tidak ambigu, dan tidak membingungkan.</li>
+          <li><strong>Materialitas</strong> — laporan berisi semua informasi yang relevan, pantas, dan wajar untuk pengambilan keputusan yang tepat dan berimbang.</li>
+          <li><strong>Kompetensi</strong> — laporan dikerjakan oleh orang yang mumpuni, bertanggung jawab, dan berpengalaman yang terikat oleh aturan dan kode etik profesional.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ SEKSI 1 ══ -->
+  <div class="bagian" id="s1">
+    <div class="bagian-header">
+      <div class="bh-num">1</div>
+      <div class="bh-title">Ruang Lingkup</div>
+    </div>
+    <div class="section">
+      <p class="body">Standar ini menetapkan pedoman penyusunan pelaporan hasil eksplorasi, sumber daya, dan cadangan mineral.</p>
+    </div>
+  </div>
+
+  <!-- ══ SEKSI 2 ══ -->
+  <div class="bagian" id="s2">
+    <div class="bagian-header">
+      <div class="bh-num">2</div>
+      <div class="bh-title">Acuan Normatif</div>
+    </div>
+    <div class="section">
+      <p class="body">Tidak ada acuan normatif dalam dokumen ini.</p>
+    </div>
+  </div>
+
+  <!-- ══ SEKSI 3 ══ -->
+  <div class="bagian" id="s3">
+    <div class="bagian-header">
+      <div class="bh-num">3</div>
+      <div class="bh-title">Istilah dan Definisi</div>
+    </div>
+    <div class="section">
+      <p class="body">Untuk tujuan penggunaan dokumen ini, istilah dan definisi berikut berlaku.</p>
+
+      <div class="def-block">
+        <div class="def-num">3.1</div>
+        <div class="def-term"><em>assay</em></div>
+        <div class="def-body">Pengujian kadar logam atau unsur lain dari suatu sampel.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.2</div>
+        <div class="def-term">cadangan mineral</div>
+        <div class="def-body">Bagian dari sumber daya mineral tertunjuk dan/atau terukur yang dapat ditambang secara ekonomis. Dalam proses estimasi cadangan mineral, kajian yang tepat pada tingkat minimum Prastudi Kelayakan (Pre FS) harus sudah dilakukan dengan mempertimbangkan semua faktor pengubah (<em>modifying factors</em>) yang relevan, meliputi teknis penambangan, pengolahan, metalurgi, sarana dan prasarana, ekonomi, pemasaran, legal, lingkungan, sosial, dan peraturan perundang-undangan. Berdasarkan tingkat keyakinannya, cadangan mineral dibagi menjadi <strong>cadangan terkira</strong> dan <strong>cadangan terbukti</strong>.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.3</div>
+        <div class="def-term">cadangan mineral marginal</div>
+        <div class="def-body">Bagian dari cadangan mineral terkira yang berada pada batas keekonomian pada saat penyusunan studi kelayakan tetapi masih harus mempertimbangkan perubahan faktor teknis dan ekonomi untuk dilakukan perencanaan penambangan sehingga status cadangan dapat kembali menjadi sumber daya.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.4</div>
+        <div class="def-term">cadangan mineral terbukti</div>
+        <div class="def-body">Bagian dari sumber daya mineral terukur yang dapat ditambang secara ekonomis, setelah terdapat kepastian terhadap faktor pengubah terkait yang dipertimbangkan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.5</div>
+        <div class="def-term">cadangan mineral terkira</div>
+        <div class="def-body">Bagian dari sumber daya mineral tertunjuk yang dapat ditambang secara ekonomis setelah semua faktor pengubah yang relevan dipertimbangkan. Cadangan mineral terkira juga bisa diartikan sebagai bagian dari sumber daya mineral terukur yang dapat ditambang secara ekonomis, namun hasil penilaian terhadap faktor pengubah menunjukkan bahwa terdapat ketidakpastian pada salah satu atau lebih dari faktor pengubah tersebut.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.6</div>
+        <div class="def-term">cebakan mineral <em>(mineral deposit)</em></div>
+        <div class="def-body">Longgokan (akumulasi) mineral atau batuan yang terdapat di kerak bumi yang terbentuk oleh proses geologi tertentu dan dapat bernilai ekonomi.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.7</div>
+        <div class="def-term">eksplorasi pendahuluan <em>(general exploration)</em></div>
+        <div class="def-body">Kegiatan teknis dalam rangka penyelidikan umum dan prospeksi untuk mengetahui kondisi geologi regional dan indikasi adanya cebakan mineral. <br><em>Catatan: Tujuannya adalah untuk menentukan gambaran geologi suatu cebakan mineral berdasarkan indikasi sebaran, perkiraan awal mengenai ukuran, bentuk, sebaran, kuantitas, dan kualitasnya.</em></div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.8</div>
+        <div class="def-term">eksplorasi terperinci <em>(detailed exploration)</em></div>
+        <div class="def-body">Kegiatan teknis dalam rangka memperoleh informasi secara terperinci dan teliti tentang lokasi, bentuk, dimensi, sebaran, kualitas, dan sumber daya tertunjuk dan/atau terukur dari cebakan mineral.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.9</div>
+        <div class="def-term">faktor pengubah</div>
+        <div class="def-body">Faktor yang dipertimbangkan untuk mengkonversi sumber daya mineral menjadi cadangan mineral. Termasuk dan tidak terbatas pada faktor penambangan, pengolahan, pemurnian, ekonomi, pemasaran, legal, lingkungan, sarana dan prasarana, sosial, dan peraturan perundang-undangan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.10</div>
+        <div class="def-term">kadar batas <em>(cut off grade)</em></div>
+        <div class="def-body">Kadar terendah bahan galian atau kadar rata-rata campuran bahan galian atau mineral yang terendah, tetapi masih memberikan keuntungan apabila ditambang dan diolah dengan tingkat teknologi pada keadaan ekonomi tertentu.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.11</div>
+        <div class="def-term">keterdapatan mineral <em>(mineral occurrence)</em></div>
+        <div class="def-body">Suatu indikasi pemineralan (<em>mineralization</em>) yang dinilai untuk dieksplorasi lebih jauh. Istilah keterdapatan mineral tidak ada hubungannya dengan ukuran volume/tonase atau kadar/kualitas, dengan demikian bukan bagian dari suatu sumber daya mineral.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.12</div>
+        <div class="def-term">keyakinan geologi <em>(geological assurance)</em></div>
+        <div class="def-body">Tingkat keyakinan mengenai cebakan mineral yang meliputi ukuran, bentuk, sebaran, kuantitas, dan kualitas sesuai dengan tahapan eksplorasi.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.13</div>
+        <div class="def-term">klasifikasi sumber daya dan cadangan</div>
+        <div class="def-body">Pengelompokan sumber daya dan cadangan mineral berdasarkan tingkat keyakinan geologi dan kelayakan tambang.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.14</div>
+        <div class="def-term">laporan lengkap eksplorasi</div>
+        <div class="def-body">Laporan yang terdiri dari laporan kegiatan eksplorasi yang dilengkapi dengan estimasi sumber daya.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.15</div>
+        <div class="def-term">orang yang berkompeten <em>(competent person)</em></div>
+        <div class="def-body">Orang yang memiliki pengetahuan, kemampuan, dan pengalaman paling kurang <strong>5 (lima) tahun</strong> yang relevan untuk melakukan pelaporan hasil eksplorasi dan/atau estimasi sumber daya dan/atau estimasi cadangan mineral, yang dibuktikan dengan sertifikat kompetensi sesuai dengan ketentuan peraturan perundang-undangan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.16</div>
+        <div class="def-term">pelaporan cadangan mineral</div>
+        <div class="def-body">Kegiatan untuk melaporkan cadangan dari suatu sumber daya mineral yang meliputi verifikasi dan validasi model geologi, sumber daya, optimasi batas tambang, pembuatan desain tambang, penjadwalan produksi tambang, evaluasi keekonomian, dan klasifikasi cadangan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.17</div>
+        <div class="def-term">pelaporan kegiatan eksplorasi <em>(exploration report)</em></div>
+        <div class="def-body">Penyiapan dokumen mutakhir dari setiap tahap eksplorasi yang menggambarkan ukuran, bentuk, sebaran, kuantitas, dan kualitas cebakan mineral. Laporan tersebut memberikan status mutakhir mengenai sumber daya mineral yang dapat digunakan untuk menentukan tahap eksplorasi berikutnya atau studi kelayakan tambang.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.18</div>
+        <div class="def-term">pelaporan sumber daya mineral</div>
+        <div class="def-body">Kegiatan untuk melaporkan sumber daya dari suatu cebakan mineral yang meliputi verifikasi dan validasi data utama dan data pendukung, model geologi, model kadar, melakukan uji prospek ekonomi, dan klasifikasi sumber daya.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.19</div>
+        <div class="def-term">prastudi kelayakan</div>
+        <div class="def-body">Sebuah studi komprehensif yang mengkaji serangkaian opsi dari kelayakan teknis dan ekonomi proyek tambang mineral. Studi ini mencakup analisis ekonomi berdasarkan asumsi yang beralasan dari faktor pengubah. Prastudi kelayakan memiliki tingkat keyakinan yang lebih rendah dibandingkan studi kelayakan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.20</div>
+        <div class="def-term">prospeksi <em>(prospecting)</em></div>
+        <div class="def-body">Bagian dari eksplorasi pendahuluan untuk mempersempit daerah yang mengandung cebakan mineral yang potensial dengan metode pemetaan geologi. <em>Catatan: Tujuannya adalah untuk mengidentifikasi suatu cebakan mineral yang akan menjadi target eksplorasi selanjutnya.</em></div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.21</div>
+        <div class="def-term">studi kelayakan <em>(feasibility study)</em></div>
+        <div class="def-body">Sebuah studi teknis dan ekonomi yang komprehensif dari sebuah opsi pengembangan proyek tambang yang telah dipilih. Studi ini memasukkan penilaian yang tepat dan terperinci terhadap aplikasi faktor pengubah dan faktor operasional lainnya yang relevan, serta analisis ekonomi terperinci yang penting untuk mendemonstrasikan bahwa pada saat laporan studi kelayakan dibuat, proses ekstraksi mineral benar-benar bisa dilakukan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.22</div>
+        <div class="def-term">studi pelingkupan <em>(scoping study)</em></div>
+        <div class="def-body">Sebuah tingkatan studi yang mengkaji kelayakan teknis dan ekonomi dari sumber daya mineral secara luas dan kasar. Studi pelingkupan dipergunakan sebagai dasar untuk pengambilan keputusan internal dalam evaluasi awal proyek dan memiliki tingkat keyakinan yang lebih rendah dibandingkan prastudi kelayakan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.23</div>
+        <div class="def-term">sumber daya mineral <em>(mineral resource)</em></div>
+        <div class="def-body">Bagian dari cebakan mineral pada kerak bumi, dengan dimensi, kualitas, dan kuantitas tertentu pada suatu konsentrasi atau keterjadian dari mineral yang memiliki nilai ekonomi dan keprospekan yang beralasan untuk pada akhirnya dapat diekstraksi secara ekonomis.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.24</div>
+        <div class="def-term">sumber daya mineral tereka <em>(inferred mineral resource)</em></div>
+        <div class="def-body">Bagian dari sumber daya mineral total yang diestimasi meliputi tonase, densitas, bentuk, dimensi, kimia, kadar, dan kandungan mineralnya hanya dapat diperkirakan dengan tingkat kepercayaan yang rendah. Titik pengamatan dan keyakinan geologi rendah tidak cukup untuk membuktikan kemenerusan cebakan mineral dan kadarnya.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.25</div>
+        <div class="def-term">sumber daya mineral tertunjuk <em>(indicated mineral resource)</em></div>
+        <div class="def-body">Bagian dari sumber daya mineral total yang diestimasi meliputi tonase, densitas, bentuk, dimensi, kimia, kadar, dan kandungan mineralnya dapat diperkirakan dengan tingkat kepercayaan yang beralasan, didasarkan pada informasi dari titik pengamatan dengan keyakinan geologi medium. Titik pengamatan cukup untuk menginterpretasikan kemenerusan cebakan mineral, tetapi tidak cukup untuk membuktikan kemenerusan kadar dan kandungan mineralnya.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.26</div>
+        <div class="def-term">sumber daya mineral terukur <em>(measured mineral resource)</em></div>
+        <div class="def-body">Bagian dari sumber daya mineral total yang diestimasi meliputi tonase, densitas, bentuk, dimensi, kimia, kadar, dan kandungan mineralnya dapat diperkirakan dengan tingkat kepercayaan tinggi, didasarkan pada informasi dari titik pengamatan dengan keyakinan geologi tinggi. Titik pengamatan jaraknya cukup berdekatan untuk membuktikan kemenerusan kadar dan kandungan mineralnya. Kajian ekonomisnya pada tingkatan studi pelingkupan.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.27</div>
+        <div class="def-term">survei tinjau <em>(reconnaissance)</em></div>
+        <div class="def-body">Tahapan eksplorasi untuk mengidentifikasi daerah-daerah yang berpotensi bagi keterdapatan mineral pada skala regional terutama berdasarkan kajian geologi regional, pemetaan geologi regional, penginderaan jauh, dan metode tidak langsung lainnya. <em>Catatan: Perkiraan kuantitas sebaiknya hanya dilakukan apabila datanya cukup tersedia atau ada kemiripan dengan cebakan lain yang mempunyai kondisi geologi yang sama.</em></div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.28</div>
+        <div class="def-term">tahapan eksplorasi <em>(exploration stages)</em></div>
+        <div class="def-body">Urutan penyelidikan geologi yang umumnya dilaksanakan melalui dua tahap, yaitu eksplorasi pendahuluan (studi pustaka dan basis data, survei tinjau, dan prospeksi) dan eksplorasi terperinci (teknik eksplorasi, survei eksplorasi, dan estimasi sumber daya).</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.29</div>
+        <div class="def-term">target eksplorasi mineral</div>
+        <div class="def-body">Kualitas dan kuantitas mineral yang diestimasi didasarkan atas titik pengamatan yang belum memenuhi persyaratan klasifikasi untuk sumber daya tereka. Pernyataannya harus dalam bentuk kisaran angka yang ditentukan oleh orang yang berkompeten.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.30</div>
+        <div class="def-term">tenaga teknis pertambangan yang berkompeten</div>
+        <div class="def-body">Tenaga pertambangan yang memiliki pengetahuan, kemampuan, pengalaman, atau sertifikasi kompetensi bagi area kerja yang telah memiliki standar kompetensi kerja yang berlaku wajib di bidang eksplorasi/geologi, survei/pemetaan, studi kelayakan, konstruksi, penambangan, pengolahan dan/atau pemurnian, pengangkutan, dan/atau reklamasi dan pascatambang yang diakui pemerintah.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.31</div>
+        <div class="def-term">titik pengamatan</div>
+        <div class="def-body">Tempat diambilnya data dan sampel salah satu atau lebih dari titik pengamatan, sumur uji, parit uji, dan/atau pengeboran.</div>
+      </div>
+
+      <div class="def-block">
+        <div class="def-num">3.32</div>
+        <div class="def-term">toleransi kesalahan <em>(error tolerance)</em></div>
+        <div class="def-body">Penyimpangan kesalahan baik kuantitas maupun kualitas sumber daya dan cadangan mineral yang masih bisa diterima sesuai dengan tahapan eksplorasi.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ SEKSI 4 ══ -->
+  <div class="bagian" id="s4">
+    <div class="bagian-header">
+      <div class="bh-num">4</div>
+      <div class="bh-title">Klasifikasi</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">4.1</span>Menilai Tingkat Keyakinan</div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">4.1.1</span>Validasi Data Topografi dan Survei</div>
+        <p class="body">Survei titik bor (<em>collar survey</em>, azimut, dan inklinasi), survei topografi, dan data geografis lainnya perlu divalidasi untuk mengkonfirmasi bahwa datum survei dan sistem grid yang benar telah digunakan. Skala pemetaan minimum <strong>1:2.000</strong>. Deviasi lubang bor perlu diperiksa dengan survei <em>downhole</em> yang memadai.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">4.1.2</span>Keterwakilan Sampel</div>
+        <p class="body">Sampel yang dianalisis dari titik pengamatan berupa pengeboran inti harus mempunyai <em>core recovery</em> lebih besar atau sama dengan <strong>95%</strong>. Jika <em>core recovery</em> kurang dari 95% karena faktor geologi suatu endapan, orang yang berkompeten wajib memberikan penjelasan mengenai hal tersebut.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">4.1.3</span>Analisis Spasial</div>
+        <p class="body">Korelasi mineralisasi dan struktur geologi harus dikonfirmasikan menggunakan penampang melintang, memanjang, dan horisontal cebakan mineral. Evaluasi yang cermat dari plot data dan penggambaran kontur untuk berbagai parameter diperlukan untuk memvalidasi data, memahami variasi lateral dan vertikal, dan mengidentifikasi setiap domain geologi yang terpisah.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">4.1.4</span>Penentuan Domain</div>
+        <p class="body">Endapan mineral biasanya heterogen dan termasuk variasi dalam karakteristik cebakan mineral. Aspek kunci dari setiap estimasi adalah untuk menentukan area cebakan yang memiliki fitur serupa, dikenal sebagai <strong>domain geologi</strong>.</p>
+        <p class="body">Fitur utama untuk definisi domain dapat meliputi percabangan dan penggabungan, intensitas deformasi struktur, kemiringan cebakan mineral, litologi, <em>washouts</em>, <em>subcrop</em> mineral, dan kecenderungan kadar mineral.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">4.1.5</span>Analisis Geostatistik</div>
+        <p class="body">Analisis dapat dilakukan untuk mengembangkan pemahaman statistik sampel populasi untuk parameter utama:</p>
+        <ul class="list-dash">
+          <li>jumlah sampel;</li>
+          <li>nilai variabel minimum dan maksimum;</li>
+          <li>rata-rata dan median;</li>
+          <li>simpangan baku;</li>
+          <li>variasi;</li>
+          <li>koefisien variasi;</li>
+          <li>kesalahan standar rata-rata; dan</li>
+          <li>batas keyakinan dari rata-rata.</li>
+        </ul>
+        <p class="body">Penggunaan metode histogram (normal dan/atau <em>log</em>), diagram pencar, diagram <em>box</em> dan <em>whisker</em>, koefisien variasi, dan frekuensi distribusi kumulatif harus digunakan untuk menggambarkan distribusi data dalam populasi sampel.</p>
+      </div>
+
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">4.1.6</span>Pemodelan Geologi</div>
+        <p class="body">Model geologi adalah penggambaran matematis yang mencerminkan interpretasi geologi dari suatu cebakan. Pemahaman yang baik tentang geologi harus ditetapkan sebelum membangun model.</p>
+        <p class="body">Pertimbangan parameter pemodelan termasuk: pemilihan algoritma pemodelan, pemilihan tipe model, ukuran <em>grid mesh</em>/blok, pencarian data di sekitarnya, interpolasi antardata, dan ekstrapolasi yang wajar terhadap kecenderungan ketebalan dan kadar mineral.</p>
+        <p class="body">Pemeriksaan validasi meliputi: pengecekan visual data, kesesuaian terhadap data, pengecekan statistik antara data lubang bor dan hasil pemodelan, rekonsiliasi dengan model sebelumnya, dan validasi model terhadap pemahaman geologi lokal.</p>
+        <div class="callout note"><strong>Kesalahan umum dalam model geologi</strong> yang dapat mempengaruhi estimasi sumber daya: tidak memeriksa perhitungan komputer; penghalusan (<em>oversmoothing</em>) atau perumitan (<em>overcomplicating</em>) yang berlebihan; model khayalan (<em>imaginary model</em>); ekstrapolasi <em>trend surface</em> yang tidak wajar; penanganan kerapatan data yang berbeda dalam model yang sama.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">4.2</span>Dasar Klasifikasi</div>
+      <p class="body">Klasifikasi sumber daya dan cadangan mineral didasarkan pada <strong>tingkat keyakinan geologi</strong> dan <strong>kajian kelayakan</strong>, mengandung dua aspek utama:</p>
+      <div class="duo-grid">
+        <div class="duo-card">
+          <div class="dch">Aspek Geologi (4.2.1)</div>
+          <div class="dcb">Berdasarkan tingkat keyakinan geologi, sumber daya terukur harus mempunyai tingkat keyakinan yang lebih besar dibandingkan tertunjuk, dan tertunjuk lebih tinggi dari tereka. Tingkat keyakinan geologi secara kuantitatif dicerminkan oleh jarak dari titik pengamatan.</div>
+        </div>
+        <div class="duo-card">
+          <div class="dch">Aspek Ekonomi (4.2.2)</div>
+          <div class="dcb">Nilai <em>cut off grade</em>, metode penambangan, proses metalurgi, mineral pengotor atau pengganggu, dan produk akhir merupakan faktor ekonomi yang perlu diperhatikan dalam menggolongkan sumber daya dan cadangan mineral.</div>
+        </div>
+      </div>
+      <div class="callout dark" style="margin-top:0.8rem;">Sumber daya terukur bisa ditingkatkan menjadi cadangan terbukti jika faktor penentu telah diselesaikan, atau menjadi cadangan terkira jika ada satu atau lebih faktor penentu yang belum diselesaikan (Gambar 1 dalam dokumen asli).</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">4.3</span>Klasifikasi Sumber Daya dan Cadangan Mineral</div>
+      <p class="body"><strong>Sumber daya mineral</strong> terdiri dari:</p>
+      <div class="klas-grid">
+        <div class="klas-card">
+          <div class="kch kch-tereka">a. Sumber Daya Tereka</div>
+          <div class="kcb">Tingkat kepercayaan rendah. Titik pengamatan dan keyakinan geologi rendah, tidak cukup membuktikan kemenerusan cebakan. <strong>Tidak dapat dikonversi ke cadangan mineral.</strong></div>
+        </div>
+        <div class="klas-card">
+          <div class="kch kch-tertunjuk">b. Sumber Daya Tertunjuk</div>
+          <div class="kcb">Tingkat kepercayaan beralasan. Titik pengamatan cukup untuk menginterpretasikan kemenerusan cebakan. Hanya dapat dikonversi ke <strong>cadangan terkira</strong>.</div>
+        </div>
+        <div class="klas-card">
+          <div class="kch kch-terukur">c. Sumber Daya Terukur</div>
+          <div class="kcb">Tingkat kepercayaan tinggi. Titik pengamatan cukup berdekatan untuk membuktikan kemenerusan kadar. Dapat dikonversi ke <strong>cadangan terbukti atau terkira</strong>.</div>
+        </div>
+      </div>
+      <p class="body" style="margin-top:0.8rem;"><strong>Cadangan mineral</strong> dibagi menjadi:</p>
+      <div class="klas-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="klas-card">
+          <div class="kch kch-terkira">a. Cadangan Terkira (<em>Probable</em>)</div>
+          <div class="kcb">Diturunkan dari sumber daya mineral tertunjuk (dan sebagian terukur). Tingkat keyakinan lebih rendah dibanding cadangan terbukti, tetapi cukup sebagai dasar keputusan pengembangan tambang. Termasuk cadangan marginal.</div>
+        </div>
+        <div class="klas-card">
+          <div class="kch kch-terbukti">b. Cadangan Terbukti (<em>Proved</em>)</div>
+          <div class="kcb">Diturunkan dari sumber daya mineral terukur. Mewakili tingkat keyakinan tertinggi dari estimasi cadangan. Semua faktor pengubah telah diselesaikan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ SEKSI 5 ══ -->
+  <div class="bagian" id="s5">
+    <div class="bagian-header">
+      <div class="bh-num">5</div>
+      <div class="bh-title">Pelaporan</div>
+    </div>
+
+    <!-- 5.1 -->
+    <div class="section" id="s51">
+      <div class="section-title"><span class="sec-num">5.1</span>Ketentuan Umum Penyusunan Laporan</div>
+      <div class="callout gold">
+        <strong>5.1.1</strong> Laporan yang berkaitan dengan hasil eksplorasi, sumber daya mineral atau cadangan mineral harus meliputi penjelasan mengenai tipe dan sifat alamiah dari mineralisasi.
+      </div>
+      <p class="body"><strong>5.1.2</strong> Laporan harus menginformasikan hal yang berkaitan dengan cebakan mineral yang dapat mempengaruhi nilai ekonominya. Setiap perubahan tentang sumber daya mineral dan/atau cadangan mineral harus <strong>secepatnya dilaporkan</strong>.</p>
+      <p class="body"><strong>5.1.3</strong> Dalam seluruh standar ini, <em>kualitas</em> diartikan sebagai kadar, <em>kuantitas</em> diartikan sebagai volume atau tonase.</p>
+    </div>
+
+    <!-- 5.2 -->
+    <div class="section" id="s52">
+      <div class="section-title"><span class="sec-num">5.2</span>Penyusunan Laporan Hasil Eksplorasi</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.2.1</span>Pengertian Hasil Eksplorasi</div>
+        <p class="body">Hasil eksplorasi terdiri dari data dan informasi yang diperoleh dari program eksplorasi yang berguna bagi semua pemangku kepentingan, tetapi <strong>hasil eksplorasi bukan bagian dari pernyataan sumber daya mineral dan/atau cadangan mineral</strong>.</p>
+        <div class="callout note"><strong>Catatan:</strong> Contoh hasil eksplorasi meliputi hasil pengambilan sampel titik pengamatan, hasil analisis laboratorium (<em>assays</em>) dari lubang bor, hasil analisis geokimia, dan hasil survei geofisika.</div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.2.2</span>Muatan Laporan Hasil Eksplorasi</div>
+        <p class="body">Laporan harus mengandung informasi yang cukup untuk membuat penilaian yang berimbang terhadap signifikansinya. Laporan harus meliputi informasi yang relevan tentang: konteks eksplorasi, jenis dan metode pengambilan sampel, interval dan metode pengambilan sampel, lokasi sampel, distribusi, dimensi, lokasi relatif semua data <em>assay</em>, metode agregasi data, status kepemilikan lahan, serta kriteria lain dalam Tabel A.2.</p>
+        <p class="body">Hasil <em>assay</em> harus dilaporkan oleh orang yang berkompeten menggunakan salah satu cara: (1) membuat tabel semua hasil analisis kadar disertai interval pengambilan sampel, atau (2) membuat laporan kadar rata-rata hasil pembobotan (<em>weighted</em>) dari zona mineralisasi.</p>
+        <p class="body">Untuk menyiapkan laporan hasil eksplorasi, sumber daya, dan cadangan mineral harus menggunakan <strong>Tabel A.2</strong> sebagai petunjuk dan acuan pemeriksaan kesesuaian (<em>check list</em>). Prinsip utama: relevansi dan materialitas.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.2.3</span>Target Eksplorasi</div>
+        <p class="body">Secara umum hasil eksplorasi dapat memberikan gambaran ukuran dan tipe mineralisasi, dan belum merupakan estimasi sumber daya dan cadangan mineral — hanya bisa disebut sebagai <strong>target eksplorasi</strong>. Pernyataan mengenai target eksplorasi harus dipaparkan dalam kisaran angka dan termasuk penjelasan terperinci mengenai konsep geologi.</p>
+        <div class="callout dark">Istilah sumber daya atau cadangan mineral tidak boleh digunakan pada konteks ini karena masih berupa konsep geologi dan kecukupan data yang tidak memadai.</div>
+      </div>
+    </div>
+
+    <!-- 5.3 -->
+    <div class="section" id="s53">
+      <div class="section-title"><span class="sec-num">5.3</span>Pelaporan Sumber Daya Mineral</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.3.1</span>Definisi dan Ketentuan Umum</div>
+        <p class="body">Sumber daya mineral adalah suatu konsentrasi atau keterjadian dari mineral yang memiliki nilai ekonomi pada kerak bumi, dengan dimensi, kualitas, dan kuantitas tertentu yang memiliki keprospekan yang beralasan untuk pada akhirnya dapat diekstraksi secara ekonomis. Sumber daya mineral dikelompokkan berdasarkan tingkat keyakinan geologi dalam kategori <strong>tereka, tertunjuk, dan terukur</strong>.</p>
+        <div class="callout note"><strong>Catatan penting:</strong> Istilah "prospek yang beralasan yang pada akhirnya dapat diekstraksi secara ekonomis" menunjukkan penilaian yang ditentukan oleh orang yang berkompeten. Kajian yang sesuai pada tingkatan ini adalah studi pelingkupan. Untuk mineral bijih besi dan bauksit, periode waktu dapat lebih dari 50 tahun; untuk mayoritas cebakan emas umumnya dibatasi 10–15 tahun.</div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.3.2</span>Sumber Daya Mineral Tereka</div>
+        <p class="body">Merupakan bagian dari sumber daya mineral yang kuantitas dan kualitas kadarnya diestimasi berdasarkan bukti geologi dan pengambilan sampel yang terbatas. Bukti geologi tersebut memadai untuk menunjukkan keterjadiannya tetapi tidak memverifikasi kemenerusan kualitas atau kadar dan kemenerusan geologinya.</p>
+        <p class="body">Sumber daya mineral tereka <strong>tidak dapat dikonversi ke cadangan mineral</strong>. Sangat beralasan untuk mengharapkan bahwa sebagian besar sumber daya mineral tereka dapat ditingkatkan menjadi sumber daya mineral tertunjuk sejalan dengan berlanjutnya eksplorasi.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.3.3</span>Sumber Daya Mineral Tertunjuk</div>
+        <p class="body">Merupakan bagian dari sumber daya mineral dengan kuantitas, kadar atau kualitas, kerapatan titik pengamatan, dimensi, dan karakteristik fisiknya dapat diestimasi dengan tingkat keyakinan yang cukup untuk memungkinkan penerapan faktor pengubah secara memadai. Sumber daya mineral tertunjuk hanya dapat dikonversi ke <strong>cadangan mineral terkira</strong>.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.3.4</span>Sumber Daya Mineral Terukur</div>
+        <p class="body">Merupakan bagian dari sumber daya mineral dengan kuantitas, kadar atau kualitas, kerapatan titik pengamatan, bentuk, dan karakteristik fisik yang dapat diestimasi dengan tingkat keyakinan yang memadai untuk mendukung perencanaan tambang terperinci dan evaluasi akhir dari kelayakan ekonomi. Sumber daya mineral terukur dapat dikonversi ke <strong>cadangan mineral terbukti atau terkira</strong>.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.3.5–5.3.9</span>Ketentuan Lainnya untuk Pelaporan Sumber Daya</div>
+        <ol class="list-num">
+          <li><strong>(5.3.5)</strong> Orang yang berkompeten harus mempertimbangkan isu-isu mengenai jenis mineralisasi dan <em>cut off grade</em> sumber daya ketika mengkaji kemenerusan geologi dan kadar. <em>Cut off grade</em> yang dipilih harus realistis.</li>
+          <li><strong>(5.3.6)</strong> Estimasi sumber daya mineral bukanlah hasil perhitungan. Pembulatan hingga dua angka penting dianggap cukup — contoh: 10.863.000 ton pada 8,23% → "11 juta ton pada 8,2%".</li>
+          <li><strong>(5.3.7)</strong> Laporan publik harus secara spesifik menyebutkan satu atau lebih kategori apakah 'tereka', 'tertunjuk', atau 'terukur'. Kategori tidak boleh dilaporkan dalam bentuk kombinasi kecuali perincian masing-masing kategori diberikan. Sumber daya mineral <strong>tidak boleh digabungkan dengan cadangan mineral</strong>.</li>
+          <li><strong>(5.3.8)</strong> Lampiran A menunjukkan daftar kriteria utama yang harus dipertimbangkan saat menyiapkan laporan.</li>
+          <li><strong>(5.3.9)</strong> Kata 'bijih' dan 'cadangan' tidak boleh digunakan dalam penjelasan mengenai estimasi sumber daya mineral karena memiliki implikasi pada kelayakan keteknikan dan keekonomian.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 5.4 -->
+    <div class="section" id="s54">
+      <div class="section-title"><span class="sec-num">5.4</span>Pelaporan Cadangan Mineral</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.4.1</span>Definisi dan Ketentuan Umum</div>
+        <p class="body">Cadangan mineral adalah bagian dari sumber daya mineral terukur dan/atau tertunjuk yang dapat ditambang secara ekonomis, termasuk tambahan material dilusi ataupun material hilang yang kemungkinan terjadi ketika material tersebut ditambang.</p>
+        <div class="callout dark">Dalam pelaporan cadangan mineral, informasi tentang estimasi faktor <em>recovery</em> pengolahan dan/atau pemurnian mineral adalah sangat penting, dan harus <strong>selalu dimasukkan</strong> dalam laporan.</div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.4.2–5.4.4</span>Kategori Cadangan</div>
+        <div class="duo-grid">
+          <div class="duo-card">
+            <div class="dch">Cadangan Mineral Terkira (5.4.2)</div>
+            <div class="dcb">Bagian sumber daya mineral tertunjuk yang ekonomis untuk ditambang, dan dalam beberapa kondisi juga merupakan bagian dari sumber daya mineral terukur. Tingkat keyakinan lebih rendah dibanding cadangan terbukti, tetapi cukup sebagai dasar keputusan pengembangan tambang, termasuk cadangan mineral marginal.</div>
+          </div>
+          <div class="duo-card">
+            <div class="dch">Cadangan Mineral Terbukti (5.4.3)</div>
+            <div class="dcb">Bagian dari sumber daya mineral terukur yang ekonomis untuk ditambang. Mewakili tingkat keyakinan tertinggi dari estimasi cadangan. Untuk cebakan tertentu, jika ada faktor pengubah yang belum jelas, sumber daya terukur tidak dapat ditetapkan sebagai cadangan terbukti.</div>
+          </div>
+        </div>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.4.5–5.4.9</span>Ketentuan Umum Pelaporan Cadangan</div>
+        <ol class="list-num">
+          <li><strong>(5.4.5)</strong> Estimasi cadangan mineral bukanlah merupakan perhitungan. Pelaporan tonase dan kadar harus mencerminkan ketidakpastian relatif, dibulatkan ke arah angka yang pantas (tonase dalam puluhan ribu, kadar dalam dua angka di belakang koma).</li>
+          <li><strong>(5.4.6)</strong> Laporan mengenai cadangan mineral harus secara spesifik menyatakan salah satu atau kedua kategori terbukti dan terkira. Laporan tidak boleh menyajikan kandungan metal atau mineral kecuali angka tonase dan kadar yang berkaitan juga dinyatakan.</li>
+          <li><strong>(5.4.7)</strong> Apabila sumber daya mineral dan cadangan mineral dilaporkan bersamaan, harus disertakan pernyataan yang menunjukkan secara jelas apakah sumber daya mineral yang dilaporkan mencakup cadangan mineral tersebut, atau masing-masing berdiri sendiri.</li>
+          <li><strong>(5.4.8)</strong> Dengan menandatangani laporan cadangan mineral, orang yang berkompeten harus bersedia bertanggung jawab dan bertanggung gugat atas isi laporan.</li>
+          <li><strong>(5.4.9)</strong> Cadangan mineral hanya bisa diturunkan dari sumber daya tertunjuk dan/atau terukur yang terdapat dalam suatu batas rencana tambang yang ekonomis.</li>
+        </ol>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.4.10–5.4.18</span>Aspek Kelengkapan Laporan Cadangan</div>
+        <ol class="list-num">
+          <li><strong>(5.4.10)</strong> Cadangan mineral dapat ditentukan setelah mempertimbangkan semua faktor pengubah yang relevan melalui: optimasi batas tambang, desain tambang, perencanaan produksi tambang, hingga evaluasi keekonomian tambang.</li>
+          <li><strong>(5.4.11)</strong> Cadangan mineral untuk metode penambangan terbuka dan bawah tanah harus <strong>dilaporkan secara terpisah</strong>. Orang yang berkompeten untuk metode terbuka dilarang menandatangani laporan cadangan bawah tanah, dan sebaliknya.</li>
+          <li><strong>(5.4.12)</strong> Orang yang berkompeten harus menguraikan lingkup kajian serta pendekatan yang digunakan dalam proses estimasi cadangan, dapat disajikan dalam bentuk <em>flowchart</em>.</li>
+          <li><strong>(5.4.13)</strong> Harus menjelaskan maksud dan tujuan dibuatnya laporan tersebut (misalnya untuk pelaporan kepada pemerintah, mendapatkan pembiayaan, atau lainnya).</li>
+          <li><strong>(5.4.14)</strong> Memuat informasi mengenai daftar laporan hasil kajian relevan lainnya yang telah digunakan sebagai referensi.</li>
+          <li><strong>(5.4.15)</strong> Memuat informasi seterperinci mungkin mengenai aspek legal perizinan tambang: jenis perizinan (IUP, IUPK, KK, IPR), kode wilayah, penerbit izin dan nomor keputusan, tanggal izin, lokasi, dan luas area.</li>
+          <li><strong>(5.4.16)</strong> Memuat peta lokasi proyek dan informasi akses dari kota besar.</li>
+          <li><strong>(5.4.17)</strong> Orang yang berkompeten harus melakukan kunjungan ke lokasi proyek dan mencantumkan ringkasan hasil kunjungan serta foto lapangan.</li>
+          <li><strong>(5.4.18)</strong> Laporan cadangan yang terpisah dari laporan sumber daya hendaknya memuat rangkuman dari laporan sumber daya tersebut.</li>
+        </ol>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.4.19</span>Aspek Teknis Pelaporan (Ringkasan)</div>
+        <p class="body">Proses estimasi cadangan mineral perlu mengikuti langkah-langkah berikut (lihat Gambar 2 dalam dokumen asli untuk <em>flowchart</em> lengkap):</p>
+        <ol class="list-num">
+          <li><strong>(5.4.19.2)</strong> Pemeriksaan dan validasi pangkalan data dan model geologi sumber daya (titik lubang bor terhadap topografi, pangkalan data geologi terhadap data mentah, domain/zona mineralisasi, nilai densitas batuan).</li>
+          <li><strong>(5.4.19.3)</strong> Penentuan tujuan pasar produk, <em>flow chart</em> rantai produksi, metode penambangan, dan asumsi pelaksana operasi (<em>owner operator</em> atau kontraktor).</li>
+          <li><strong>(5.4.19.4)</strong> Parameter teknis: parameter <em>cut off</em>, kadar atau tebal bijih minimum, perolehan proses pengolahan, kedalaman maksimum, dan lebar minimum bukaan tambang.</li>
+          <li><strong>(5.4.19.5)</strong> Asumsi parameter penambangan: kehilangan penambangan (<em>mining losses</em>), dilusi, dan perolehan penambangan keseluruhan (<em>global mining recovery</em>).</li>
+          <li><strong>(5.4.19.10)</strong> Parameter geoteknik melalui kajian geoteknik yang memadai, termasuk evaluasi kemampugalian dan kemampugaruan, kajian hidrologi/hidrogeologi, dan potensi air asam tambang.</li>
+          <li><strong>(5.4.19.15)</strong> Batas pit ekonomis ditentukan melalui proses optimisasi berdasarkan semua asumsi/parameter teknis dan ekonomi yang telah ditentukan.</li>
+          <li><strong>(5.4.19.20)</strong> <em>Practical mine design</em> mencakup: desain pit final dengan <em>ramp</em> dan jenjang, timbunan final di luar pit, lokasi pabrik dan rencana jalan angkut.</li>
+          <li><strong>(5.4.19.23)</strong> Perencanaan sepanjang umur tambang (<em>life of mine plan</em>) harus dibuat, memuat: rencana produksi tahunan, <em>milestones</em>, rencana kebutuhan peralatan, neraca timbunan material buangan, dan desain tahapan penambangan.</li>
+          <li><strong>(5.4.19.27–5.4.19.29)</strong> Aspek lingkungan, aspek legal (IUP/IUPK/KK, IPPKH, izin jalan/pelabuhan), dan faktor sosial (PPM) harus dievaluasi dan dibahas.</li>
+          <li><strong>(5.4.19.30–5.4.19.32)</strong> Evaluasi ekonomi proyek menggunakan metode <em>discounted cashflow</em> atau lainnya. Kriteria: NPV, IRR, dan <em>Payback Period</em>. Disajikan grafik sensitivitas NPV terhadap harga mineral, CAPEX, dan OPEX.</li>
+          <li><strong>(5.4.19.34–5.4.19.38)</strong> Pernyataan cadangan harus dibandingkan dengan laporan kajian sebelumnya; menyebutkan waktu estimasi dan <em>cut off date</em> pangkalan data; orang yang berkompeten harus mengisi Tabel A.4.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- 5.5 -->
+    <div class="section" id="s55">
+      <div class="section-title"><span class="sec-num">5.5</span>Pelaporan Material Isian, Bijih Sisa, <em>Pillars</em>, Kadar Rendah, <em>Stockpiles</em>, Timbunan, dan Tailing</div>
+      <p class="body">Semua material yang mengandung mineral yang mempunyai potensi ekonomi, meliputi material isian, bijih sisa, <em>pillars</em>, mineralisasi kadar rendah, <em>stockpiles</em> kadar rendah, timbunan (<em>dumps</em>), dan material sisa pengolahan (<em>tailing</em>):</p>
+      <ul class="list-alpha" type="a">
+        <li>yang memiliki prospek beralasan untuk diekstraksi secara ekonomis → berlaku ketentuan sebagai <strong>sumber daya mineral</strong>;</li>
+        <li>yang dapat ditetapkan untuk diekstraksi secara ekonomis → berlaku ketentuan sebagai <strong>cadangan mineral</strong>.</li>
+      </ul>
+      <div class="callout note"><em>Stockpiles</em> didefinisikan meliputi <em>stockpiles</em> permukaan dan bawah tanah, termasuk "<em>broken ore</em>" di lombong (<em>stope</em>). Material termineralisasi yang sedang diproses termasuk pelindian (<em>leaching</em>), jika hendak dilaporkan, harus <strong>dilaporkan secara terpisah</strong>.</div>
+    </div>
+
+    <!-- 5.6 -->
+    <div class="section" id="s56">
+      <div class="section-title"><span class="sec-num">5.6</span>Pelaporan Hasil Eksplorasi, Sumber Daya, dan Cadangan Intan dan Batu Mulia Lainnya</div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.6.1</span>Pertimbangan Khusus</div>
+        <p class="body">Tabel A.5 sebagai bagian dari petunjuk harus dipertimbangkan secara meyakinkan. Perbedaan dari komoditas lain umumnya terdapat pada kandungan dan variasi mineral, sifat butiran intan, persyaratan khusus untuk penilaian intan, serta kesulitan dan ketidakpastian dalam estimasi sumber daya dan cadangan intan.</p>
+      </div>
+      <div class="sub-section">
+        <div class="sub-title"><span class="sub-num">5.6.2–5.6.3</span>Ketentuan Pelaporan Intan</div>
+        <p class="body">Laporan mengenai intan yang diperoleh dari program pengambilan sampel harus mencantumkan: dasar pengambilan sampel, metode <em>recovery</em> dan angka <em>recovery</em> intan. Batas ukuran terkecil (<em>lower cut off size</em>) harus dinyatakan dalam laporan.</p>
+        <p class="body">Bila penentuan kadar intan didasarkan atas korelasi antara frekuensi keterjadian <em>microdiamond</em> dan butiran berukuran ekonomis, maka metode ini harus dinyatakan, keandalan prosedur harus dijelaskan, dan batasan ukuran lubang ayak <em>microdiamond</em> harus dilaporkan.</p>
+        <p class="body">Jika penilaian ekonomis dari sejumlah intan dilaporkan, maka berat (dalam karat) dan batas minimum ukuran intan harus dinyatakan, dan harga intan dinyatakan dalam mata uang tertentu per karat.</p>
+      </div>
+    </div>
+
+    <!-- 5.7 -->
+    <div class="section" id="s57">
+      <div class="section-title"><span class="sec-num">5.7</span>Pelaporan Hasil Eksplorasi, Sumber Daya Mineral, dan Cadangan Mineral untuk Mineral Industri</div>
+      <p class="body">Butir ini ditujukan untuk hal-hal khusus berkaitan dengan laporan untuk mineral industri, yang antara lain meliputi: kaolin, fosfat, batu gamping, dolomit, talk, zeolit, granit, andesit, bentonit, pasir kuarsa. Lampiran A sebagai bagian dari petunjuk harus dipertimbangkan secara meyakinkan.</p>
+      <p class="body">Faktor pendukung estimasi sumber daya mineral dan cadangan mineral untuk mineral industri adalah sama dengan faktor pendukung jenis cebakan lainnya. Sebelum melaporkan, diperlukan pertimbangan beberapa karakteristik kunci atau kualitas, seperti kemungkinan spesifikasi produk, kedekatan dengan pasar, dan kelayakan pasar dari produk secara umum.</p>
+      <div class="callout dark">Prinsip dan tujuan standar ini harus diterapkan pada semua mineral industri. Hasil analisis laboratorium tidak selalu relevan; kriteria kualitas lain seperti mineral pengotor atau sifat fisik dan mekanik mineral industri mungkin lebih bisa diterapkan.</div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ LAMPIRAN A ══ -->
+  <div class="bagian" id="lampa">
+    <div class="bagian-header">
+      <div class="bh-num">A</div>
+      <div class="bh-title">Lampiran A (Normatif) — Daftar Pengecekan Kriteria Laporan</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">A.1</span>Tabel A.1 — Data dan Teknik Pengambilan Sampel</div>
+      <p class="body">Kriteria dalam tabel ini dapat diterapkan untuk semua tabel berikutnya.</p>
+      <table class="std-table">
+        <thead><tr><th>Kriteria</th><th>Penjelasan Utama</th><th>✓</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Teknik pengambilan sampel</strong></td><td>Dasar dan kualitas pengambilan sampel; ukuran sampel yang diambil harus representatif.</td><td></td></tr>
+          <tr><td><strong>Teknik pengeboran</strong></td><td>Jenis pengeboran (inti, <em>reverse circulation</em>, <em>open hole hammer</em>, <em>rotary air blast</em>, <em>auger</em>, Bangka bor, dll.) dan rinciannya (diameter inti bor, <em>triple or standard tube</em>, dll.).</td><td></td></tr>
+          <tr><td><strong>Perolehan sampel pengeboran</strong></td><td>Apakah perolehan sampel inti bor dan hancuran bor (<em>cutting</em>) telah dicatat dan dikaji; tindakan untuk memaksimalkan perolehan sampel; ada/tidaknya hubungan antara perolehan sampel dan kadar.</td><td></td></tr>
+          <tr><td><strong>Penampangan (<em>logging</em>)</strong></td><td>Apakah penampangan dilakukan sampai tahap terperinci untuk mendukung estimasi sumber daya, kajian penambangan, dan metalurgi; apakah dilakukan secara kualitatif atau kuantitatif; sampel inti bor/hancuran bor/paritan difoto.</td><td></td></tr>
+          <tr><td><strong>Teknik pengambilan dan preparasi sampel</strong></td><td>Jika dari inti bor: apakah dipotong/dibelah dan apakah diambil seperempat/setengah/seluruhnya; prosedur pengendalian kualitas; apakah ukuran sampel tepat dibanding ukuran butir material.</td><td></td></tr>
+          <tr><td><strong>Kualitas data analisis laboratorium</strong></td><td>Sifat, kualitas, dan ketepatan prosedur analisis laboratorium; jenis prosedur pengendalian kualitas (SRM, blank, duplikat, pengecekan ke laboratorium lain).</td><td></td></tr>
+          <tr><td><strong>Verifikasi pengambilan sampel dan <em>assay</em></strong></td><td>Verifikasi terhadap anomali kadar dari lubang bor yang signifikan; penggunaan pengeboran kembar.</td><td></td></tr>
+          <tr><td><strong>Arsip pelaporan</strong></td><td>Dokumentasi data primer, prosedur pemasukan data, verifikasi data, prosedur penyimpanan data secara fisik dan elektronik; pembahasan mengenai data <em>assay</em>.</td><td></td></tr>
+          <tr><td><strong>Lokasi titik pengambilan data</strong></td><td>Akurasi dan kualitas survei untuk menentukan posisi lubang bor (<em>collar</em> dan <em>downhole survey</em>), paritan, terowongan; spesifikasi sistem grid; kualitas kontrol topografi.</td><td></td></tr>
+          <tr><td><strong>Spasi dan distribusi data</strong></td><td>Spasi data untuk pelaporan hasil eksplorasi; apakah spasi dan distribusi data cukup untuk tingkat keyakinan geologi yang sesuai; apakah komposit sampel telah diterapkan.</td><td></td></tr>
+          <tr><td><strong>Orientasi data dan struktur geologi</strong></td><td>Apakah orientasi pengambilan sampel tidak bias karena adanya struktur dan kemenerusan yang tidak diketahui.</td><td></td></tr>
+          <tr><td><strong>Keamanan sampel</strong></td><td>Tindakan yang diambil untuk menjamin keamanan sampel.</td><td></td></tr>
+          <tr><td><strong>Pemeriksaan dan penelaahan</strong></td><td>Hasil dari setiap pemeriksaan atau penelaahan terhadap teknik pengambilan sampel dan data.</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">A.2</span>Tabel A.2 — Pelaporan Hasil Eksplorasi</div>
+      <table class="std-table">
+        <thead><tr><th>Kriteria</th><th>Penjelasan Utama</th><th>✓</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Wilayah usaha pertambangan</strong></td><td>Jenis, nama/nomor referensi, lokasi, dan kepemilikan; kepastian masa berlaku izin; kerangka lingkungan.</td><td></td></tr>
+          <tr><td><strong>Eksplorasi oleh pihak lain</strong></td><td>Pengakuan dan penilaian eksplorasi yang dilakukan oleh pihak lain.</td><td></td></tr>
+          <tr><td><strong>Geologi</strong></td><td>Jenis endapan, kerangka geologi, dan jenis mineralisasi.</td><td></td></tr>
+          <tr><td><strong>Metode agregasi data</strong></td><td>Teknik perataan dengan pembobotan, pemotongan kadar maksimum/minimum, dan kadar ambang bawah; prosedur agregasi penembusan lubang bor yang meliputi interval pendek berkadar tinggi dan interval panjang berkadar rendah.</td><td></td></tr>
+          <tr><td><strong>Hubungan tebal mineralisasi dan panjang penembusan</strong></td><td>Hubungan ini penting dalam pelaporan hasil eksplorasi; jika geometri tidak diketahui, harus ada pernyataan jelas bahwa "panjang pengeboran, tebal sebenarnya tidak diketahui".</td><td></td></tr>
+          <tr><td><strong>Diagram</strong></td><td>Apabila mungkin, peta dan penampang (dengan skala) dan tabel penembusan lubang harus disertakan untuk setiap penemuan penting.</td><td></td></tr>
+          <tr><td><strong>Pelaporan berimbang</strong></td><td>Pelaporan yang mewakili kadar rendah dan tinggi, dan/atau tebal, untuk menghindari pelaporan hasil eksplorasi yang membingungkan.</td><td></td></tr>
+          <tr><td><strong>Data eksplorasi mendasar lainnya</strong></td><td>Data eksplorasi lainnya jika bermakna dan penting: pengamatan geologi, survei geofisika, survei geokimia, sampel bulk, hasil tes metalurgi, berat jenis, air tanah, geoteknik, potensi bahan pengganggu.</td><td></td></tr>
+          <tr><td><strong>Pekerjaan lanjutan</strong></td><td>Sifat dan skala pekerjaan lanjutan yang direncanakan; area potensi pengembangan termasuk interpretasi geologi utama.</td><td></td></tr>
+          <tr><td><strong>Kunjungan lapangan</strong></td><td>Penjelasan mengenai kunjungan lapangan oleh orang yang berkompeten dan hasilnya; jika tidak dilakukan, harus diberi penjelasan.</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">A.3</span>Tabel A.3 — Estimasi dan Pelaporan Sumber Daya Mineral</div>
+      <table class="std-table">
+        <thead><tr><th>Kriteria</th><th>Penjelasan Utama</th><th>✓</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Keterpaduan pangkalan data</strong></td><td>Tindakan untuk memastikan bahwa data tidak rusak antara pengumpulan awal dan saat penggunaannya; prosedur validasi data.</td><td></td></tr>
+          <tr><td><strong>Kunjungan lapangan</strong></td><td>Penjelasan mengenai kunjungan lapangan oleh orang yang berkompeten; jika tidak dilakukan harus diberi penjelasan.</td><td></td></tr>
+          <tr><td><strong>Interpretasi geologi</strong></td><td>Keyakinan atau ketidakpastian dalam interpretasi geologi dari cebakan mineral; sifat data dan asumsi yang dibuat; pengaruh alternatif interpretasi; faktor-faktor yang mempengaruhi kemenerusan kadar dan geologi.</td><td></td></tr>
+          <tr><td><strong>Dimensi</strong></td><td>Keberlanjutan dan keberagaman sumber daya diekspresikan sebagai panjang (sepanjang jurus), lebar bidang, dan kedalaman di bawah permukaan.</td><td></td></tr>
+          <tr><td><strong>Teknik pemodelan dan estimasi</strong></td><td>Sifat dan ketepatan teknik estimasi; perlakuan terhadap nilai kadar ekstrim, <em>domaining</em>, parameter interpolasi, jarak maksimum ekstrapolasi; metode geostatistik (termasuk variogram); diskusi <em>capping</em>; proses validasi.</td><td></td></tr>
+          <tr><td><strong>Lengas (<em>moisture</em>)</strong></td><td>Apakah tonase diestimasi dengan kondisi kering atau kelembaban alami, dan metode penentuan kandungan lengas.</td><td></td></tr>
+          <tr><td><strong>Parameter <em>cut off</em></strong></td><td>Dasar dari penerapan <em>cut off grade</em> atau penerapan parameter kualitas.</td><td></td></tr>
+          <tr><td><strong>Faktor penambangan / asumsi</strong></td><td>Asumsi yang dibuat berkenaan dengan metode penambangan yang mungkin, dimensi penambangan minimum, dan dilusi penambangan internal (atau eksternal).</td><td></td></tr>
+          <tr><td><strong>Faktor metalurgi / asumsi</strong></td><td>Dasar yang dipakai untuk membuat asumsi atau prediksi berkenaan dengan kelayakan metalurgi; proses dan parameter perlakuan metalurgi.</td><td></td></tr>
+          <tr><td><strong>Densitas</strong></td><td>Apakah diasumsikan atau ditetapkan; jika ditetapkan, metode yang digunakan, cara basah atau kering, frekuensi pengukuran, ukuran dan keterwakilan sampel.</td><td></td></tr>
+          <tr><td><strong>Klasifikasi</strong></td><td>Dasar klasifikasi sumber daya mineral menjadi berbagai kategori; apakah perhitungan yang tepat sudah diambil untuk semua faktor yang relevan.</td><td></td></tr>
+          <tr><td><strong>Audit dan kaji ulang</strong></td><td>Hasil dari pemeriksaan atau penelaahan atas estimasi sumber daya mineral.</td><td></td></tr>
+          <tr><td><strong>Diskusi ketepatan/keyakinan relatif</strong></td><td>Pernyataan ketepatan dan/atau keyakinan relatif terhadap estimasi sumber daya mineral; apakah estimasi bersifat global atau lokal; dibandingkan dengan data produksi jika tersedia.</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">A.4</span>Tabel A.4 — Estimasi dan Pelaporan Cadangan Mineral</div>
+      <table class="std-table">
+        <thead><tr><th>Kriteria</th><th>Penjelasan Utama</th><th>✓</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Estimasi sumber daya untuk konversi</strong></td><td>Deskripsi dari estimasi sumber daya yang digunakan sebagai dasar konversi; pernyataan jelas apakah cadangan merupakan tambahan atau bagian dari sumber daya.</td><td></td></tr>
+          <tr><td><strong>Kunjungan lapangan</strong></td><td>Penjelasan mengenai kunjungan lapangan oleh orang yang berkompeten dan tenaga teknis pertambangan yang berkompeten serta hasilnya.</td><td></td></tr>
+          <tr><td><strong>Status kajian</strong></td><td>Jenis dan tingkatan kajian; standar tidak membutuhkan akhir studi kelayakan, tetapi mengharuskan setidaknya prastudi kelayakan.</td><td></td></tr>
+          <tr><td><strong>Parameter <em>cut off</em></strong></td><td>Dasar dari parameter kadar <em>cut off</em> atau kualitas yang diterapkan.</td><td></td></tr>
+          <tr><td><strong>Faktor penambangan / asumsi</strong></td><td>Metode dan asumsi untuk mengkonversi sumber daya menjadi cadangan; pemilihan metode penambangan selektif; asumsi parameter geoteknik; faktor dilusi penambangan, faktor <em>recovery</em> tambang, dan lebar minimum penambangan; sarana dan prasarana.</td><td></td></tr>
+          <tr><td><strong>Faktor metalurgi / asumsi</strong></td><td>Proses metalurgi yang diusulkan; teknologi yang digunakan; sifat, jumlah, dan keterwakilan uji coba metalurgi; asumsi atau pengecualian untuk unsur pengotor.</td><td></td></tr>
+          <tr><td><strong>Lingkungan</strong></td><td>Status kajian lingkungan; rincian tentang dampak secara material terhadap cadangan.</td><td></td></tr>
+          <tr><td><strong>Faktor biaya dan pendapatan</strong></td><td>Asal-usul dari, atau asumsi yang dibuat untuk proyeksi modal/kapital dan biaya operasi; asumsi pendapatan termasuk harga utama, logam atau harga nilai tukar komoditas; biaya tetap untuk royalti.</td><td></td></tr>
+          <tr><td><strong>Penilaian pasar</strong></td><td>Situasi permintaan, penawaran, dan persediaan; analisis pelanggan dan kompetitor; prediksi harga dan volume; untuk mineral industri: spesifikasi pelanggan, persyaratan pengujian.</td><td></td></tr>
+          <tr><td><strong>Lainnya</strong></td><td>Risiko alami, sarana dan prasarana, lingkungan, legal, pemasaran, faktor sosial, atau peraturan perundang-undangan; status dan persetujuan atas izin konsesi.</td><td></td></tr>
+          <tr><td><strong>Klasifikasi</strong></td><td>Dasar klasifikasi cadangan mineral menjadi berbagai kategori; proporsi cadangan terkira yang berasal dari sumber daya terukur.</td><td></td></tr>
+          <tr><td><strong>Audit atau peninjauan kembali</strong></td><td>Hasil dari pemeriksaan atau penelaahan atas estimasi cadangan mineral.</td><td></td></tr>
+          <tr><td><strong>Penjelasan keakuratan/keyakinan relatif</strong></td><td>Pernyataan ketepatan dan/atau keyakinan relatif tentang estimasi cadangan; apakah estimasi bersifat global atau lokal; dibandingkan dengan data produksi jika tersedia.</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="sec-num">A.5</span>Tabel A.5 — Estimasi dan Pelaporan Intan dan Batu Mulia Lainnya</div>
+      <p class="body">Kriteria yang terdaftar dalam tabel lainnya yang relevan juga diterapkan dalam tabel ini. Panduan tambahan tersedia dalam "Panduan untuk Pelaporan Hasil Eksplorasi Intan" yang dibuat oleh <em>Diamond Exploration Best Practices Committee</em> yang didirikan oleh Canadian Institute of Mining, Metallurgy and Petroleum.</p>
+      <table class="std-table">
+        <thead><tr><th>Kriteria</th><th>Penjelasan Utama</th><th>✓</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Mineral indikator</strong></td><td>Laporan tentang indikator mineral (garnet, <em>ilmenite</em>, <em>chrome spinel</em>, <em>chrome diopside</em>) harus disiapkan oleh laboratorium yang tepat dan berkualitas.</td><td></td></tr>
+          <tr><td><strong>Sumber intan</strong></td><td>Perincian dari bentuk, ukuran, dan warna dari intan dan jenis dari sumber intan (primer atau sekunder) termasuk jenis batuan dan lingkungan geologi.</td><td></td></tr>
+          <tr><td><strong>Pengumpulan/pengambilan sampel</strong></td><td>Jenis sampel (titik pengamatan, bongkah, inti bor, <em>reverse circulating drill cuttings</em>, kerakal, sedimen sungai atau tanah); tujuan pengambilan sampel; ukuran sampel, distribusi, dan tingkat keterwakilan.</td><td></td></tr>
+          <tr><td><strong>Penanganan/pengolahan sampel</strong></td><td>Jenis fasilitas, kecepatan penanganan/pengolahan, dan akreditasi; reduksi ukuran sampel; batas bawah ukuran butir; proses efisiensi, audit <em>tailing</em>, dan granulometri.</td><td></td></tr>
+          <tr><td><strong>Kadar sampel</strong></td><td>Kadar sampel pada bagian ini digunakan dalam konteks karat per unit massa, unit luasan, atau unit volume. Kadar sampel di atas <em>cut off sieve</em> harus dilaporkan sebagai karat per ton kering.</td><td></td></tr>
+          <tr><td><strong>Pelaporan hasil eksplorasi</strong></td><td>Data lengkap ayakan per <em>fasies</em>; hasil pengambilan sampel bulk; analisis struktur spasial dan distribusi kadar; ukuran batuan dan distribusinya.</td><td></td></tr>
+          <tr><td><strong>Estimasi kadar untuk sumber daya dan cadangan intan</strong></td><td>Deskripsi jenis sampel, pengaturan spasi pengeboran; ukuran penggerusan sampel; jumlah dan berat intan di atas batas bawah <em>cut off</em>.</td><td></td></tr>
+          <tr><td><strong>Estimasi nilai</strong></td><td>Valuasi tidak harus dilaporkan untuk sampel yang diproses dengan metode total liberation; nilai rata-rata satuan uang/karat harus dilaporkan dalam mata uang tertentu; dasar untuk harga; penilaian atas kerusakan (pecahan) intan.</td><td></td></tr>
+          <tr><td><strong>Keamanan dan integritas</strong></td><td>Proses audit terakreditasi; apakah sampel disegel setelah diambil; lokasi penilai, pengawalan, pengiriman; rekonsiliasi dengan karat sampel tercatat; hasil pengecekan <em>tailing</em>.</td><td></td></tr>
+          <tr><td><strong>Klasifikasi</strong></td><td>Kebutuhan untuk menghubungkan frekuensi batu (batu per meter kubik atau ton) terhadap ukuran batu (karat per batu) untuk menghasilkan kadar (karat per ton); unsur ketidakpastian harus dipertimbangkan.</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ LAMPIRAN B ══ -->
+  <div class="bagian" id="lampb">
+    <div class="bagian-header">
+      <div class="bh-num">B</div>
+      <div class="bh-title">Lampiran B (Informatif) — Pedoman Kajian Teknis</div>
+    </div>
+
+    <div class="section">
+      <p class="body">Pedoman mengenai kajian teknis ini dibuat sebagai panduan berbagai macam kajian yang digunakan untuk sumber daya mineral dan cadangan mineral. Studi pelingkupan, prastudi kelayakan, dan studi kelayakan menganalisis dan menilai faktor-faktor geologi, teknik, dan ekonomi dengan lebih terperinci dan akurat.</p>
+
+      <div class="section-title" style="margin-top:1rem;"><span class="sec-num">B.1</span>Tabel B.1 — Pedoman Kajian Teknis</div>
+      <table class="kajian-table">
+        <thead>
+          <tr>
+            <th class="left" style="width:22%;">Deskripsi</th>
+            <th style="width:26%;">Studi Pelingkupan</th>
+            <th style="width:26%;">Prastudi Kelayakan</th>
+            <th style="width:26%;">Studi Kelayakan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group-row"><td colspan="4">UMUM</td></tr>
+          <tr><td>Kategori sumber daya</td><td>Sebagian besar Tereka</td><td>Sebagian besar Tertunjuk</td><td>Tertunjuk dan Terukur</td></tr>
+          <tr><td>Kategori cadangan</td><td>Tidak ada</td><td>Sebagian besar Terkira</td><td>Terkira dan Terbukti</td></tr>
+          <tr><td>Metode penambangan &amp; batasan geoteknik</td><td>Konseptual</td><td>Opsi awal</td><td>Terperinci dan optimal</td></tr>
+          <tr><td>Desain tambang</td><td>Tidak ada atau konseptual (<em>high-level</em>)</td><td>Rencana dan penjadwalan tambang awal</td><td>Rencana dan penjadwalan tambang terperinci</td></tr>
+          <tr><td>Penjadwalan</td><td>Perkiraan tahunan</td><td>Triwulan ke tahunan</td><td>Bulanan untuk mendapatkan <em>payback period</em></td></tr>
+          <tr><td>Pengolahan mineral</td><td>Pengujian metalurgi</td><td>Opsi awal</td><td>Terperinci dan optimal</td></tr>
+          <tr><td>Izin (Air, Listrik, Tambang, Prospek, Lingkungan)</td><td>Daftar izin yang dibutuhkan</td><td>Permohonan awal diajukan</td><td>Pihak berwenang terlibat dan permohonan diajukan</td></tr>
+          <tr><td>Persetujuan sosial untuk dapat beroperasi</td><td>Kontak awal dengan masyarakat lokal</td><td>Dilakukan pemetaan sosial (<em>social mapping</em>)</td><td>Rencana PPM lokal telah ditetapkan</td></tr>
+          <tr><td>Toleransi risiko</td><td>Tinggi</td><td>Sedang</td><td>Rendah</td></tr>
+          <tr class="group-row"><td colspan="4">CAPEX</td></tr>
+          <tr><td>Basis estimasi CAPEX</td><td>Perhitungan kasar (<em>Order-of-Magnitude</em>), berdasarkan data lampau atau pemfaktoran. Pekerjaan perencanaan rekayasa selesai &lt;5%</td><td>Diestimasi dari pemfaktoran secara lampau atau persentase dan penawaran vendor berdasarkan volume material. Pekerjaan rekayasa selesai (5–20)%</td><td>Pekerjaan perencanaan rekayasa terperinci selesai (20–50)%, perkiraan jumlah material, dan penawaran dari beberapa vendor</td></tr>
+          <tr><td>Kisaran akurasi</td><td>± (25–50)%</td><td>± (15–25)%</td><td>± (10–15)%</td></tr>
+          <tr><td>Kisaran biaya tak terduga (<em>contingency</em>)</td><td>± 30%</td><td>± (15–30)%</td><td>± (10–15)% (ditentukan berdasarkan analisis risiko)</td></tr>
+          <tr class="group-row"><td colspan="4">OPEX</td></tr>
+          <tr><td>Basis estimasi OPEX</td><td>Perhitungan kasar, berdasarkan data lampau atau pemfaktoran</td><td>Estimasi dari pemfaktoran secara lampau atau persentase dan penawaran vendor berdasarkan volume material</td><td>Estimasi terperinci</td></tr>
+          <tr><td>Kuantitas operasi</td><td>Umum</td><td>Estimasi secara spesifik dengan menggunakan pemfaktoran tertentu</td><td>Estimasi terperinci</td></tr>
+          <tr><td>Biaya unit</td><td>Berdasarkan data lampau atau pemfaktoran</td><td>Estimasi dari biaya buruh, listrik, dan <em>consumables</em>, dengan pemfaktoran</td><td>Surat penawaran tertulis dari vendor; sedikit pemfaktoran</td></tr>
+          <tr><td>Kisaran akurasi OPEX</td><td>± (25–50)%</td><td>± (15–25)%</td><td>± (10–15)%</td></tr>
+          <tr><td>Kisaran biaya tak terduga (<em>contingency</em>)</td><td>± 25%</td><td>± 15%</td><td>± 10% (ditentukan berdasarkan analisis risiko)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ LAMPIRAN C ══ -->
+  <div class="bagian" id="lampc">
+    <div class="bagian-header">
+      <div class="bh-num">C</div>
+      <div class="bh-title">Lampiran C (Informatif) — Format Laporan Sumber Daya dan Cadangan Mineral yang Direkomendasikan</div>
+    </div>
+
+    <div class="section">
+      <p class="body">Struktur laporan sumber daya dan cadangan mineral yang direkomendasikan:</p>
+      <ul class="format-list">
+        <li>Kata Pengantar</li>
+        <li>Daftar Isi, Daftar Tabel, Daftar Gambar, Daftar Lampiran</li>
+        <li>Ringkasan Eksekutif</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab I — Pendahuluan</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>1.1. Latar belakang dan tujuan</li>
+        <li>1.2. Lingkup kajian dan pendekatan</li>
+        <li>1.3. Kajian pendukung dan laporan yang relevan</li>
+        <li>1.4. Institusi yang mengeluarkan laporan</li>
+        <li>1.5. Standar akurasi estimasi</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab II — Deskripsi Proyek</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>2.1. Lokasi dan akses</li>
+        <li>2.2. Aspek legalitas dan perizinan</li>
+        <li>2.3. Hasil kunjungan lapangan</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab III — Kondisi Geologi dan Lokal</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>3.1. Geologi regional</li>
+        <li>3.2. Geologi lokal</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab IV — Program Eksplorasi dan Survei</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>4.1. Pengeboran eksplorasi</li>
+        <li>4.2. <em>Logging</em> geofisika</li>
+        <li>4.3. Pencatatan litologi</li>
+        <li>4.4. Pengambilan dan preparasi contoh</li>
+        <li>4.5. <em>Collar survey</em></li>
+        <li>4.6. Survei topografi</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab V — Pemodelan Geologi, Estimasi, dan Pelaporan Sumber Daya Mineral</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>5.1. Interpretasi <em>database</em> eksplorasi</li>
+        <li>5.2. Pemodelan geologi</li>
+        <li>5.3. Estimasi sumber daya</li>
+        <li>5.4. Kualifikasi dan pernyataan orang yang berkompeten</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab VI — Kajian Teknis</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>6.1. Kajian geoteknik</li>
+        <li>6.2. Kajian hidrologi – hidrogeologi</li>
+        <li>6.3. Kajian air asam tambang</li>
+        <li>6.4. Kajian metalurgi dan pengolahan</li>
+        <li>6.5. Kajian pendukung lainnya yang relevan</li>
+      </ul>
+      <ul class="format-list">
+        <li><strong>Bab VII — Pelaporan Cadangan Mineral</strong></li>
+      </ul>
+      <ul class="format-list sub">
+        <li>7.1. Verifikasi dan validasi pemodelan geologi sumber daya</li>
+        <li>7.2. Optimisasi penambangan</li>
+        <li>7.3. Desain penambangan</li>
+        <li>7.4. Perencanaan sepanjang umur tambang (<em>Life-of-mine plan</em>)</li>
+        <li>7.5. Evaluasi keekonomian proyek tambang</li>
+        <li>7.6. Tinjauan faktor pengubah</li>
+        <li>7.7. Kriteria klasifikasi</li>
+        <li>7.8. Estimasi cadangan</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══ BIBLIOGRAFI ══ -->
+  <div class="bagian" id="biblio">
+    <div class="bagian-header">
+      <div class="bh-num">▸</div>
+      <div class="bh-title">Bibliografi</div>
+    </div>
+    <div class="section">
+      <ol class="list-num">
+        <li>SNI 7568:2010, <em>Glosarium eksplorasi mineral dan batubara</em></li>
+        <li>Badan dan Pengembangan dan Pelindungan Bahasa, <em>Kamus Besar Bahasa Indonesia</em>, Jakarta: Balai Pustaka, 2003</li>
+        <li>Badan Pengembangan dan Pembinaan Bahasa, <em>Pedoman Umum Ejaan Bahasa Indonesia</em>, Kementerian Pendidikan dan Kebudayaan, 2016</li>
+        <li>Guidelines Review Committee on behalf of the Coalfields Geology Council of New South Wales and the Queensland Resources Council, <em>Australasian Code for Reporting of Exploration Results, Mineral Resources and Ore Reserves</em>, JORC Code, 2012</li>
+        <li>Komite Cadangan Mineral Indonesia, <em>Kode Pelaporan Hasil Eksplorasi, Sumber Daya Mineral dan Cadangan Mineral Indonesia</em>, Kode KCMI 2017</li>
+        <li>Menteri Energi dan Sumber Daya Mineral Republik Indonesia, Keputusan Menteri ESDM Nomor 1827.K/30/MEM/2018 Lampiran II dan VII, 2018</li>
+        <li><em>Panduan untuk Pelaporan Hasil Eksplorasi Intan</em>, Diamond Exploration Best Practices Committee, Canadian Institute of Mining, Metallurgy and Petroleum</li>
+      </ol>
+    </div>
+
+    <div style="margin-top:2rem; padding:1.2rem 1.5rem; background:var(--blue-pale); border:1px solid var(--rule); border-radius:6px;">
+      <p class="body" style="font-size:13px;"><strong>Informasi pendukung terkait perumus standar:</strong></p>
+      <p class="body" style="font-size:13px; margin-top:0.5rem;"><strong>Komite Teknis:</strong> KT 73-02, Teknik Pertambangan Mineral dan Batubara</p>
+      <p class="body" style="font-size:13px;"><strong>Susunan keanggotaan:</strong> Ketua: I Gede Suratha · Wakil Ketua: Made Astawa Rai · Sekretaris: Andi Ari Santoso · Anggota: Supriyanto, Arief Heru Kuncoro, Ridho K. Watimena, Maryanto, Soenar Triwardono, Welly Turupadang, Rajulisman, K.M. Ricky Rinaldy</p>
+      <p class="body" style="font-size:13px;"><strong>Konseptor rancangan SNI:</strong> Budi Santoso</p>
+      <p class="body" style="font-size:13px;"><strong>Sekretariat pengelola:</strong> Direktorat Teknik dan Lingkungan, Direktorat Jenderal Mineral dan Batubara, Kementerian Energi dan Sumber Daya Mineral dan Batubara</p>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+window.addEventListener('scroll', () => {
+  const el = document.getElementById('prog');
+  const h  = document.documentElement;
+  el.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+</script>
+</body>
+</html>
