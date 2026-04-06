@@ -7,33 +7,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0b0e17;
-    --surface: #111520;
-    --surface2: #161b2c;
-    --border: #252b42;
-    --text: #e8eaf2;
-    --text-muted: #7a82a0;
-    --text-dim: #3d4460;
-    --gold: #c9a84c;
-    --gold-dim: #6b5520;
-    --gold-pale: #1e1810;
-    --blue: #4a7fc1;
-    --blue-dim: #1e3358;
-    --green: #3a9e6a;
-    --green-dim: #14382a;
-    --purple: #7a5ac1;
-    --purple-dim: #281e45;
-    --teal: #2eb8a0;
-    --teal-dim: #0e4038;
-    --orange: #c97c30;
-    --orange-dim: #4a2c0e;
-    --red: #c14a4a;
-    --red-dim: #3d1414;
-    --pink: #b84888;
-    --pink-dim: #3d1430;
-    --indigo: #5a78d0;
-    --indigo-dim: #1e2858;
-    --search-hl: rgba(201,168,76,0.30);
+    --bg: #f5f0e8;
+    --surface: #faf7f2;
+    --surface2: #ede8de;
+    --border: #d8cfc0;
+    --text: #2a2218;
+    --text-muted: #6b5e48;
+    --text-dim: #a8997e;
+    --gold: #9a6f28;
+    --gold-dim: #c9a96e;
+    --gold-pale: #f0e8d4;
+    --blue: #2d5fa0;
+    --blue-dim: #b8cce8;
+    --green: #246b48;
+    --green-dim: #b0d8c4;
+    --purple: #5a3a90;
+    --purple-dim: #ccc0e8;
+    --teal: #1a7a68;
+    --teal-dim: #a8d8d0;
+    --orange: #8a4a18;
+    --orange-dim: #e0c0a0;
+    --red: #8a2828;
+    --red-dim: #e0b8b8;
+    --pink: #7a2858;
+    --pink-dim: #e0b8d0;
+    --indigo: #304888;
+    --indigo-dim: #b8c4e4;
+    --search-hl: rgba(154,111,40,0.18);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,8 +50,9 @@
     content: '';
     position: fixed; inset: 0;
     background-image:
-      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(74,127,193,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(201,168,76,0.04) 0%, transparent 55%);
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(201,168,100,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(154,111,40,0.08) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245,240,232,0.4) 0%, transparent 80%);
     pointer-events: none; z-index: 0;
   }
 
@@ -109,7 +110,7 @@
   /* ── Search bar ── */
   .search-wrap {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(11,14,23,0.92);
+    background: rgba(245,240,232,0.94);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 14px 48px;
@@ -158,7 +159,7 @@
   #searchResults {
     display: none;
     position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(11,14,23,0.97);
+    background: rgba(245,240,232,0.98);
     z-index: 200;
     overflow-y: auto;
     padding: 0;
@@ -166,7 +167,7 @@
 
   .results-header {
     position: sticky; top: 0;
-    background: rgba(11,14,23,0.95);
+    background: rgba(245,240,232,0.96);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 16px 48px;
@@ -253,7 +254,7 @@
   }
 
   .snippet mark {
-    background: var(--search-hl);
+    background: rgba(154,111,40,0.20);
     color: var(--gold);
     border-radius: 2px;
     padding: 0 2px;
@@ -301,6 +302,7 @@
     overflow: hidden;
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    box-shadow: 0 1px 4px rgba(100,80,40,0.07), 0 2px 12px rgba(100,80,40,0.04);
   }
 
   .card::before {
@@ -309,21 +311,21 @@
     opacity: 0; transition: opacity 0.25s;
   }
 
-  .card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(100,80,40,0.18), 0 2px 8px rgba(100,80,40,0.10); }
   .card:hover::before { opacity: 1; }
 
   /* dim cards when search active */
   .card.hidden-card { display: none; }
 
-  .card.gold    { --c: var(--gold);   --c-dim: var(--gold-dim);   --c-pale: var(--gold-pale); }
-  .card.blue    { --c: var(--blue);   --c-dim: var(--blue-dim);   --c-pale: rgba(74,127,193,0.06); }
-  .card.green   { --c: var(--green);  --c-dim: var(--green-dim);  --c-pale: rgba(58,158,106,0.06); }
-  .card.purple  { --c: var(--purple); --c-dim: var(--purple-dim); --c-pale: rgba(122,90,193,0.06); }
-  .card.teal    { --c: var(--teal);   --c-dim: var(--teal-dim);   --c-pale: rgba(46,184,160,0.06); }
-  .card.orange  { --c: var(--orange); --c-dim: var(--orange-dim); --c-pale: rgba(201,124,48,0.06); }
-  .card.red     { --c: var(--red);    --c-dim: var(--red-dim);    --c-pale: rgba(193,74,74,0.06); }
-  .card.pink    { --c: var(--pink);   --c-dim: var(--pink-dim);   --c-pale: rgba(184,72,136,0.06); }
-  .card.indigo  { --c: var(--indigo); --c-dim: var(--indigo-dim); --c-pale: rgba(90,120,208,0.06); }
+  .card.gold    { --c: var(--gold);   --c-dim: var(--gold-dim);   --c-pale: #f5edda; }
+  .card.blue    { --c: var(--blue);   --c-dim: var(--blue-dim);   --c-pale: #dce8f5; }
+  .card.green   { --c: var(--green);  --c-dim: var(--green-dim);  --c-pale: #d4ede2; }
+  .card.purple  { --c: var(--purple); --c-dim: var(--purple-dim); --c-pale: #e4dcf5; }
+  .card.teal    { --c: var(--teal);   --c-dim: var(--teal-dim);   --c-pale: #d0ece8; }
+  .card.orange  { --c: var(--orange); --c-dim: var(--orange-dim); --c-pale: #f5e2cc; }
+  .card.red     { --c: var(--red);    --c-dim: var(--red-dim);    --c-pale: #f5d8d8; }
+  .card.pink    { --c: var(--pink);   --c-dim: var(--pink-dim);   --c-pale: #f5d8e8; }
+  .card.indigo  { --c: var(--indigo); --c-dim: var(--indigo-dim); --c-pale: #d8dcf5; }
 
   .card:hover { border-color: var(--c); }
   .card::before { background: var(--c); }
@@ -336,13 +338,15 @@
 
   .card-kode {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px; color: var(--c);
-    letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.85;
+    font-size: 13.5px; color: var(--c);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 500; opacity: 1;
+    line-height: 1.4;
   }
 
   .card-title {
     font-family: 'Playfair Display', serif;
-    font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--text);
+    font-size: 14px; font-weight: 700; line-height: 1.35; color: var(--text);
   }
 
   .card-desc {
@@ -353,9 +357,10 @@
 
   .tag {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px; padding: 3px 7px; border-radius: 4px;
+    font-size: 9.5px; padding: 3px 8px; border-radius: 4px;
     background: var(--c-pale); color: var(--c);
     border: 1px solid var(--c-dim); letter-spacing: 0.03em;
+    font-weight: 500;
   }
 
   .card-footer {
@@ -364,7 +369,7 @@
   }
 
   .card-year {
-    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--text-muted);
   }
 
   .card-cta {
@@ -388,7 +393,7 @@
   .rename-box {
     margin-top: 10px;
     padding: 10px 14px;
-    background: rgba(201,168,76,0.06);
+    background: rgba(154,111,40,0.08);
     border: 1px solid var(--gold-dim);
     border-radius: 6px;
     font-family: 'JetBrains Mono', monospace;
@@ -403,7 +408,7 @@
     padding: 22px 48px; max-width: 1100px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px; color: var(--text-dim);
+    font-size: 10.5px; color: var(--text-muted);
     gap: 12px; flex-wrap: wrap;
   }
 
@@ -441,6 +446,127 @@
     .cards-grid { grid-template-columns: 1fr; }
     .rename-box { column-count: 1; }
   }
+
+  /* ── Tambah Peraturan Button ── */
+  .add-reg-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em;
+    color: var(--gold); background: var(--gold-pale);
+    border: 1px solid var(--gold-dim);
+    border-radius: 6px; padding: 8px 16px;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    box-shadow: 0 1px 3px rgba(100,80,30,0.10);
+  }
+  .add-reg-btn:hover { background: #ecdfc0; border-color: var(--gold); box-shadow: 0 2px 8px rgba(100,80,30,0.15); }
+
+  /* ── Modal Overlay ── */
+  #addModal {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(42,34,24,0.55);
+    backdrop-filter: blur(14px);
+    align-items: center; justify-content: center;
+  }
+  #addModal.open { display: flex; }
+
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 36px 40px;
+    width: 100%; max-width: 520px;
+    box-shadow: 0 24px 60px rgba(60,40,20,0.25), 0 4px 16px rgba(60,40,20,0.12);
+    animation: fadeUp 0.25s ease both;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px; font-weight: 700;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .modal-subtitle {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 28px;
+  }
+
+  .field-group { margin-bottom: 18px; }
+  .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 8px; display: block;
+  }
+  .field-input {
+    width: 100%; background: var(--bg);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; color: var(--text);
+    font-family: 'Source Sans 3', sans-serif; font-size: 14px;
+    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .field-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(154,111,40,0.12); }
+  .field-input:focus { border-color: var(--gold); }
+  .field-input::placeholder { color: var(--text-dim); }
+
+  .color-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .color-swatch {
+    width: 32px; height: 32px; border-radius: 8px;
+    border: 2px solid transparent; cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+  }
+  .color-swatch:hover { transform: scale(1.15); }
+  .color-swatch.selected { border-color: #fff; }
+
+  .modal-actions {
+    display: flex; gap: 10px; margin-top: 28px; justify-content: flex-end;
+  }
+  .btn-cancel {
+    background: none; border: 1px solid var(--border);
+    color: var(--text-muted); border-radius: 8px;
+    padding: 10px 20px; cursor: pointer; font-size: 13px;
+    font-family: 'Source Sans 3', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-cancel:hover { border-color: var(--text-muted); color: var(--text); }
+
+  .btn-save {
+    background: linear-gradient(135deg, var(--gold) 0%, #8b6820 100%);
+    border: none; color: #0b0e17; border-radius: 8px;
+    padding: 10px 24px; cursor: pointer; font-size: 13px;
+    font-family: 'Source Sans 3', sans-serif; font-weight: 700;
+    transition: opacity 0.2s; letter-spacing: 0.03em;
+  }
+  .btn-save:hover { opacity: 0.88; }
+
+  /* ── Custom card delete button ── */
+  .card-delete {
+    position: absolute; top: 10px; right: 10px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(138,40,40,0.10); border: 1px solid rgba(138,40,40,0.25);
+    color: var(--red); font-size: 12px; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; transition: opacity 0.2s, background 0.2s;
+    z-index: 2;
+  }
+  .card:hover .card-delete { opacity: 1; }
+  .card-delete:hover { background: rgba(138,40,40,0.22); }
+
+  /* ── Custom section label ── */
+  .custom-section { margin-top: 40px; }
+
+  /* ── Toast notification ── */
+  #toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 600;
+    background: var(--surface); border: 1px solid var(--gold-dim);
+    color: var(--gold); border-radius: 8px; padding: 12px 20px;
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.08em;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(100,80,30,0.18);
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
 </style>
 </head>
 <body>
@@ -453,9 +579,10 @@
   <h1>Referensi <em>Regulasi</em><br>Pertambangan Minerba</h1>
   <p class="subtitle">Kumpulan dokumen peraturan perundang-undangan di bidang mineral dan batubara. Klik kartu untuk membuka explorer interaktif masing-masing regulasi.</p>
   <div class="meta-row">
-    <span class="meta-badge">11 Dokumen</span>
+    <span class="meta-badge" id="docCountBadge">11 Dokumen</span>
     <span class="meta-badge">UU · PP · Perpres · Kepmen · Kepdirjen · Permen · SNI</span>
     <span class="meta-badge">Ditjen Minerba</span>
+    <button class="add-reg-btn" onclick="openAddModal()">＋ Tambah Peraturan</button>
   </div>
 </header>
 
@@ -721,7 +848,52 @@
       </div>
     </div>
   </div>
+
+  <!-- Custom Regulations Section (rendered by JS) -->
+  <div id="customSection"></div>
+
 </main>
+
+<!-- Toast -->
+<div id="toast">✓ Tersimpan</div>
+
+<!-- Add Regulation Modal -->
+<div id="addModal">
+  <div class="modal-box">
+    <div class="modal-title">Tambah Peraturan</div>
+    <div class="modal-subtitle">Peraturan baru akan tersimpan otomatis di browser ini.</div>
+
+    <div class="field-group">
+      <label class="field-label">Kode Regulasi *</label>
+      <input class="field-input" id="inp-kode" placeholder="cth. Kepmen ESDM No. 7 Tahun 2023" />
+    </div>
+    <div class="field-group">
+      <label class="field-label">Judul Peraturan *</label>
+      <input class="field-input" id="inp-title" placeholder="cth. Pedoman Teknis Pengelolaan Limbah Tambang" />
+    </div>
+    <div class="field-group">
+      <label class="field-label">Nama File HTML (opsional)</label>
+      <input class="field-input" id="inp-file" placeholder="cth. kepmen_7_2023.html" />
+    </div>
+    <div class="field-group">
+      <label class="field-label">Deskripsi Singkat</label>
+      <input class="field-input" id="inp-desc" placeholder="cth. Ketentuan teknis mengenai pengelolaan limbah..." />
+    </div>
+    <div class="field-group">
+      <label class="field-label">URL / Link (opsional)</label>
+      <input class="field-input" id="inp-url" placeholder="cth. https://jdih.esdm.go.id/... atau nama file lokal" />
+    </div>
+    <div class="field-group">
+      <label class="field-label">Warna Kartu</label>
+      <div class="color-row" id="colorRow"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeAddModal()">Batal</button>
+      <button class="btn-save" onclick="saveNewReg()">Simpan Peraturan</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   <span>Portal Regulasi Pertambangan Minerba · Referensi Internal Inspektur Tambang</span>
@@ -875,6 +1047,220 @@ function closeSearch() {
 searchPanel.addEventListener('click', (e) => {
   if (e.target === searchPanel) closeSearch();
 });
+
+// ─── CUSTOM REGULATIONS (localStorage) ──────────────────────────────────────
+const CUSTOM_KEY = 'portal_custom_regs_v1';
+const PALETTE = [
+  '#c9a84c','#4a7fc1','#3a9e6a','#2eb8a0','#c97c30',
+  '#c14a4a','#7a5ac1','#5a78d0','#b84888','#d06030',
+  '#20a0b8','#8ab820'
+];
+let selectedColor = PALETTE[0];
+
+function loadCustomRegs() {
+  try { return JSON.parse(localStorage.getItem(CUSTOM_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+function saveCustomRegs(arr) {
+  localStorage.setItem(CUSTOM_KEY, JSON.stringify(arr));
+}
+
+function openAddModal() {
+  document.getElementById('inp-kode').value = '';
+  document.getElementById('inp-title').value = '';
+  document.getElementById('inp-file').value = '';
+  document.getElementById('inp-desc').value = '';
+  document.getElementById('inp-url').value = '';
+  selectedColor = PALETTE[0];
+  renderColorRow();
+  document.getElementById('addModal').classList.add('open');
+  setTimeout(() => document.getElementById('inp-kode').focus(), 80);
+}
+function closeAddModal() {
+  document.getElementById('addModal').classList.remove('open');
+}
+
+function renderColorRow() {
+  const row = document.getElementById('colorRow');
+  row.innerHTML = PALETTE.map(c =>
+    `<div class="color-swatch${c === selectedColor ? ' selected' : ''}"
+      style="background:${c}"
+      onclick="pickColor('${c}')"></div>`
+  ).join('');
+}
+function pickColor(c) {
+  selectedColor = c;
+  renderColorRow();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg || '✓ Tersimpan';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function saveNewReg() {
+  const kode  = document.getElementById('inp-kode').value.trim();
+  const title = document.getElementById('inp-title').value.trim();
+  const file  = document.getElementById('inp-file').value.trim();
+  const desc  = document.getElementById('inp-desc').value.trim();
+  const url   = document.getElementById('inp-url').value.trim();
+
+  if (!kode || !title) {
+    alert('Kode Regulasi dan Judul Peraturan wajib diisi.');
+    return;
+  }
+
+  const regs = loadCustomRegs();
+  const newReg = {
+    id: Date.now().toString(),
+    kode, title, file, desc, url,
+    color: selectedColor,
+    createdAt: new Date().toISOString()
+  };
+  regs.push(newReg);
+  saveCustomRegs(regs);
+
+  // Also add to CARDS for search
+  CARDS.push({
+    file: file || url || '#',
+    title: title,
+    kode: kode,
+    color: selectedColor
+  });
+
+  closeAddModal();
+  renderCustomSection();
+  updateDocCount();
+  showToast('✓ Peraturan berhasil ditambahkan');
+}
+
+function deleteCustomReg(id) {
+  if (!confirm('Hapus peraturan ini dari daftar?')) return;
+  let regs = loadCustomRegs().filter(r => r.id !== id);
+  saveCustomRegs(regs);
+  // Rebuild CARDS from scratch (reload custom)
+  rebuildCardsFromCustom();
+  renderCustomSection();
+  updateDocCount();
+  showToast('✗ Peraturan dihapus');
+}
+
+function rebuildCardsFromCustom() {
+  // Remove any previously added custom entries (keep originals)
+  const originalCount = 11;
+  CARDS.splice(originalCount);
+  // Re-add current custom
+  const regs = loadCustomRegs();
+  regs.forEach(r => {
+    CARDS.push({
+      file: r.file || r.url || '#',
+      title: r.title,
+      kode: r.kode,
+      color: r.color
+    });
+  });
+}
+
+function updateDocCount() {
+  const custom = loadCustomRegs();
+  const total = 11 + custom.length;
+  const badge = document.getElementById('docCountBadge');
+  if (badge) badge.textContent = total + ' Dokumen';
+}
+
+function renderCustomSection() {
+  const regs = loadCustomRegs();
+  const container = document.getElementById('customSection');
+  if (!container) return;
+
+  if (regs.length === 0) {
+    container.innerHTML = '';
+    return;
+  }
+
+  const colorClass = (hex) => {
+    const map = {
+      '#c9a84c': 'gold', '#4a7fc1': 'blue', '#3a9e6a': 'green',
+      '#2eb8a0': 'teal', '#c97c30': 'orange', '#c14a4a': 'red',
+      '#7a5ac1': 'purple', '#5a78d0': 'indigo', '#b84888': 'pink'
+    };
+    return map[hex] || 'gold';
+  };
+
+  const icon = (kode) => {
+    if (/uu|undang/i.test(kode)) return '📜';
+    if (/pp|peraturan pem/i.test(kode)) return '⚙️';
+    if (/perpres/i.test(kode)) return '🏛️';
+    if (/kepmen|permen/i.test(kode)) return '📋';
+    if (/kepdirjen/i.test(kode)) return '📑';
+    if (/sni/i.test(kode)) return '📐';
+    return '📄';
+  };
+
+  const cards = regs.map(r => {
+    const cls = colorClass(r.color);
+    const href = r.url || r.file || '#';
+    const target = href === '#' ? '' : 'target="_blank"';
+    const yearMatch = r.kode.match(/\d{4}/);
+    const year = yearMatch ? 'Tahun ' + yearMatch[0] : 'Custom';
+    return `
+    <div style="position:relative;">
+      <a class="card ${cls}" href="${href}" ${target} data-file="${r.file || ''}"
+         style="--c:${r.color};--c-dim:${r.color}55;--c-pale:${r.color}12;">
+        <div class="card-icon">${icon(r.kode)}</div>
+        <div>
+          <div class="card-kode">${r.kode}</div>
+          <div class="card-title">${r.title}</div>
+        </div>
+        ${r.desc ? `<p class="card-desc">${r.desc}</p>` : ''}
+        <div class="card-tags">
+          <span class="tag">Custom</span>
+          ${r.file ? `<span class="tag">Local</span>` : ''}
+          ${r.url && !r.file ? `<span class="tag">Online</span>` : ''}
+        </div>
+        <div class="card-footer">
+          <span class="card-year">${year}</span>
+          <span class="card-cta">${href === '#' ? 'Tidak ada file' : 'Buka →'}</span>
+        </div>
+      </a>
+      <button class="card-delete" onclick="event.preventDefault();event.stopPropagation();deleteCustomReg('${r.id}')" title="Hapus">✕</button>
+    </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="section-label custom-section">Peraturan Tambahan (${regs.length})</div>
+    <div class="cards-grid">${cards}</div>
+  `;
+}
+
+// ─── Init custom regulations on page load ────────────────────────────────────
+(function initCustom() {
+  rebuildCardsFromCustom();
+  renderCustomSection();
+  updateDocCount();
+  renderColorRow();
+
+  // Close modal on backdrop click
+  document.getElementById('addModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAddModal();
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAddModal();
+  });
+
+  // Enter to save in modal inputs
+  ['inp-kode','inp-title','inp-file','inp-desc','inp-url'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('keydown', e => {
+      if (e.key === 'Enter') saveNewReg();
+    });
+  });
+})();
+
 </script>
 </body>
 </html>
