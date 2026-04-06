@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PP No. 22 Tahun 2021 — Penyelenggaraan PPLH</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #f5f7f9;
+    --sidebar-bg: #0d1f2d;
+    --sidebar-text: #b0c4d8;
+    --sidebar-hover: #d0e8f0;
+    --sidebar-active: #4db8e8;
+    --sidebar-section: #3a6a8a;
+    --content-bg: #ffffff;
+    --ink: #1a1e22;
+    --ink-soft: #3a4450;
+    --ink-light: #7a8a9a;
+    --rule: #dce4ec;
+    --accent: #0d4f6e;
+    --accent-soft: #1a6a94;
+    --highlight: #e8f4fb;
+    --pasal-border: #4db8e8;
+    --bab-bg: #0d1f2d;
+    --bab-text: #d0e8f0;
+    --sidebar-width: 300px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    font-family: 'Source Serif 4', Georgia, serif;
+    color: var(--ink);
+    display: flex;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.78;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #1a3348;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: #070f16; }
+  #sidebar::-webkit-scrollbar-thumb { background: #1a3a52; border-radius: 2px; }
+
+  .sidebar-header {
+    padding: 24px 20px 18px;
+    border-bottom: 1px solid #1a3348;
+    position: sticky;
+    top: 0;
+    background: var(--sidebar-bg);
+    z-index: 2;
+  }
+
+  .sidebar-header .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sidebar-section);
+    margin-bottom: 5px;
+  }
+
+  .sidebar-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 13.5px;
+    color: var(--sidebar-active);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .sidebar-header p {
+    font-size: 11px;
+    color: var(--sidebar-text);
+    margin-top: 5px;
+    opacity: 0.75;
+    line-height: 1.5;
+  }
+
+  /* Search */
+  .sidebar-search {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1a3348;
+    position: sticky;
+    top: 0;
+    background: var(--sidebar-bg);
+    z-index: 1;
+  }
+
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-wrap input {
+    width: 100%;
+    background: #070f16;
+    border: 1px solid #1a3a52;
+    border-radius: 6px;
+    padding: 7px 30px 7px 12px;
+    font-size: 12px;
+    color: var(--sidebar-text);
+    font-family: 'Source Serif 4', serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-wrap input:focus { border-color: var(--sidebar-active); }
+  .search-wrap input::placeholder { color: #1a3a52; }
+
+  .search-wrap .clear-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--sidebar-section);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    display: none;
+    padding: 2px;
+  }
+
+  .search-wrap input:not(:placeholder-shown) ~ .clear-btn { display: block; }
+
+  .search-results-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--sidebar-active);
+    padding: 4px 14px 0;
+    display: none;
+  }
+
+  /* Nav */
+  .nav-tree { padding: 6px 0 24px; }
+
+  .nav-bab-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--sidebar-section);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'JetBrains Mono', monospace;
+    user-select: none;
+  }
+
+  .nav-bab-header:hover { background: rgba(255,255,255,0.03); }
+  .nav-bab-header .chevron { margin-left: auto; transition: transform 0.2s; font-size: 8px; opacity: 0.5; }
+  .nav-bab-header.open .chevron { transform: rotate(90deg); }
+
+  .nav-items { display: none; padding: 0 0 4px; }
+  .nav-items.open { display: block; }
+
+  .nav-item {
+    display: block;
+    padding: 4px 14px 4px 26px;
+    font-size: 11.5px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    transition: all 0.15s;
+    border-left: 2px solid transparent;
+    opacity: 0.8;
+    line-height: 1.4;
+  }
+
+  .nav-item:hover {
+    color: var(--sidebar-hover);
+    border-left-color: #1a3a52;
+    background: rgba(255,255,255,0.02);
+    opacity: 1;
+  }
+
+  .nav-item.active {
+    color: var(--sidebar-active);
+    border-left-color: var(--sidebar-active);
+    background: rgba(77,184,232,0.06);
+    opacity: 1;
+  }
+
+  .nav-item.highlight {
+    background: rgba(77,184,232,0.12);
+    color: #fff;
+    opacity: 1;
+  }
+
+  .nav-bagian {
+    display: block;
+    padding: 3px 14px 3px 22px;
+    font-size: 11px;
+    color: var(--sidebar-section);
+    text-decoration: none;
+    transition: all 0.15s;
+    font-style: italic;
+    opacity: 0.9;
+    line-height: 1.4;
+  }
+
+  .nav-bagian:hover { color: var(--sidebar-hover); opacity: 1; }
+
+  /* ── MAIN ── */
+  #main { margin-left: var(--sidebar-width); flex: 1; }
+
+  /* Search highlight in content */
+  mark {
+    background: #fff3a0;
+    color: #333;
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  /* Doc header */
+  .doc-header {
+    background: var(--bab-bg);
+    color: var(--bab-text);
+    padding: 52px 56px 44px;
+    text-align: center;
+    border-bottom: 3px solid var(--sidebar-active);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(77,184,232,0.08) 0%, transparent 70%);
+  }
+
+  .doc-header .kop {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--sidebar-section);
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  .doc-header .title-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--sidebar-active);
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+    position: relative;
+    line-height: 1.35;
+  }
+
+  .doc-header .nomor-badge {
+    display: inline-block;
+    background: rgba(77,184,232,0.12);
+    border: 1px solid rgba(77,184,232,0.3);
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--sidebar-active);
+    letter-spacing: 0.1em;
+    margin: 14px 0 18px;
+    position: relative;
+  }
+
+  .doc-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: #c8e0f0;
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .doc-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .doc-stat {
+    text-align: center;
+  }
+
+  .doc-stat .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--sidebar-active);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .doc-stat .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--sidebar-section);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .content-body { padding: 0 56px 80px; max-width: 960px; }
+
+  /* BAB blocks */
+  .bab-block { margin-top: 48px; }
+
+  .bab-title {
+    background: var(--bab-bg);
+    color: var(--bab-text);
+    padding: 14px 26px;
+    border-radius: 6px 6px 0 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-align: center;
+    border-bottom: 2px solid var(--sidebar-active);
+  }
+
+  .bab-title .bab-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sidebar-section);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .bab-title .pasal-range {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--sidebar-section);
+    opacity: 0.8;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .bab-content {
+    border: 1px solid var(--rule);
+    border-top: none;
+    border-radius: 0 0 6px 6px;
+    overflow: hidden;
+  }
+
+  .bagian-title {
+    background: var(--highlight);
+    padding: 11px 22px;
+    font-family: 'Playfair Display', serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent);
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: 16px;
+  }
+
+  .bagian-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .paragraf-title {
+    background: #f0f4f8;
+    padding: 8px 22px;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--ink-soft);
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+    font-family: 'Source Serif 4', serif;
+  }
+
+  .pasal-block {
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--content-bg);
+    scroll-margin-top: 24px;
+    transition: background 0.2s;
+  }
+
+  .pasal-block:last-child { border-bottom: none; }
+  .pasal-block:hover { background: #fafcfe; }
+
+  .pasal-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pasal-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--pasal-border), transparent);
+  }
+
+  .pasal-text { font-size: 14px; line-height: 1.82; color: var(--ink); margin-bottom: 11px; }
+  .pasal-text:last-child { margin-bottom: 0; }
+
+  .ayat { display: flex; gap: 13px; margin-bottom: 10px; }
+  .ayat:last-child { margin-bottom: 0; }
+
+  .ayat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent-soft);
+    min-width: 26px;
+    padding-top: 4px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .ayat-text { flex: 1; font-size: 14px; line-height: 1.82; color: var(--ink); }
+
+  .list-alpha, .list-num { margin: 8px 0 7px 14px; }
+
+  .list-item {
+    display: flex;
+    gap: 11px;
+    margin-bottom: 6px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .list-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent-soft);
+    min-width: 18px;
+    padding-top: 3px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .sub-list { margin: 6px 0 5px 18px; }
+
+  .sub-item {
+    display: flex;
+    gap: 9px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+
+  .sub-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-light);
+    min-width: 18px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .preambule-block {
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--content-bg);
+  }
+
+  .preambule-row { display: flex; gap: 16px; margin-bottom: 14px; }
+  .preambule-row:last-child { margin-bottom: 0; }
+
+  .preambule-key {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    min-width: 100px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .preambule-val { flex: 1; font-size: 13.5px; line-height: 1.82; }
+
+  .mengingat-item {
+    display: flex;
+    gap: 11px;
+    margin-bottom: 9px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+  }
+
+  .mengingat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent-soft);
+    min-width: 18px;
+    padding-top: 3px;
+    flex-shrink: 0;
+  }
+
+  .memutuskan-block {
+    text-align: center;
+    padding: 24px 26px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--highlight);
+  }
+
+  .memutuskan-block .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    margin-bottom: 7px;
+  }
+
+  .memutuskan-block p {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bab-bg);
+    line-height: 1.65;
+  }
+
+  .ttd-block {
+    padding: 28px 26px;
+    background: var(--content-bg);
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ttd-col { flex: 1; min-width: 200px; }
+  .ttd-col .place { font-size: 13px; color: var(--ink-soft); margin-bottom: 26px; line-height: 1.7; }
+  .ttd-col .role { font-size: 11.5px; color: var(--ink-light); margin-bottom: 3px; }
+  .ttd-col .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    border-top: 1px solid var(--rule);
+    padding-top: 7px;
+    margin-top: 3px;
+  }
+
+  .lampiran-note {
+    background: var(--highlight);
+    border-left: 3px solid var(--pasal-border);
+    padding: 12px 18px;
+    margin: 10px 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+  }
+
+  .scope-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin: 10px 0;
+  }
+
+  .scope-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding: 6px 10px;
+    background: var(--highlight);
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+  }
+
+  .scope-item .scope-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-soft);
+    min-width: 14px;
+    padding-top: 2px;
+  }
+
+  /* Progress bar */
+  #progress {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    right: 0;
+    height: 2px;
+    z-index: 300;
+  }
+
+  #progress-bar {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent), var(--sidebar-active));
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* Scroll to top */
+  #totop {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 40px;
+    height: 40px;
+    background: var(--bab-bg);
+    border: 1px solid #1a3a52;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sidebar-active);
+    font-size: 16px;
+    transition: all 0.2s;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    text-decoration: none;
+  }
+
+  #totop.visible { opacity: 1; pointer-events: all; }
+  #totop:hover { background: #1a3348; transform: translateY(-2px); }
+
+  a.anchor { display: block; position: relative; top: -80px; visibility: hidden; }
+
+  /* No-result state */
+  .no-result { display: none; padding: 10px 14px; font-size: 11.5px; color: #5a7a9a; font-style: italic; }
+</style>
+</head>
+<body>
+
+<div id="progress"><div id="progress-bar"></div></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="label">Peraturan Pemerintah · Lingkungan Hidup</div>
+    <h1>PP No. 22 Tahun 2021</h1>
+    <p>Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup</p>
+  </div>
+
+  <div class="sidebar-search">
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Cari pasal, kata kunci…" autocomplete="off" />
+      <button class="clear-btn" id="clear-search" title="Hapus pencarian">✕</button>
+    </div>
+    <div class="search-results-count" id="search-count"></div>
+    <div class="no-result" id="no-result">Tidak ditemukan</div>
+  </div>
+
+  <div class="nav-tree" id="nav-tree">
+
+    <div class="nav-bab">
+      <div class="nav-bab-header open" onclick="toggleBab(this)">
+        <span>Pembukaan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items open">
+        <a href="#konsideran" class="nav-item">Menimbang &amp; Mengingat</a>
+        <a href="#memutuskan" class="nav-item">Memutuskan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB I — Ketentuan Umum</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal1" class="nav-item">Pasal 1 — 103 Definisi</a>
+        <a href="#pasal2" class="nav-item">Pasal 2 — Ruang Lingkup</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB II — Persetujuan Lingkungan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab2-bg1" class="nav-bagian">▸ Bg. 1: Umum</a>
+        <a href="#pasal3" class="nav-item">Pasal 3 — Kewajiban Persetujuan</a>
+        <a href="#pasal4" class="nav-item">Pasal 4 — Jenis Dokumen LH</a>
+        <a href="#pasal5" class="nav-item">Pasal 5 — Kewajiban Amdal</a>
+        <a href="#pasal6" class="nav-item">Pasal 6 — Kewajiban UKL-UPL</a>
+        <a href="#pasal7" class="nav-item">Pasal 7 — SPPL</a>
+        <a href="#bab2-bg2" class="nav-bagian">▸ Bg. 2: Penyusunan Amdal &amp; Uji Kelayakan</a>
+        <a href="#pasal21" class="nav-item">Pasal 21 — Penyusunan Amdal</a>
+        <a href="#pasal22" class="nav-item">Pasal 22 — Pendekatan Studi</a>
+        <a href="#bab2-bg3" class="nav-bagian">▸ Bg. 3: Formulir UKL-UPL</a>
+        <a href="#pasal52" class="nav-item">Pasal 52 — Pengisian Formulir UKL-UPL</a>
+        <a href="#bab2-bg4" class="nav-bagian">▸ Bg. 4: Pengisian SPPL</a>
+        <a href="#pasal65" class="nav-item">Pasal 65 — SPPL</a>
+        <a href="#bab2-bg5" class="nav-bagian">▸ Bg. 5: Penyusun Amdal</a>
+        <a href="#pasal67" class="nav-item">Pasal 67 — Tim Penyusun Amdal</a>
+        <a href="#bab2-bg6" class="nav-bagian">▸ Bg. 6: Lembaga Uji Kelayakan LH</a>
+        <a href="#pasal76" class="nav-item">Pasal 76 — Lembaga Uji Kelayakan</a>
+        <a href="#bab2-bg7" class="nav-bagian">▸ Bg. 7: Ahli Bersertifikat Tim UKL</a>
+        <a href="#pasal84" class="nav-item">Pasal 84 — Ahli Bersertifikat</a>
+        <a href="#bab2-bg8" class="nav-bagian">▸ Bg. 8: DELH &amp; DPLH</a>
+        <a href="#pasal86" class="nav-item">Pasal 86 — DELH dan DPLH</a>
+        <a href="#bab2-bg9" class="nav-bagian">▸ Bg. 9: Perubahan Persetujuan</a>
+        <a href="#pasal89" class="nav-item">Pasal 89 — Perubahan Persetujuan LH</a>
+        <a href="#bab2-bg10" class="nav-bagian">▸ Bg. 10: Bantuan UMK</a>
+        <a href="#pasal102" class="nav-item">Pasal 102 — Bantuan UMK</a>
+        <a href="#bab2-bg11" class="nav-bagian">▸ Bg. 11: Pendanaan</a>
+        <a href="#pasal103" class="nav-item">Pasal 103 — Pendanaan Persetujuan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB III — Perlindungan &amp; Pengelolaan Mutu Air</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab3-bg1" class="nav-bagian">▸ Bg. 1: Ketentuan Umum</a>
+        <a href="#pasal107" class="nav-item">Pasal 107 — Lingkup Mutu Air</a>
+        <a href="#bab3-bg2" class="nav-bagian">▸ Bg. 2: Perencanaan</a>
+        <a href="#pasal108" class="nav-item">Pasal 108 — Perencanaan PPLM Air</a>
+        <a href="#pasal109" class="nav-item">Pasal 109 — Inventarisasi Badan Air</a>
+        <a href="#bab3-bg3" class="nav-bagian">▸ Bg. 3: Pemanfaatan</a>
+        <a href="#pasal125" class="nav-item">Pasal 125 — Pemanfaatan Air</a>
+        <a href="#bab3-bg4" class="nav-bagian">▸ Bg. 4: Pengendalian</a>
+        <a href="#pasal127" class="nav-item">Pasal 127 — Pengendalian Pencemaran Air</a>
+        <a href="#bab3-bg6" class="nav-bagian">▸ Bg. 6: Hak, Kewajiban, dan Larangan</a>
+        <a href="#pasal157" class="nav-item">Pasal 157 — Hak Setiap Orang</a>
+        <a href="#bab3-bg7" class="nav-bagian">▸ Bg. 7: Peran Serta Masyarakat</a>
+        <a href="#pasal161" class="nav-item">Pasal 161 — Peran Serta Masyarakat</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB IV — Perlindungan &amp; Pengelolaan Mutu Udara</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab4-bg1" class="nav-bagian">▸ Bg. 1: Umum</a>
+        <a href="#pasal163" class="nav-item">Pasal 163 — Penyelenggaraan PPLM Udara</a>
+        <a href="#bab4-bg2" class="nav-bagian">▸ Bg. 2: Perencanaan</a>
+        <a href="#pasal164" class="nav-item">Pasal 164 — Perencanaan</a>
+        <a href="#pasal165" class="nav-item">Pasal 165 — Inventarisasi Udara</a>
+        <a href="#bab4-bg3" class="nav-bagian">▸ Bg. 3: Pemanfaatan</a>
+        <a href="#pasal186" class="nav-item">Pasal 186 — Pemanfaatan WPPMU</a>
+        <a href="#bab4-bg4" class="nav-bagian">▸ Bg. 4: Pengendalian</a>
+        <a href="#pasal193" class="nav-item">Pasal 193 — Pengendalian Pencemaran Udara</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB V — Perlindungan &amp; Pengelolaan Mutu Laut</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab5-bg1" class="nav-bagian">▸ Bg. 1: Umum</a>
+        <a href="#pasal220" class="nav-item">Pasal 220 — Tujuan Penyelenggaraan</a>
+        <a href="#pasal221" class="nav-item">Pasal 221 — Kewenangan</a>
+        <a href="#pasal222" class="nav-item">Pasal 222 — Ruang Lingkup</a>
+        <a href="#bab5-bg2" class="nav-bagian">▸ Bg. 2: Perencanaan</a>
+        <a href="#pasal223" class="nav-item">Pasal 223 — Perencanaan Mutu Laut</a>
+        <a href="#bab5-bg3" class="nav-bagian">▸ Bg. 3: Pemanfaatan</a>
+        <a href="#pasal240" class="nav-item">Pasal 240 — Pemanfaatan Laut</a>
+        <a href="#bab5-bg4" class="nav-bagian">▸ Bg. 4: Pengendalian</a>
+        <a href="#pasal248" class="nav-item">Pasal 248 — Pengendalian Pencemaran Laut</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB VI — Pengendalian Kerusakan LH</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal272" class="nav-item">Pasal 272 — Kriteria Baku Kerusakan LH</a>
+        <a href="#pasal273" class="nav-item">Pasal 273 — Pengecualian Pembakaran Lahan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB VII — Pengelolaan Limbah B3 dan Non-B3</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab7-bg1" class="nav-bagian">▸ Bg. 1: Umum</a>
+        <a href="#pasal274" class="nav-item">Pasal 274 — Kewajiban Pengelolaan Limbah</a>
+        <a href="#bab7-bg2" class="nav-bagian">▸ Bg. 2: Pengelolaan Limbah B3</a>
+        <a href="#pasal275" class="nav-item">Pasal 275 — Ruang Lingkup Pengelolaan B3</a>
+        <a href="#pasal276" class="nav-item">Pasal 276 — Penetapan Limbah B3</a>
+        <a href="#pasal277" class="nav-item">Pasal 277 — Pengurangan Limbah B3</a>
+        <a href="#pasal278" class="nav-item">Pasal 278 — Penyimpanan Limbah B3</a>
+        <a href="#pasal297" class="nav-item">Pasal 297 — Pengumpulan Limbah B3</a>
+        <a href="#pasal307" class="nav-item">Pasal 307 — Pengangkutan Limbah B3</a>
+        <a href="#pasal315" class="nav-item">Pasal 315 — Pemanfaatan Limbah B3</a>
+        <a href="#pasal326" class="nav-item">Pasal 326 — Pengolahan Limbah B3</a>
+        <a href="#pasal341" class="nav-item">Pasal 341 — Penimbunan Limbah B3</a>
+        <a href="#pasal350" class="nav-item">Pasal 350 — Dumping Limbah B3</a>
+        <a href="#pasal355" class="nav-item">Pasal 355 — Pengecualian Limbah B3</a>
+        <a href="#pasal360" class="nav-item">Pasal 360 — Perpindahan Lintas Batas</a>
+        <a href="#pasal396" class="nav-item">Pasal 396 — Sistem Tanggap Darurat</a>
+        <a href="#bab7-bg3" class="nav-bagian">▸ Bg. 3: Pengelolaan Limbah Non-B3</a>
+        <a href="#pasal449" class="nav-item">Pasal 449 — Ruang Lingkup Limbah Non-B3</a>
+        <a href="#pasal450" class="nav-item">Pasal 450 — Penetapan Limbah Non-B3</a>
+        <a href="#pasal454" class="nav-item">Pasal 454 — Pengurangan Limbah Non-B3</a>
+        <a href="#pasal455" class="nav-item">Pasal 455 — Penyimpanan Limbah Non-B3</a>
+        <a href="#pasal459" class="nav-item">Pasal 459 — Pemanfaatan Limbah Non-B3</a>
+        <a href="#pasal465" class="nav-item">Pasal 465 — Penimbunan Limbah Non-B3</a>
+        <a href="#pasal468" class="nav-item">Pasal 468 — Penanganan &amp; Pemulihan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB VIII — Dana Penjaminan Pemulihan LH</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal471" class="nav-item">Pasal 471 — Penggunaan Dana Penjaminan</a>
+        <a href="#pasal472" class="nav-item">Pasal 472 — Kewajiban Penyediaan Dana</a>
+        <a href="#pasal473" class="nav-item">Pasal 473 — Bentuk Dana Penjaminan</a>
+        <a href="#pasal475" class="nav-item">Pasal 475 — Pencantuman dalam Persetujuan</a>
+        <a href="#pasal478" class="nav-item">Pasal 478 — Tanggung Jawab Tetap</a>
+        <a href="#pasal479" class="nav-item">Pasal 479 — Ketentuan Lebih Lanjut</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB IX — Sistem Informasi LH</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal480" class="nav-item">Pasal 480 — Sistem Informasi LH</a>
+        <a href="#pasal481" class="nav-item">Pasal 481 — Informasi Dokumen LH</a>
+        <a href="#pasal482" class="nav-item">Pasal 482 — Penggunaan Sistem Informasi</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB X — Pembinaan dan Pengawasan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab10-bg1" class="nav-bagian">▸ Bg. 1: Pembinaan</a>
+        <a href="#pasal490" class="nav-item">Pasal 490 — Pembinaan oleh Menteri</a>
+        <a href="#bab10-bg2" class="nav-bagian">▸ Bg. 2: Pengawasan</a>
+        <a href="#pasal492" class="nav-item">Pasal 492 — Kewajiban Pengawasan</a>
+        <a href="#pasal494" class="nav-item">Pasal 494 — Pejabat Pengawas LH</a>
+        <a href="#bab10-bg3" class="nav-bagian">▸ Bg. 3: Wewenang PPLH</a>
+        <a href="#pasal495" class="nav-item">Pasal 495 — Wewenang Pejabat Pengawas</a>
+        <a href="#bab10-bg4" class="nav-bagian">▸ Bg. 4: Pelaksanaan Pengawasan</a>
+        <a href="#pasal496" class="nav-item">Pasal 496 — Cara Pengawasan</a>
+        <a href="#bab10-bg5" class="nav-bagian">▸ Bg. 5: Pengawasan Lapis Kedua</a>
+        <a href="#pasal502" class="nav-item">Pasal 502 — Pengawasan Lapis Kedua</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB XI — Sanksi Administratif</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#bab11-bg1" class="nav-bagian">▸ Bg. 1: Wewenang Penerapan Sanksi</a>
+        <a href="#pasal505" class="nav-item">Pasal 505 — Kewajiban Penerapan Sanksi</a>
+        <a href="#pasal506" class="nav-item">Pasal 506 — Kewenangan Menteri/Gubernur</a>
+        <a href="#bab11-bg2" class="nav-bagian">▸ Bg. 2: Penerapan Sanksi Administratif</a>
+        <a href="#pasal508" class="nav-item">Pasal 508 — Jenis Sanksi Administratif</a>
+        <a href="#pasal509" class="nav-item">Pasal 509 — Dasar Penerapan Sanksi</a>
+        <a href="#pasal515" class="nav-item">Pasal 515 — Teguran Tertulis</a>
+        <a href="#pasal516" class="nav-item">Pasal 516 — Paksaan Pemerintah</a>
+        <a href="#pasal521" class="nav-item">Pasal 521 — Denda Administratif</a>
+        <a href="#pasal523" class="nav-item">Pasal 523 — Pembekuan Perizinan</a>
+        <a href="#pasal524" class="nav-item">Pasal 524 — Pencabutan Perizinan</a>
+        <a href="#pasal526" class="nav-item">Pasal 526 — Ketentuan Lanjut</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB XII — Ketentuan Peralihan</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal527" class="nav-item">Pasal 527 — Ketentuan Peralihan</a>
+      </div>
+    </div>
+
+    <div class="nav-bab">
+      <div class="nav-bab-header" onclick="toggleBab(this)">
+        <span>BAB XIII — Ketentuan Penutup</span><span class="chevron">▶</span>
+      </div>
+      <div class="nav-items">
+        <a href="#pasal528" class="nav-item">Pasal 528 — Peraturan Tetap Berlaku</a>
+        <a href="#pasal529" class="nav-item">Pasal 529 — Peraturan Dicabut</a>
+        <a href="#pasal530" class="nav-item">Pasal 530 — Ketentuan PP 46/2017</a>
+        <a href="#pasal531" class="nav-item">Pasal 531 — Ketentuan Transisi</a>
+        <a href="#pasal534" class="nav-item">Pasal 534 — Mulai Berlaku</a>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main id="main">
+
+  <div class="doc-header">
+    <div class="kop">Presiden Republik Indonesia</div>
+    <div class="title-main">PERATURAN PEMERINTAH<br>REPUBLIK INDONESIA</div>
+    <div class="nomor-badge">NOMOR 22 TAHUN 2021</div>
+    <h2>TENTANG<br>PENYELENGGARAAN PERLINDUNGAN DAN PENGELOLAAN<br>LINGKUNGAN HIDUP</h2>
+    <div class="doc-stats">
+      <div class="doc-stat"><div class="num">13</div><div class="lbl">BAB</div></div>
+      <div class="doc-stat"><div class="num">534</div><div class="lbl">Pasal</div></div>
+      <div class="doc-stat"><div class="num">483</div><div class="lbl">Halaman</div></div>
+      <div class="doc-stat"><div class="num">2021</div><div class="lbl">Tahun</div></div>
+    </div>
+  </div>
+
+  <div class="content-body" id="searchable-content">
+
+    <!-- PEMBUKAAN -->
+    <div class="bab-block" id="pembukaan">
+      <div class="bab-title">
+        <span class="bab-number">Pembukaan</span>
+        DENGAN RAHMAT TUHAN YANG MAHA ESA — PRESIDEN REPUBLIK INDONESIA
+      </div>
+      <div class="bab-content">
+
+        <div class="preambule-block" id="konsideran">
+          <div class="preambule-row">
+            <div class="preambule-key">Menimbang</div>
+            <div class="preambule-val">bahwa untuk melaksanakan ketentuan Pasal 22 dan Pasal 185 huruf b Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja, perlu menetapkan Peraturan Pemerintah tentang Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup;</div>
+          </div>
+          <div class="preambule-row">
+            <div class="preambule-key">Mengingat</div>
+            <div class="preambule-val">
+              <div>
+                <div class="mengingat-item"><span class="mengingat-num">1.</span><span>Pasal 5 ayat (2) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945;</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">2.</span><span>Undang-Undang Nomor 32 Tahun 2009 tentang Perlindungan dan Pengelolaan Lingkungan Hidup sebagaimana telah diubah dengan Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja (Lembaran Negara Tahun 2020 Nomor 245, Tambahan Lembaran Negara Nomor 6573);</span></div>
+                <div class="mengingat-item"><span class="mengingat-num">3.</span><span>Undang-Undang Nomor 11 Tahun 2020 tentang Cipta Kerja (Lembaran Negara Republik Indonesia Tahun 2020 Nomor 245, Tambahan Lembaran Negara Republik Indonesia Nomor 6573);</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="memutuskan-block" id="memutuskan">
+          <div class="label">MEMUTUSKAN</div>
+          <p>Menetapkan : PERATURAN PEMERINTAH TENTANG PENYELENGGARAAN PERLINDUNGAN DAN PENGELOLAAN LINGKUNGAN HIDUP.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB I -->
+    <div class="bab-block" id="bab1">
+      <div class="bab-title">
+        <span class="bab-number">BAB I</span>
+        KETENTUAN UMUM
+        <span class="pasal-range">Pasal 1 – 2</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal1">
+          <div class="pasal-heading">Pasal 1 — Definisi (103 Ketentuan)</div>
+          <p class="pasal-text">Dalam Peraturan Pemerintah ini yang dimaksud dengan:</p>
+          <div class="list-num">
+            <div class="list-item"><span class="list-key">1.</span><span><strong>Lingkungan Hidup</strong> adalah kesatuan ruang dengan semua benda, daya, keadaan, dan makhluk hidup, termasuk manusia dan perilakunya, yang mempengaruhi alam itu sendiri, kelangsungan perikehidupan, dan kesejahteraan manusia serta makhluk hidup lain.</span></div>
+            <div class="list-item"><span class="list-key">2.</span><span><strong>Perlindungan dan Pengelolaan Lingkungan Hidup</strong> adalah upaya sistematis dan terpadu yang dilakukan untuk melestarikan fungsi Lingkungan Hidup dan mencegah terjadinya pencemaran dan/atau kerusakan Lingkungan Hidup yang meliputi perencanaan, pemanfaatan, pengendalian, pemeliharaan, pengawasan, dan penegakan hukum.</span></div>
+            <div class="list-item"><span class="list-key">3.</span><span><strong>Perizinan Berusaha</strong> adalah legalitas yang diberikan kepada Pelaku Usaha untuk memulai dan menjalankan usaha dan/atau kegiatannya.</span></div>
+            <div class="list-item"><span class="list-key">4.</span><span><strong>Persetujuan Lingkungan</strong> adalah Keputusan Kelayakan Lingkungan Hidup atau Pernyataan Kesanggupan Pengelolaan Lingkungan Hidup yang telah mendapatkan persetujuan dari Pemerintah Pusat atau Pemerintah Daerah.</span></div>
+            <div class="list-item"><span class="list-key">5.</span><span><strong>Amdal</strong> (Analisis Mengenai Dampak Lingkungan Hidup) adalah Kajian dampak penting pada Lingkungan Hidup dari suatu usaha dan/atau kegiatan yang direncanakan, untuk digunakan sebagai prasyarat pengambilan keputusan tentang penyelenggaraan usaha dan/atau kegiatan serta termuat dalam Perizinan Berusaha atau persetujuan Pemerintah Pusat atau Pemerintah Daerah.</span></div>
+            <div class="list-item"><span class="list-key">6.</span><span><strong>UKL-UPL</strong> (Upaya Pengelolaan Lingkungan Hidup dan Upaya Pemantauan Lingkungan Hidup) adalah rangkaian proses pengelolaan dan pemantauan Lingkungan Hidup yang dituangkan dalam bentuk standar untuk digunakan sebagai prasyarat pengambilan keputusan serta termuat dalam Perizinan Berusaha atau persetujuan Pemerintah Pusat atau Pemerintah Daerah.</span></div>
+            <div class="list-item"><span class="list-key">7.</span><span><strong>Keputusan Kelayakan Lingkungan Hidup</strong> adalah keputusan yang menyatakan kelayakan Lingkungan Hidup dari suatu rencana Usaha dan/atau Kegiatan yang wajib dilengkapi dengan Amdal.</span></div>
+            <div class="list-item"><span class="list-key">8.</span><span><strong>Pernyataan Kesanggupan Pengelolaan Lingkungan Hidup</strong> adalah standar pengelolaan Lingkungan Hidup dan pemantauan Lingkungan Hidup dari penanggung jawab Usaha dan/atau Kegiatan yang telah mendapatkan persetujuan dari Pemerintah Pusat atau Pemerintah Daerah bagi Usaha dan/atau Kegiatan yang wajib UKL-UPL.</span></div>
+            <div class="list-item"><span class="list-key">9.</span><span><strong>SPPL</strong> (Surat Pernyataan Kesanggupan Pengelolaan dan Pemantauan Lingkungan Hidup) adalah pernyataan kesanggupan dari penanggung jawab Usaha dan/atau Kegiatan untuk melakukan pengelolaan dan pemantauan Lingkungan Hidup atas Dampak Lingkungan Hidup dari Usaha dan/atau Kegiatannya di luar Usaha dan/atau Kegiatan yang wajib Amdal atau UKL-UPL.</span></div>
+            <div class="list-item"><span class="list-key">10.</span><span><strong>Persetujuan Pemerintah</strong> adalah bentuk keputusan yang diterbitkan oleh Pemerintah Pusat atau Pemerintah Daerah sebagai dasar pelaksanaan kegiatan yang dilakukan oleh Instansi Pemerintah.</span></div>
+            <div class="list-item"><span class="list-key">11.</span><span><strong>Usaha dan/atau Kegiatan</strong> adalah segala bentuk aktivitas yang dapat menimbulkan perubahan terhadap rona Lingkungan Hidup serta menyebabkan dampak terhadap Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">12.</span><span><strong>Dampak Lingkungan Hidup</strong> adalah pengaruh perubahan pada Lingkungan Hidup yang diakibatkan oleh suatu Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">13.</span><span><strong>Dampak Penting</strong> adalah perubahan Lingkungan Hidup yang sangat mendasar yang diakibatkan oleh suatu Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">14.</span><span><strong>Formulir UKL-UPL</strong> adalah isian ruang lingkup UKL-UPL.</span></div>
+            <div class="list-item"><span class="list-key">15.</span><span><strong>Formulir Kerangka Acuan</strong> adalah isian ruang lingkup kajian analisis Dampak Lingkungan Hidup yang merupakan hasil pelingkupan.</span></div>
+            <div class="list-item"><span class="list-key">16.</span><span><strong>Andal</strong> (Analisis Dampak Lingkungan Hidup) adalah telaahan secara cermat dan mendalam tentang Dampak Penting suatu rencana Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">17.</span><span><strong>RKL</strong> (Rencana Pengelolaan Lingkungan Hidup) adalah upaya penanganan dampak terhadap Lingkungan Hidup yang ditimbulkan akibat dari rencana Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">18.</span><span><strong>RKL Rinci</strong> adalah upaya penanganan dampak terhadap Lingkungan Hidup yang ditimbulkan akibat dari rencana Usaha dan/atau Kegiatan yang berada dalam kawasan yang sudah memiliki Amdal kawasan.</span></div>
+            <div class="list-item"><span class="list-key">19.</span><span><strong>RPL</strong> (Rencana Pemantauan Lingkungan Hidup) adalah upaya pemantauan komponen Lingkungan Hidup yang terkena dampak akibat dari rencana Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">20.</span><span><strong>RPL Rinci</strong> adalah upaya pemantauan komponen Lingkungan Hidup yang terkena dampak akibat dari rencana Usaha dan/atau Kegiatan yang berada dalam Kawasan yang sudah memilki Amdal kawasan.</span></div>
+            <div class="list-item"><span class="list-key">21.</span><span><strong>Lembaga Uji Kelayakan Lingkungan Hidup</strong> adalah lembaga yang dibentuk oleh Pemerintah Pusat untuk melakukan uji kelayakan.</span></div>
+            <div class="list-item"><span class="list-key">22.</span><span><strong>Tim Uji Kelayakan Lingkungan Hidup</strong> adalah tim yang dibentuk oleh Lembaga Uji Kelayakan Lingkungan Hidup yang berkedudukan di pusat dan daerah untuk melakukan uji kelayakan.</span></div>
+            <div class="list-item"><span class="list-key">23.</span><span><strong>Sistem Informasi Lingkungan Hidup</strong> adalah sistem kombinasi dari teknologi informasi dan aktivitas orang yang menggunakan teknologi untuk mendukung operasi dan manajemen Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">24.</span><span><strong>Pelaku Usaha</strong> adalah orang perseorangan atau badan usaha yang melakukan Usaha dan/atau Kegiatan pada bidang tertentu.</span></div>
+            <div class="list-item"><span class="list-key">25.</span><span><strong>Instansi Pemerintah</strong> adalah kementerian/lembaga pemerintah nonkementerian/instansi pemerintah daerah yang melakukan kegiatan pada bidang tertentu.</span></div>
+            <div class="list-item"><span class="list-key">26.</span><span><strong>DELH</strong> (Dokumen Evaluasi Lingkungan Hidup) adalah dokumen evaluasi dampak Penting pada Lingkungan Hidup terhadap Usaha dan/atau Kegiatan yang telah berjalan untuk digunakan sebagai instrumen perlindungan dan pengelolaan Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">27.</span><span><strong>DPLH</strong> (Dokumen Pengelolaan Lingkungan Hidup) adalah dokumen evaluasi dampak tidak penting pada Lingkungan Hidup terhadap Usaha dan/atau Kegiatan yang telah berjalan untuk digunakan sebagai instrumen perlindungan dan Pengelolaan Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">28.</span><span><strong>Pencemaran Lingkungan Hidup</strong> adalah masuk atau dimasukkannya makhluk hidup, zat, energi, dan/atau komponen lain ke dalam Lingkungan Hidup oleh kegiatan manusia sehingga melampaui baku mutu Lingkungan Hidup yang telah ditetapkan.</span></div>
+            <div class="list-item"><span class="list-key">29.</span><span><strong>Kerusakan Lingkungan Hidup</strong> adalah perubahan langsung dan/atau tidak langsung terhadap sifat fisik, kimia, dan/atau hayati Lingkungan Hidup yang melampaui Kriteria Baku Kerusakan Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">30.</span><span><strong>Perusakan Lingkungan Hidup</strong> adalah tindakan orang yang menimbulkan perubahan langsung atau tidak langsung terhadap sifat fisik, kimia, dan/atau hayati Lingkungan Hidup sehingga melampaui Kriteria Baku Kerusakan Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">32.</span><span><strong>Perlindungan dan Pengelolaan Mutu Air</strong> adalah upaya sistematis dan terpadu yang dilakukan untuk menjaga Mutu Air.</span></div>
+            <div class="list-item"><span class="list-key">33.</span><span><strong>DAS</strong> (Daerah Aliran Sungai) adalah suatu wilayah daratan yang merupakan satu kesatuan dengan sungai dan anak sungainya, yang berfungsi menampung, menyimpan, dan mengalirkan air yang berasal dari curah hujan ke danau atau ke laut secara alamiah.</span></div>
+            <div class="list-item"><span class="list-key">34.</span><span><strong>CAT</strong> (Cekungan Air Tanah) adalah suatu wilayah yang dibatasi oleh batas hidrogeologis, tempat semua kejadian hidrogeologis berlangsung.</span></div>
+            <div class="list-item"><span class="list-key">35.</span><span><strong>Badan Air</strong> adalah air yang terkumpul dalam suatu wadah baik alami maupun buatan yang mempunyai tabiat hidrologikal, wujud fisik, kimiawi, dan hayati.</span></div>
+            <div class="list-item"><span class="list-key">36.</span><span><strong>Pencemaran Air</strong> adalah masuk atau dimasukkannya makhluk hidup, zat, energi, dan/atau komponen lain ke dalam air oleh kegiatan manusia sehingga melampaui Baku Mutu Air yang telah ditetapkan.</span></div>
+            <div class="list-item"><span class="list-key">37.</span><span><strong>Mutu Air</strong> adalah ukuran kondisi air pada waktu dan tempat tertentu yang diukur dan/atau diuji berdasarkan parameter dan metode tertentu.</span></div>
+            <div class="list-item"><span class="list-key">38.</span><span><strong>Baku Mutu Air</strong> adalah ukuran batas atau kadar makhluk hidup, zat, energi, atau komponen yang ada atau harus ada dan/atau unsur pencemar yang ditenggang keberadaannya di dalam air.</span></div>
+            <div class="list-item"><span class="list-key">40.</span><span><strong>Air Limbah</strong> adalah air yang berasal dari suatu proses dalam suatu kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">41.</span><span><strong>Baku Mutu Air Limbah</strong> adalah ukuran batas atau kadar unsur pencemar dan/atau jumlah unsur pencemar yang ditenggang keberadaannya dalam Air Limbah yang akan dibuang atau dilepas ke dalam media air dan tanah.</span></div>
+            <div class="list-item"><span class="list-key">42.</span><span><strong>Udara Ambien</strong> adalah udara bebas di permukaan bumi pada lapisan troposfir yang berada di dalam wilayah yurisdiksi Republik Indonesia.</span></div>
+            <div class="list-item"><span class="list-key">44.</span><span><strong>Perlindungan dan Pengelolaan Mutu Udara</strong> adalah upaya sistematis dan terpadu yang dilakukan untuk menjaga Mutu Udara.</span></div>
+            <div class="list-item"><span class="list-key">45.</span><span><strong>RPPMU</strong> (Rencana Perlindungan dan Pengelolaan Mutu Udara) adalah perencanaan yang memuat potensi, masalah, dan upaya Perlindungan dan Pengelolaan Mutu Udara dalam kurun waktu tertentu.</span></div>
+            <div class="list-item"><span class="list-key">46.</span><span><strong>WPPMU</strong> (Wilayah Perlindungan dan Pengelolaan Mutu Udara) adalah wilayah yang dibagi dalam beberapa area untuk perencanaan Perlindungan dan Pengelolaan Mutu Udara.</span></div>
+            <div class="list-item"><span class="list-key">49.</span><span><strong>Pencemaran Udara</strong> adalah masuk atau dimasukkannya zat, energi, dan/atau komponen lainnya ke dalam Udara Ambien oleh kegiatan manusia sehingga melampaui Baku Mutu Udara Ambien yang telah ditetapkan.</span></div>
+            <div class="list-item"><span class="list-key">54.</span><span><strong>Perlindungan dan Pengelolaan Mutu Laut</strong> adalah upaya sistematis dan terpadu yang dilakukan untuk menjaga Mutu Laut.</span></div>
+            <div class="list-item"><span class="list-key">59.</span><span><strong>Kriteria Baku Kerusakan Lingkungan Hidup</strong> adalah ukuran batas perubahan sifat fisik, kimia, dan/atau hayati Lingkungan Hidup yang dapat ditenggang oleh Lingkungan Hidup untuk dapat tetap melestarikan fungsinya.</span></div>
+            <div class="list-item"><span class="list-key">64.</span><span><strong>Terumbu Karang</strong> adalah suatu ekosistem yang hidup di dasar perairan dan berupa bentukan batuan kapur terdiri dari polip-polip karang dan organisme-organisme kecil lain yang hidup dalam koloni.</span></div>
+            <div class="list-item"><span class="list-key">65.</span><span><strong>Mangrove</strong> adalah vegetasi pantai yang memiliki morfologi khas dengan sistem perakaran yang mampu beradaptasi pada daerah pasang surut dengan substrat lumpur atau lumpur berpasir.</span></div>
+            <div class="list-item"><span class="list-key">66.</span><span><strong>Padang Lamun</strong> adalah hamparan lamun yang hidup dan tumbuh di laut dangkal, mempunyai akar, rimpang, daun, bunga dan buah, dan berkembang biak secara generatif dan vegetatif.</span></div>
+            <div class="list-item"><span class="list-key">67.</span><span><strong>B3</strong> (Bahan Berbahaya dan Beracun) adalah zat, energi, dan/atau komponen lain yang karena sifat, konsentrasi, dan/atau jumlahnya, baik secara langsung maupun tidak langsung, dapat mencemarkan dan/atau merusak Lingkungan Hidup, dan/atau membahayakan Lingkungan Hidup, kesehatan, serta kelangsungan hidup manusia dan makhluk hidup lain.</span></div>
+            <div class="list-item"><span class="list-key">68.</span><span><strong>Limbah</strong> adalah sisa suatu Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">69.</span><span><strong>Limbah B3</strong> (Limbah Bahan Berbahaya dan Beracun) adalah sisa suatu usaha dan/atau kegiatan yang mengandung B3.</span></div>
+            <div class="list-item"><span class="list-key">70.</span><span><strong>Limbah NonB3</strong> adalah sisa suatu Usaha dan/atau Kegiatan yang tidak menunjukkan karakteristik Limbah B3.</span></div>
+            <div class="list-item"><span class="list-key">78.</span><span><strong>Pengelolaan Limbah B3</strong> adalah kegiatan yang meliputi pengurangan, penyimpanan, pengumpulan, pengangkutan, pemanfaatan, pengolahan, dan/atau penimbunan.</span></div>
+            <div class="list-item"><span class="list-key">79.</span><span><strong>Dumping (Pembuangan)</strong> adalah kegiatan membuang, menempatkan, dan/atau memasukkan limbah dan/atau bahan dalam jumlah, konsentrasi, waktu, dan lokasi tertentu dengan persyaratan tertentu ke media Lingkungan Hidup tertentu.</span></div>
+            <div class="list-item"><span class="list-key">93.</span><span><strong>Persetujuan Teknis</strong> adalah persetujuan dari pemerintah atau Pemerintah Daerah berupa ketentuan mengenai standar Perlindungan dan Pengelolaan Lingkungan Hidup dan/atau analisis mengenai dampak lalu lintas Usaha dan/atau Kegiatan sesuai peraturan perundang-undangan.</span></div>
+            <div class="list-item"><span class="list-key">94.</span><span><strong>SLO</strong> (Surat Kelayakan Operasional) adalah surat yang memuat pernyataan pemenuhan mengenai standar Perlindungan dan Pengelolaan Lingkungan Hidup Usaha dan/atau Kegiatan.</span></div>
+            <div class="list-item"><span class="list-key">95.</span><span><strong>Setiap Orang</strong> adalah orang perseorangan atau badan usaha, baik yang berbadan hukum maupun yang tidak berbadan hukum.</span></div>
+            <div class="list-item"><span class="list-key">97.</span><span><strong>Pejabat Pengawas Lingkungan Hidup</strong> (Pejabat Fungsional Pengawas Lingkungan Hidup) adalah pegawai negeri sipil yang diberi tugas, tanggung jawab, wewenang, dan hak secara penuh oleh pejabat yang berwenang untuk melakukan pengawasan dan/atau penegakan hukum Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">98.</span><span><strong>Pengawasan</strong> adalah kegiatan yang dilaksanakan secara langsung atau tidak langsung oleh pejabat pengawas Lingkungan Hidup untuk mengetahui dan/atau menetapkan tingkat ketaatan penanggung jawab Usaha dan/atau Kegiatan atas ketentuan yang ditetapkan dalam Perizinan Berusaha atau Persetujuan Pemerintah serta peraturan perundang-undangan di bidang perlindungan dan Pengelolaan Lingkungan Hidup.</span></div>
+            <div class="list-item"><span class="list-key">99.</span><span><strong>Sanksi Administratif</strong> adalah perangkat sarana hukum administrasi yang bersifat pembebanan kewajiban/perintah dan/atau penarikan kembali keputusan tata usaha negara yang dikenakan kepada penanggung jawab Usaha dan/atau Kegiatan atas dasar ketidaktaatan terhadap ketentuan yang ditetapkan dalam peraturan perundang-undangan di bidang Perlindungan dan Pengelolaan Lingkungan Hidup serta Perizinan Berusaha atau Persetujuan Pemerintah.</span></div>
+            <div class="list-item"><span class="list-key">100.</span><span><strong>Pemerintah Pusat</strong> yang selanjutnya disebut Pemerintah adalah Presiden Republik Indonesia yang memegang kekuasaan pemerintahan Negara Republik Indonesia yang dibantu oleh Wakil Presiden dan menteri.</span></div>
+            <div class="list-item"><span class="list-key">102.</span><span><strong>Pemerintah Daerah</strong> adalah kepala daerah sebagai unsur penyelenggara pemerintahan daerah yang memimpin pelaksanaan urusan pemerintahan yang menjadi kewenangan daerah otonom.</span></div>
+            <div class="list-item"><span class="list-key">103.</span><span><strong>Menteri</strong> adalah menteri yang menyelenggarakan urusan pemerintahan di bidang Perlindungan dan Pengelolaan Lingkungan Hidup.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal2">
+          <div class="pasal-heading">Pasal 2 — Ruang Lingkup</div>
+          <p class="pasal-text">Peraturan Pemerintah ini mengatur mengenai:</p>
+          <div class="scope-grid">
+            <div class="scope-item"><span class="scope-key">a.</span><span>Persetujuan Lingkungan</span></div>
+            <div class="scope-item"><span class="scope-key">b.</span><span>Perlindungan dan Pengelolaan Mutu Air</span></div>
+            <div class="scope-item"><span class="scope-key">c.</span><span>Perlindungan dan Pengelolaan Mutu Udara</span></div>
+            <div class="scope-item"><span class="scope-key">d.</span><span>Perlindungan dan Pengelolaan Mutu Laut</span></div>
+            <div class="scope-item"><span class="scope-key">e.</span><span>Pengendalian Kerusakan Lingkungan Hidup</span></div>
+            <div class="scope-item"><span class="scope-key">f.</span><span>Pengelolaan Limbah B3 dan Pengelolaan Limbah nonB3</span></div>
+            <div class="scope-item"><span class="scope-key">g.</span><span>Dana Penjaminan untuk Pemulihan Fungsi Lingkungan Hidup</span></div>
+            <div class="scope-item"><span class="scope-key">h.</span><span>Sistem Informasi Lingkungan Hidup</span></div>
+            <div class="scope-item"><span class="scope-key">i.</span><span>Pembinaan dan Pengawasan</span></div>
+            <div class="scope-item"><span class="scope-key">j.</span><span>Pengenaan Sanksi Administratif</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB II -->
+    <div class="bab-block" id="bab2">
+      <div class="bab-title">
+        <span class="bab-number">BAB II</span>
+        PERSETUJUAN LINGKUNGAN
+        <span class="pasal-range">Pasal 3 – 106</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab2-bg1"><span class="bagian-number">Bagian Kesatu</span>Umum</div>
+
+        <div class="pasal-block" id="pasal3">
+          <div class="pasal-heading">Pasal 3 — Kewajiban Persetujuan Lingkungan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Persetujuan Lingkungan wajib dimiliki oleh setiap Usaha dan/atau Kegiatan yang memiliki Dampak Penting atau tidak penting terhadap lingkungan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Persetujuan Lingkungan diberikan kepada Pelaku Usaha atau Instansi Pemerintah.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Persetujuan Lingkungan menjadi prasyarat penerbitan Perizinan Berusaha atau Persetujuan Pemerintah.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Persetujuan Lingkungan dilakukan melalui: (a) penyusunan Amdal dan uji kelayakan Amdal; atau (b) penyusunan Formulir UKL-UPL dan pemeriksaan Formulir UKL-UPL.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Persetujuan Lingkungan berakhir bersamaan dengan berakhirnya Perizinan Berusaha atau Persetujuan Pemerintah.</span></div>
+          <div class="ayat"><span class="ayat-num">(6)</span><span class="ayat-text">Dalam hal Perizinan Berusaha berakhir dan tidak terjadi perubahan Usaha dan/atau Kegiatan, perpanjangan Perizinan Berusaha dapat menggunakan dasar Persetujuan Lingkungan yang eksisting.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal4">
+          <div class="pasal-heading">Pasal 4 — Jenis Dokumen Lingkungan Hidup</div>
+          <p class="pasal-text">Setiap rencana Usaha dan/atau Kegiatan yang berdampak terhadap Lingkungan Hidup wajib memiliki:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>Amdal;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>UKL-UPL; atau</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>SPPL.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal5">
+          <div class="pasal-heading">Pasal 5 — Kewajiban Amdal</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Amdal wajib dimiliki bagi setiap rencana Usaha dan/atau Kegiatan yang memiliki Dampak Penting terhadap Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Rencana Usaha dan/atau Kegiatan yang wajib memiliki Amdal meliputi: (a) jenis rencana Usaha dan/atau Kegiatan yang besaran/skalanya wajib Amdal; dan/atau (b) jenis rencana Usaha dan/atau Kegiatan yang lokasinya dilakukan di dalam dan/atau berbatasan langsung dengan kawasan lindung.</span></div>
+          <div class="ayat"><span class="ayat-num">(7)</span><span class="ayat-text">Kawasan lindung sebagaimana dimaksud pada ayat (2) huruf b tercantum dalam Lampiran I yang merupakan bagian tidak terpisahkan dari Peraturan Pemerintah ini.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal6">
+          <div class="pasal-heading">Pasal 6 — Kewajiban UKL-UPL</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">UKL-UPL wajib dimiliki bagi Usaha dan/atau Kegiatan yang tidak memiliki Dampak Penting terhadap Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Rencana Usaha dan/atau Kegiatan yang wajib memiliki UKL-UPL meliputi: (a) jenis rencana Usaha dan/atau Kegiatan yang tidak memiliki Dampak Penting; (b) jenis rencana Usaha dan/atau Kegiatan yang besaran/skalanya di bawah kriteria wajib Amdal; dan/atau (c) jenis Usaha dan/atau Kegiatan yang menggunakan bahan, memproduksi jumlah, dan/atau memiliki luas tertentu.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal7">
+          <div class="pasal-heading">Pasal 7 — SPPL</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">SPPL diwajibkan bagi Usaha dan/atau Kegiatan yang tidak wajib Amdal dan tidak wajib UKL-UPL.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">SPPL bagi Usaha dan/atau Kegiatan yang dilakukan oleh Pelaku Usaha dilakukan sesuai dengan jenis rencana Usaha dan/atau Kegiatan yang tidak wajib Amdal dan tidak wajib UKL-UPL.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg2"><span class="bagian-number">Bagian Kedua</span>Penyusunan Amdal dan Uji Kelayakan Amdal</div>
+
+        <div class="pasal-block" id="pasal21">
+          <div class="pasal-heading">Pasal 21 — Penyusunan Amdal</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Amdal disusun oleh penanggung jawab Usaha dan/atau Kegiatan pada tahap perencanaan suatu Usaha dan/atau Kegiatan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Lokasi rencana Usaha dan/atau Kegiatan wajib sesuai dengan rencana tata ruang.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Dalam hal lokasi rencana Usaha dan/atau Kegiatan tidak sesuai dengan rencana tata ruang, dokumen Amdal tidak dapat dinilai dan dikembalikan kepada penanggung jawab Usaha dan/atau Kegiatan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal22">
+          <div class="pasal-heading">Pasal 22 — Pendekatan Studi Amdal</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Dalam menyusun Amdal, penanggung jawab Usaha dan/atau Kegiatan menggunakan pendekatan studi: (a) tunggal; (b) terpadu; atau (c) kawasan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pendekatan studi tunggal dilakukan apabila penanggung jawab Usaha dan/atau Kegiatan merencanakan untuk melakukan 1 (satu) jenis Usaha dan/atau Kegiatan yang kewenangan pembinaannya berada di bawah 1 (satu) kementerian/lembaga/organisasi perangkat daerah.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg3"><span class="bagian-number">Bagian Ketiga</span>Penyusunan dan Pemeriksaan Formulir UKL-UPL</div>
+
+        <div class="pasal-block" id="pasal52">
+          <div class="pasal-heading">Pasal 52 — Pengisian Formulir UKL-UPL</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Formulir UKL-UPL diisi oleh penanggung jawab Usaha dan/atau Kegiatan sesuai dengan jenis usahanya.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Formulir UKL-UPL sebagaimana dimaksud pada ayat (1) terdiri atas: (a) Formulir UKL-UPL standar spesifik; dan (b) Formulir UKL-UPL standar.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg4"><span class="bagian-number">Bagian Keempat</span>Pengisian SPPL</div>
+
+        <div class="pasal-block" id="pasal65">
+          <div class="pasal-heading">Pasal 65 — SPPL</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">SPPL bagi Usaha yang dilakukan oleh Pelaku Usaha dilakukan dengan mengisi formulir SPPL yang disampaikan dalam sistem Perizinan Berusaha secara elektronik.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg5"><span class="bagian-number">Bagian Kelima</span>Penyusun Amdal</div>
+
+        <div class="pasal-block" id="pasal67">
+          <div class="pasal-heading">Pasal 67 — Tim Penyusun Amdal</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penyusunan Amdal dilaksanakan oleh tim penyusun Amdal yang ditetapkan oleh penanggung jawab Usaha dan/atau Kegiatan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Tim penyusun Amdal terdiri atas: (a) ketua tim penyusun Amdal; dan (b) anggota tim penyusun Amdal.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg6"><span class="bagian-number">Bagian Keenam</span>Pembentukan Lembaga Uji Kelayakan Lingkungan Hidup dan Tim Uji Kelayakan</div>
+
+        <div class="pasal-block" id="pasal76">
+          <div class="pasal-heading">Pasal 76 — Pembentukan Lembaga Uji Kelayakan LH</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri membentuk Lembaga Uji Kelayakan Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Lembaga Uji Kelayakan Lingkungan Hidup bertugas membentuk Tim Uji Kelayakan Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg7"><span class="bagian-number">Bagian Ketujuh</span>Ahli Bersertifikat Tim Uji Kelayakan Lingkungan Hidup</div>
+
+        <div class="pasal-block" id="pasal84">
+          <div class="pasal-heading">Pasal 84 — Ahli Bersertifikat</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri menetapkan ahli bersertifikat sebagai anggota Tim Uji Kelayakan Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Penetapan sebagaimana dimaksud pada ayat (1) dilakukan melalui mekanisme seleksi yang ditetapkan oleh Menteri.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg8"><span class="bagian-number">Bagian Kedelapan</span>Dokumen Evaluasi Lingkungan Hidup (DELH) dan Dokumen Pengelolaan Lingkungan Hidup (DPLH)</div>
+
+        <div class="pasal-block" id="pasal86">
+          <div class="pasal-heading">Pasal 86 — DELH dan DPLH</div>
+          <p class="pasal-text">Penanggung jawab Usaha dan/atau Kegiatan yang telah melaksanakan Usaha dan/atau Kegiatan sebelum berlakunya Peraturan Pemerintah ini dan memenuhi kriteria: (a) tidak memiliki dokumen Lingkungan Hidup atau dokumen Lingkungan Hidupnya tidak sesuai dengan ketentuan peraturan perundang-undangan; dan (b) lokasi Usaha dan/atau Kegiatan sesuai dengan rencana tata ruang, wajib memiliki DELH atau DPLH.</p>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg9"><span class="bagian-number">Bagian Kesembilan</span>Perubahan Persetujuan Lingkungan</div>
+
+        <div class="pasal-block" id="pasal89">
+          <div class="pasal-heading">Pasal 89 — Perubahan Persetujuan Lingkungan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penanggung jawab Usaha dan/atau Kegiatan wajib melakukan perubahan Persetujuan Lingkungan apabila Usaha dan/atau Kegiatannya yang telah memperoleh Persetujuan Lingkungan direncanakan untuk dilakukan perubahan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Perubahan Usaha dan/atau Kegiatan meliputi: (a) perubahan spesifikasi teknik, alat produksi, bahan baku, bahan penolong, dan/atau sarana yang berpengaruh terhadap Lingkungan Hidup; (b) penambahan kapasitas produksi; (c) perluasan lahan Usaha dan/atau Kegiatan; (d) perubahan waktu atau durasi operasi; (e) terjadinya perubahan kebijakan pemerintah yang ditujukan untuk peningkatan perlindungan dan Pengelolaan Lingkungan Hidup; (f) terjadi perubahan Lingkungan Hidup yang sangat mendasar akibat peristiwa alam; dan lainnya.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg10"><span class="bagian-number">Bagian Kesepuluh</span>Bantuan Pemerintah Terhadap Usaha Mikro dan Kecil</div>
+
+        <div class="pasal-block" id="pasal102">
+          <div class="pasal-heading">Pasal 102 — Bantuan Pemerintah untuk UMK</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemerintah Pusat dan Pemerintah Daerah membantu penyusunan Amdal bagi usaha mikro dan kecil yang memiliki Dampak Penting terhadap Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab2-bg11"><span class="bagian-number">Bagian Kesebelas</span>Pendanaan Persetujuan Lingkungan</div>
+
+        <div class="pasal-block" id="pasal103">
+          <div class="pasal-heading">Pasal 103 — Pendanaan Persetujuan Lingkungan</div>
+          <p class="pasal-text">Penanggung jawab Usaha dan/atau Kegiatan bertanggung jawab atas pendanaan penyusunan Amdal atau Formulir UKL-UPL. Ketentuan lebih lanjut mengenai: (a) pembentukan Lembaga Uji Kelayakan Lingkungan Hidup dan Tim Uji Kelayakan Lingkungan Hidup; dan (b) tata cara penilaian calon ahli bersertifikat, diatur dengan Peraturan Menteri.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB III -->
+    <div class="bab-block" id="bab3">
+      <div class="bab-title">
+        <span class="bab-number">BAB III</span>
+        PERLINDUNGAN DAN PENGELOLAAN MUTU AIR
+        <span class="pasal-range">Pasal 107 – 162</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab3-bg1"><span class="bagian-number">Bagian Kesatu</span>Ketentuan Umum</div>
+
+        <div class="pasal-block" id="pasal107">
+          <div class="pasal-heading">Pasal 107 — Lingkup Perlindungan dan Pengelolaan Mutu Air</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Perlindungan dan Pengelolaan Mutu Air dilakukan terhadap air yang berada di dalam Badan Air.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Badan Air meliputi: (a) Badan Air permukaan, meliputi: sungai, anak sungai, dan sejenisnya; danau dan sejenisnya; rawa dan lahan basah lainnya; dan/atau (b) akuifer.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Penyelenggaraan Perlindungan dan Pengelolaan Mutu Air meliputi: (a) perencanaan; (b) pemanfaatan; (c) pengendalian; dan (d) pemeliharaan.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab3-bg2"><span class="bagian-number">Bagian Kedua</span>Perencanaan</div>
+
+        <div class="pasal-block" id="pasal108">
+          <div class="pasal-heading">Pasal 108 — Perencanaan Perlindungan dan Pengelolaan Mutu Air</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Perencanaan Perlindungan dan Pengelolaan Mutu Air diselenggarakan dengan pendekatan DAS, CAT, dan ekosistemnya.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Perencanaan dilaksanakan melalui: (a) inventarisasi Badan Air; (b) penyusunan dan penetapan Baku Mutu Air; (c) perhitungan dan penetapan alokasi beban pencemar air; dan (d) penyusunan dan penetapan rencana Perlindungan dan Pengelolaan Mutu Air.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal109">
+          <div class="pasal-heading">Pasal 109 — Inventarisasi Badan Air</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Inventarisasi Badan Air dilaksanakan oleh Menteri.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Inventarisasi dilakukan dengan tahapan: (a) mengidentifikasi Badan Air; dan (b) melakukan karakterisasi Badan Air.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab3-bg3"><span class="bagian-number">Bagian Ketiga</span>Pemanfaatan</div>
+
+        <div class="pasal-block" id="pasal125">
+          <div class="pasal-heading">Pasal 125 — Pemanfaatan Air</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemanfaatan air pada Badan Air dilakukan berdasarkan rencana Perlindungan dan Pengelolaan Mutu Air sebagaimana dimaksud dalam Pasal 117.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab3-bg4"><span class="bagian-number">Bagian Keempat</span>Pengendalian</div>
+
+        <div class="pasal-block" id="pasal127">
+          <div class="pasal-heading">Pasal 127 — Pengendalian Pencemaran Air</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengendalian Pencemaran Air dilaksanakan sesuai dengan rencana Perlindungan dan Pengelolaan Mutu Air sebagaimana dimaksud dalam Pasal 117.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengendalian Pencemaran Air dilakukan melalui: (a) pencegahan Pencemaran Air; (b) penanggulangan Pencemaran Air; dan (c) pemulihan Mutu Air.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab3-bg6"><span class="bagian-number">Bagian Keenam</span>Hak, Kewajiban, dan Larangan</div>
+
+        <div class="pasal-block" id="pasal157">
+          <div class="pasal-heading">Pasal 157 — Hak Setiap Orang</div>
+          <p class="pasal-text">Setiap Orang berhak:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>mendapatkan informasi tentang rencana Perlindungan dan Pengelolaan Mutu Air yang ditetapkan oleh Menteri, gubernur, atau bupati/wali kota;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>mendapatkan pendidikan tentang sumber pencemar, bahaya Pencemaran Air, dan upaya Perlindungan dan Pengelolaan Mutu Air;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>berpartisipasi dalam memantau Mutu Air;</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>berpartisipasi dalam menjaga dan meningkatkan Mutu Air;</span></div>
+            <div class="list-item"><span class="list-key">e.</span><span>menyampaikan pengaduan dan mengajukan keberatan atas Pencemaran Air yang terjadi di lingkungannya; dan/atau</span></div>
+            <div class="list-item"><span class="list-key">f.</span><span>mendapatkan perlindungan hukum dalam rangka memperjuangkan Perlindungan dan Pengelolaan Mutu Air sebagai suatu upaya perjuangan atas hak Lingkungan Hidup yang baik dan sehat.</span></div>
+          </div>
+        </div>
+
+        <div class="bagian-title" id="bab3-bg7"><span class="bagian-number">Bagian Ketujuh</span>Peran Serta Masyarakat</div>
+
+        <div class="pasal-block" id="pasal161">
+          <div class="pasal-heading">Pasal 161 — Peran Serta Masyarakat</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Masyarakat berperan serta dalam Perlindungan dan Pengelolaan Mutu Air melalui pengawasan sosial, pemberian saran, pendapat, usul, keberatan, atau pengaduan.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB IV -->
+    <div class="bab-block" id="bab4">
+      <div class="bab-title">
+        <span class="bab-number">BAB IV</span>
+        PERLINDUNGAN DAN PENGELOLAAN MUTU UDARA
+        <span class="pasal-range">Pasal 163 – 220</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab4-bg1"><span class="bagian-number">Bagian Kesatu</span>Umum</div>
+
+        <div class="pasal-block" id="pasal163">
+          <div class="pasal-heading">Pasal 163 — Penyelenggaraan Perlindungan dan Pengelolaan Mutu Udara</div>
+          <p class="pasal-text">Penyelenggaraan Perlindungan dan Pengelolaan Mutu Udara meliputi: (a) perencanaan; (b) pemanfaatan; dan (c) pengendalian.</p>
+        </div>
+
+        <div class="bagian-title" id="bab4-bg2"><span class="bagian-number">Bagian Kedua</span>Perencanaan</div>
+
+        <div class="pasal-block" id="pasal164">
+          <div class="pasal-heading">Pasal 164 — Perencanaan Perlindungan dan Pengelolaan Mutu Udara</div>
+          <p class="pasal-text">Perencanaan Perlindungan dan Pengelolaan Mutu Udara dilakukan melalui: (a) inventarisasi udara; (b) penyusunan dan penetapan Baku Mutu Udara Ambien; (c) penyusunan dan penetapan WPPMU; dan (d) penyusunan dan penetapan RPPMU.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal165">
+          <div class="pasal-heading">Pasal 165 — Inventarisasi Udara</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Inventarisasi udara meliputi: (a) sumber Emisi dan/atau sumber gangguan; dan (b) Mutu Udara ambien.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Inventarisasi sumber Emisi dan/atau sumber gangguan dilakukan pada: (a) sumber tidak bergerak; dan (b) sumber bergerak.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab4-bg3"><span class="bagian-number">Bagian Ketiga</span>Pemanfaatan</div>
+
+        <div class="pasal-block" id="pasal186">
+          <div class="pasal-heading">Pasal 186 — Pemanfaatan WPPMU</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemanfaatan WPPMU dilaksanakan berdasarkan RPPMU nasional, RPPMU provinsi, dan RPPMU kabupaten/kota.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pemanfaatan WPPMU dapat dilakukan pada: (a) WPPMU kelas I; (b) WPPMU kelas II; dan (c) WPPMU kelas III.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab4-bg4"><span class="bagian-number">Bagian Keempat</span>Pengendalian</div>
+
+        <div class="pasal-block" id="pasal193">
+          <div class="pasal-heading">Pasal 193 — Pengendalian Pencemaran Udara</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengendalian Pencemaran Udara dilaksanakan oleh Menteri, gubernur, atau bupati/wali kota sesuai dengan kewenangannya, Pelaku Usaha, dan masyarakat.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengendalian Pencemaran Udara meliputi: (a) pencegahan Pencemaran Udara; (b) penanggulangan Pencemaran Udara; dan (c) pemulihan Mutu Udara.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB V -->
+    <div class="bab-block" id="bab5">
+      <div class="bab-title">
+        <span class="bab-number">BAB V</span>
+        PERLINDUNGAN DAN PENGELOLAAN MUTU LAUT
+        <span class="pasal-range">Pasal 220 – 271</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab5-bg1"><span class="bagian-number">Bagian Kesatu</span>Umum</div>
+
+        <div class="pasal-block" id="pasal220">
+          <div class="pasal-heading">Pasal 220 — Tujuan Penyelenggaraan Perlindungan dan Pengelolaan Mutu Laut</div>
+          <p class="pasal-text">Penyelenggaraan Perlindungan dan Pengelolaan Mutu Laut bertujuan:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>melindungi wilayah Negara Kesatuan Republik Indonesia dari Pencemaran dan/atau Kerusakan Laut;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>menjamin kelangsungan kehidupan makhluk hidup dan kelestarian Mutu Laut;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>menjamin pemenuhan dan perlindungan hak atas Mutu Laut sebagai bagian dari hak asasi manusia; dan</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>mencapai keserasian, keselarasan, dan keseimbangan Mutu Laut untuk mewujudkan pembangunan berkelanjutan.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal221">
+          <div class="pasal-heading">Pasal 221 — Kewenangan Penyelenggaraan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penyelenggaraan Perlindungan dan Pengelolaan Mutu Laut dilakukan oleh: (a) Menteri; atau (b) gubernur.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Menteri berwenang pada lokasi di atas 12 (dua belas) mil laut, kawasan strategis nasional, dan kawasan strategis nasional tertentu.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Gubernur berwenang pada lokasi di bawah 12 (dua belas) mil laut diukur dari garis pantai ke arah laut lepas, di luar Usaha dan/atau Kegiatan minyak dan gas bumi.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal222">
+          <div class="pasal-heading">Pasal 222 — Ruang Lingkup</div>
+          <p class="pasal-text">Penyelenggaraan Perlindungan dan Pengelolaan Mutu Laut meliputi: (a) perencanaan; (b) pemanfaatan; (c) pengendalian; dan (d) pemeliharaan.</p>
+        </div>
+
+        <div class="bagian-title" id="bab5-bg2"><span class="bagian-number">Bagian Kedua</span>Perencanaan</div>
+
+        <div class="pasal-block" id="pasal223">
+          <div class="pasal-heading">Pasal 223 — Perencanaan Perlindungan dan Pengelolaan Mutu Laut</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Perencanaan Perlindungan dan Pengelolaan Mutu Laut dilakukan oleh Menteri dan gubernur sesuai dengan kewenangannya melalui: (a) inventarisasi Mutu Laut; (b) penetapan Status Mutu Laut; dan (c) penyusunan rencana Perlindungan dan Pengelolaan Mutu Laut.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab5-bg3"><span class="bagian-number">Bagian Ketiga</span>Pemanfaatan</div>
+
+        <div class="pasal-block" id="pasal240">
+          <div class="pasal-heading">Pasal 240 — Pemanfaatan Laut</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemanfaatan dilaksanakan dengan memperhatikan: (a) keberlanjutan proses dan fungsi Laut; (b) keberlanjutan produktivitas Laut; dan (c) keselamatan, mutu hidup, dan kesejahteraan masyarakat.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab5-bg4"><span class="bagian-number">Bagian Keempat</span>Pengendalian</div>
+
+        <div class="pasal-block" id="pasal248">
+          <div class="pasal-heading">Pasal 248 — Pengendalian Pencemaran dan/atau Kerusakan Laut</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengendalian Pencemaran dan/atau Kerusakan Laut dilakukan oleh Menteri, gubernur, Pelaku Usaha, dan masyarakat.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengendalian Pencemaran dan/atau Kerusakan Laut meliputi: (a) pencegahan Pencemaran dan/atau Kerusakan Laut; (b) penanggulangan Pencemaran dan/atau Kerusakan Laut; dan (c) pemulihan Mutu Laut dan Kerusakan Laut.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB VI -->
+    <div class="bab-block" id="bab6">
+      <div class="bab-title">
+        <span class="bab-number">BAB VI</span>
+        PENGENDALIAN KERUSAKAN LINGKUNGAN HIDUP
+        <span class="pasal-range">Pasal 272 – 273</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal272">
+          <div class="pasal-heading">Pasal 272 — Kriteria Baku Kerusakan Lingkungan Hidup</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Untuk menentukan terjadinya Kerusakan Lingkungan Hidup, ditetapkan kriteria baku Kerusakan Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Kriteria baku Kerusakan Lingkungan Hidup meliputi kriteria baku kerusakan: (a) Terumbu Karang; (b) Mangrove; (c) Padang Lamun; (d) tanah untuk produksi biomassa; (e) gambut; (f) karst; (g) lingkungan yang berkaitan dengan kebakaran hutan dan/atau lahan; (h) lahan akibat Usaha dan/atau Kegiatan pertambangan; dan (i) kriteria baku Kerusakan Lingkungan Hidup lainnya sesuai dengan perkembangan ilmu pengetahuan dan teknologi.</span></div>
+          <div class="ayat"><span class="ayat-num">(5)</span><span class="ayat-text">Kriteria baku Kerusakan Lingkungan Hidup sebagaimana dimaksud pada ayat (2) huruf f sampai dengan huruf i ditetapkan dalam Peraturan Menteri.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal273">
+          <div class="pasal-heading">Pasal 273 — Pengecualian Pembakaran Lahan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Ketentuan mengenai kriteria baku Kerusakan Lingkungan Hidup sebagaimana dimaksud dalam Pasal 272 ayat (2) huruf g, dikecualikan terhadap kegiatan pembukaan lahan dengan cara pembakaran yang dilakukan masyarakat di lahan miliknya sendiri.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pelaksanaan pembukaan lahan dengan cara pembakaran dilakukan berdasarkan kearifan lokal yang meliputi: (a) luas lahan maksimal 2 (dua) hektare per kepala keluarga; (b) dikelilingi oleh sekat bakar sebagai pencegah penjalaran api ke wilayah sekelilingnya; dan (c) ditanami tanaman jenis varietas lokal.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB VII -->
+    <div class="bab-block" id="bab7">
+      <div class="bab-title">
+        <span class="bab-number">BAB VII</span>
+        PENGELOLAAN LIMBAH BAHAN BERBAHAYA DAN BERACUN DAN PENGELOLAAN LIMBAH NON BAHAN BERBAHAYA DAN BERACUN
+        <span class="pasal-range">Pasal 274 – 470</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab7-bg1"><span class="bagian-number">Bagian Kesatu</span>Umum</div>
+
+        <div class="pasal-block" id="pasal274">
+          <div class="pasal-heading">Pasal 274 — Kewajiban Pengelolaan Limbah</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah wajib melakukan pengelolaan Limbah yang dihasilkannya.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengelolaan sebagaimana dimaksud pada ayat (1) meliputi: (a) Pengelolaan Limbah B3; dan (b) Pengelolaan Limbah nonB3.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab7-bg2"><span class="bagian-number">Bagian Kedua</span>Pengelolaan Limbah Bahan Berbahaya dan Beracun</div>
+
+        <div class="pasal-block" id="pasal275">
+          <div class="pasal-heading">Pasal 275 — Ruang Lingkup Pengelolaan Limbah B3</div>
+          <p class="pasal-text">Penyelenggaraan Pengelolaan Limbah B3 meliputi: (a) penetapan Limbah B3; (b) Pengurangan Limbah B3; (c) Penyimpanan Limbah B3; (d) Pengumpulan Limbah B3; (e) Pengangkutan Limbah B3; (f) Pemanfaatan Limbah B3; (g) Pengolahan Limbah B3; (h) Penimbunan Limbah B3; (i) Dumping (Pembuangan) Limbah B3; (j) pengecualian Limbah B3; (k) perpindahan lintas batas Limbah B3; (l) Penanggulangan Pencemaran dan pemulihan fungsi Lingkungan Hidup; (m) Sistem Tanggap Darurat dalam Pengelolaan Limbah B3; dan (n) pembiayaan.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal276">
+          <div class="pasal-heading">Pasal 276 — Penetapan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah B3 wajib melakukan Pengelolaan Limbah B3 yang dihasilkannya.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Limbah B3 berdasarkan kategori bahayanya terdiri atas: (a) Limbah B3 kategori 1; dan (b) Limbah B3 kategori 2.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Limbah B3 berdasarkan sumbernya terdiri atas: (a) Limbah B3 dari sumber tidak spesifik; (b) Limbah B3 dari B3 kedaluwarsa, B3 yang tumpah, B3 yang tidak memenuhi spesifikasi produk; dan (c) Limbah B3 dari sumber spesifik.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal277">
+          <div class="pasal-heading">Pasal 277 — Pengurangan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah B3 wajib melakukan Pengurangan Limbah B3.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengurangan Limbah B3 dilakukan melalui: (a) substitusi bahan; (b) modifikasi proses; dan/atau (c) penggunaan teknologi ramah lingkungan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal278">
+          <div class="pasal-heading">Pasal 278 — Penyimpanan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah B3 wajib melakukan Penyimpanan Limbah B3.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Penyimpanan Limbah B3 dilakukan di tempat Penyimpanan Limbah B3 yang wajib memenuhi persyaratan lokasi dan fasilitas Penyimpanan Limbah B3 sesuai dengan ketentuan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal297">
+          <div class="pasal-heading">Pasal 297 — Pengumpulan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengumpulan Limbah B3 wajib memiliki Perizinan Berusaha dari Pemerintah Pusat atau Pemerintah Daerah sesuai dengan kewenangannya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal307">
+          <div class="pasal-heading">Pasal 307 — Pengangkutan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengangkutan Limbah B3 wajib memiliki Perizinan Berusaha dari Pemerintah Pusat sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal315">
+          <div class="pasal-heading">Pasal 315 — Pemanfaatan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemanfaatan Limbah B3 wajib memiliki Perizinan Berusaha dari Pemerintah Pusat atau Pemerintah Daerah sesuai dengan kewenangannya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal326">
+          <div class="pasal-heading">Pasal 326 — Pengolahan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengolahan Limbah B3 wajib memiliki Perizinan Berusaha dari Pemerintah Pusat atau Pemerintah Daerah sesuai dengan kewenangannya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal341">
+          <div class="pasal-heading">Pasal 341 — Penimbunan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penimbunan Limbah B3 wajib memiliki Perizinan Berusaha dari Pemerintah Pusat.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal350">
+          <div class="pasal-heading">Pasal 350 — Dumping Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang dilarang melakukan Dumping (Pembuangan) Limbah B3 ke media lingkungan hidup tanpa persetujuan dari Pemerintah Pusat.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal355">
+          <div class="pasal-heading">Pasal 355 — Pengecualian Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Limbah B3 yang dihasilkan dari Usaha dan/atau Kegiatan tertentu dapat dikecualikan dari ketentuan pengelolaan Limbah B3 berdasarkan penetapan Menteri.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal360">
+          <div class="pasal-heading">Pasal 360 — Perpindahan Lintas Batas Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Ekspor Limbah B3 hanya dapat dilakukan dengan persetujuan dari otoritas negara penerima sebelum dilaksanakan perpindahan lintas batas Limbah B3.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal396">
+          <div class="pasal-heading">Pasal 396 — Sistem Tanggap Darurat Pengelolaan Limbah B3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah B3 wajib memiliki dan melaksanakan Sistem Tanggap Darurat dalam Pengelolaan Limbah B3.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab7-bg3"><span class="bagian-number">Bagian Ketiga (dalam BAB VII)</span>Pengelolaan Limbah Non Bahan Berbahaya dan Beracun</div>
+
+        <div class="pasal-block" id="pasal449">
+          <div class="pasal-heading">Pasal 449 — Ruang Lingkup Pengelolaan Limbah NonB3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penyelenggaraan Pengelolaan Limbah nonB3 meliputi: (a) pengurangan Limbah nonB3; (b) Penyimpanan Limbah nonB3; (c) pemanfaatan Limbah nonB3; (d) penimbunan Limbah nonB3; (e) Penanggulangan Pencemaran dan pemulihan fungsi Lingkungan Hidup; dan (f) pelaporan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal450">
+          <div class="pasal-heading">Pasal 450 — Penetapan Limbah NonB3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri menetapkan Limbah nonB3 yang dihasilkan dari Usaha dan/atau Kegiatan tertentu.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal454">
+          <div class="pasal-heading">Pasal 454 — Pengurangan Limbah NonB3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah nonB3 wajib melakukan pengurangan Limbah nonB3 yang dihasilkannya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal455">
+          <div class="pasal-heading">Pasal 455 — Penyimpanan Limbah NonB3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah nonB3 wajib melakukan penyimpanan terhadap Limbah nonB3 yang dihasilkannya sebelum dilakukan pengelolaan lebih lanjut.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal459">
+          <div class="pasal-heading">Pasal 459 — Pemanfaatan Limbah NonB3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Setiap Orang yang menghasilkan Limbah nonB3 dapat melakukan pemanfaatan Limbah nonB3 yang dihasilkannya sendiri atau menyerahkan kepada pihak lain.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pemanfaatan Limbah nonB3 meliputi: (a) pemanfaatan sebagai substitusi bahan baku; (b) pemanfaatan sebagai substitusi sumber energi; (c) pemanfaatan sebagai bahan baku; (d) pemanfaatan sebagai produk samping; dan (e) pemanfaatan sesuai dengan perkembangan ilmu pengetahuan dan teknologi.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal465">
+          <div class="pasal-heading">Pasal 465 — Penimbunan Limbah NonB3</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Penimbunan Limbah nonB3 dilakukan dengan menggunakan fasilitas penimbunan Limbah nonB3.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal468">
+          <div class="pasal-heading">Pasal 468 — Penanggulangan dan Pemulihan Fungsi LH</div>
+          <p class="pasal-text">Setiap Orang yang menghasilkan Limbah nonB3, yang melakukan Pencemaran Lingkungan Hidup dan/atau Perusakan Lingkungan Hidup wajib melaksanakan: (a) Penanggulangan Pencemaran Lingkungan Hidup dan/atau Kerusakan Lingkungan Hidup; dan (b) pemulihan fungsi Lingkungan Hidup.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB VIII -->
+    <div class="bab-block" id="bab8">
+      <div class="bab-title">
+        <span class="bab-number">BAB VIII</span>
+        DANA PENJAMINAN UNTUK PEMULIHAN FUNGSI LINGKUNGAN HIDUP
+        <span class="pasal-range">Pasal 471 – 479</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal471">
+          <div class="pasal-heading">Pasal 471 — Penggunaan Dana Penjaminan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Dana penjaminan untuk pemulihan fungsi Lingkungan Hidup digunakan untuk kegiatan: (a) Penanggulangan Pencemaran Lingkungan Hidup dan/atau Kerusakan Lingkungan Hidup; dan/atau (b) pemulihan fungsi Lingkungan Hidup akibat Pencemaran Lingkungan Hidup dan/atau Kerusakan Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal472">
+          <div class="pasal-heading">Pasal 472 — Kewajiban Penyediaan Dana Penjaminan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pemegang Persetujuan Lingkungan wajib menyediakan dana penjaminan untuk pemulihan fungsi Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pelaku Usaha pemegang Persetujuan Lingkungan menyediakan dana penjaminan untuk pemulihan fungsi Lingkungan Hidup untuk disimpan di bank pemerintah yang ditunjuk oleh Pemerintah.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Untuk jenis Usaha dan/atau Kegiatan tertentu, dana penjaminan untuk pemulihan fungsi Lingkungan Hidup dapat dikelola secara mandiri.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal473">
+          <div class="pasal-heading">Pasal 473 — Bentuk Dana Penjaminan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Dana penjaminan untuk pemulihan fungsi Lingkungan Hidup disediakan oleh Pelaku Usaha dalam bentuk: (a) deposito berjangka; (b) tabungan bersama; (c) bank garansi; dan/atau (d) lainnya sesuai dengan ketentuan peraturan perundang-undangan.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Penyediaan dana penjaminan dapat dilakukan dalam bentuk polis asuransi atau instrumen keuangan lainnya yang diterbitkan oleh lembaga jasa keuangan milik pemerintah yang ditunjuk oleh Pemerintah.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal475">
+          <div class="pasal-heading">Pasal 475 — Pencantuman dalam Persetujuan Lingkungan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Kewajiban penempatan atau penyediaan dana penjaminan untuk pemulihan fungsi Lingkungan Hidup: (a) dicantumkan dalam Persetujuan Lingkungan; dan (b) dimuat di dalam Perizinan Berusaha.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal478">
+          <div class="pasal-heading">Pasal 478 — Tanggung Jawab Tetap Berlaku</div>
+          <p class="pasal-text">Penyediaan dana penjaminan untuk pemulihan fungsi Lingkungan Hidup tidak membebaskan kewajiban Pelaku Usaha untuk melakukan pengendalian Pencemaran Lingkungan Hidup dan/atau Kerusakan Lingkungan Hidup akibat Usaha dan/atau Kegiatan.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal479">
+          <div class="pasal-heading">Pasal 479 — Ketentuan Lebih Lanjut</div>
+          <p class="pasal-text">Penerapan kewajiban penyediaan dana penjaminan untuk pemulihan fungsi Lingkungan Hidup sebagaimana dimaksud dalam Pasal 471 sampai dengan Pasal 478 dilaksanakan sesuai dengan ketentuan peraturan perundang-undangan.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB IX -->
+    <div class="bab-block" id="bab9">
+      <div class="bab-title">
+        <span class="bab-number">BAB IX</span>
+        SISTEM INFORMASI LINGKUNGAN HIDUP
+        <span class="pasal-range">Pasal 480 – 489</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal480">
+          <div class="pasal-heading">Pasal 480 — Sistem Informasi Lingkungan Hidup</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri, gubernur, atau bupati/wali kota sesuai dengan kewenangannya menyediakan informasi melalui Sistem Informasi Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Sistem Informasi Lingkungan Hidup dikembangkan terintegrasi secara elektronik yang terdiri atas sistem informasi: (a) dokumen Lingkungan Hidup; (b) pelaporan Persetujuan Lingkungan; (c) status Lingkungan Hidup; (d) Pengelolaan Limbah B3; (e) peta rawan lingkungan; (f) pengawasan dan penerapan Sanksi Administratif; dan (g) informasi Lingkungan Hidup lainnya.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal481">
+          <div class="pasal-heading">Pasal 481 — Sistem Informasi Dokumen Lingkungan Hidup</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Sistem informasi dokumen Lingkungan Hidup bertujuan: (a) mempermudah proses pelayanan dokumen Lingkungan Hidup bagi Setiap Orang; (b) mempermudah penyusunan dokumen Lingkungan Hidup; (c) mempercepat proses penilaian dan pemeriksaan dokumen Lingkungan Hidup; (d) mempermudah dalam pelacakan data bagi masyarakat, penanggung jawab Usaha dan/atau Kegiatan, dan pemerintah; (e) membantu pengambilan keputusan dalam penentuan kelayakan/ketidaklayakan Lingkungan Hidup; dan (f) memfasilitasi keterbukaan informasi publik dalam proses penilaian dan pemeriksaan dokumen Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal482">
+          <div class="pasal-heading">Pasal 482 — Penggunaan Sistem Informasi Dokumen LH</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Sistem informasi dokumen Lingkungan Hidup digunakan dalam: (a) pengumuman rencana Usaha dan/atau Kegiatan; (b) pengisian Formulir Kerangka Acuan; (c) pemeriksaan Formulir Kerangka Acuan; (d) penyusunan dokumen Andal dan dokumen RKL-RPL; (e) Uji Kelayakan; (f) pengisian Formulir UKL-UPL standar spesifik dan standar; (g) pemeriksaan Formulir UKL-UPL standar spesifik dan standar; dan lainnya.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB X -->
+    <div class="bab-block" id="bab10">
+      <div class="bab-title">
+        <span class="bab-number">BAB X</span>
+        PEMBINAAN DAN PENGAWASAN
+        <span class="pasal-range">Pasal 490 – 504</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab10-bg1"><span class="bagian-number">Bagian Kesatu</span>Pembinaan</div>
+
+        <div class="pasal-block" id="pasal490">
+          <div class="pasal-heading">Pasal 490 — Pembinaan oleh Menteri</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri melakukan pembinaan kepada: (a) gubernur; (b) Tim Uji Kelayakan Lingkungan Hidup; (c) Pejabat Pengendali Dampak Lingkungan; (d) penyuluh Lingkungan Hidup; (e) Pejabat Pengawas Lingkungan Hidup; (f) lembaga sertifikasi kompetensi Amdal; (g) lembaga pelatihan kompetensi Amdal; (h) lembaga penyedia jasa penyusunan dokumen Amdal; (i) penyusun Amdal perorangan; (j) penanggung jawab Usaha dan/atau Kegiatan; dan/atau (k) masyarakat.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pembinaan dilakukan terkait: (a) Perizinan Berusaha dan Persetujuan Pemerintah; (b) Perlindungan dan Pengelolaan Mutu Air; (c) Perlindungan dan Pengelolaan Mutu Udara; (d) Pengendalian Pencemaran dan Kerusakan Laut; (e) Pengelolaan Limbah B3; dan/atau (f) muatan teknis lainnya.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pembinaan dilakukan melalui: pemberian norma, standar, prosedur, dan kriteria; evaluasi kinerja Pemerintah Daerah; evaluasi kinerja penanggung jawab Usaha dan/atau Kegiatan; diseminasi peraturan perundang-undangan; bimbingan teknis; pendidikan dan pelatihan; bantuan sarana dan prasarana; program percontohan; forum bimbingan dan/atau konsultasi teknis; penyuluhan; penelitian; pengembangan; pemberian penghargaan; dan/atau bentuk lainnya.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab10-bg2"><span class="bagian-number">Bagian Kedua</span>Pengawasan</div>
+
+        <div class="pasal-block" id="pasal492">
+          <div class="pasal-heading">Pasal 492 — Kewajiban Pengawasan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri, gubernur, atau bupati/wali kota wajib melakukan pengawasan terhadap ketaatan penanggung jawab Usaha dan/atau Kegiatan atas ketentuan yang ditetapkan dalam Perizinan Berusaha atau Persetujuan Pemerintah terkait Persetujuan Lingkungan dan peraturan perundang-undangan di bidang perlindungan dan Pengelolaan Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal494">
+          <div class="pasal-heading">Pasal 494 — Pejabat Pengawas Lingkungan Hidup</div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Dalam melaksanakan pengawasan, Menteri, gubernur, atau bupati/wali kota menetapkan Pejabat Pengawas Lingkungan Hidup yang merupakan pejabat fungsional.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab10-bg3"><span class="bagian-number">Bagian Ketiga</span>Wewenang Pejabat Pengawas Lingkungan Hidup</div>
+
+        <div class="pasal-block" id="pasal495">
+          <div class="pasal-heading">Pasal 495 — Wewenang Pejabat Pengawas Lingkungan Hidup</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pejabat Pengawas Lingkungan Hidup berwenang untuk melakukan pemeriksaan, pengambilan sampel, pengujian, pengamatan, dan pendokumentasian di lokasi Usaha dan/atau Kegiatan dalam rangka pelaksanaan pengawasan.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab10-bg4"><span class="bagian-number">Bagian Keempat</span>Pelaksanaan Pengawasan</div>
+
+        <div class="pasal-block" id="pasal496">
+          <div class="pasal-heading">Pasal 496 — Cara Pengawasan</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pengawasan dilakukan oleh Pejabat Pengawas Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengawasan dapat dilakukan dengan cara: (a) pengawasan langsung; dan/atau (b) pengawasan tidak langsung.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Pengawasan langsung dilakukan dengan mendatangi lokasi Usaha dan/atau Kegiatan secara: (a) reguler; atau (b) insidental.</span></div>
+          <div class="ayat"><span class="ayat-num">(4)</span><span class="ayat-text">Pengawasan tidak langsung dilakukan melalui penelaahan data laporan penanggung jawab Usaha dan/atau Kegiatan dan/atau data dari Sistem Informasi Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab10-bg5"><span class="bagian-number">Bagian Kelima</span>Pengawasan Lapis Kedua</div>
+
+        <div class="pasal-block" id="pasal502">
+          <div class="pasal-heading">Pasal 502 — Pengawasan Lapis Kedua</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri dapat melakukan pengawasan terhadap ketaatan penanggung jawab Usaha dan/atau Kegiatan yang Perizinan Berusaha atau Persetujuan Pemerintah terkait Persetujuan Lingkungan diterbitkan oleh Pemerintah Daerah jika: (a) Menteri menganggap terjadi pelanggaran yang serius di bidang Perlindungan dan Pengelolaan Lingkungan Hidup berdasarkan norma, standar, prosedur, dan kriteria yang ditetapkan oleh Menteri; dan (b) gubernur dan/atau bupati/wali kota tidak melaksanakan pengawasan.</span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB XI -->
+    <div class="bab-block" id="bab11">
+      <div class="bab-title">
+        <span class="bab-number">BAB XI</span>
+        TATA CARA PENERAPAN SANKSI ADMINISTRATIF PERIZINAN BERUSAHA ATAU PERSETUJUAN PEMERINTAH
+        <span class="pasal-range">Pasal 505 – 526</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="bagian-title" id="bab11-bg1"><span class="bagian-number">Bagian Kesatu</span>Wewenang Penerapan Sanksi Administratif</div>
+
+        <div class="pasal-block" id="pasal505">
+          <div class="pasal-heading">Pasal 505 — Kewajiban Penerapan Sanksi Administratif</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri, gubernur, atau bupati/wali kota wajib menerapkan Sanksi Administratif terhadap penanggung jawab Usaha dan/atau Kegiatan jika dalam pengawasan ditemukan pelanggaran terhadap ketentuan: (a) Perizinan Berusaha; atau (b) Persetujuan Pemerintah, terkait Persetujuan Lingkungan dan peraturan perundang-undangan di bidang Perlindungan dan Pengelolaan Lingkungan Hidup.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Penerapan Sanksi Administratif dilakukan sesuai dengan norma, standar, prosedur, dan kriteria yang ditetapkan oleh Menteri.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal506">
+          <div class="pasal-heading">Pasal 506 — Kewenangan Menteri, Gubernur, Bupati/Wali Kota</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Menteri berwenang menerapkan Sanksi Administratif kepada penanggung jawab Usaha dan/atau Kegiatan terhadap pelanggaran Perizinan Berusaha atau Persetujuan Pemerintah terkait Persetujuan Lingkungan yang diterbitkan oleh Pemerintah Pusat.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Gubernur berwenang menerapkan Sanksi Administratif terhadap pelanggaran yang Perizinan Berusahaatau Persetujuan Pemerintah diterbitkan oleh Pemerintah Daerah provinsi.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Bupati/wali kota berwenang menerapkan Sanksi Administratif terhadap pelanggaran yang Perizinan Berusaha atau Persetujuan Pemerintah diterbitkan oleh Pemerintah Daerah kabupaten/kota.</span></div>
+        </div>
+
+        <div class="bagian-title" id="bab11-bg2"><span class="bagian-number">Bagian Kedua</span>Penerapan Sanksi Administratif</div>
+
+        <div class="pasal-block" id="pasal508">
+          <div class="pasal-heading">Pasal 508 — Jenis Sanksi Administratif</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Sanksi Administratif berupa: (a) teguran tertulis; (b) paksaan pemerintah; (c) denda administratif; (d) pembekuan Perizinan Berusaha; dan/atau (e) pencabutan Perizinan Berusaha.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Sanksi Administratif diterbitkan dalam bentuk keputusan.</span></div>
+          <div class="ayat"><span class="ayat-num">(3)</span><span class="ayat-text">Keputusan paling sedikit memuat: (a) nama jabatan dan alamat pejabat administrasi yang berwenang; (b) nama dan alamat penanggung jawab Usaha dan/atau Kegiatan; (c) nama dan alamat perusahaan; (d) jenis pelanggaran; (e) ketentuan yang dilanggar; (f) uraian kewajiban atau perintah yang harus dilakukan; dan (g) jangka waktu penaatan kewajiban penanggung jawab Usaha dan/atau Kegiatan.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal509">
+          <div class="pasal-heading">Pasal 509 — Dasar Penerapan Sanksi Administratif</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Sanksi Administratif diterapkan berdasarkan atas: (a) berita acara pengawasan; dan (b) rekomendasi dari Pejabat Pengawas Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal515">
+          <div class="pasal-heading">Pasal 515 — Teguran Tertulis</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Teguran tertulis sebagaimana dimaksud dalam Pasal 508 ayat (1) huruf a merupakan Sanksi Administratif yang diberikan kepada penanggung jawab Usaha dan/atau Kegiatan yang tidak menaati ketentuan dalam Perizinan Berusaha atau Persetujuan Pemerintah.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal516">
+          <div class="pasal-heading">Pasal 516 — Paksaan Pemerintah</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Paksaan pemerintah sebagaimana dimaksud dalam Pasal 508 ayat (1) huruf b merupakan Sanksi Administratif yang diberikan kepada penanggung jawab Usaha dan/atau Kegiatan yang tidak menaati Sanksi Administratif berupa teguran tertulis.</span></div>
+          <div class="ayat"><span class="ayat-num">(2)</span><span class="ayat-text">Pengenaan paksaan pemerintah dapat dijatuhkan tanpa didahului teguran tertulis apabila pelanggaran yang dilakukan menimbulkan: (a) ancaman yang sangat serius bagi manusia dan Lingkungan Hidup; (b) dampak yang lebih besar dan lebih luas jika tidak segera dihentikan pencemaran dan/atau kerusakannya; dan/atau (c) kerugian yang lebih besar bagi Lingkungan Hidup.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal521">
+          <div class="pasal-heading">Pasal 521 — Denda Administratif</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Denda administratif sebagaimana dimaksud dalam Pasal 508 ayat (1) huruf c dapat diberikan bersama dengan Sanksi Administratif berupa teguran tertulis, paksaan pemerintah, pembekuan Perizinan Berusaha, atau pencabutan Perizinan Berusaha.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal523">
+          <div class="pasal-heading">Pasal 523 — Pembekuan Perizinan Berusaha</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pembekuan Perizinan Berusaha sebagaimana dimaksud dalam Pasal 508 ayat (1) huruf d merupakan Sanksi Administratif yang diberikan kepada penanggung jawab Usaha dan/atau Kegiatan yang tidak melaksanakan paksaan pemerintah.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal524">
+          <div class="pasal-heading">Pasal 524 — Pencabutan Perizinan Berusaha</div>
+          <div class="ayat"><span class="ayat-num">(1)</span><span class="ayat-text">Pencabutan Perizinan Berusaha sebagaimana dimaksud dalam Pasal 508 ayat (1) huruf e merupakan Sanksi Administratif yang diberikan kepada penanggung jawab Usaha dan/atau Kegiatan yang tidak melaksanakan pembekuan Perizinan Berusaha.</span></div>
+        </div>
+
+        <div class="pasal-block" id="pasal526">
+          <div class="pasal-heading">Pasal 526 — Ketentuan Lebih Lanjut</div>
+          <p class="pasal-text">Ketentuan lebih lanjut mengenai: (a) tata cara penerapan Sanksi Administratif; (b) perhitungan denda administratif; dan (c) tata cara pengenaan Sanksi Administratif, diatur dalam Peraturan Menteri.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB XII -->
+    <div class="bab-block" id="bab12">
+      <div class="bab-title">
+        <span class="bab-number">BAB XII</span>
+        KETENTUAN PERALIHAN
+        <span class="pasal-range">Pasal 527</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal527">
+          <div class="pasal-heading">Pasal 527 — Ketentuan Peralihan</div>
+          <p class="pasal-text">Pada saat Peraturan Pemerintah ini mulai berlaku:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>izin lingkungan, izin Perlindungan dan Pengelolaan Lingkungan Hidup, Surat Keputusan Kelayakan Lingkungan Hidup, rekomendasi UKL-UPL, atau dokumen Lingkungan Hidup yang telah mendapat persetujuan sebelum berlakunya Peraturan Pemerintah ini, dinyatakan tetap berlaku dan menjadi prasyarat serta termuat dalam Perizinan Berusaha atau Persetujuan Pemerintah;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>penilaian Amdal, atau pemeriksaan Formulir UKL-UPL dan pengajuan izin Perlindungan dan Pengelolaan Lingkungan Hidup yang sedang dalam proses, dilanjutkan sampai dengan terbitnya Persetujuan Lingkungan;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>lisensi yang telah dimiliki komisi penilai Amdal tetap berlaku dan dapat diperpanjang sampai terbentuknya Tim Uji Kelayakan Lingkungan Hidup;</span></div>
+            <div class="list-item"><span class="list-key">d.</span><span>komisi penilai Amdal tetap melaksanakan tugas melakukan Uji Kelayakan Amdal sampai dengan terbentuknya Tim Uji Kelayakan Lingkungan Hidup;</span></div>
+            <div class="list-item"><span class="list-key">e.</span><span>sertifikasi profesi dari lembaga sertifikasi profesi yang dimiliki oleh penyusun Amdal tetap berlaku sampai dengan berakhirnya masa berlaku sertifikasi dan dapat diperpanjang sampai terbentuknya lembaga sertifikasi kompetensi; dan</span></div>
+            <div class="list-item"><span class="list-key">f.</span><span>dalam hal Pemerintah atau Pemerintah Daerah belum menetapkan Baku Mutu Air pada badan air permukaan, menggunakan Baku Mutu Air kelas 2 sebagaimana tercantum dalam Lampiran VI yang merupakan bagian tidak terpisahkan dari Peraturan Pemerintah ini.</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BAB XIII -->
+    <div class="bab-block" id="bab13">
+      <div class="bab-title">
+        <span class="bab-number">BAB XIII</span>
+        KETENTUAN PENUTUP
+        <span class="pasal-range">Pasal 528 – 534</span>
+      </div>
+      <div class="bab-content">
+
+        <div class="pasal-block" id="pasal528">
+          <div class="pasal-heading">Pasal 528 — Peraturan Pelaksanaan Tetap Berlaku</div>
+          <p class="pasal-text">Pada saat Peraturan Pemerintah ini mulai berlaku, semua peraturan perundang-undangan yang merupakan peraturan pelaksanaan dari: (a) PP Nomor 19 Tahun 1999 tentang Pengendalian Pencemaran dan/atau Perusakan Laut; (b) PP Nomor 41 Tahun 1999 tentang Pengendalian Pencemaran Udara; (c) PP Nomor 82 Tahun 2001 tentang Pengelolaan Kualitas Air dan Pengendalian Pencemaran Air; (d) PP Nomor 27 Tahun 2012 tentang Izin Lingkungan; (e) PP Nomor 101 Tahun 2014 tentang Pengelolaan Limbah Bahan Berbahaya dan Beracun, masih tetap berlaku sepanjang tidak bertentangan atau belum diganti dengan peraturan yang baru berdasarkan Peraturan Pemerintah ini.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal529">
+          <div class="pasal-heading">Pasal 529 — Peraturan yang Dicabut</div>
+          <p class="pasal-text">Pada saat Peraturan Pemerintah ini mulai berlaku, peraturan-peraturan berikut dicabut dan dinyatakan tidak berlaku: (a) PP Nomor 19 Tahun 1999; (b) PP Nomor 41 Tahun 1999; (c) PP Nomor 82 Tahun 2001; (d) PP Nomor 27 Tahun 2012 tentang Izin Lingkungan; dan (e) PP Nomor 101 Tahun 2014.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal530">
+          <div class="pasal-heading">Pasal 530 — Pencabutan Ketentuan PP 46 Tahun 2017</div>
+          <p class="pasal-text">Ketentuan Pasal 21 sampai dengan Pasal 115 terkait dengan dana jaminan pemulihan Lingkungan Hidup dalam Peraturan Pemerintah Nomor 46 Tahun 2017 tentang Instrumen Ekonomi Lingkungan Hidup dicabut dan dinyatakan tidak berlaku.</p>
+        </div>
+
+        <div class="pasal-block" id="pasal531">
+          <div class="pasal-heading">Pasal 531 — Ketentuan Transisi Kelembagaan</div>
+          <p class="pasal-text">Pada saat Peraturan Pemerintah ini mulai berlaku:</p>
+          <div class="list-alpha">
+            <div class="list-item"><span class="list-key">a.</span><span>Lembaga Uji Kelayakan Lingkungan Hidup terbentuk dalam waktu paling lama 6 (enam) bulan sejak diberlakukan Peraturan Pemerintah ini;</span></div>
+            <div class="list-item"><span class="list-key">b.</span><span>Tim Uji Kelayakan Lingkungan Hidup terbentuk dalam waktu paling lama 9 (sembilan) bulan sejak diberlakukan Peraturan Pemerintah ini;</span></div>
+            <div class="list-item"><span class="list-key">c.</span><span>lembaga sertifikasi kompetensi penyusun Amdal terbentuk dalam waktu paling lama 6 (enam) bulan sejak diberlakukan Peraturan Pemerintah ini;</span></div>
+            <div class="list-item"><span class="list-key">e.</span><span>penyusunan dan penetapan Baku Mutu Air serta perhitungan dan penetapan alokasi beban pencemar air harus diselesaikan dalam jangka waktu paling lama 2 (dua) tahun sejak Peraturan Pemerintah ini diundangkan;</span></div>
+            <div class="list-item"><span class="list-key">f.</span><span>pemenuhan Baku Mutu hasil uji Emisi sebagai dasar pengenaan pajak kendaraan bermotor untuk unsur pencemar lingkungan diberlakukan 2 (dua) tahun setelah Peraturan Pemerintah ini diundangkan;</span></div>
+            <div class="list-item"><span class="list-key">g.</span><span>kewajiban memiliki tenaga kerja yang memiliki sertifikat kompetensi di bidang Pengelolaan Limbah B3 diberlakukan paling lambat 1 (satu) tahun sejak Peraturan Pemerintah ini diundangkan.</span></div>
+          </div>
+        </div>
+
+        <div class="pasal-block" id="pasal534">
+          <div class="pasal-heading">Pasal 534 — Mulai Berlaku</div>
+          <p class="pasal-text">Peraturan Pemerintah ini mulai berlaku pada tanggal diundangkan. Agar setiap orang mengetahuinya, memerintahkan pengundangan Peraturan Pemerintah ini dengan penempatannya dalam Lembaran Negara Republik Indonesia.</p>
+        </div>
+
+        <div class="ttd-block">
+          <div class="ttd-col">
+            <div class="place">Ditetapkan di Jakarta<br>pada tanggal 2 Februari 2021</div>
+            <div class="role">PRESIDEN REPUBLIK INDONESIA</div>
+            <div class="name">JOKO WIDODO</div>
+          </div>
+          <div class="ttd-col">
+            <div class="place">Diundangkan di Jakarta<br>pada tanggal 2 Februari 2021</div>
+            <div class="role">MENTERI HUKUM DAN HAK ASASI MANUSIA REPUBLIK INDONESIA</div>
+            <div class="name">YASONNA H. LAOLY</div>
+          </div>
+        </div>
+
+        <div style="padding: 14px 26px; background: var(--highlight); border-top: 1px solid var(--rule);">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-light);letter-spacing:0.1em;">LEMBARAN NEGARA REPUBLIK INDONESIA TAHUN 2021 NOMOR 32</p>
+          <div class="lampiran-note" style="margin-top:10px;">Peraturan ini dilengkapi dengan Lampiran yang merupakan bagian tidak terpisahkan, terdiri atas: Lampiran I (Kawasan Lindung); Lampiran II (Jenis Usaha/Kegiatan Wajib Amdal); Lampiran III (Jenis Usaha/Kegiatan Wajib UKL-UPL); Lampiran IV (Baku Mutu Air Nasional); Lampiran V (Baku Mutu Udara Ambien Nasional); Lampiran VI (Baku Mutu Air Kelas 2); Lampiran VII (NAB Limbah B3); dan lampiran-lampiran terkait lainnya.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end content-body -->
+</main>
+
+<a href="#" id="totop" title="Kembali ke atas">↑</a>
+
+<script>
+// Toggle sidebar sections
+function toggleBab(el) {
+  el.classList.toggle('open');
+  el.nextElementSibling.classList.toggle('open');
+}
+
+// Search functionality
+let searchTimeout = null;
+let currentMatches = [];
+let currentMatchIndex = -1;
+
+function clearHighlights(container) {
+  container.querySelectorAll('mark').forEach(m => {
+    const parent = m.parentNode;
+    parent.replaceChild(document.createTextNode(m.textContent), m);
+    parent.normalize();
+  });
+}
+
+function highlightText(node, query) {
+  if (node.nodeType === 3) {
+    const idx = node.nodeValue.toLowerCase().indexOf(query);
+    if (idx >= 0) {
+      const mark = document.createElement('mark');
+      mark.textContent = node.nodeValue.substr(idx, query.length);
+      const after = node.splitText(idx);
+      after.splitText(query.length);
+      after.parentNode.replaceChild(mark, after);
+      return mark;
+    }
+  } else if (node.nodeType === 1 && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE' && node.nodeName !== 'MARK') {
+    Array.from(node.childNodes).forEach(child => highlightText(child, query));
+  }
+  return null;
+}
+
+function doSearch(query) {
+  const content = document.getElementById('searchable-content');
+  const navItems = document.querySelectorAll('.nav-item, .nav-bagian');
+  const countEl = document.getElementById('search-count');
+  const noResult = document.getElementById('no-result');
+
+  clearHighlights(content);
+  navItems.forEach(item => item.classList.remove('highlight'));
+  currentMatches = [];
+
+  if (!query || query.length < 2) {
+    countEl.style.display = 'none';
+    noResult.style.display = 'none';
+    return;
+  }
+
+  const q = query.toLowerCase();
+
+  // Highlight in content
+  highlightText(content, q);
+  currentMatches = Array.from(document.querySelectorAll('#searchable-content mark'));
+
+  // Highlight nav items
+  navItems.forEach(item => {
+    if (item.textContent.toLowerCase().includes(q)) {
+      item.classList.add('highlight');
+      // Open parent
+      const parent = item.closest('.nav-items');
+      if (parent) { parent.classList.add('open'); parent.previousElementSibling.classList.add('open'); }
+    }
+  });
+
+  if (currentMatches.length > 0) {
+    countEl.textContent = currentMatches.length + ' hasil ditemukan';
+    countEl.style.display = 'block';
+    noResult.style.display = 'none';
+    // Scroll to first match
+    currentMatches[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    currentMatchIndex = 0;
+  } else {
+    countEl.style.display = 'none';
+    noResult.style.display = 'block';
+  }
+}
+
+document.getElementById('search-input').addEventListener('input', function() {
+  clearTimeout(searchTimeout);
+  const val = this.value.trim();
+  searchTimeout = setTimeout(() => doSearch(val), 300);
+});
+
+document.getElementById('clear-search').addEventListener('click', function() {
+  document.getElementById('search-input').value = '';
+  const content = document.getElementById('searchable-content');
+  clearHighlights(content);
+  document.querySelectorAll('.nav-item, .nav-bagian').forEach(i => i.classList.remove('highlight'));
+  document.getElementById('search-count').style.display = 'none';
+  document.getElementById('no-result').style.display = 'none';
+  document.getElementById('search-input').focus();
+});
+
+// Progress bar + scroll to top
+window.addEventListener('scroll', function() {
+  const scrolled = window.scrollY;
+  const total = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('progress-bar').style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+  document.getElementById('totop').classList.toggle('visible', scrolled > 500);
+  updateActiveNav();
+});
+
+function updateActiveNav() {
+  const blocks = document.querySelectorAll('[id^="pasal"], [id^="bab"]');
+  const navLinks = document.querySelectorAll('.nav-item');
+  let current = '';
+  blocks.forEach(b => { if (b.getBoundingClientRect().top <= 130) current = b.id; });
+  navLinks.forEach(item => item.classList.toggle('active', item.getAttribute('href') === '#' + current));
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    const target = document.querySelector(href);
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  });
+});
+</script>
+</body>
+</html>
