@@ -579,7 +579,7 @@
   <h1>Referensi <em>Regulasi</em><br>Pertambangan Minerba</h1>
   <p class="subtitle">Kumpulan dokumen peraturan perundang-undangan di bidang mineral dan batubara. Klik kartu untuk membuka explorer interaktif masing-masing regulasi.</p>
   <div class="meta-row">
-    <span class="meta-badge" id="docCountBadge">11 Dokumen</span>
+    <span class="meta-badge" id="docCountBadge">13 Dokumen</span>
     <span class="meta-badge">UU · PP · Perpres · Kepmen · Kepdirjen · Permen · SNI</span>
     <span class="meta-badge">Ditjen Minerba</span>
     <button class="add-reg-btn" onclick="openAddModal()">＋ Tambah Peraturan</button>
@@ -826,6 +826,47 @@
       </div>
     </a>
 
+
+    <!-- PP 22 / 2021 -->
+    <a class="card green" href="pp22_2021.html" target="_blank" data-file="pp22_2021.html">
+      <div class="card-icon">🌿</div>
+      <div>
+        <div class="card-kode">PP No. 22 Tahun 2021</div>
+        <div class="card-title">Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup</div>
+      </div>
+      <p class="card-desc">Peraturan Pemerintah tentang penyelenggaraan PPLH — mencakup Amdal, UKL-UPL, persetujuan lingkungan, baku mutu air, udara, laut, dan penegakan hukum lingkungan hidup.</p>
+      <div class="card-tags">
+        <span class="tag">Amdal</span>
+        <span class="tag">UKL-UPL</span>
+        <span class="tag">Baku Mutu</span>
+        <span class="tag">Persetujuan Lingkungan</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">Tahun 2021</span>
+        <span class="card-cta">Buka Explorer →</span>
+      </div>
+    </a>
+
+
+    <!-- Aturan Pertambangan Format PDF -->
+    <a class="card gold" href="https://shorturl.at/B1jmp" target="_blank" data-file="https://shorturl.at/B1jmp">
+      <div class="card-icon">📁</div>
+      <div>
+        <div class="card-kode" style="font-size:12px;">Aturan Pertambangan Format PDF</div>
+        <div class="card-title">Kumpulan Peraturan Pertambangan Minerba</div>
+      </div>
+      <p class="card-desc">Kumpulan aturan pertambangan dalam format PDF — tersedia untuk diunduh dan dibaca secara offline.</p>
+      <div class="card-tags">
+        <span class="tag">PDF</span>
+        <span class="tag">Unduh</span>
+        <span class="tag">Referensi</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-year">🔗 Tautan Eksternal</span>
+        <span class="card-cta">Buka Link →</span>
+      </div>
+    </a>
+
   </div>
 
   <div class="info-strip">
@@ -844,7 +885,8 @@
         perpres_55_2022.html<br>
         permen_naker_5_2018.html<br>
         sni_4726_2019.html<br>
-        kepdirjen309-2018.html
+        kepdirjen309-2018.html<br>
+        pp22_2021.html
       </div>
     </div>
   </div>
@@ -897,7 +939,7 @@
 
 <footer>
   <span>Portal Regulasi Pertambangan Minerba · Referensi Internal Inspektur Tambang</span>
-  <span>11 dokumen · offline-ready · full-text search</span>
+  <span>13 dokumen · offline-ready · full-text search</span>
 </footer>
 
 <script>
@@ -929,6 +971,8 @@ const CARDS = [
   { file: 'perpres_55_2022.html',     title: 'Pendelegasian Perizinan Berusaha Pertambangan',       kode: 'Perpres No. 55 Tahun 2022',                  color: '#5a78d0' },
   { file: 'permen_naker_5_2018.html', title: 'K3 Lingkungan Kerja',                                 kode: 'Permen Ketenagakerjaan No. 5 Tahun 2018',    color: '#b84888' },
   { file: 'sni_4726_2019.html',       title: 'Pedoman Pelaporan Sumber Daya & Cadangan Mineral',   kode: 'SNI 4726:2019',                              color: '#2eb8a0' },
+  { file: 'pp22_2021.html',            title: 'Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup', kode: 'PP No. 22 Tahun 2021',              color: '#3a9e6a' },
+  { file: 'https://shorturl.at/B1jmp', title: 'Kumpulan Peraturan Pertambangan Minerba (PDF)',  kode: 'Aturan Pertambangan Format PDF',  color: '#c9a84c' },
 ];
 
 // ─── Search logic ────────────────────────────────────────────────────────────
@@ -1149,7 +1193,7 @@ function deleteCustomReg(id) {
 
 function rebuildCardsFromCustom() {
   // Remove any previously added custom entries (keep originals)
-  const originalCount = 11;
+  const originalCount = 13;
   CARDS.splice(originalCount);
   // Re-add current custom
   const regs = loadCustomRegs();
@@ -1165,7 +1209,7 @@ function rebuildCardsFromCustom() {
 
 function updateDocCount() {
   const custom = loadCustomRegs();
-  const total = 11 + custom.length;
+  const total = 13 + custom.length;
   const badge = document.getElementById('docCountBadge');
   if (badge) badge.textContent = total + ' Dokumen';
 }
